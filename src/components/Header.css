@@ -1,0 +1,22 @@
+
+.header {
+  background-color: #333;
+  padding: 10px;
+  color: white;
+  text-align: center;
+}
+
+.header ul {
+  list-style: none;
+  padding: 0;
+}
+
+.header li {
+  display: inline;
+  margin: 0 10px;
+}
+
+.header a {
+  color: white;
+  text-decoration: none;
+}

@@ -1,0 +1,58 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.hero {
+  background-color: #d3d3d3; /* Light gray background */
+  color: black;
+  text-align: center;
+  height: 76.75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.hero h1, .hero p {
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.hero h1 {
+  font-size: 5em; 
+  color: #000;
+}
+
+.hero p {
+  font-size: 2.5em; 
+  color: #4d4d4d;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.button {
+  font-size: 1.2em; /* Adjust the size as needed */
+  font-weight: bold;
+  padding: 15px 30px;
+  margin: 0 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #000;
+  color: #fff;
+}
+
+.about-me {
+  margin-right: auto; /* Pushes the About Me button to the left */
+}
+
+.experiences, .projects {
+  margin-left: 10px;
+}
