@@ -1,18 +1,22 @@
-
-import React from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import Projects from './components/Projects';
-import About from './components/About';
-import Contact from './components/Contact';
+// src/App.js
+import React, { useState } from 'react';
+import Sidebar from './components/Sidebar';
+import MainSection from './components/MainSection';
+import SocialLinks from './components/SocialLinks';
+import EmojiBackground from './components/EmojiBackground';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <Hero />
-    </div>
-  );
+    const [activeSection, setActiveSection] = useState('');
+
+    return (
+        <div className="app">
+            <EmojiBackground />
+            <Sidebar setActiveSection={setActiveSection} />
+            <MainSection activeSection={activeSection} />
+            <SocialLinks />
+        </div>
+    );
 }
 
 export default App;

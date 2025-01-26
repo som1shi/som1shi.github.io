@@ -1,0 +1,51 @@
+.emoji-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: auto;
+    z-index: -1;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.emoji-line {
+    position: absolute;
+    opacity: 0.5;
+    transition: transform 0.2s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.emoji-line:hover {
+    opacity: 0.6;
+    cursor: default;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(110vh) rotate(0deg);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0.5;
+    }
+}
+
+@keyframes floatDown {
+    0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0.5;
+    }
+}
