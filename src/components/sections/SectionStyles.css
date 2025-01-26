@@ -512,3 +512,58 @@
 .research {
     background-color: #ffffff;
 }
+
+@media (max-width: 768px) {
+    .section {
+        width: 90%;
+        height: 70vh;
+        margin: 10px auto;
+    }
+
+    .landing h1, .landing h2, .landing p {
+        font-size: 32px;
+    }
+
+    .experience-item, .project-item, .research-item {
+        padding: 12px 12px 12px 46px;
+    }
+
+    .experience-item::before, .project-item::before, .research-item::before {
+        left: 8px;
+        width: 28px;
+        height: 28px;
+    }
+
+    .tech-tag {
+        font-size: 10px;
+        padding: 1px 6px;
+    }
+
+    .section.expanded {
+        width: 95vw;
+        height: 80vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .section {
+        width: 95%;
+        height: 65vh;
+    }
+
+    .landing h1, .landing h2, .landing p {
+        font-size: 28px;
+    }
+
+    .section-header h2 {
+        font-size: 18px;
+    }
+
+    .experience-header h3, .project-item h3, .research-header h3 {
+        font-size: 13px;
+    }
+
+    .description {
+        font-size: 11px;
+    }
+}

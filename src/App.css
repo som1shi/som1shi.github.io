@@ -11,3 +11,10 @@
   -moz-user-select: none;
   -ms-user-select: none;
 }
+
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+    padding: 20px;
+  }
+}

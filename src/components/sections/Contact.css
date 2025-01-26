@@ -255,3 +255,39 @@
 .contact-card * {
     background-color: initial;
 }
+
+@media (max-width: 768px) {
+    .contact-card {
+        width: 90%;
+        height: 70vh;
+    }
+
+    .contact-card.expanded {
+        width: 95vw;
+        height: 80vh;
+    }
+
+    .message-input {
+        font-size: 14px;
+    }
+
+    .sent-message, .email-display {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-header h2 {
+        font-size: 18px;
+    }
+
+    .message-input {
+        font-size: 13px;
+    }
+
+    .sent-message, .email-display {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+}
