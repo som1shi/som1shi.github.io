@@ -1,1 +1,0 @@
-# som1shi.github.io
