@@ -10,7 +10,7 @@ const Sidebar = ({ setActiveSection }) => {
 
 return (
     <div className="sidebar">
-        {['Home', 'About', 'Experiences', 'Projects', 'Research', 'Contact'].map((section, index) => (
+        {['Home', 'About', 'Experiences', 'Projects', 'Research', 'Misc', 'Contact'].map((section, index) => (
             <button
             key={index}
             onClick={() => handleSectionClick(section)}

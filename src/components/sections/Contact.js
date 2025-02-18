@@ -5,7 +5,6 @@ import useWindowControls from '../../hooks/useWindowControls';
 
 const Contact = () => {
     const { isExpanded, isVisible, TrafficLights } = useWindowControls();
-    const [showEmail, setShowEmail] = useState(false);
     const [message, setMessage] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const [showEmailContent, setShowEmailContent] = useState(false);

@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Sarvagya",
+  "name": "Sarvagya Somvanshi's Portfolio",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,11 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#0072e5",
+  "background_color": "#ffffff",
+  "description": "Personal portfolio website showcasing projects, research, and experiences",
+  "orientation": "portrait",
+  "categories": ["portfolio", "personal"],
+  "screenshots": [],
+  "prefer_related_applications": false
 }

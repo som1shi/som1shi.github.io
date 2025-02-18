@@ -6,6 +6,7 @@ import Experiences from './sections/Experiences';
 import Projects from './sections/Projects';
 import Research from './sections/Research';
 import Contact from './sections/Contact';
+import Misc from './sections/Misc';
 
 const MainSection = ({ activeSection }) => {
     switch (activeSection) {
@@ -21,6 +22,8 @@ const MainSection = ({ activeSection }) => {
             return <Research />;
         case 'Contact':
             return <Contact />;
+        case 'Misc':
+            return <Misc />;
         default:
             return <Landing />;
     }
