@@ -29,6 +29,17 @@ const Refiner = () => {
     
     const [shareFeedback, setShareFeedback] = useState(false);
     
+    const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+    const [volume, setVolume] = useState(0.2);
+    const audioRef = useRef(null);
+    
+    const correctSoundRef = useRef(null);
+    const completeGameSoundRef = useRef(null);
+    const hintRevealSoundRef = useRef(null);
+    const wrongSoundRef = useRef(null);
+    
+    const [showVolumeControl, setShowVolumeControl] = useState(false);
+    
     const generateRandomNumber = (row, col) => {
         return {
             value: Math.floor(Math.random() * 10),
@@ -42,7 +53,7 @@ const Refiner = () => {
     };
     
     const findSolution = (allNumbers, target) => {
-        const rows = 16;
+        const rows = 8;
         const cols = 16;
         const grid = Array(rows).fill().map(() => Array(cols).fill(null));
         
@@ -111,7 +122,7 @@ const Refiner = () => {
     
     const generateNumbers = () => {
         const newNumbers = [];
-        const rows = 16;
+        const rows = 8;
         const cols = 16;
         
         for (let row = 0; row < rows; row++) {
@@ -218,6 +229,8 @@ const Refiner = () => {
                 }
             }
             
+            setNumbers(prev => prev.map(n => ({...n, selected: false, animating: selectedIds.has(n.id)})));
+            
             setTimeout(() => {
                 setNumbers(newNumbers);
                 setSelectedNumbers([]);
@@ -232,6 +245,8 @@ const Refiner = () => {
                 console.log(`Replaced ${replacements} numbers with new ones. New target: ${newTarget}`);
             }, 300);
         }, 800);
+        
+        playSound(correctSoundRef);
     };
 
     useEffect(() => {
@@ -243,6 +258,13 @@ const Refiner = () => {
                 setTargetsHit(prev => prev + 1);
                 
                 replaceSelectedNumbers();
+            } else if (currentSum > 0) {
+                playSound(wrongSoundRef);
+                
+                setTimeout(() => {
+                    setSelectedNumbers([]);
+                    setNumbers(prev => prev.map(n => ({...n, selected: false})));
+                }, 300);
             }
         }
     }, [selectedNumbers]);
@@ -293,6 +315,69 @@ const Refiner = () => {
         };
     }, []);
     
+    useEffect(() => {
+        if (!audioRef.current) {
+            audioRef.current = new Audio('/sounds/refiner-ambient.wav');
+            audioRef.current.loop = true;
+            audioRef.current.volume = volume;
+        }
+        
+        if (!correctSoundRef.current) {
+            correctSoundRef.current = new Audio('/sounds/refiner-correct.wav');
+            correctSoundRef.current.volume = volume * 0.7;
+        }
+        
+        if (!completeGameSoundRef.current) {
+            completeGameSoundRef.current = new Audio('/sounds/refiner-compete.mp3');
+            completeGameSoundRef.current.volume = volume * 0.8;
+        }
+        
+        if (!hintRevealSoundRef.current) {
+            hintRevealSoundRef.current = new Audio('/sounds/refiner-hint-reveal.wav');
+            hintRevealSoundRef.current.volume = volume * 0.6;
+        }
+        
+        if (!wrongSoundRef.current) {
+            wrongSoundRef.current = new Audio('/sounds/refiner-wrong.mp3');
+            wrongSoundRef.current.volume = volume * 0.6;
+        }
+        
+        const resumeAudio = () => {
+            if (audioRef.current) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    const audioContext = new AudioContext();
+                    audioContext.resume();
+                }
+                
+                if (isMusicPlaying) {
+                    audioRef.current.play().catch(e => console.log('Auto-play prevented:', e));
+                }
+            }
+        };
+        
+        window.addEventListener('click', resumeAudio);
+        window.addEventListener('touchstart', resumeAudio);
+        
+        return () => {
+            window.removeEventListener('click', resumeAudio);
+            window.removeEventListener('touchstart', resumeAudio);
+            
+            [
+                audioRef, 
+                correctSoundRef, 
+                completeGameSoundRef, 
+                hintRevealSoundRef, 
+                wrongSoundRef
+            ].forEach(ref => {
+                if (ref.current) {
+                    ref.current.pause();
+                    ref.current.currentTime = 0;
+                }
+            });
+        };
+    }, [isMusicPlaying, volume]);
+    
     const startGame = () => {
         setGameActive(true);
         setGameOver(false);
@@ -316,6 +401,12 @@ const Refiner = () => {
                 return prev - 1;
             });
         }, 1000);
+        
+        if (!isMusicPlaying && audioRef.current) {
+            audioRef.current.play();
+            setIsMusicPlaying(true);
+        }
+        preloadSounds();
     };
     
     const handleMouseDown = (e) => {
@@ -332,8 +423,8 @@ const Refiner = () => {
         setSelectionBox({
             left: startX,
             top: startY,
-            width: 0,
-            height: 0
+            width: 1,
+            height: 1
         });
         setIsSelecting(true);
     };
@@ -342,8 +433,8 @@ const Refiner = () => {
         if (!isSelecting || !gameActive || animatingToTarget) return;
         
         const gridRect = gridRef.current.getBoundingClientRect();
-        const currentX = e.clientX - gridRect.left;
-        const currentY = e.clientY - gridRect.top;
+        const currentX = Math.max(0, Math.min(e.clientX - gridRect.left, gridRect.width));
+        const currentY = Math.max(0, Math.min(e.clientY - gridRect.top, gridRect.height));
         
         const left = Math.min(selectionStart.x, currentX);
         const top = Math.min(selectionStart.y, currentY);
@@ -353,48 +444,44 @@ const Refiner = () => {
         setSelectionBox({ left, top, width, height });
     };
     
-    const handleMouseUp = () => {
-        if (!isSelecting || !gameActive || animatingToTarget) return;
+    const handleMouseUp = (e) => {
+        if (!isSelecting || !gameActive) return;
         
+        const finalSelectionBox = selectionBox;
         setIsSelecting(false);
+        setSelectionBox(null);
         
-        if (!selectionBox || selectionBox.width < 5 || selectionBox.height < 5) {
-            setSelectionBox(null);
-            return;
-        }
+        const gridRect = gridRef.current.getBoundingClientRect();
         
-        const cellElements = gridRef.current.querySelectorAll('.grid-cell');
         const selectedIds = [];
+        const cellElements = document.querySelectorAll('.grid-cell');
         
-        cellElements.forEach(cellElement => {
-            const cellRect = cellElement.getBoundingClientRect();
-            const gridRect = gridRef.current.getBoundingClientRect();
+        cellElements.forEach(cell => {
+            const cellRect = cell.getBoundingClientRect();
+
+            const cellCenterX = cellRect.left + (cellRect.width / 2) - gridRect.left;
+            const cellCenterY = cellRect.top + (cellRect.height / 2) - gridRect.top;
+
+            const isInside = 
+                cellCenterX >= finalSelectionBox.left && 
+                cellCenterX <= finalSelectionBox.left + finalSelectionBox.width &&
+                cellCenterY >= finalSelectionBox.top && 
+                cellCenterY <= finalSelectionBox.top + finalSelectionBox.height;
             
-            const centerX = (cellRect.left + cellRect.right) / 2 - gridRect.left;
-            const centerY = (cellRect.top + cellRect.bottom) / 2 - gridRect.top;
-            
-            if (
-                centerX >= selectionBox.left && 
-                centerX <= selectionBox.left + selectionBox.width &&
-                centerY >= selectionBox.top && 
-                centerY <= selectionBox.top + selectionBox.height
-            ) {
-                const id = cellElement.getAttribute('data-id');
-                selectedIds.push(id);
+            if (isInside) {
+                const id = cell.getAttribute('data-id');
+                if (id) selectedIds.push(id);
             }
         });
         
-        setSelectedNumbers(selectedIds);
-        
-        setNumbers(prev => prev.map(n => ({
-            ...n, 
-            selected: selectedIds.includes(n.id),
-            animating: selectedIds.includes(n.id)
-        })));
-        
-        setTimeout(() => {
-            setSelectionBox(null);
-        }, 200);
+        if (selectedIds.length > 0) {
+            setSelectedNumbers(selectedIds);
+            
+            setNumbers(prev => prev.map(n => ({
+                ...n,
+                selected: selectedIds.includes(n.id)
+            })));
+        }
     };
     
     const getCurrentSum = () => {
@@ -408,6 +495,7 @@ const Refiner = () => {
         clearInterval(timerRef.current);
         setGameActive(false);
         setGameOver(true);
+        playSound(completeGameSoundRef);
     };
     
     const currentSum = getCurrentSum();
@@ -417,22 +505,10 @@ const Refiner = () => {
         
         const shareText = `I refined ${score} targets in ${gameDuration} seconds playing Refiner! Can you beat my score?`;
         
-        if (navigator.share) {
-            navigator.share({
-                title: 'My Refiner Score',
-                text: shareText,
-                url: gameUrl
-            })
-            .catch(error => {
-                console.log('Error sharing:', error);
-                copyToClipboard(`${shareText}\n\n${gameUrl}`);
-            });
-        } else {
-            copyToClipboard(`${shareText}\n\n${gameUrl}`);
-            
-            setShareFeedback(true);
-            setTimeout(() => setShareFeedback(false), 2000);
-        }
+        copyToClipboard(`${shareText}\n\n${gameUrl}`);
+        
+        setShareFeedback(true);
+        setTimeout(() => setShareFeedback(false), 2000);
     };
     
     const copyToClipboard = (text) => {
@@ -453,10 +529,178 @@ const Refiner = () => {
     };
     
     const shareButtonText = shareFeedback ? 'Copied to clipboard!' : 'Share Score';
+    const toggleMusic = () => {
+        if (!isMusicPlaying) {
+            audioRef.current.play().catch(e => console.log('Play prevented:', e));
+            setIsMusicPlaying(true);
+        } else {
+            setShowVolumeControl(!showVolumeControl);
+        }
+        
+        try {
+            localStorage.setItem('refinerMusicEnabled', isMusicPlaying ? 'true' : 'false');
+        } catch (e) {
+            console.log('Could not save music preference');
+        }
+    };
+
+    const muteMusic = () => {
+        audioRef.current.pause();
+        setIsMusicPlaying(false);
+        setShowVolumeControl(false);
+        
+        try {
+            localStorage.setItem('refinerMusicEnabled', 'false');
+        } catch (e) {
+            console.log('Could not save music preference');
+        }
+    };
+
+    const playSound = (soundRef) => {
+        if (!soundRef || !soundRef.current) return;
+        
+        try {
+            soundRef.current.pause();
+            soundRef.current.currentTime = 0;
+            
+            if (soundRef === correctSoundRef) {
+                soundRef.current.volume = volume * 0.7;
+            } else if (soundRef === wrongSoundRef) {
+                soundRef.current.volume = volume * 0.6;
+            } else if (soundRef === completeGameSoundRef) {
+                soundRef.current.volume = volume * 0.8;
+            } else if (soundRef === hintRevealSoundRef) {
+                soundRef.current.volume = volume * 0.6;
+            }
+            
+            setTimeout(() => {
+                const playPromise = soundRef.current.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log('Sound play prevented:', error);
+                        
+                        setTimeout(() => {
+                            soundRef.current.play().catch(e => console.log('Retry failed:', e));
+                        }, 100);
+                    });
+                }
+            }, 10);
+        } catch (e) {
+            console.error("Error playing sound:", e);
+        }
+    };
+
+    const handleVolumeChange = (e) => {
+        const newVolume = parseFloat(e.target.value);
+        setVolume(newVolume);
+        
+        if (audioRef.current) {
+            audioRef.current.volume = newVolume;
+        }
+        
+        if (correctSoundRef.current) {
+            correctSoundRef.current.volume = newVolume * 0.7;
+        }
+        
+        if (completeGameSoundRef.current) {
+            completeGameSoundRef.current.volume = newVolume * 0.8;
+        }
+        
+        if (hintRevealSoundRef.current) {
+            hintRevealSoundRef.current.volume = newVolume * 0.6;
+        }
+        
+        if (wrongSoundRef.current) {
+            wrongSoundRef.current.volume = newVolume * 0.6;
+        }
+        
+        try {
+            localStorage.setItem('refinerMusicVolume', newVolume.toString());
+        } catch (e) {
+            console.log('Could not save volume preference');
+        }
+    };
+
+    useEffect(() => {
+        try {
+            const savedVolume = localStorage.getItem('refinerMusicVolume');
+            if (savedVolume !== null) {
+                setVolume(parseFloat(savedVolume));
+                if (audioRef.current) {
+                    audioRef.current.volume = parseFloat(savedVolume);
+                }
+            }
+            
+            const musicEnabled = localStorage.getItem('refinerMusicEnabled');
+            if (musicEnabled === 'true' && audioRef.current) {
+                audioRef.current.play().catch(e => {
+                    console.log('Auto-play prevented on load:', e);
+                    setIsMusicPlaying(false);
+                });
+                setIsMusicPlaying(true);
+            }
+        } catch (e) {
+            console.log('Could not load audio preferences');
+        }
+    }, []);
+
+    const showHint = () => {
+        if (hintRevealSoundRef.current) {
+            hintRevealSoundRef.current.currentTime = 0;
+            hintRevealSoundRef.current.play().catch(e => console.log('Play prevented:', e));
+        }
+        
+    };
+
+    const preloadSounds = () => {
+        try {
+            if (correctSoundRef.current) {
+                correctSoundRef.current.load();
+            }
+            if (wrongSoundRef.current) {
+                wrongSoundRef.current.load();
+            }
+            if (completeGameSoundRef.current) {
+                completeGameSoundRef.current.load();
+            }
+            if (hintRevealSoundRef.current) {
+                hintRevealSoundRef.current.load();
+            }
+        } catch (e) {
+            console.log('Error preloading sounds:', e);
+        }
+    };
+
+    const VolumeIcon = ({ volume, isMuted }) => {
+        if (isMuted || volume === 0) {
+            return (
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 2L4 5H2V11H4L8 14V2Z" stroke="#7AF3D0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M14 5L10 9" stroke="#7AF3D0" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M10 5L14 9" stroke="#7AF3D0" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
+            );
+        } else if (volume < 0.4) {
+            return (
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 2L4 5H2V11H4L8 14V2Z" stroke="#7AF3D0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M10.5 6C11.3 6.8 11.3 9.2 10.5 10" stroke="#7AF3D0" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
+            );
+        } else {
+            return (
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 2L4 5H2V11H4L8 14V2Z" stroke="#7AF3D0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M10.5 6C11.3 6.8 11.3 9.2 10.5 10" stroke="#7AF3D0" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M13 4C14.7 5.6 14.7 10.4 13 12" stroke="#7AF3D0" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
+            );
+        }
+    };
 
     return (
         <div className="refiner">
-            <div className="back-button" onClick={() => window.history.back()}>×</div>
             <div className="mdr-header">
                 <div className="timer-container">
                     <div 
@@ -465,10 +709,36 @@ const Refiner = () => {
                     ></div>
                     <span className="timer-text">{timeLeft}s</span>
                 </div>
+                
                 <div className="score-display">
                     <span>Score: {score}</span>
                 </div>
+                
+                <div className="music-controls">
+                    <button 
+                        className={`music-button ${isMusicPlaying ? 'playing' : ''}`} 
+                        onClick={toggleMusic}
+                        aria-label={isMusicPlaying ? "Music options" : "Play music"}
+                    >
+                        <VolumeIcon volume={volume} isMuted={!isMusicPlaying} />
+                    </button>
+                    
+                    {isMusicPlaying && (
+                        <input 
+                            type="range" 
+                            min="0" 
+                            max="0.8"
+                            step="0.1" 
+                            value={volume} 
+                            onChange={handleVolumeChange}
+                            className="volume-slider"
+                        />
+                    )}
+                </div>
+                
                 <div className="company-logo">SOMVANSHI</div>
+                
+                <div className="back-button" onClick={() => window.history.back()}>×</div>
             </div>
             
             <div className="refiner-container">
@@ -535,7 +805,7 @@ const Refiner = () => {
                 <div className="intro-screen">
                     <h1>Data Refinement</h1>
                     <p>Drag to select numbers that add up to the target sum.</p>
-                    <p>Selected numbers will be replaced with new ones.</p>
+                    <p>If you struggle, look around for the scary numbers.</p>
                     <div className="duration-options">
                         <button 
                             className={`duration-button ${gameDuration === 30 ? 'selected' : ''}`} 
@@ -575,47 +845,24 @@ const Refiner = () => {
             {gameOver && (
                 <div className="game-over">
                     <div className="game-over-content">
-                        <h2>Session Concluded</h2>
-                        <p>Targets Refined: {targetsHit}</p>
-                        <p>Score: {score}</p>
+                        <h2>Game Over</h2>
+                        <div className="score-result">
+                            <div className="score-value">{score}</div>
+                            <div className="score-label">Targets Refined</div>
+                        </div>
+                        
+                        <div className="duration-result">
+                            <div className="duration-value">{gameDuration}</div>
+                            <div className="duration-label">Seconds</div>
+                        </div>
+                        
+                        <button className="play-again-button" onClick={() => window.location.reload()}>
+                            Play Again
+                        </button>
                         
                         <button className="share-button" onClick={shareScore}>
                             {shareButtonText}
                         </button>
-                        
-                        <div className="duration-options">
-                            <button 
-                                className={`duration-button ${gameDuration === 30 ? 'selected' : ''}`} 
-                                onClick={() => setGameDuration(30)}
-                            >
-                                30 Seconds
-                            </button>
-                            <button 
-                                className={`duration-button ${gameDuration === 60 ? 'selected' : ''}`} 
-                                onClick={() => setGameDuration(60)}
-                            >
-                                60 Seconds
-                            </button>
-                            <button 
-                                className={`duration-button ${gameDuration === 180 ? 'selected' : ''}`} 
-                                onClick={() => setGameDuration(180)}
-                            >
-                                3 Minutes
-                            </button>
-                            <button 
-                                className={`duration-button ${gameDuration === 300 ? 'selected' : ''}`} 
-                                onClick={() => setGameDuration(300)}
-                            >
-                                5 Minutes
-                            </button>
-                            <button 
-                                className={`duration-button ${gameDuration === 600 ? 'selected' : ''}`} 
-                                onClick={() => setGameDuration(600)}
-                            >
-                                10 Minutes
-                            </button>
-                        </div>
-                        <button className="start-button" onClick={startGame}>Restart</button>
                     </div>
                 </div>
             )}
