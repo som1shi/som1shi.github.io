@@ -2,14 +2,17 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    width: 100%;
     background: #ECE9D8;
     font-family: 'Tahoma', sans-serif;
     border: 3px solid #0054E3;
     overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
 }
 
-.window-header {
+.rotate-connect-four .window-header {
     background: linear-gradient(180deg, #0054E3 0%, #2E89FF 10%, #0054E3 100%);
     height: 32px;
     display: flex;
@@ -22,7 +25,7 @@
     user-select: none;
 }
 
-.window-title {
+.rotate-connect-four .window-title {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -31,12 +34,12 @@
     font-family: 'Tahoma', sans-serif;
 }
 
-.window-controls {
+.rotate-connect-four .window-controls {
     display: flex;
     gap: 2px;
 }
 
-.window-button {
+.rotate-connect-four .window-button {
     width: 22px;
     height: 22px;
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -48,49 +51,53 @@
     color: white;
 }
 
-.window-button.close::after {
+.rotate-connect-four .window-button.close::after {
     content: "×";
 }
 
-.window-button:hover {
+.rotate-connect-four .window-button:hover {
     background: #E81123;
 }
 
-.game-container {
+.rotate-connect-four .game-container {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 20px;
-    gap: 20px;
+    justify-content: flex-start;
+    padding: 10px;
+    gap: 10px;
     background: #ECE9D8;
     height: calc(100vh - 32px);
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
-.board {
+.rotate-connect-four .board {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(7, 1fr);
-    width: min(400px, 80vw);
+    width: min(350px, 90vw);
+    max-height: 60vh;
     aspect-ratio: 1/1;
     margin: 0 auto;
+    padding: 6px;
+    gap: 3px;
     background: #0054E3;
-    padding: 8px;
     border-radius: 8px;
-    gap: 4px;
     border: 3px solid;
     border-color: #2E89FF #003DA6 #003DA6 #2E89FF;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
     position: relative;
+    margin-bottom: 10px;
 }
 
-.row {
+.rotate-connect-four .row {
     display: contents;
 }
 
-.cell {
+.rotate-connect-four .cell {
     aspect-ratio: 1;
     background: #fff;
     border-radius: 50%;
@@ -104,22 +111,22 @@
     transition: none;
 }
 
-.cell:hover {
+.rotate-connect-four .cell:hover {
     background: #f0f0f0;
 }
 
-.piece {
+.rotate-connect-four .piece {
     width: 90%;
     height: 90%;
     border-radius: 50%;
     position: relative;
-    animation: dropIn 0.4s ease-out forwards !important;
+    animation: rotateCF-dropIn 0.4s ease-out forwards !important;
     transition: none !important;
     will-change: transform;
     backface-visibility: hidden;
 }
 
-.piece.red {
+.rotate-connect-four .piece.red {
     background: radial-gradient(circle at 30% 30%, #FF5F57, #E0443E);
     box-shadow: 
         inset -2px -2px 6px rgba(0,0,0,0.4),
@@ -127,7 +134,7 @@
         0 3px 5px rgba(0,0,0,0.3);
 }
 
-.piece.yellow {
+.rotate-connect-four .piece.yellow {
     background: radial-gradient(circle at 30% 30%, #FEBC2E, #F5A623);
     box-shadow: 
         inset -2px -2px 6px rgba(0,0,0,0.4),
@@ -135,21 +142,22 @@
         0 3px 5px rgba(0,0,0,0.3);
 }
 
-.controls {
+.rotate-connect-four .controls {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    width: min(400px, 90vw);
+    gap: 8px;
+    width: min(350px, 90vw);
     margin: 0 auto;
-    padding: 12px;
+    padding: 10px;
     background: #ECE9D8;
     border: 2px solid;
     border-color: #fff #848484 #848484 #fff;
     border-radius: 3px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
 }
 
-.controls-row {
+.rotate-connect-four .controls-row {
     display: flex;
     gap: 10px;
     align-items: center;
@@ -157,7 +165,7 @@
     width: 100%;
 }
 
-.turn-indicator {
+.rotate-connect-four .turn-indicator {
     padding: 8px 12px;
     background: white;
     border: 2px solid;
@@ -171,14 +179,14 @@
     font-weight: bold;
 }
 
-.rotation-controls {
+.rotate-connect-four .rotation-controls {
     display: flex;
     gap: 12px;
     justify-content: center;
     width: 100%;
 }
 
-.controls button {
+.rotate-connect-four .controls button {
     padding: 6px 15px;
     background: linear-gradient(180deg, #EEE 0%, #DDD 45%, #CCC 50%, #DDD 100%);
     border: 2px solid;
@@ -193,11 +201,11 @@
     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
-.controls button:hover {
+.rotate-connect-four .controls button:hover {
     background: linear-gradient(180deg, #f5f5f5 0%, #e5e5e5 45%, #DDD 50%, #e5e5e5 100%);
 }
 
-.controls button:active {
+.rotate-connect-four .controls button:active {
     background: linear-gradient(180deg, #DDD 0%, #EEE 45%, #f5f5f5 50%, #EEE 100%);
     border-color: #848484 #fff #fff #848484;
     padding-top: 7px;
@@ -205,16 +213,16 @@
     box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
 }
 
-.controls button:disabled {
+.rotate-connect-four .controls button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
 
-.controls-top {
+.rotate-connect-four .controls-top {
     justify-content: space-between;
 }
 
-@keyframes dropIn {
+@keyframes rotateCF-dropIn {
     0% { 
         transform: translateY(-30px) scale(0.8); 
         opacity: 0.8; 
@@ -231,48 +239,48 @@
     }
 }
 
-@keyframes rotateLeft {
+@keyframes rotateCF-rotateLeft {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(-90deg); }
 }
 
-@keyframes rotateRight {
+@keyframes rotateCF-rotateRight {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(90deg); }
 }
 
-.board.rotating-left {
-    animation: rotateLeft 0.5s ease-in-out forwards;
+.rotate-connect-four .board.rotating-left {
+    animation: rotateCF-rotateLeft 0.5s ease-in-out forwards;
 }
 
-.board.rotating-right {
-    animation: rotateRight 0.5s ease-in-out forwards;
+.rotate-connect-four .board.rotating-right {
+    animation: rotateCF-rotateRight 0.5s ease-in-out forwards;
 }
 
-.board.rotating-left .cell, 
-.board.rotating-right .cell {
+.rotate-connect-four .board.rotating-left .cell, 
+.rotate-connect-four .board.rotating-right .cell {
     pointer-events: none;
 }
 
-.board.rotating {
+.rotate-connect-four .board.rotating {
     animation: none;
 }
 
-.dice-container {
+.rotate-connect-four .dice-container {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     justify-content: space-between;
-    width: 92%;
-    min-height: 70px;
-    padding: 8px 12px;
+    width: 100%;
+    min-height: 50px;
+    padding: 5px 8px;
     background: white;
     border: 2px solid;
     border-color: #848484 #fff #fff #848484;
     border-radius: 3px;
 }
 
-.dice {
+.rotate-connect-four .dice {
     width: 30px;
     height: 30px;
     position: relative;
@@ -281,7 +289,7 @@
     flex-shrink: 0;
 }
 
-.dice-face {
+.rotate-connect-four .dice-face {
     width: 100%;
     height: 100%;
     position: relative;
@@ -303,7 +311,7 @@
     transition: transform 0.2s ease-out;
 }
 
-.dice-message {
+.rotate-connect-four .dice-message {
     text-align: center;
     font-size: 12px;
     font-weight: bold;
@@ -314,19 +322,21 @@
     color: #333;
 }
 
-.rules-panel {
+.rotate-connect-four .rules-panel {
     background: white;
     border: 2px solid;
     border-color: #848484 #fff #fff #848484;
     border-radius: 3px;
-    padding: 10px 14px;
+    padding: 6px 10px;
     margin: 8px 0;
     font-size: 12px;
     font-family: 'Tahoma', sans-serif;
     box-shadow: inset 1px 1px 3px rgba(0,0,0,0.1);
+    max-height: 200px;
+    overflow-y: auto;
 }
 
-.rules-panel h3 {
+.rotate-connect-four .rules-panel h3 {
     margin-top: 0;
     margin-bottom: 10px;
     font-size: 13px;
@@ -334,62 +344,105 @@
     color: #0054E3;
 }
 
-.rules-panel ol {
+.rotate-connect-four .rules-panel ol {
     margin: 0;
     padding-left: 25px;
 }
 
-.rules-panel li {
+.rotate-connect-four .rules-panel li {
     margin-bottom: 6px;
 }
 
-@media (max-width: 768px) {
-    .board {
-        width: 90vw;
+@media (max-height: 700px) {
+    .rotate-connect-four .game-container {
+        padding: 5px;
+        gap: 8px;
     }
     
-    .controls {
-        width: 90vw;
+    .rotate-connect-four .board {
+        width: min(300px, 90vw);
     }
     
-    .dice-message {
-        font-size: 11px;
+    .rotate-connect-four .controls {
+        width: min(300px, 90vw);
+        padding: 6px;
+    }
+    
+    .rotate-connect-four .turn-indicator {
+        padding: 4px 8px;
+    }
+    
+    .rotate-connect-four .controls button {
+        min-width: 60px;
+        padding: 4px 8px;
+    }
+    
+    .rotate-connect-four .controls-row {
+        gap: 6px;
     }
 }
 
 @media (max-width: 480px) {
-    .game-container {
-        padding: 10px;
-        gap: 10px;
+    .rotate-connect-four .game-container {
+        padding: 8px 5px;
+        gap: 8px;
     }
     
-    .board {
+    .rotate-connect-four .board {
         width: 95vw;
     }
     
-    .controls {
+    .rotate-connect-four .controls {
         width: 95vw;
-        padding: 8px;
+        padding: 6px;
+        gap: 6px;
     }
     
-    .dice-container {
-        min-height: 60px;
-        padding: 5px 8px;
+    .rotate-connect-four .dice-container {
+        min-height: 40px;
+        padding: 4px 6px;
     }
     
-    .dice {
-        width: 40px;
-        height: 40px;
+    .rotate-connect-four .dice {
+        width: 28px;
+        height: 28px;
     }
     
-    .controls button {
-        min-width: 70px;
-        padding: 4px 8px;
+    .rotate-connect-four .controls button {
+        min-width: auto;
+        padding: 4px 6px;
+        font-size: 11px;
+    }
+    
+    .rotate-connect-four .rules-panel {
+        font-size: 10px;
+    }
+    
+    .rotate-connect-four .rules-panel h3 {
         font-size: 11px;
     }
 }
 
-.dot {
+@media (max-height: 600px) {
+    .rotate-connect-four .game-container {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .rotate-connect-four .controls {
+        order: 2;
+        width: min(350px, 45%);
+    }
+    
+    .rotate-connect-four .board {
+        order: 1;
+        width: min(320px, 45%);
+    }
+}
+
+.rotate-connect-four .dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
@@ -399,101 +452,101 @@
     box-shadow: inset 0 0 2px rgba(0,0,0,0.5);
 }
 
-.dice-face .dot {
+.rotate-connect-four .dice-face .dot {
     display: none;
 }
 
-.face-1 .dot-5 { 
+.rotate-connect-four .face-1 .dot-5 { 
     display: block; 
     grid-area: g; 
 }
 
-.face-2 .dot-1 { 
+.rotate-connect-four .face-2 .dot-1 { 
     display: block; 
     grid-area: a; 
 }
-.face-2 .dot-6 { 
+.rotate-connect-four .face-2 .dot-6 { 
     display: block; 
     grid-area: b; 
 }
 
-.face-3 .dot-1 { 
+.rotate-connect-four .face-3 .dot-1 { 
     display: block; 
     grid-area: a; 
 }
-.face-3 .dot-5 { 
+.rotate-connect-four .face-3 .dot-5 { 
     display: block; 
     grid-area: g; 
 }
-.face-3 .dot-6 { 
+.rotate-connect-four .face-3 .dot-6 { 
     display: block; 
     grid-area: b; 
 }
 
-.face-4 .dot-1 { 
+.rotate-connect-four .face-4 .dot-1 { 
     display: block; 
     grid-area: a; 
 }
-.face-4 .dot-3 { 
+.rotate-connect-four .face-4 .dot-3 { 
     display: block; 
     grid-area: c; 
 }
-.face-4 .dot-4 { 
+.rotate-connect-four .face-4 .dot-4 { 
     display: block; 
     grid-area: d; 
 }
-.face-4 .dot-6 { 
+.rotate-connect-four .face-4 .dot-6 { 
     display: block; 
     grid-area: b; 
 }
 
-.face-5 .dot-1 { 
+.rotate-connect-four .face-5 .dot-1 { 
     display: block; 
     grid-area: a; 
 }
-.face-5 .dot-3 { 
+.rotate-connect-four .face-5 .dot-3 { 
     display: block; 
     grid-area: c; 
 }
-.face-5 .dot-5 { 
+.rotate-connect-four .face-5 .dot-5 { 
     display: block; 
     grid-area: g; 
 }
-.face-5 .dot-4 { 
+.rotate-connect-four .face-5 .dot-4 { 
     display: block; 
     grid-area: d; 
 }
-.face-5 .dot-6 { 
+.rotate-connect-four .face-5 .dot-6 { 
     display: block; 
     grid-area: b; 
 }
 
-.face-6 .dot-1 { 
+.rotate-connect-four .face-6 .dot-1 { 
     display: block; 
     grid-area: a; 
 }
-.face-6 .dot-3 { 
+.rotate-connect-four .face-6 .dot-3 { 
     display: block; 
     grid-area: c; 
 }
-.face-6 .dot-4 { 
+.rotate-connect-four .face-6 .dot-4 { 
     display: block; 
     grid-area: d; 
 }
-.face-6 .dot-6 { 
+.rotate-connect-four .face-6 .dot-6 { 
     display: block; 
     grid-area: b; 
 }
-.face-6 .dot-2 { 
+.rotate-connect-four .face-6 .dot-2 { 
     display: block; 
     grid-area: e; 
 }
-.face-6 .dot-5 { 
+.rotate-connect-four .face-6 .dot-5 { 
     display: block; 
     grid-area: f; 
 }
 
-@keyframes rollDice {
+@keyframes rotateCF-rollDice {
     0% { 
         transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateZ(0px); 
     }
@@ -520,23 +573,23 @@
     }
 }
 
-.dice-face.rolling {
-    animation: rollDice 1s ease-in-out;
+.rotate-connect-four .dice-face.rolling {
+    animation: rotateCF-rollDice 1s ease-in-out;
     transform-origin: center center;
 }
 
-.dice-face:not(.rolling) {
-    animation: diceLand 0.3s ease-out;
-}
-
-@keyframes diceLand {
+@keyframes rotateCF-diceLand {
     0% { transform: translateZ(10px) scale(1.1); }
     40% { transform: translateZ(5px) scale(1.05); }
     70% { transform: translateZ(2px) scale(1.02); }
     100% { transform: translateZ(0) scale(1); }
 }
 
-.dice::after {
+.rotate-connect-four .dice-face:not(.rolling) {
+    animation: rotateCF-diceLand 0.3s ease-out;
+}
+
+.rotate-connect-four .dice::after {
     content: '';
     position: absolute;
     width: 80%;
@@ -550,12 +603,12 @@
     transition: all 0.5s;
 }
 
-.dice:has(.rolling)::after {
+.rotate-connect-four .dice:has(.rolling)::after {
     width: 60%;
     opacity: 0.7;
 }
 
-.share-button {
+.rotate-connect-four .share-button {
     background: linear-gradient(180deg, #4B97FD 0%, #3281E8 100%) !important;
     color: white !important;
     border-color: #2E89FF #1a60c9 #1a60c9 #2E89FF !important;
@@ -568,16 +621,22 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.share-button:hover {
+.rotate-connect-four .share-button:hover {
     background: linear-gradient(180deg, #5ca4ff 0%, #3d8fff 100%) !important;
 }
 
-.share-button:active {
+.rotate-connect-four .share-button:active {
     background: linear-gradient(180deg, #2d79e5 0%, #3d8fff 100%) !important;
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.3) !important;
 }
 
-.share-button::before {
+.rotate-connect-four .share-button::before {
     content: "🏆 ";
     margin-right: 5px;
+}
+
+@media (min-height: 800px) {
+    .rotate-connect-four .board {
+        max-height: 50vh;
+    }
 } 

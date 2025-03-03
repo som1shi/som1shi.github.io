@@ -49,8 +49,9 @@ const RotateConnectFour = () => {
     const rollDice = () => {
         setIsDiceRolling(true);
         
-        if (diceFaceRef.current) {
-            diceFaceRef.current.classList.add('rolling');
+        const diceFaceElement = document.querySelector('.rotate-connect-four .dice-face');
+        if (diceFaceElement) {
+            diceFaceElement.classList.add('rolling');
         }
         
         setTimeout(() => {
@@ -94,7 +95,7 @@ const RotateConnectFour = () => {
         
         const finalBoard = applyGravity(newBoard);
         
-        const boardElement = document.querySelector('.board');
+        const boardElement = document.querySelector('.rotate-connect-four .board');
         if (boardElement) {
             boardElement.classList.add(direction === 'left' ? 'rotating-left' : 'rotating-right');
             
