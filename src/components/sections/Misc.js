@@ -1,6 +1,7 @@
 import React from 'react';
 import './SectionStyles.css';
 import useWindowControls from '../../hooks/useWindowControls';
+import Icon from '../Icon';
 
 const miscItems = [
     {
@@ -23,6 +24,13 @@ const miscItems = [
         description: "Connect Four with dice rolls and board rotation mechanics.",
         link: "/rotate-connect-four",
         category: "Games"
+    },
+    {
+        title: "Macrodata Refinement",
+        icon: "🔢",
+        description: "Sort scary numbers in this Severance-inspired terminal game.",
+        link: "/refiner",
+        category: "Games"
     }
 ];
 
@@ -38,6 +46,7 @@ const Misc = () => {
                 <h2>misc</h2>
             </div>
             <div className="section-content">
+                
                 {miscItems.map((item, index) => (
                     <div key={index} className="misc-item" onClick={() => window.location.href = item.link}>
                         <div className="misc-icon">{item.icon}</div>
