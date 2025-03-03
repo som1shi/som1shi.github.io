@@ -1,31 +1,36 @@
 // src/App.js
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
 import MainSection from './components/MainSection';
+import Sidebar from './components/Sidebar';
 import SocialLinks from './components/SocialLinks';
 import EmojiBackground from './components/EmojiBackground';
 import Minesweeper from './components/games/Minesweeper/Minesweeper';
+import QuantumChess from './components/games/QuantumChess/QuantumChess';
+import RotateConnectFour from './components/games/RotateConnectFour/RotateConnectFour';
 import './App.css';
 
-function App() {
-    const [activeSection, setActiveSection] = useState('');
+const Home = () => {
+    const [activeSection, setActiveSection] = React.useState("Home");
+    
+    return (
+        <div className="app">
+            <EmojiBackground />
+            <MainSection activeSection={activeSection} />
+            <Sidebar setActiveSection={setActiveSection} />
+            <SocialLinks />
+        </div>
+    );
+};
 
+function App() {
     return (
         <Router basename="/">
             <Routes>
+                <Route path="/" element={<Home />} />
                 <Route path="/wordsweeper" element={<Minesweeper />} />
-                <Route 
-                    path="/" 
-                    element={
-                        <div className="app">
-                            <EmojiBackground />
-                            <Sidebar setActiveSection={setActiveSection} />
-                            <MainSection activeSection={activeSection} />
-                            <SocialLinks />
-                        </div>
-                    } 
-                />
+                <Route path="/quantum-chess" element={<QuantumChess />} />
+                <Route path="/rotate-connect-four" element={<RotateConnectFour />} />
             </Routes>
         </Router>
     );

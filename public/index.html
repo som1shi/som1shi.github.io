@@ -22,6 +22,11 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <!-- Add default favicon -->
+    <link 
+      rel="icon" 
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>"
+    />
     <title>Sarvagya</title>
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages
@@ -37,6 +42,23 @@
           );
         }
       }(window.location))
+
+      // Update title and icon based on route
+      function updateTitleAndIcon() {
+        if (window.location.pathname.includes('wordsweeper')) {
+          document.title = 'WordSweeper';
+          var link = document.querySelector("link[rel='icon']");
+          link.href = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">💣</text></svg>';
+        } else {
+          document.title = 'Sarvagya';
+          var link = document.querySelector("link[rel='icon']");
+          link.href = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🎯</text></svg>';
+        }
+      }
+
+      // Listen for route changes
+      window.addEventListener('popstate', updateTitleAndIcon);
+      window.addEventListener('load', updateTitleAndIcon);
     </script>
   </head>
   <body>

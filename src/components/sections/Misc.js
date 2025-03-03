@@ -9,6 +9,20 @@ const miscItems = [
         description: "The Classic Minesweeper game with a twist.",
         link: "/wordsweeper",
         category: "Games"
+    },
+    {
+        title: "Schrödinger's Chess",
+        icon: "♟️",
+        description: "Chess where pieces exist in quantum superposition until observed.",
+        link: "/quantum-chess",
+        category: "Games"
+    },
+    {
+        title: "Rotate Connect Four",
+        icon: "🎲",
+        description: "Connect Four with dice rolls and board rotation mechanics.",
+        link: "/rotate-connect-four",
+        category: "Games"
     }
 ];
 
