@@ -31,6 +31,13 @@ const miscItems = [
         description: "Sort scary numbers in this Severance-inspired terminal game.",
         link: "/refiner",
         category: "Games"
+    },
+    {
+        title: "WikiConnect",
+        icon: "🔗",
+        description: "Navigate through Wikipedia to connect two random articles.",
+        link: "/wikiconnect",
+        category: "Games"
     }
 ];
 

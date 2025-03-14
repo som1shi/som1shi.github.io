@@ -218,6 +218,8 @@ const Refiner = () => {
         setTimeout(() => {
             targetBox.classList.remove('receiving');
             
+            targetBox.classList.add('changing-target');
+            
             const newNumbers = [...numbers];
             let replacements = 0;
             
@@ -241,6 +243,10 @@ const Refiner = () => {
                 setLastTargetTime(Date.now());
                 setHintShown(false);
                 setScaryCells([]);
+                
+                setTimeout(() => {
+                    targetBox.classList.remove('changing-target');
+                }, 500);
                 
                 console.log(`Replaced ${replacements} numbers with new ones. New target: ${newTarget}`);
             }, 300);

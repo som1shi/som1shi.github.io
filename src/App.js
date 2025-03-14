@@ -1,41 +1,41 @@
 // src/App.js
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import MainSection from './components/MainSection';
+import './App.css';
 import Sidebar from './components/Sidebar';
+import MainSection from './components/MainSection';
 import SocialLinks from './components/SocialLinks';
 import EmojiBackground from './components/EmojiBackground';
 import Minesweeper from './components/games/Minesweeper/Minesweeper';
 import QuantumChess from './components/games/QuantumChess/QuantumChess';
 import RotateConnectFour from './components/games/RotateConnectFour/RotateConnectFour';
 import Refiner from './components/games/Refiner/Refiner';
-import './App.css';
-
-const Home = () => {
-    const [activeSection, setActiveSection] = React.useState("Home");
-    
-    return (
-        <div className="app">
-            <EmojiBackground />
-            <MainSection activeSection={activeSection} />
-            <Sidebar setActiveSection={setActiveSection} />
-            <SocialLinks />
-        </div>
-    );
-};
+import WikiConnect from './components/games/WikiConnect/WikiConnect';
 
 function App() {
-    return (
-        <Router basename="/">
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/wordsweeper" element={<Minesweeper />} />
-                <Route path="/quantum-chess" element={<QuantumChess />} />
-                <Route path="/rotate-connect-four" element={<RotateConnectFour />} />
-                <Route path="/refiner" element={<Refiner />} />
-            </Routes>
-        </Router>
-    );
+  const [activeSection, setActiveSection] = useState("Home");
+
+  return (
+    <Router>
+      <div className="app">
+        <Routes>
+          <Route path="/" element={
+            <>
+              <EmojiBackground />
+              <Sidebar setActiveSection={setActiveSection} />
+              <MainSection activeSection={activeSection} />
+              <SocialLinks />
+            </>
+          } />
+          <Route path="/wordsweeper" element={<Minesweeper />} />
+          <Route path="/quantum-chess" element={<QuantumChess />} />
+          <Route path="/rotate-connect-four" element={<RotateConnectFour />} />
+          <Route path="/refiner" element={<Refiner />} />
+          <Route path="/wikiconnect" element={<WikiConnect />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
 export default App;
