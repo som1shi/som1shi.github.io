@@ -8,6 +8,12 @@ const Projects = () => {
 
     const projects = [
         {
+            title: "os32",
+            technologies: ["OS", "JavaScript", "React", "Resful API", "Python", "FireBase"],
+            description: "Retro themed emulated operating system powered by Node.js, React, Firebase and Restful APIs. Features a file system, terminal, internet browserr and various applications/games.",
+            link: "https://os32.vercel.app"
+        },
+        {
             title: "AI Brand Semantics Analyzer",
             technologies: ["Node.js", "Python", "xAPI", "Grok LLM", "React"],
             description: "Full stack app powered by Node.js, Python, xAPI, Grok LLM and React to track and analyze brand performance on the X platform",
@@ -29,7 +35,7 @@ const Projects = () => {
             title: "TutorOne",
             technologies: ["Flutter", "ML", "OCR"],
             description: "Flutter Mobile application which optimizes Optical Character Recognition to facilitate improvement of legible alphabet writing skills in children",
-            link: "#"
+            link: "https://github.com/som1shi/TutorOne"
         },
         {
             title: "Haunted Hallows: AR Video Game",
@@ -47,13 +53,13 @@ const Projects = () => {
             title: "Discord Bot",
             technologies: ["Discord API", "Python"],
             description: "Chatbot utilizing various APIs to provide platitude of text-based information using the Discord platform",
-            link: "#"
+            link: "https://github.com/som1shi/Optima"
         },
         {
             title: "MEGAlib Conversion Project",
             technologies: ["CMake", "Data Analysis"],
             description: "Highly modular data analysis library encompassing of approximately 1000 source files upgraded to CMake build services.",
-            link: "#"
+            link: "https://megalibtoolkit.com/home.html"
         }
     ];
 

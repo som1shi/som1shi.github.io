@@ -8,6 +8,12 @@ const Experiences = () => {
 
     const experiences = [
         {
+            title: "Microsoft",
+            role: "Software Engineer Intern",
+            date: "Summer 2025",
+            location: "Redmond, WA",
+        },
+        {
             title: "Bentley Systems",
             role: "Contract Software Developer",
             date: "Fall 2024",
