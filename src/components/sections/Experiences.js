@@ -4,7 +4,7 @@ import './SectionStyles.css';
 import useWindowControls from '../../hooks/useWindowControls';
 
 const Experiences = () => {
-    const { isExpanded, isVisible, TrafficLights } = useWindowControls();
+    const { isExpanded, isVisible, animState, onAnimationEnd, TrafficLights } = useWindowControls();
 
     const experiences = [
         {
@@ -60,7 +60,7 @@ const Experiences = () => {
     if (!isVisible) return null;
 
     return (
-        <div className={`section experiences ${isExpanded ? 'expanded' : ''}`}>
+        <div className={`section experiences ${isExpanded ? 'expanded' : ''} ${animState || ''}`} onAnimationEnd={onAnimationEnd}>
             <div className="section-header">
                 <TrafficLights />
                 <h2>experiences</h2>

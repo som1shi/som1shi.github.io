@@ -1,0 +1,52 @@
+/* src/components/chrome/IOSDock.css */
+
+.ios-dock-container {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 10px 10px;
+    box-sizing: border-box;
+    z-index: 50;
+}
+
+.ios-dock-glass {
+    width: 100%;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+    /* subtle top highlight for depth */
+    border-top: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.ios-dock-icon-wrapper {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.1s;
+}
+
+.ios-dock-icon-wrapper:active {
+    transform: scale(0.9);
+    filter: brightness(0.8);
+}
+
+.ios-dock-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 22%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.ios-dock-svg {
+    font-size: 24px;
+    color: white;
+}

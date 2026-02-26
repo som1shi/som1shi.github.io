@@ -1,0 +1,303 @@
+/* MacBook Air 2017 – authentic CSS recreation */
+
+.macbook-container {
+    width: min(1100px, 96vw);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.35)) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.18));
+}
+
+/* ─── Lid (display half) ─── */
+.macbook-lid {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.macbook-lid-outer {
+    width: 100%;
+    padding: 8px 8px 6px;
+    border-radius: 14px 14px 2px 2px;
+    background:
+        linear-gradient(180deg,
+            #d6dae2 0%,
+            #c3c8d0 3%,
+            #b8bdc6 10%,
+            #adb2bc 50%,
+            #a4a9b3 90%,
+            #9ea3ad 100%);
+    border: 0.5px solid #8a8f99;
+    box-sizing: border-box;
+}
+
+.macbook-lid-inner {
+    width: 100%;
+    border-radius: 8px 8px 1px 1px;
+    background: #0c0c0c;
+    padding: 22px 16px 16px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Camera notch area */
+.macbook-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+}
+
+.macbook-camera-housing {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #1a1e24;
+    border: 1px solid #2c3038;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.macbook-camera-lens {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #3a4460 0%, #181c24 70%);
+}
+
+/* ─── Screen ─── */
+.macbook-screen {
+    width: 100%;
+    min-height: 640px;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    background:
+        radial-gradient(ellipse 120% 50% at 50% 92%, #1a1e3a 0%, transparent 60%),
+        radial-gradient(ellipse 90% 35% at 30% 85%, #2d2554 0%, transparent 55%),
+        radial-gradient(ellipse 90% 35% at 70% 85%, #1e3a5f 0%, transparent 55%),
+        radial-gradient(ellipse 140% 45% at 50% 78%, #3b5998 0%, transparent 50%),
+        radial-gradient(ellipse 100% 30% at 50% 70%, #4a7fb5 0%, transparent 50%),
+        radial-gradient(ellipse 80% 25% at 35% 65%, #6ba3c7 0%, transparent 45%),
+        radial-gradient(ellipse 80% 25% at 65% 65%, #5e9ac0 0%, transparent 45%),
+        linear-gradient(180deg,
+            #fbc688 0%,
+            #f5a861 4%,
+            #e8956e 8%,
+            #d88b7f 12%,
+            #b98aaa 18%,
+            #8b8ac4 25%,
+            #6e8fd4 32%,
+            #5a92d8 40%,
+            #4a90d9 50%,
+            #4088cc 60%,
+            #3574a8 72%,
+            #2a5e8a 82%,
+            #1e3d5f 92%,
+            #141e30 100%);
+}
+
+.macbook-screen-content {
+    width: 100%;
+    min-height: 640px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    isolation: isolate;
+}
+
+.macbook-screen-gloss {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(165deg,
+            rgba(255, 255, 255, 0.04) 0%,
+            rgba(255, 255, 255, 0.01) 40%,
+            transparent 60%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* ─── Bottom bar (hinge lip visible between lid and base) ─── */
+.macbook-bottom-bar {
+    width: min(1040px, 91vw);
+    height: 7px;
+    background:
+        linear-gradient(180deg,
+            #a8adb7 0%,
+            #94999f 40%,
+            #888d96 100%);
+    border-radius: 0 0 3px 3px;
+    position: relative;
+    z-index: 1;
+    border: 0.5px solid #80858e;
+    border-top: none;
+    pointer-events: none;
+}
+
+.macbook-bottom-notch {
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(180deg, #7a7f88 0%, #8a8f98 100%);
+    border-radius: 0 0 3px 3px;
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ─── Base (bottom chassis with keyboard & trackpad) ─── */
+.macbook-base {
+    width: min(1180px, 99vw);
+    pointer-events: none;
+    position: relative;
+    z-index: 0;
+}
+
+.macbook-base-surface {
+    width: 100%;
+    height: 42px;
+    background:
+        linear-gradient(180deg,
+            #cdd1d9 0%,
+            #bcc1cb 20%,
+            #b0b6c0 45%,
+            #a5abb6 70%,
+            #9ea4b0 100%);
+    border-radius: 0 0 52px 52px;
+    border: 0.5px solid #91969f;
+    border-top: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Keyboard area – small dots as keys */
+.macbook-keyboard-area {
+    width: 72%;
+    margin: 5px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5px;
+    opacity: 0.22;
+}
+
+.macbook-key-row {
+    display: flex;
+    gap: 1.5px;
+    justify-content: center;
+}
+
+.macbook-key {
+    width: 7px;
+    height: 4px;
+    border-radius: 0.5px;
+    background: rgba(60, 65, 75, 0.6);
+    flex-shrink: 0;
+}
+
+.macbook-key-space {
+    width: 36px;
+}
+
+/* Trackpad */
+.macbook-trackpad {
+    width: 170px;
+    height: 12px;
+    border-radius: 0 0 10px 10px;
+    background:
+        linear-gradient(180deg,
+            #b4b9c3 0%,
+            #a5abb6 100%);
+    border: 0.5px solid rgba(120, 126, 138, 0.65);
+    border-top: none;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ─── Slots for screen content areas ─── */
+.laptop-menubar-slot {
+    flex-shrink: 0;
+}
+
+.laptop-main-slot {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 80px;
+}
+
+@media (min-width: 769px) {
+    .laptop-dock-slot {
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        transform: translateX(-50%);
+        z-index: 4;
+    }
+
+    .laptop-dock-slot .dock-nav {
+        position: static;
+    }
+
+    .laptop-mobile-sidebar-slot {
+        display: none;
+    }
+}
+
+/* ─── Mobile: strip away laptop chrome ─── */
+@media (max-width: 768px) {
+    .macbook-container {
+        width: 100%;
+        filter: none;
+    }
+
+    .macbook-lid,
+    .macbook-lid-outer,
+    .macbook-lid-inner,
+    .macbook-screen,
+    .macbook-screen-content,
+    .laptop-main-slot {
+        width: 100%;
+        min-height: auto;
+        padding: 0;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    .macbook-notch,
+    .macbook-screen-gloss,
+    .macbook-bottom-bar,
+    .macbook-base,
+    .laptop-dock-slot,
+    .laptop-menubar-slot {
+        display: none;
+    }
+
+    .laptop-mobile-sidebar-slot {
+        display: block;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .macbook-container,
+    .macbook-lid,
+    .macbook-base {
+        transition: none !important;
+        animation: none !important;
+    }
+}

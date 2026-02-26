@@ -4,13 +4,13 @@ import './SectionStyles.css';
 import useWindowControls from '../../hooks/useWindowControls';
 
 const Projects = () => {
-    const { isExpanded, isVisible, TrafficLights } = useWindowControls();
+    const { isExpanded, isVisible, animState, onAnimationEnd, TrafficLights } = useWindowControls();
 
     const projects = [
         {
             title: "os32",
-            technologies: ["OS", "JavaScript", "React", "Resful API", "Python", "FireBase"],
-            description: "Retro themed emulated operating system powered by Node.js, React, Firebase and Restful APIs. Features a file system, terminal, internet browserr and various applications/games.",
+            technologies: ["OS", "JavaScript", "React", "RESTful API", "Python", "Firebase"],
+            description: "Retro-themed emulated operating system powered by Node.js, React, Firebase, and RESTful APIs. Features a file system, terminal, internet browser, and various applications/games.",
             link: "https://os32.vercel.app"
         },
         {
@@ -66,7 +66,7 @@ const Projects = () => {
     if (!isVisible) return null;
 
     return (
-        <div className={`section projects ${isExpanded ? 'expanded' : ''}`}>
+        <div className={`section projects ${isExpanded ? 'expanded' : ''} ${animState || ''}`} onAnimationEnd={onAnimationEnd}>
             <div className="section-header">
                 <TrafficLights />
                 <h2>projects</h2>

@@ -1,0 +1,74 @@
+.macos-menubar {
+    width: 100%;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    box-sizing: border-box;
+    background: rgba(30, 30, 30, 0.52);
+    backdrop-filter: saturate(1.8) blur(18px);
+    -webkit-backdrop-filter: saturate(1.8) blur(18px);
+    color: rgba(255, 255, 255, 0.92);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    position: relative;
+    z-index: 10;
+    user-select: none;
+    -webkit-user-select: none;
+    flex-shrink: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.menubar-left,
+.menubar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.menubar-apple {
+    font-size: 15px;
+    line-height: 1;
+    opacity: 0.95;
+}
+
+.menubar-appname {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.menubar-section {
+    font-weight: 400;
+    opacity: 0.7;
+    font-size: 13px;
+}
+
+.menubar-right {
+    gap: 12px;
+}
+
+.menubar-icon {
+    font-size: 14px;
+    line-height: 1;
+    opacity: 0.85;
+}
+
+.menubar-battery {
+    font-size: 17px;
+}
+
+.menubar-time {
+    font-size: 13px;
+    font-weight: 400;
+    opacity: 0.9;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .macos-menubar {
+        display: none;
+    }
+}

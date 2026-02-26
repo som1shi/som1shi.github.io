@@ -4,7 +4,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    pointer-events: auto;
+    pointer-events: none;
     z-index: -1;
     overflow: hidden;
     user-select: none;
@@ -17,10 +17,18 @@
     position: absolute;
     opacity: 0.5;
     transition: transform 0.2s ease;
+    will-change: transform;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .emoji-line {
+        display: none !important;
+        transition: none !important;
+    }
 }
 
 .emoji-line:hover {

@@ -1,0 +1,48 @@
+/* src/components/chrome/IOSGrid.css */
+.ios-grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px 10px;
+    padding: 20px;
+    align-content: flex-start;
+    height: 100%;
+}
+
+.ios-app-icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.ios-app-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 22%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+    transition: transform 0.1s ease, filter 0.1s ease;
+}
+
+.ios-app-icon-wrapper:active .ios-app-icon {
+    transform: scale(0.9);
+    filter: brightness(0.8);
+}
+
+.ios-app-svg {
+    font-size: 24px;
+    color: white;
+}
+
+.ios-app-label {
+    color: white;
+    font-size: 11px;
+    font-weight: 400;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    text-align: center;
+}

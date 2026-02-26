@@ -4,7 +4,7 @@ import './Contact.css';
 import useWindowControls from '../../hooks/useWindowControls';
 
 const Contact = () => {
-    const { isExpanded, isVisible, TrafficLights } = useWindowControls();
+    const { isExpanded, isVisible, animState, onAnimationEnd, TrafficLights } = useWindowControls();
     const [message, setMessage] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const [showEmailContent, setShowEmailContent] = useState(false);
@@ -46,10 +46,10 @@ const Contact = () => {
     if (!isVisible) return null;
 
     return (
-        <div className={`contact-card ${isExpanded ? 'expanded' : ''}`}>
-            <div className="contact-header">
+        <div className={`contact-card ${isExpanded ? 'expanded' : ''} ${animState || ''}`} onAnimationEnd={onAnimationEnd}>
+            <div className="section-header">
                 <TrafficLights />
-                <h2>contact</h2>
+                <h2 className="window-title">Contact</h2>
             </div>
             <div className="contact-body">
                 {sentMessage && (
@@ -63,7 +63,7 @@ const Contact = () => {
                             ) : showEmailContent && (
                                 <>
                                     <p className="email-display">sarvagya [at] berkeley [dot] edu</p>
-                                    <button className="reset-button" onClick={resetConversation}>
+                                    <button type="button" className="reset-button" onClick={resetConversation}>
                                         Clear conversation
                                     </button>
                                 </>
@@ -73,15 +73,17 @@ const Contact = () => {
                 )}
             </div>
             <div className="message-bar">
-                <input 
-                    type="text" 
-                    className="message-input" 
+                <input
+                    type="text"
+                    className="message-input"
                     placeholder="Type 'show email' and press send"
+                    aria-label="Message input"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    onKeyPress={handleKeyPress}
+                    onKeyDown={handleKeyPress}
                 />
-                <button 
+                <button
+                    type="button"
                     className={`send-button ${message.toLowerCase().trim() === 'show email' ? 'active' : ''}`}
                     onClick={handleSend}
                     disabled={message.toLowerCase().trim() !== 'show email'}

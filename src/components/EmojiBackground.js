@@ -1,16 +1,19 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import './EmojiBackground.css';
 
 const EMOJIS = ['🌟','💫', '✨', '💻', '🚀', '🤖', '⚡', '🔮', '🎮', '🖥️', '📱', '⚙️','🛠️', '📟', '📡','🔗', '📌'];
 
 const EmojiBackground = () => {
     const containerRef = useRef(null);
+    const frameRef = useRef(null);
+    const mouseRef = useRef({ x: 0, y: 0 });
+    const reducedMotionRef = useRef(false);
 
-    const handleMouseMove = (e) => {
+    const applyPointerPush = useCallback(() => {
         if (!containerRef.current) return;
+
         const emojis = containerRef.current.getElementsByClassName('emoji-line');
-        const mouseX = e.clientX;
-        const mouseY = e.clientY;
+        const { x: mouseX, y: mouseY } = mouseRef.current;
 
         Array.from(emojis).forEach(emoji => {
             const rect = emoji.getBoundingClientRect();
@@ -30,10 +33,19 @@ const EmojiBackground = () => {
                 emoji.style.transform = 'none';
             }
         });
-    };
 
-    const createEmojiLine = () => {
-        if (!containerRef.current) return;
+        frameRef.current = null;
+    }, []);
+
+    const handleMouseMove = useCallback((e) => {
+        mouseRef.current = { x: e.clientX, y: e.clientY };
+        if (frameRef.current || reducedMotionRef.current) return;
+        frameRef.current = requestAnimationFrame(applyPointerPush);
+    }, [applyPointerPush]);
+
+    const createEmojiLine = useCallback(() => {
+        if (!containerRef.current || reducedMotionRef.current) return;
+        if (containerRef.current.childElementCount >= 14) return;
 
         const emoji = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
         const line = document.createElement('div');
@@ -63,18 +75,36 @@ const EmojiBackground = () => {
                 containerRef.current.removeChild(line);
             }
         }, duration * 1000);
-    };
+    }, []);
 
     useEffect(() => {
-        const interval = setInterval(createEmojiLine, 900);
-        for (let i = 0; i < 6; i++) createEmojiLine();
+        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        reducedMotionRef.current = mediaQuery.matches;
+
+        const handlePreferenceChange = (event) => {
+            reducedMotionRef.current = event.matches;
+            if (event.matches && containerRef.current) {
+                containerRef.current.innerHTML = '';
+            }
+        };
+
+        mediaQuery.addEventListener('change', handlePreferenceChange);
+
+        const spawnRate = window.innerWidth < 768 ? 1600 : 1100;
+        const initialCount = window.innerWidth < 768 ? 3 : 5;
+        const interval = setInterval(createEmojiLine, spawnRate);
+        for (let i = 0; i < initialCount; i++) createEmojiLine();
 
         window.addEventListener('mousemove', handleMouseMove);
         return () => {
             clearInterval(interval);
             window.removeEventListener('mousemove', handleMouseMove);
+            mediaQuery.removeEventListener('change', handlePreferenceChange);
+            if (frameRef.current) {
+                cancelAnimationFrame(frameRef.current);
+            }
         };
-    }, []);
+    }, [createEmojiLine, handleMouseMove]);
 
     return <div ref={containerRef} className="emoji-background" />;
 };

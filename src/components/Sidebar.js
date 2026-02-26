@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import './Sidebar.css';
 
-const Sidebar = ({ setActiveSection }) => {
-    const [activeSection, setActiveSectionState] = useState("Home");
+const Sidebar = ({ activeSection: controlledActiveSection, setActiveSection }) => {
+    const [activeSectionState, setActiveSectionState] = useState("Home");
+    const activeSection = controlledActiveSection || activeSectionState;
+
     const handleSectionClick = (section) => {
         setActiveSection(section);
         setActiveSectionState(section);

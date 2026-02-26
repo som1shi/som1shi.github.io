@@ -1,7 +1,6 @@
 import React from 'react';
 import './SectionStyles.css';
 import useWindowControls from '../../hooks/useWindowControls';
-import Icon from '../Icon';
 
 const miscItems = [
     {
@@ -42,12 +41,12 @@ const miscItems = [
 ];
 
 const Misc = () => {
-    const { isExpanded, isVisible, TrafficLights } = useWindowControls();
+    const { isExpanded, isVisible, animState, onAnimationEnd, TrafficLights } = useWindowControls();
 
     if (!isVisible) return null;
 
     return (
-        <div className={`section misc ${isExpanded ? 'expanded' : ''}`}>
+        <div className={`section misc ${isExpanded ? 'expanded' : ''} ${animState || ''}`} onAnimationEnd={onAnimationEnd}>
             <div className="section-header">
                 <TrafficLights />
                 <h2>misc</h2>
