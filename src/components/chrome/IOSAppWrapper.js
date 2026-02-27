@@ -8,6 +8,7 @@ const IOSAppWrapper = ({ title, activeSection, onBack, children }) => {
             case 'About': return { background: 'linear-gradient(180deg, #FFD700 0%, #FFC700 100%)', color: '#000' };
             case 'Experiences': return { background: 'linear-gradient(180deg, #E4E4E4 0%, #D1D1D1 100%)', color: '#000' };
             case 'Projects': return { background: 'linear-gradient(180deg, #FF5F57 0%, #E0443E 100%)', color: '#fff' };
+            case 'Photos': return { background: '#f8f8f8', color: '#000' };
             case 'Research': return { background: 'linear-gradient(180deg, #9F74D1 0%, #8A63B4 100%)', color: '#fff' };
             case 'Misc': return { background: 'linear-gradient(180deg, #28C840 0%, #1DAA31 100%)', color: '#fff' };
             case 'Contact': return { background: '#f8f8f8', color: '#000' }; // Standard iOS grey for Messages

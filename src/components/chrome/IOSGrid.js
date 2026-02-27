@@ -9,7 +9,8 @@ import {
     FaPowerOff,
     FaGithub,
     FaLinkedinIn,
-    FaDesktop
+    FaDesktop,
+    FaImages
 } from 'react-icons/fa';
 import './IOSGrid.css';
 
@@ -18,6 +19,7 @@ const sections = [
     { id: 'Experiences', label: 'Experiences', Icon: FaBriefcase, gradient: 'linear-gradient(135deg, #8e8e93 0%, #636366 100%)' },
     { id: 'Projects', label: 'Projects', Icon: FaCodeBranch, gradient: 'linear-gradient(135deg, #34c759 0%, #248a3d 100%)' },
     { id: 'Research', label: 'Research', Icon: FaFlask, gradient: 'linear-gradient(135deg, #af52de 0%, #8944ab 100%)' },
+    { id: 'Photos', label: 'Photos', Icon: FaImages, gradient: 'linear-gradient(135deg, #e0b0ff 0%, #b05bff 50%, #56ccf2 100%)' },
     { id: 'Misc', label: 'Misc', Icon: FaGamepad, gradient: 'linear-gradient(135deg, #ff3b30 0%, #d70015 100%)' },
     { id: 'Contact', label: 'Contact', Icon: FaCommentDots, gradient: 'linear-gradient(135deg, #30d158 0%, #248a3d 100%)' },
 ];

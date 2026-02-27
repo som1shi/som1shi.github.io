@@ -12,11 +12,14 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
   .app {
     flex-direction: column;
-    padding: 20px;
+    padding: 0px;
+    height: 100vh;
+    width: 100vw;
   }
 }

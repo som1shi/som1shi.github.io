@@ -475,7 +475,7 @@
 .about .section-content {
     padding: 30px 40px;
     height: calc(100% - 60px);
-    overflow: hidden;
+    overflow-y: scroll;
     background-color: #ffffff;
 }
 
@@ -492,13 +492,11 @@
     margin-bottom: 0;
 }
 
-.about .section-content::-webkit-scrollbar {
-    display: none;
-}
+
 
 .about.expanded .section-content {
     height: calc(100% - 60px);
-    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .about .section-header {
@@ -681,19 +679,19 @@
 }
 
 .section.maximizing {
-    animation: windowMaximize 0.35s cubic-bezier(0.2, 0, 0, 1) forwards;
+    animation: windowMaximize 0.2s cubic-bezier(0.2, 0, 0, 1) forwards;
 }
 
 .contact-card.maximizing {
-    animation: windowMaximize 0.35s cubic-bezier(0.2, 0, 0, 1) forwards;
+    animation: windowMaximize 0.2s cubic-bezier(0.2, 0, 0, 1) forwards;
 }
 
 .section.restoring {
-    animation: windowRestore 0.3s cubic-bezier(0.2, 0, 0, 1) forwards;
+    animation: windowRestore 0.15s cubic-bezier(0.2, 0, 0, 1) forwards;
 }
 
 .contact-card.restoring {
-    animation: windowRestore 0.3s cubic-bezier(0.2, 0, 0, 1) forwards;
+    animation: windowRestore 0.15s cubic-bezier(0.2, 0, 0, 1) forwards;
 }
 
 @keyframes genieMinimize {
@@ -806,4 +804,155 @@
 .native-mobile-app .research .section-content,
 .native-mobile-app .misc .section-content {
     height: 100% !important;
+}
+
+/* ─── Photos Section ─── */
+
+.photos .section-header {
+    background: #f8f8f8;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.photos .section-header h2 {
+    color: #000000;
+    text-shadow: none;
+}
+
+/* Scrollable content area */
+.photos-scroll-content {
+    height: calc(100% - 60px);
+    overflow-y: scroll;
+    padding: 4px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+/* Left-to-right grid — perfect squares */
+.photos-masonry {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 4px;
+}
+
+.photos-tile {
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: #ECE9D8;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s ease;
+}
+
+.photos-tile:active {
+    transform: scale(0.96);
+}
+
+.photos-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Placeholder when image fails */
+.photos-tile--placeholder {
+    min-height: 80px;
+    background: linear-gradient(135deg, #ECE9D8, #D4CFBA);
+    display: none;
+    /* hide entirely — no broken placeholder shown */
+}
+
+.photos-lightbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.1s ease-out;
+    overflow: hidden;
+    container-type: size;
+}
+
+.photos-lightbox-content {
+    position: relative;
+    display: inline-block;
+}
+
+.photos-lightbox-content img {
+    max-width: 65cqw;
+    max-height: 65cqh;
+    width: auto;
+    height: auto;
+    border: 2px solid #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    display: block;
+}
+
+/* Retro iPhone-style close badge (like iOS folders/delete icons) */
+.photos-lightbox-close {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    background: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer;
+    padding: 0;
+    z-index: 501;
+    transition: transform 0.1s ease;
+}
+
+.photos-lightbox-close:active {
+    transform: scale(0.9);
+}
+
+.photos-lightbox-caption {
+    color: white;
+    font-family: -apple-system, sans-serif;
+    font-size: 14px;
+    margin-top: 12px;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Mobile native-app overrides */
+.native-mobile-app .photos {
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.native-mobile-app .photos-scroll-content {
+    height: 100% !important;
+}
+
+.native-mobile-app .photos-masonry {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+}
+
+.native-mobile-app .photos-lightbox-close {
+    display: none !important;
 }

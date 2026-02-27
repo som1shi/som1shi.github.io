@@ -6,7 +6,6 @@ import './App.css';
 import Sidebar from './components/Sidebar';
 import MainSection from './components/MainSection';
 import SocialLinks from './components/SocialLinks';
-import EmojiBackground from './components/EmojiBackground';
 import LaptopFrame from './components/chrome/LaptopFrame';
 import IPhoneFrame from './components/chrome/IPhoneFrame';
 import MenuBar from './components/chrome/MenuBar';
@@ -128,7 +127,6 @@ function App() {
           >
             Relaunch Device
           </button>
-          <EmojiBackground />
           <MainSection activeSection={activeSection} />
           <Sidebar setActiveSection={setActiveSection} />
           <SocialLinks />
@@ -183,7 +181,6 @@ function App() {
       <Routes>
         <Route path="/" element={
           <>
-            {isShellEnabled && <EmojiBackground />}
             {isShellEnabled ? (
               <div className="app">{renderContent()}</div>
             ) : (

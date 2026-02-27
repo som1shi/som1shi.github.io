@@ -7,6 +7,7 @@ import Projects from './sections/Projects';
 import Research from './sections/Research';
 import Contact from './sections/Contact';
 import Misc from './sections/Misc';
+import Photos from './sections/Photos';
 import IOSGrid from './chrome/IOSGrid';
 import IOSAppWrapper from './chrome/IOSAppWrapper';
 
@@ -22,6 +23,7 @@ const MainSection = ({ activeSection, isMobile, setActiveSection, toggleShell })
             case 'Experiences': return <Experiences />;
             case 'Projects': return <Projects />;
             case 'Research': return <Research />;
+            case 'Photos': return <Photos />;
             case 'Contact': return <Contact />;
             case 'Misc': return <Misc />;
             default: return <Landing />;
@@ -35,6 +37,7 @@ const MainSection = ({ activeSection, isMobile, setActiveSection, toggleShell })
             'Experiences': 'Experiences',
             'Projects': 'Projects',
             'Research': 'Research',
+            'Photos': 'Photos',
             'Contact': 'Contact',
             'Misc': 'Misc',
         };

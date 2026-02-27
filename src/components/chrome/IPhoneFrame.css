@@ -235,3 +235,26 @@
     border: 2px solid #555;
     border-radius: 4px;
 }
+
+@media (max-width: 768px) {
+    .iphone-container {
+        padding: 10px;
+        width: 100vw;
+        height: 100vh;
+        box-sizing: border-box;
+    }
+
+    .iphone-body {
+        width: 100%;
+        height: 100%;
+        max-width: 450px;
+        /* Don't get comically wide on tablets */
+    }
+
+    .iphone-screen {
+        width: 100%;
+        flex: 1;
+        /* Take remaining space */
+        height: auto;
+    }
+}

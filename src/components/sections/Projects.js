@@ -14,6 +14,18 @@ const Projects = () => {
             link: "https://os32.vercel.app"
         },
         {
+            title: "Computer Vision Portfolio",
+            technologies: ["Python", "NumPy", "OpenCV", "Image Processing", "Computer Vision", "Linear Algebra"],
+            description: "Project portfolio for CS180 showcasing implementations of image alignment, filtering, hybrid images, frequency analysis, image morphing, and other computational photography techniques.",
+            link: "https://som1shi.github.io/cs180/"
+        },
+        {
+            title: "Computer Graphics Portfolio",
+            technologies: ["C++", "OpenGL", "GLSL", "Rasterization", "Ray Tracing", "Half-Edge Meshes"],
+            description: "Computer graphics project portfolio featuring implementations of triangle rasterization, supersampling antialiasing, Bézier curves and surfaces, half-edge mesh operations, mesh resampling, and physically-based ray tracing with global illumination.",
+            link: "https://som1shi.github.io/cs184/"
+        },
+        {
             title: "AI Brand Semantics Analyzer",
             technologies: ["Node.js", "Python", "xAPI", "Grok LLM", "React"],
             description: "Full stack app powered by Node.js, Python, xAPI, Grok LLM and React to track and analyze brand performance on the X platform",
