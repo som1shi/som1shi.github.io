@@ -8,22 +8,16 @@ const Research = () => {
 
     const research = [
         {
-            title: "Research Apprentice at UC Berkeley School of Informatics",
-            advisor: "Prof. Zachary Pardos",
-            date: "February 2023 - May 2023",
-            description: "Worked on the OATutor platform, enabling facilitation of mathematics education",
+            title: "Transformers for Social Media Trends and Algorithms",
+            advisor: "Designing Algorithmic Media",
+            date: "January 2026 - Current",
+            description: <a href='https://arxiv.org/abs/2605.02358' target='_blank'>View Paper</a>,
         },
         {
-            title: "Research Apprentice at UCSF Memory and Aging Center",
-            advisor: "Dr. Jet Vonk",
-            date: "February 2024 - May 2024",
-            description: "Developed, integrated, and evaluated content units in Linguistic Pipelines to quantify and interpret semantic richness of patient data.",
-        },
-        {
-            title: "NLP Research at Haas School of Business",
-            advisor: "Prof. Biwen Zhang",
-            date: "April 2024 - June 2024",
-            description: "Developed BERT models on large-scale datasets, fine-tuning hyperparameters for accurate semantic categorization and understanding of semantic textual data.",
+            title: "Transformer Architectures for Regression Models",
+            advisor: "Deep Learning at Berkeley",
+            date: "September 2025 - Febuary 2026",
+            description: <a href='https://arxiv.org/abs/2602.17171' target='_blank'>View Paper</a>,
         },
         {
             title: "Journalism and LLM Research",
@@ -32,16 +26,22 @@ const Research = () => {
             description: "Working on Large Language Model research in the intersection of Journalism and Newspaper Bias",
         },
         {
-            title: "Transformaer Architectures for Regression Models",
-            advisor: "Deep Learning at Berkeley",
-            date: "September 2025 - Febuary 2026",
-            description: <a href='https://arxiv.org/abs/2602.17171' target='_blank'>View Paper</a>,
+            title: "NLP Research at Haas School of Business",
+            advisor: "Prof. Biwen Zhang",
+            date: "April 2024 - June 2024",
+            description: "Developed BERT models on large-scale datasets, fine-tuning hyperparameters for accurate semantic categorization and understanding of semantic textual data.",
         },
         {
-            title: "Transformers for Social Media Trends and Algortihims",
-            advisor: "Designing Algorithmic Media",
-            date: "January 2026 - Current",
-            description: "In Progress",
+            title: "Research Apprentice at UCSF Memory and Aging Center",
+            advisor: "Dr. Jet Vonk",
+            date: "February 2024 - May 2024",
+            description: "Developed, integrated, and evaluated content units in Linguistic Pipelines to quantify and interpret semantic richness of patient data.",
+        },
+        {
+            title: "Research Apprentice at UC Berkeley School of Informatics",
+            advisor: "Prof. Zachary Pardos",
+            date: "February 2023 - May 2023",
+            description: "Worked on the OATutor platform, enabling facilitation of mathematics education",
         }
     ];
 

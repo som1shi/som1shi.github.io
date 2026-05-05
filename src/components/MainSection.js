@@ -31,7 +31,6 @@ const MainSection = ({ activeSection, isMobile, setActiveSection, toggleShell })
     };
 
     if (isMobile && activeSection !== 'Home') {
-        // Find title for the header
         const titleMap = {
             'About': 'About Me',
             'Experiences': 'Experiences',

@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import './SectionStyles.css';
 import useWindowControls from '../../hooks/useWindowControls';
 
-// Exact matching photos in /public/photos to avoid 404 requests and layout shifts
 const validPhotoNumbers = [
     2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
     21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36,
@@ -11,8 +10,6 @@ const validPhotoNumbers = [
 ];
 
 const photoFiles = validPhotoNumbers.map(num => {
-    // We check both lowercase and uppercase JPG if requested, but most are .JPG / .jpg
-    // Let's just use the exact extensions we found to be safe:
     let ext = '.jpg';
     if ([2, 3, 4, 5, 6, 13, 15, 16, 18, 20, 22, 23, 24, 26, 30, 32, 33, 34, 35, 37, 38, 40, 42, 44].includes(num)) ext = '.JPG';
     return {

@@ -2,7 +2,6 @@ import React from 'react';
 import './IOSAppWrapper.css';
 
 const IOSAppWrapper = ({ title, activeSection, onBack, children }) => {
-    // Map each section to its vibrant iOS gradient background
     const getHeaderStyle = () => {
         switch (activeSection) {
             case 'About': return { background: 'linear-gradient(180deg, #FFD700 0%, #FFC700 100%)', color: '#000' };
@@ -18,7 +17,6 @@ const IOSAppWrapper = ({ title, activeSection, onBack, children }) => {
 
     const headerStyle = getHeaderStyle();
 
-    // Override back button blue color to white if the header is colored
     const buttonStyle = headerStyle.color === '#fff' ? { color: '#fff' } : {};
 
     return (
