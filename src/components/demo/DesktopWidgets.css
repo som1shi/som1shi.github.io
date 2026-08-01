@@ -1,0 +1,463 @@
+.desktop-demo-fork-1 .desktop-dashboard-grid {
+  grid-template-rows: 320px 260px;
+  grid-template-areas:
+    "weather weather weather photos photos photos photos clock clock clock clock clock"
+    "notes notes notes notes notes notes github github github github github github";
+}
+
+.desktop-demo-fork-1 .desktop-widget,
+.desktop-demo-fork-1 .desktop-apps-widget {
+  transition:
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-standard) ease,
+    transform var(--motion-standard) var(--motion-ease);
+}
+
+.desktop-demo-fork-1 .desktop-widget[data-visible="true"]:hover,
+.desktop-demo-fork-1 .desktop-apps-widget[data-visible="true"]:hover {
+  border-color: rgba(255, 255, 255, 0.38);
+  box-shadow: 0 20px 48px rgba(20, 33, 64, 0.2);
+  transform: translate3d(0, -2px, 0);
+}
+
+.desktop-demo-fork-1 .widget-label {
+  min-height: 20px;
+  top: 13px;
+  left: 14px;
+  gap: 6px;
+  padding: 0 7px;
+  border: 1px solid var(--widget-label-border, rgba(255, 255, 255, 0.14));
+  border-radius: 999px;
+  color: var(--widget-label-fg, rgba(255, 255, 255, 0.82));
+  background: var(--widget-label-bg, rgba(28, 28, 30, 0.18));
+  box-sizing: border-box;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  backdrop-filter: blur(14px) saturate(1.12);
+  -webkit-backdrop-filter: blur(14px) saturate(1.12);
+}
+
+.desktop-demo-fork-1 .widget-label svg {
+  color: var(--widget-label-accent, currentColor);
+  font-size: 11px;
+  transition: transform var(--motion-standard) var(--motion-ease);
+}
+
+.desktop-demo-fork-1 .desktop-widget:hover .widget-label svg,
+.desktop-demo-fork-1 .desktop-apps-widget:hover .widget-label svg {
+  transform: translate3d(1px, -1px, 0);
+}
+
+.desktop-demo-fork-1 .desktop-apps-widget {
+  --widget-label-accent: rgba(255, 255, 255, 0.88);
+  padding: 33px 8px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: var(--widget-radius);
+}
+
+.desktop-demo-fork-1 .desktop-apps-widget .dock-shelf {
+  gap: 0;
+  padding: 3px 4px 2px;
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.13);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.2),
+    0 8px 20px rgba(18, 28, 52, 0.18);
+}
+
+.desktop-demo-fork-1 .desktop-apps-widget .dock-item {
+  padding: 2px;
+}
+
+.desktop-demo-fork-1 .desktop-apps-widget .dock-divider {
+  height: 34px;
+  margin-inline: 4px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.desktop-demo-fork-1 .music-widget {
+  --widget-label-accent: #ff375f;
+  height: 156px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--widget-radius);
+  background:
+    linear-gradient(105deg, rgba(38, 19, 32, 0.32), rgba(33, 20, 24, 0.1)),
+    #47263a;
+}
+
+.desktop-demo-fork-1 .music-widget::after {
+  background: linear-gradient(90deg, rgba(37, 18, 32, 0.46), rgba(26, 16, 19, 0.18));
+}
+
+.desktop-demo-fork-1 .music-backdrop {
+  animation: none;
+  transform: scale(1.06);
+}
+
+.desktop-demo-fork-1 .music-player {
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 14px;
+  padding: 42px 18px 14px;
+}
+
+.desktop-demo-fork-1 .music-artwork-frame {
+  flex-basis: 72px;
+}
+
+.desktop-demo-fork-1 .music-artwork {
+  width: 72px;
+  height: 72px;
+  flex-basis: 72px;
+  border-radius: 13px;
+  box-shadow: 0 10px 24px rgba(9, 5, 12, 0.28);
+  transition:
+    box-shadow var(--motion-standard) ease,
+    transform var(--motion-entry) var(--motion-ease);
+}
+
+.desktop-demo-fork-1 .music-widget:hover .music-artwork {
+  box-shadow: 0 13px 28px rgba(9, 5, 12, 0.34);
+  transform: translate3d(0, -1px, 0) scale(1.015);
+}
+
+.desktop-demo-fork-1 .music-track strong {
+  font-size: 21px;
+}
+
+.desktop-demo-fork-1 .music-track .music-artist {
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 10.5px;
+  font-weight: 560;
+}
+
+.desktop-demo-fork-1 .desktop-dashboard-grid .desktop-widget {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--widget-radius);
+  box-shadow: var(--widget-shadow);
+}
+
+.desktop-demo-fork-1 .weather-widget {
+  --widget-label-accent: #ffd60a;
+  padding: 45px 20px 18px;
+}
+
+.desktop-demo-fork-1 .weather-forecast {
+  padding-top: 14px;
+}
+
+.desktop-demo-fork-1 .photos-widget {
+  --widget-label-accent: #bf7aff;
+  border-radius: var(--widget-radius);
+}
+
+.desktop-demo-fork-1 .photos-widget .widget-label {
+  --widget-label-bg: rgba(15, 18, 24, 0.34);
+}
+
+.desktop-demo-fork-1 .photos-meta {
+  padding: 34px 18px 14px;
+}
+
+.desktop-demo-fork-1 .world-clock-widget {
+  --widget-label-accent: #ff9f0a;
+  padding: 18px;
+  border-radius: var(--widget-radius);
+  background: linear-gradient(150deg, #202023, #141416 72%);
+}
+
+.desktop-demo-fork-1 .world-clock-list {
+  height: 100%;
+  align-items: center;
+  gap: 12px;
+  padding: 38px 0 4px;
+  box-sizing: border-box;
+}
+
+.desktop-demo-fork-1 .world-clock-city {
+  align-self: center;
+}
+
+.desktop-demo-fork-1 .clock-face {
+  width: 96px;
+  height: 96px;
+  box-shadow:
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.12),
+    0 9px 20px rgba(0, 0, 0, 0.25);
+}
+
+.desktop-demo-fork-1 .clock-number {
+  font-size: 7.5px;
+  transform: translate(-50%, -50%) rotate(var(--number-angle)) translateY(-36px) rotate(var(--number-counter-angle));
+}
+
+.desktop-demo-fork-1 .clock-hour {
+  height: 24px;
+}
+
+.desktop-demo-fork-1 .clock-minute {
+  height: 34px;
+}
+
+.desktop-demo-fork-1 .clock-second {
+  height: 37px;
+}
+
+.desktop-demo-fork-1 .clock-city-meta {
+  margin-top: 8px;
+}
+
+.desktop-demo-fork-1 .world-clock-city .clock-city-meta strong {
+  font-size: 10.5px;
+}
+
+.desktop-demo-fork-1 .clock-city-meta > span {
+  margin-top: 2px;
+  font-size: 8.5px;
+}
+
+.desktop-demo-fork-1 .notes-widget {
+  --widget-label-fg: rgba(44, 41, 34, 0.78);
+  --widget-label-bg: rgba(255, 255, 255, 0.44);
+  --widget-label-border: rgba(79, 64, 36, 0.12);
+  --widget-label-accent: #b78100;
+  padding: 62px 18px 12px;
+  border-radius: var(--widget-radius);
+}
+
+.desktop-demo-fork-1 .notes-meta {
+  position: absolute;
+  top: 39px;
+  right: 18px;
+  left: 18px;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(44, 41, 34, 0.42);
+  font-size: 9px;
+}
+
+.desktop-demo-fork-1 .notes-meta span {
+  color: #b27a00;
+  font-weight: 700;
+}
+
+.desktop-demo-fork-1 .notes-meta strong {
+  font-weight: 650;
+}
+
+.desktop-demo-fork-1 .notes-list {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(79, 64, 36, 0.14);
+}
+
+.desktop-demo-fork-1 .note-row {
+  flex: 1;
+  padding-block: 8px 7px;
+  border-color: rgba(79, 64, 36, 0.13);
+  transition: background-color var(--motion-fast) ease, transform var(--motion-standard) var(--motion-ease);
+}
+
+.desktop-demo-fork-1 .note-row:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translate3d(2px, 0, 0);
+}
+
+.desktop-demo-fork-1 .note-row > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.desktop-demo-fork-1 .note-row strong {
+  color: #2d2921;
+  font-size: 11px;
+}
+
+.desktop-demo-fork-1 .note-row time {
+  color: rgba(44, 41, 34, 0.38);
+  font-size: 9px;
+}
+
+.desktop-demo-fork-1 .note-row span {
+  margin-top: 2px;
+  color: rgba(44, 41, 34, 0.52);
+  font-size: 9.5px;
+}
+
+.desktop-demo-fork-1 .github-widget {
+  --widget-label-accent: #39d353;
+  padding: 43px 18px 14px;
+  border-radius: var(--widget-radius);
+}
+
+.desktop-demo-fork-1 .github-profile {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.desktop-demo-fork-1 .github-profile span {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 9px;
+}
+
+.desktop-demo-fork-1 .github-profile strong {
+  font-size: 10.5px;
+}
+
+.desktop-demo-fork-1 .github-repo {
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+  padding: 10px 11px;
+  border-color: rgba(255, 255, 255, 0.085);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.desktop-demo-fork-1 .github-repo span,
+.desktop-demo-fork-1 .github-repo small {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 8px;
+}
+
+.desktop-demo-fork-1 .github-repo strong {
+  margin: 3px 0;
+  overflow: hidden;
+  color: #f0f6fc;
+  font-size: 10.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.desktop-demo-fork-1 .github-summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 13px;
+}
+
+.desktop-demo-fork-1 .github-summary strong {
+  font-size: 11px;
+}
+
+.desktop-demo-fork-1 .github-summary span {
+  color: #39d353;
+  font-size: 8.5px;
+  font-weight: 700;
+}
+
+.desktop-demo-fork-1 .github-activity {
+  width: 100%;
+  align-content: end;
+  align-self: stretch;
+  gap: 6px;
+}
+
+.desktop-demo-fork-1 .contribution-grid {
+  grid-template-columns: repeat(12, 7px);
+  justify-content: center;
+  gap: 3px;
+}
+
+.desktop-demo-fork-1 .contribution-grid i {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+}
+
+.desktop-demo-fork-1 .github-legend {
+  justify-content: center;
+}
+
+@media (max-width: 680px) {
+  .desktop-demo-fork-1 .desktop-apps-widget {
+    padding-inline: 8px;
+  }
+
+  .desktop-demo-fork-1 .music-widget {
+    height: 190px;
+  }
+
+  .desktop-demo-fork-1 .music-player {
+    grid-template-columns: 92px minmax(0, 1fr);
+    padding: 48px 18px 16px;
+  }
+
+  .desktop-demo-fork-1 .music-artwork {
+    width: 92px;
+    height: 92px;
+  }
+
+  .desktop-demo-fork-1 .world-clock-list {
+    gap: 6px;
+    padding-top: 42px;
+  }
+
+  .desktop-demo-fork-1 .clock-face {
+    width: 80px;
+    height: 80px;
+  }
+
+  .desktop-demo-fork-1 .clock-number {
+    transform: translate(-50%, -50%) rotate(var(--number-angle)) translateY(-30px) rotate(var(--number-counter-angle));
+  }
+
+  .desktop-demo-fork-1 .desktop-dashboard-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-auto-rows: auto;
+    grid-template-areas:
+      "weather"
+      "photos"
+      "clock"
+      "notes"
+      "github";
+  }
+
+  .desktop-demo-fork-1 .weather-widget,
+  .desktop-demo-fork-1 .world-clock-widget {
+    min-height: 310px;
+  }
+
+  .desktop-demo-fork-1 .photos-widget {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 1;
+  }
+
+  .desktop-demo-fork-1 .notes-widget,
+  .desktop-demo-fork-1 .github-widget {
+    min-height: 250px;
+  }
+
+  .desktop-demo-fork-1 .contribution-grid {
+    grid-template-columns: repeat(12, 9px);
+  }
+
+  .desktop-demo-fork-1 .contribution-grid i {
+    width: 9px;
+    height: 9px;
+  }
+}
+
+@media (min-width: 681px) and (max-width: 900px) {
+  .desktop-demo-fork-1 .desktop-dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 300px 300px 250px;
+    grid-template-areas:
+      "weather photos"
+      "clock clock"
+      "notes github";
+  }
+
+  .desktop-demo-fork-1 .world-clock-list {
+    padding-inline: 44px;
+  }
+}

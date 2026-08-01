@@ -1,0 +1,255 @@
+.desktop-demo-fork-1 .desktop-about {
+  display: block;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-about .desktop-app-window-content {
+  display: block;
+  padding: 0;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-about .desktop-about-copy {
+  width: 100%;
+  padding: 42px 44px;
+  border-radius: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-projects .desktop-app-window-content {
+  overflow: hidden;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-projects .portfolio-index {
+  max-height: 310px;
+  margin-top: 18px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-projects .desktop-feature-grid {
+  height: 396px;
+  align-items: stretch;
+  padding: 18px 18px 0;
+  box-sizing: border-box;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-projects .desktop-card {
+  height: 100%;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-research .desktop-app-window-content {
+  height: 430px;
+  overflow: hidden;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-experience .desktop-app-window-content {
+  height: 400px;
+  overflow: hidden;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-research .desktop-scroll-widget,
+.desktop-demo-fork-1 .desktop-app-window-experience .desktop-scroll-widget {
+  height: 100%;
+  max-height: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-research .desktop-list-row {
+  min-height: 96px;
+  grid-template-columns: 48px minmax(0, 1fr) 120px;
+  gap: 16px;
+  padding: 18px 28px;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-research .desktop-list-copy > span {
+  margin-bottom: 5px;
+  font-size: 10px;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-research .desktop-list-row h3 {
+  font-size: 17px;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-research .desktop-list-row p {
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-experience .experience-directory-row {
+  min-height: 74px;
+  grid-template-columns: 1.1fr 1.5fr 0.72fr 0.82fr;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-experience .experience-link {
+  top: 16px;
+}
+
+.desktop-demo-fork-1 .desktop-list-row,
+.desktop-demo-fork-1 .experience-directory-row,
+.desktop-demo-fork-1 .portfolio-index-item {
+  transition:
+    background-color var(--motion-fast) ease,
+    transform var(--motion-standard) var(--motion-ease);
+}
+
+.desktop-demo-fork-1 a.desktop-list-row:hover,
+.desktop-demo-fork-1 a.portfolio-index-item:hover,
+.desktop-demo-fork-1 .experience-directory-row:hover {
+  background: rgba(24, 24, 26, 0.045);
+  transform: translate3d(4px, 0, 0);
+}
+
+.desktop-demo-fork-1 [data-visible="true"] > .desktop-list-row,
+.desktop-demo-fork-1 [data-visible="true"] > .experience-directory-row {
+  animation: desktop-list-row-in var(--motion-entry) var(--motion-ease) both;
+}
+
+.desktop-demo-fork-1 .desktop-list-card[data-visible="true"] > :nth-child(2) {
+  animation-delay: 35ms;
+}
+
+.desktop-demo-fork-1 .desktop-list-card[data-visible="true"] > :nth-child(3) {
+  animation-delay: 70ms;
+}
+
+.desktop-demo-fork-1 .desktop-list-card[data-visible="true"] > :nth-child(4) {
+  animation-delay: 105ms;
+}
+
+.desktop-demo-fork-1 .desktop-list-card[data-visible="true"] > :nth-child(5) {
+  animation-delay: 140ms;
+}
+
+@keyframes desktop-list-row-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.desktop-demo-fork-1 .desktop-app-window-projects .portfolio-index,
+.desktop-demo-fork-1 .desktop-app-window-research .desktop-scroll-widget,
+.desktop-demo-fork-1 .desktop-app-window-experience .desktop-scroll-widget {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(60, 60, 67, 0.26) transparent;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-projects .portfolio-index::-webkit-scrollbar,
+.desktop-demo-fork-1 .desktop-app-window-research .desktop-scroll-widget::-webkit-scrollbar,
+.desktop-demo-fork-1 .desktop-app-window-experience .desktop-scroll-widget::-webkit-scrollbar {
+  width: 8px;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-projects .portfolio-index::-webkit-scrollbar-track,
+.desktop-demo-fork-1 .desktop-app-window-research .desktop-scroll-widget::-webkit-scrollbar-track,
+.desktop-demo-fork-1 .desktop-app-window-experience .desktop-scroll-widget::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-projects .portfolio-index::-webkit-scrollbar-thumb,
+.desktop-demo-fork-1 .desktop-app-window-research .desktop-scroll-widget::-webkit-scrollbar-thumb,
+.desktop-demo-fork-1 .desktop-app-window-experience .desktop-scroll-widget::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgba(60, 60, 67, 0.26);
+  background-clip: padding-box;
+}
+
+@media (max-width: 680px) {
+  .desktop-demo-fork-1 .desktop-app-window-about .desktop-about-copy {
+    padding: 30px 26px;
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-research .desktop-app-window-content,
+  .desktop-demo-fork-1 .desktop-app-window-experience .desktop-app-window-content {
+    height: 360px;
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-projects .desktop-feature-grid {
+    height: auto;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "os32"
+      "academic";
+    padding: 12px 12px 0;
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-projects .desktop-card {
+    min-height: 330px;
+  }
+
+  .desktop-demo-fork-1 .desktop-feature-grid .os32-preview {
+    width: 64%;
+    right: -24px;
+  }
+
+  .desktop-demo-fork-1 .desktop-feature-grid .os32-copy {
+    width: calc(100% - 32px);
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-projects .portfolio-index-item {
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 12px;
+    padding: 18px;
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-projects .portfolio-index-action {
+    display: none;
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-research .desktop-list-row {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 10px;
+    padding: 16px;
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-research .desktop-list-meta {
+    grid-column: 2;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-experience .experience-directory {
+    padding-inline: 16px;
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-experience .experience-directory-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px 12px;
+    padding-block: 12px;
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-experience .experience-directory-row span:nth-last-child(-n + 2) {
+    text-align: left;
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-experience .experience-link {
+    position: static;
+    justify-content: flex-end;
+    padding: 4px 0 8px;
+  }
+}
+
+@media (min-width: 681px) and (max-width: 900px) {
+  .desktop-demo-fork-1 .desktop-app-window-projects .desktop-feature-grid {
+    height: auto;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "os32"
+      "academic";
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-projects .desktop-card {
+    min-height: 340px;
+  }
+}

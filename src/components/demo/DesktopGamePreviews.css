@@ -1,0 +1,407 @@
+.desktop-games-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: repeat(3, 190px);
+  grid-template-areas:
+    "words words words words words words words chess chess chess chess chess"
+    "words words words words words words words connect connect connect connect connect"
+    "refiner refiner refiner refiner refiner refiner wiki wiki wiki wiki wiki wiki";
+  gap: 12px;
+}
+
+.desktop-game-preview {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.56);
+  border-radius: 18px;
+  color: #1c1c1e;
+  background: rgba(246, 246, 248, 0.96);
+  box-shadow: 0 15px 36px rgba(14, 27, 58, 0.14);
+  text-decoration: none;
+  transition:
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-standard) ease,
+    transform var(--motion-standard) var(--motion-ease);
+}
+
+.desktop-game-preview-wordsweeper {
+  grid-area: words;
+}
+
+.desktop-game-preview-quantum-chess {
+  grid-area: chess;
+}
+
+.desktop-game-preview-rotate-connect-four {
+  grid-area: connect;
+}
+
+.desktop-game-preview-refiner {
+  grid-area: refiner;
+}
+
+.desktop-game-preview-wikiconnect {
+  grid-area: wiki;
+}
+
+.desktop-game-preview-canvas,
+.game-ui {
+  min-height: 0;
+  height: 100%;
+}
+
+.desktop-game-preview footer {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 58px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(28, 28, 30, 0.1);
+}
+
+.desktop-game-preview footer div {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.desktop-game-preview footer strong {
+  overflow: hidden;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.desktop-game-preview footer span {
+  overflow: hidden;
+  color: rgba(28, 28, 30, 0.5);
+  font-size: 10.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.desktop-game-preview footer svg {
+  flex: 0 0 auto;
+  color: rgba(28, 28, 30, 0.32);
+  font-size: 10px;
+  transition: color var(--motion-fast) ease, transform var(--motion-standard) var(--motion-ease);
+}
+
+.mines-preview {
+  padding: 16px;
+  background: #ece9d8;
+  box-sizing: border-box;
+}
+
+.xp-bar {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  color: #fff;
+  background: linear-gradient(180deg, #2e89ff, #0054e3);
+  font: 700 10px/1 Tahoma, sans-serif;
+}
+
+.mine-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+  padding: 8px 12px;
+  border: 2px solid;
+  border-color: #848484 #fff #fff #848484;
+}
+
+.mine-status strong {
+  padding: 3px 6px;
+  color: #ff3b30;
+  background: #111;
+  font: 700 18px/1 "Courier New", monospace;
+}
+
+.mine-status span {
+  font-size: 20px;
+}
+
+.mine-grid {
+  height: calc(100% - 78px);
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  grid-template-rows: repeat(6, minmax(0, 1fr));
+  border: 2px solid;
+  border-color: #848484 #fff #fff #848484;
+}
+
+.mine-grid i {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid;
+  border-color: #fff #848484 #848484 #fff;
+  font: 700 11px/1 Tahoma, sans-serif;
+  font-style: normal;
+}
+
+.mine-grid i.is-open {
+  border-color: #b8b8b8;
+  color: #0054e3;
+  background: #d5d2c4;
+}
+
+.mine-grid i.mine {
+  color: #111;
+}
+
+.chess-preview {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 14px;
+  background: linear-gradient(145deg, #20252c, #11151b);
+  box-sizing: border-box;
+}
+
+.quantum-state {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  z-index: 2;
+  color: #8de8ff;
+  font: 700 7px/1 -apple-system, sans-serif;
+  letter-spacing: 0.12em;
+}
+
+.chess-board {
+  width: min(128px, 84%);
+  aspect-ratio: 1;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.34);
+}
+
+.chess-board i {
+  display: grid;
+  place-items: center;
+  color: #171717;
+  background: #f0d9b5;
+  font-size: 12px;
+  font-style: normal;
+}
+
+.chess-board i:nth-child(16n + 2),
+.chess-board i:nth-child(16n + 4),
+.chess-board i:nth-child(16n + 6),
+.chess-board i:nth-child(16n + 8),
+.chess-board i:nth-child(16n + 9),
+.chess-board i:nth-child(16n + 11),
+.chess-board i:nth-child(16n + 13),
+.chess-board i:nth-child(16n + 15) {
+  background: #b58863;
+}
+
+.connect-preview {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  padding: 12px;
+  background: linear-gradient(180deg, #4b97fd, #0054e3);
+  box-sizing: border-box;
+}
+
+.connect-title {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 9px;
+  color: #fff;
+  font: 700 8px/1 Tahoma, sans-serif;
+}
+
+.connect-board {
+  width: min(220px, 82%);
+  height: min(92px, calc(100% - 18px));
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  place-self: center;
+  place-items: center;
+  gap: 4px;
+  padding: 8px;
+  border: 2px solid #78b4ff;
+  background: #0054e3;
+  box-sizing: border-box;
+}
+
+.connect-board i {
+  width: min(100%, 14px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #eef4ff;
+  box-shadow: inset 0 2px 4px rgba(0, 40, 120, 0.42);
+}
+
+.connect-board i.red {
+  background: radial-gradient(circle at 30% 30%, #ff746e, #e0443e);
+}
+
+.connect-board i.yellow {
+  background: radial-gradient(circle at 30% 30%, #ffd95d, #f5a623);
+}
+
+.refiner-preview {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 16px;
+  color: #7af3d0;
+  background: #000;
+  font-family: "Courier New", monospace;
+  box-sizing: border-box;
+}
+
+.refiner-heading,
+.refiner-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+}
+
+.refiner-heading strong {
+  padding: 3px 6px;
+  border: 1px solid currentColor;
+  font-size: 10px;
+}
+
+.refiner-values {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  align-content: center;
+  gap: 7px;
+}
+
+.refiner-values i {
+  font-size: 11px;
+  font-style: normal;
+  text-align: center;
+  text-shadow: 0 0 9px rgba(122, 243, 208, 0.72);
+}
+
+.refiner-status {
+  padding-top: 8px;
+  border-top: 1px solid rgba(122, 243, 208, 0.28);
+}
+
+.wiki-preview {
+  color: #202122;
+  background: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.wiki-toolbar {
+  height: 27px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 10px;
+  border-bottom: 1px solid #c8ccd1;
+  background: #eaecf0;
+  font: 8px/1 -apple-system, sans-serif;
+}
+
+.wiki-toolbar strong {
+  flex: 1;
+  padding: 4px 8px;
+  border: 1px solid #c8ccd1;
+  border-radius: 4px;
+  background: #fff;
+  text-align: center;
+}
+
+.wiki-page {
+  padding: 14px 16px;
+}
+
+.wiki-page > span {
+  font: 700 7px/1 -apple-system, sans-serif;
+  letter-spacing: 0.1em;
+}
+
+.wiki-page h4 {
+  margin: 7px 0 5px;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.wiki-page > i {
+  display: block;
+  border-top: 1px solid #a2a9b1;
+}
+
+.wiki-page p {
+  margin: 8px 0;
+  font-size: 8px;
+  line-height: 1.45;
+}
+
+.wiki-page div {
+  display: flex;
+  gap: 8px;
+  color: #36c;
+  font-size: 7px;
+}
+
+@media (hover: hover) {
+  .desktop-game-preview:hover {
+    border-color: rgba(255, 255, 255, 0.88);
+    transform: translate3d(0, -3px, 0);
+    box-shadow: 0 20px 44px rgba(10, 20, 43, 0.2);
+  }
+
+  .desktop-game-preview:hover footer svg {
+    color: rgba(28, 28, 30, 0.62);
+    transform: translate3d(3px, 0, 0);
+  }
+}
+
+@media (max-width: 900px) {
+  .desktop-games-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 360px 220px 220px;
+    grid-template-areas:
+      "words words"
+      "chess connect"
+      "refiner wiki";
+  }
+}
+
+@media (max-width: 680px) {
+  .desktop-games-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 390px repeat(4, 220px);
+    grid-template-areas:
+      "words"
+      "chess"
+      "connect"
+      "refiner"
+      "wiki";
+  }
+
+  .desktop-game-preview footer {
+    padding: 13px 14px;
+  }
+
+  .desktop-game-preview footer strong {
+    font-size: 12px;
+  }
+}

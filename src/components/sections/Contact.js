@@ -1,9 +1,8 @@
-// src/components/sections/Contact.js
 import React, { useState, useEffect } from 'react';
 import './Contact.css';
 import useWindowControls from '../../hooks/useWindowControls';
 
-const Contact = () => {
+const Contact = ({ desktop = false }) => {
     const { isExpanded, isVisible, animState, onAnimationEnd, TrafficLights } = useWindowControls();
     const [message, setMessage] = useState('');
     const [isTyping, setIsTyping] = useState(false);
@@ -46,12 +45,17 @@ const Contact = () => {
     if (!isVisible) return null;
 
     return (
-        <div className={`contact-card ${isExpanded ? 'expanded' : ''} ${animState || ''}`} onAnimationEnd={onAnimationEnd}>
+        <div className={`contact-card ${desktop ? 'desktop-contact-card' : ''} ${isExpanded ? 'expanded' : ''} ${animState || ''}`} onAnimationEnd={onAnimationEnd}>
             <div className="section-header">
                 <TrafficLights />
                 <h2 className="window-title">Contact</h2>
             </div>
             <div className="contact-body">
+                {desktop && !sentMessage && (
+                    <div className="message-container left contact-idle">
+                        <p>Say “show email” to reveal my address.</p>
+                    </div>
+                )}
                 {sentMessage && (
                     <>
                         <div className="message-container">

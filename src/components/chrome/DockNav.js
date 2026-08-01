@@ -1,7 +1,6 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react';
 import {
     FaHome,
-    FaUserCircle,
     FaBriefcase,
     FaCodeBranch,
     FaFlask,
@@ -32,21 +31,23 @@ const externalLinks = [
     { id: 'github', label: 'GitHub', Icon: FaGithub, gradient: 'linear-gradient(135deg, #333333 0%, #1a1a1a 100%)', url: 'https://github.com/som1shi' },
 ];
 
-const BASE_SIZE = 50;
-const MAX_SCALE = 1.8;
-const MAGNIFY = MAX_SCALE - 1;
-const SIGMA = 60;
+const DEFAULT_BASE_SIZE = 50;
+const COMPACT_BASE_SIZE = 38;
 
-function gaussian(dist) {
-    return Math.exp(-(dist * dist) / (2 * SIGMA * SIGMA));
+function gaussian(dist, sigma) {
+    return Math.exp(-(dist * dist) / (2 * sigma * sigma));
 }
 
-const DockNav = ({ activeSection, setActiveSection }) => {
+const DockNav = ({ activeSection, setActiveSection, sectionIds, externalIds, compact = false }) => {
     const shelfRef = useRef(null);
     const itemRefs = useRef([]);
     const [scales, setScales] = useState([]);
+    const [reduceMotion, setReduceMotion] = useState(false);
     const animFrameRef = useRef(null);
     const isHovering = useRef(false);
+    const baseSize = compact ? COMPACT_BASE_SIZE : DEFAULT_BASE_SIZE;
+    const magnify = (compact ? 1.45 : 1.8) - 1;
+    const sigma = compact ? 48 : 60;
 
     const computeScales = useCallback((mouseX) => {
         if (!shelfRef.current) return;
@@ -58,18 +59,19 @@ const DockNav = ({ activeSection, setActiveSection }) => {
             const rect = el.getBoundingClientRect();
             const center = rect.left + rect.width / 2;
             const dist = Math.abs(mouseX - center);
-            newScales.push(1 + MAGNIFY * gaussian(dist));
+            newScales.push(1 + magnify * gaussian(dist, sigma));
         }
         setScales(newScales);
-    }, []);
+    }, [magnify, sigma]);
 
     const handleMouseMove = useCallback((e) => {
+        if (reduceMotion) return;
         isHovering.current = true;
         if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
         animFrameRef.current = requestAnimationFrame(() => {
             computeScales(e.clientX);
         });
-    }, [computeScales]);
+    }, [computeScales, reduceMotion]);
 
     const handleMouseLeave = useCallback(() => {
         isHovering.current = false;
@@ -83,40 +85,58 @@ const DockNav = ({ activeSection, setActiveSection }) => {
         };
     }, []);
 
+    useEffect(() => {
+        const query = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+        if (!query) return undefined;
+        const update = () => setReduceMotion(query.matches);
+        update();
+        query.addEventListener?.('change', update);
+        return () => query.removeEventListener?.('change', update);
+    }, []);
+
+    const sectionMap = new Map(sections.map((item) => [item.id, item]));
+    const externalLinkMap = new Map(externalLinks.map((item) => [item.id, item]));
+    const visibleSections = sectionIds
+        ? sectionIds.map((id) => sectionMap.get(id)).filter(Boolean)
+        : sections;
+    const visibleExternalLinks = externalIds
+        ? externalIds.map((id) => externalLinkMap.get(id)).filter(Boolean)
+        : externalLinks;
     let refIdx = 0;
     return (
-        <nav className="dock-nav" aria-label="macOS-style dock navigation">
+        <nav className={`dock-nav ${compact ? 'dock-nav-compact' : ''}`.trim()} aria-label="macOS-style dock navigation">
             <div
                 className="dock-shelf"
                 ref={shelfRef}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
             >
-                {sections.map(({ id, label, Icon, gradient }, i) => {
+                {visibleSections.map(({ id, label, Icon, gradient }) => {
                     const idx = refIdx++;
                     const isActive = activeSection === id;
                     const s = scales[idx] || 1;
-                    const tileSize = BASE_SIZE * s;
-                    const lift = (s - 1) * BASE_SIZE * 0.6;
+                    const tileSize = baseSize * s;
+                    const lift = (s - 1) * baseSize * 0.6;
                     return (
                         <button
                             key={id}
                             type="button"
                             ref={el => { itemRefs.current[idx] = el; }}
                             className={`dock-item ${isActive ? 'active' : ''}`}
+                            aria-label={label}
                             aria-pressed={isActive}
                             onClick={() => setActiveSection(id)}
                             style={{
-                                transform: `translateY(${-lift}px)`,
+                                transform: reduceMotion ? 'none' : `translateY(${-lift}px)`,
                             }}
                         >
                             <span
                                 className="dock-icon-tile"
                                 style={{
                                     background: gradient,
-                                    width: tileSize,
-                                    height: tileSize,
-                                    fontSize: 24 * s,
+                                    width: reduceMotion ? baseSize : tileSize,
+                                    height: reduceMotion ? baseSize : tileSize,
+                                    fontSize: baseSize * 0.48 * (reduceMotion ? 1 : s),
                                 }}
                                 aria-hidden="true"
                             >
@@ -131,11 +151,11 @@ const DockNav = ({ activeSection, setActiveSection }) => {
                 {(() => { refIdx++; return null; })()}
                 <span className="dock-divider" aria-hidden="true" />
 
-                {externalLinks.map(({ id, label, Icon, gradient, url }) => {
+                {visibleExternalLinks.map(({ id, label, Icon, gradient, url }) => {
                     const idx = refIdx++;
                     const s = scales[idx] || 1;
-                    const tileSize = BASE_SIZE * s;
-                    const lift = (s - 1) * BASE_SIZE * 0.6;
+                    const tileSize = baseSize * s;
+                    const lift = (s - 1) * baseSize * 0.6;
                     return (
                         <a
                             key={id}
@@ -146,16 +166,16 @@ const DockNav = ({ activeSection, setActiveSection }) => {
                             className="dock-item"
                             aria-label={`Open ${label}`}
                             style={{
-                                transform: `translateY(${-lift}px)`,
+                                transform: reduceMotion ? 'none' : `translateY(${-lift}px)`,
                             }}
                         >
                             <span
                                 className="dock-icon-tile"
                                 style={{
                                     background: gradient,
-                                    width: tileSize,
-                                    height: tileSize,
-                                    fontSize: 24 * s,
+                                    width: reduceMotion ? baseSize : tileSize,
+                                    height: reduceMotion ? baseSize : tileSize,
+                                    fontSize: baseSize * 0.48 * (reduceMotion ? 1 : s),
                                 }}
                                 aria-hidden="true"
                             >

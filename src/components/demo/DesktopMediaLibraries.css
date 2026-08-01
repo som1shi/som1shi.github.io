@@ -1,0 +1,205 @@
+.desktop-demo-fork-1 .desktop-media-library .desktop-app-window-content {
+  padding: 0;
+}
+
+.desktop-media-stage {
+  min-height: 560px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  contain: layout paint;
+}
+
+.desktop-book-stage {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(128, 92, 82, 0.17), transparent 38%),
+    linear-gradient(160deg, #1d1818 0%, #120f10 64%, #0b090a 100%);
+}
+
+.desktop-book-stage::before,
+.desktop-poster-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.desktop-book-stage::before {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025), transparent 14% 86%, rgba(0, 0, 0, 0.22)),
+    linear-gradient(180deg, rgba(255, 245, 230, 0.02), transparent 28%, rgba(0, 0, 0, 0.25));
+}
+
+.desktop-poster-stage {
+  min-height: 590px;
+  background:
+    radial-gradient(circle at 50% 36%, rgba(87, 111, 143, 0.3), transparent 42%),
+    linear-gradient(150deg, #242932 0%, #151922 58%, #0e1117 100%);
+}
+
+.desktop-poster-stage::before {
+  opacity: 0.22;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 120px),
+    linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.36));
+}
+
+.desktop-media-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: inherit;
+  position: absolute !important;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  touch-action: pan-y;
+  opacity: 0.96;
+  transform: scale(0.998);
+  transition: opacity var(--motion-standard) ease, transform var(--motion-entry) var(--motion-ease);
+}
+
+.desktop-media-library[data-media-active="true"] .desktop-media-canvas {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.desktop-poster-index {
+  position: absolute;
+  z-index: 2;
+  right: 5%;
+  bottom: 22px;
+  left: 5%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  color: rgba(255, 255, 255, 0.94);
+  pointer-events: none;
+}
+
+.desktop-poster-index article {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+  text-align: center;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.58);
+  opacity: 0;
+  transform: translate3d(0, 6px, 0);
+  transition: opacity var(--motion-standard) ease, transform var(--motion-entry) var(--motion-ease);
+}
+
+.desktop-media-library[data-media-active="true"] .desktop-poster-index article {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.desktop-media-library[data-media-active="true"] .desktop-poster-index article:nth-child(2) {
+  transition-delay: 45ms;
+}
+
+.desktop-media-library[data-media-active="true"] .desktop-poster-index article:nth-child(3) {
+  transition-delay: 90ms;
+}
+
+.desktop-poster-index strong {
+  overflow: hidden;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(16px, 2vw, 23px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.desktop-poster-index span {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 11px;
+  font-weight: 560;
+}
+
+.desktop-media-semantic-list {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.desktop-media-fallback {
+  min-height: inherit;
+  position: relative;
+  z-index: 2;
+  display: grid;
+  align-content: center;
+  gap: 1px;
+  padding: 10%;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.desktop-media-fallback article {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.desktop-media-fallback strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.desktop-media-fallback span {
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 12px;
+}
+
+@media (max-width: 900px) {
+  .desktop-media-stage,
+  .desktop-poster-stage {
+    min-height: 500px;
+  }
+
+  .desktop-poster-index {
+    right: 4%;
+    left: 4%;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 680px) {
+  .desktop-media-stage,
+  .desktop-poster-stage {
+    min-height: 360px;
+  }
+
+  .desktop-poster-index {
+    right: 14px;
+    bottom: 14px;
+    left: 14px;
+    gap: 5px;
+  }
+
+  .desktop-poster-index strong {
+    font-size: 11px;
+  }
+
+  .desktop-poster-index span {
+    font-size: 8px;
+  }
+
+  .desktop-media-fallback {
+    padding: 28px;
+  }
+
+  .desktop-media-fallback article {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+    padding: 13px 0;
+  }
+}

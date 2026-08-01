@@ -1,0 +1,232 @@
+.desktop-demo-fork-1 .desktop-app-window-photos {
+  height: 640px;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-photos .desktop-app-titlebar {
+  position: relative;
+  top: auto;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-photos .desktop-app-window-content {
+  height: calc(640px - var(--titlebar-height));
+  padding: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.42) transparent;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-photos .desktop-app-window-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-photos .desktop-app-window-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-photos .desktop-app-window-content::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.42);
+  background-clip: padding-box;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-photos .desktop-photo-grid {
+  padding: 10px;
+  background: var(--app-surface);
+  box-sizing: border-box;
+}
+
+.desktop-demo-fork-1 .desktop-photo-grid button {
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  transition:
+    box-shadow var(--motion-standard) ease,
+    transform var(--motion-standard) var(--motion-ease);
+}
+
+.desktop-demo-fork-1 .desktop-photo-grid button:hover {
+  z-index: 1;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
+  transform: translate3d(0, -2px, 0);
+}
+
+.desktop-demo-fork-1 .desktop-photo-grid[data-visible="true"] button {
+  animation: desktop-photo-in var(--motion-entry) var(--motion-ease) both;
+}
+
+.desktop-demo-fork-1 .desktop-photo-grid[data-visible="true"] button:nth-child(2) {
+  animation-delay: 35ms;
+}
+
+.desktop-demo-fork-1 .desktop-photo-grid[data-visible="true"] button:nth-child(3) {
+  animation-delay: 70ms;
+}
+
+.desktop-demo-fork-1 .desktop-photo-grid[data-visible="true"] button:nth-child(4) {
+  animation-delay: 105ms;
+}
+
+@keyframes desktop-photo-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0) scale(0.995);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.desktop-demo-fork-1 .desktop-app-window-photos.is-compact {
+  height: var(--titlebar-height);
+}
+
+.desktop-demo-fork-1 .desktop-app-window-photos.is-expanded {
+  height: min(760px, calc(100vh - 80px));
+}
+
+.desktop-demo-fork-1 .desktop-app-window-photos.is-expanded .desktop-app-window-content {
+  height: calc(min(760px, 100vh - 80px) - var(--titlebar-height));
+}
+
+.desktop-demo-fork-1 .desktop-app-window-playground .desktop-app-window-content {
+  padding: 0;
+  overflow: hidden;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-playground .desktop-games-grid {
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.desktop-demo-fork-1 .desktop-contact-section .desktop-contact-card {
+  width: 100%;
+  height: 390px;
+  min-height: 390px;
+  margin: 0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--window-radius);
+  box-shadow: var(--window-shadow);
+}
+
+.desktop-demo-fork-1 .desktop-contact-section {
+  min-height: 0;
+}
+
+.desktop-demo-fork-1 .desktop-contact-card .section-header {
+  height: 54px;
+  padding: 0 24px;
+  border-radius: var(--window-radius) var(--window-radius) 0 0;
+  box-sizing: border-box;
+}
+
+.desktop-demo-fork-1 .desktop-contact-card .traffic-lights {
+  left: 24px;
+}
+
+.desktop-demo-fork-1 .desktop-contact-card .contact-body {
+  height: calc(100% - 120px);
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.desktop-demo-fork-1 .desktop-contact-card .contact-idle {
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.desktop-demo-fork-1 .desktop-contact-card .contact-idle p {
+  margin: 0;
+  color: rgba(235, 235, 245, 0.5);
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+
+.desktop-demo-fork-1 .desktop-contact-card .message-bar {
+  padding: 14px 24px;
+}
+
+.desktop-demo-fork-1 .desktop-contact-card .message-input {
+  min-height: 42px;
+  padding-inline: 18px;
+  border-radius: 22px;
+}
+
+.desktop-demo-fork-1 .desktop-contact-card.expanded {
+  width: 90vw;
+  height: 90vh;
+  min-height: 0;
+}
+
+.desktop-demo-fork-1 .desktop-lightbox {
+  animation: desktop-lightbox-in var(--motion-standard) ease both;
+}
+
+.desktop-demo-fork-1 .desktop-lightbox img {
+  animation: desktop-lightbox-image-in var(--motion-entry) var(--motion-ease) both;
+}
+
+@keyframes desktop-lightbox-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes desktop-lightbox-image-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0) scale(0.99);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@media (max-width: 680px) {
+  .desktop-demo-fork-1 .desktop-app-window-photos {
+    height: 520px;
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-photos .desktop-app-window-content {
+    height: calc(520px - var(--titlebar-height));
+    padding: 0;
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-photos .desktop-photo-grid {
+    padding: 6px;
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-playground .desktop-games-grid {
+    padding: 8px;
+  }
+
+  .desktop-demo-fork-1 .desktop-contact-section .desktop-contact-card {
+    height: 380px;
+    min-height: 380px;
+  }
+
+  .desktop-demo-fork-1 .desktop-contact-card .section-header {
+    padding-inline: 18px;
+  }
+
+  .desktop-demo-fork-1 .desktop-contact-card .traffic-lights {
+    left: 18px;
+  }
+
+  .desktop-demo-fork-1 .desktop-contact-card .message-bar {
+    padding-inline: 16px;
+  }
+
+  .desktop-demo-fork-1 .desktop-contact-card .message-input {
+    min-width: 0;
+  }
+}

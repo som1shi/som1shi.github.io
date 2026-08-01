@@ -16,6 +16,7 @@ import QuantumChess from './components/games/QuantumChess/QuantumChess';
 import RotateConnectFour from './components/games/RotateConnectFour/RotateConnectFour';
 import Refiner from './components/games/Refiner/Refiner';
 import WikiConnect from './components/games/WikiConnect/WikiConnect';
+import DesktopDemo from './components/demo/DesktopDemo';
 
 function App() {
   const [activeSection, setActiveSection] = useState("Home");
@@ -193,6 +194,11 @@ function App() {
         <Route path="/rotate-connect-four" element={<RotateConnectFour />} />
         <Route path="/refiner" element={<Refiner />} />
         <Route path="/wikiconnect" element={<WikiConnect />} />
+        <Route path="/desktop-demo" element={<DesktopDemo />} />
+        {Array.from({ length: 10 }, (_, index) => {
+          const variant = index + 1;
+          return <Route key={variant} path={`/desktop-demo-${variant}`} element={<DesktopDemo variant={variant} />} />;
+        })}
       </Routes>
     </Router >
   );

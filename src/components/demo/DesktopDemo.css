@@ -1,0 +1,3186 @@
+.desktop-demo {
+  --card-radius: 28px;
+  --card-shadow: 0 14px 38px rgba(10, 20, 43, 0.13);
+  --grid-gap: 16px;
+  width: 100vw;
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  isolation: isolate;
+  color: #18181a;
+  background:
+    radial-gradient(circle at 16% 16%, rgba(255, 205, 166, 0.82), transparent 28%),
+    radial-gradient(circle at 78% 28%, rgba(108, 158, 229, 0.62), transparent 34%),
+    radial-gradient(circle at 42% 82%, rgba(103, 79, 172, 0.72), transparent 36%),
+    linear-gradient(160deg, #e6a785 0%, #748fc7 42%, #365e93 70%, #202344 100%);
+  scroll-behavior: smooth;
+  scroll-padding-top: 52px;
+}
+
+@keyframes desktop-accent-drift {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-12px, -10px, 0) scale(1.08);
+  }
+}
+
+@keyframes music-ambient {
+  from {
+    transform: scale(1.04);
+    filter: blur(24px) saturate(0.86);
+  }
+  to {
+    transform: scale(1.12);
+    filter: blur(27px) saturate(1.04);
+  }
+}
+
+@keyframes contribution-pop {
+  from {
+    opacity: 0.25;
+    filter: brightness(0.55);
+  }
+  to {
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
+.desktop-demo > .macos-menubar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 0 12px;
+  border: 0;
+  background: rgba(20, 20, 22, 0.74);
+  box-shadow: inset 0 -1px rgba(255, 255, 255, 0.08);
+  backdrop-filter: saturate(1.25) blur(24px);
+  -webkit-backdrop-filter: saturate(1.25) blur(24px);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  letter-spacing: 0;
+}
+
+.desktop-demo .menubar-left {
+  min-width: 0;
+  gap: 10px;
+}
+
+.desktop-demo .menubar-apple {
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  opacity: 0.96;
+}
+
+.desktop-demo .menubar-appname {
+  font-size: 12.5px;
+  letter-spacing: -0.01em;
+}
+
+.desktop-demo .menubar-navigation {
+  gap: 2px;
+}
+
+.desktop-demo .menubar-menu-item {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.desktop-demo .menubar-menu-item:hover {
+  color: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.desktop-demo .menubar-menu-item[aria-current="location"] {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.desktop-demo .menubar-right {
+  gap: 9px;
+}
+
+.desktop-demo .menubar-icon {
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  opacity: 0.82;
+}
+
+.desktop-demo .menubar-battery {
+  font-size: 16px;
+}
+
+.desktop-demo .menubar-time {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.86;
+}
+
+.desktop-demo-workspace {
+  width: min(1120px, calc(100vw - 64px));
+  margin: 0 auto;
+  padding: 32px 0 96px;
+  box-sizing: border-box;
+}
+
+.desktop-hero-grid {
+  height: 420px;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-areas: "intro intro intro intro intro intro intro intro rail rail rail rail";
+  gap: var(--grid-gap);
+}
+
+.desktop-demo-intro {
+  grid-area: intro;
+  min-width: 0;
+  min-height: 0;
+  scroll-margin-top: 52px;
+}
+
+.desktop-hero-rail {
+  grid-area: rail;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: 118px 286px;
+  grid-template-areas:
+    "apps"
+    "music";
+  gap: var(--grid-gap);
+}
+
+.desktop-story,
+.desktop-dashboard {
+  margin-top: 72px;
+  scroll-margin-top: 52px;
+}
+
+.desktop-portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: 360px 300px;
+  grid-template-areas:
+    "os32 os32 os32 os32 os32 os32 os32 academic academic academic academic academic"
+    "research research research research research research research experience experience experience experience experience";
+  gap: var(--grid-gap);
+}
+
+.desktop-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: 140px 140px 190px;
+  grid-template-areas:
+    "weather weather weather photos photos photos photos clock clock clock clock clock"
+    "weather weather weather photos photos photos photos clock clock clock clock clock"
+    "notes notes github github goodreads goodreads goodreads goodreads letterboxd letterboxd letterboxd letterboxd";
+  gap: var(--grid-gap);
+}
+
+.desktop-demo[data-motion-ready="true"] [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0) scale(0.985);
+  transition:
+    opacity 460ms ease var(--reveal-delay, 0ms),
+    transform 560ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    box-shadow 260ms ease;
+  will-change: opacity, transform;
+}
+
+.desktop-demo[data-motion-ready="true"] [data-reveal][data-visible="true"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.desktop-intro-card,
+.desktop-card,
+.desktop-widget {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  border: 0;
+  border-radius: var(--card-radius);
+  box-sizing: border-box;
+  box-shadow: var(--card-shadow);
+}
+
+.desktop-intro-card,
+.desktop-card,
+.desktop-widget,
+.desktop-apps-widget {
+  transition:
+    transform 360ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 280ms ease,
+    border-color 220ms ease;
+}
+
+.desktop-intro-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(32px, 4vw, 56px);
+  background: rgba(248, 248, 250, 0.97);
+}
+
+.desktop-intro-card::after {
+  content: "";
+  width: 220px;
+  height: 220px;
+  position: absolute;
+  right: -72px;
+  bottom: -76px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(117, 187, 255, 0.34), rgba(255, 135, 115, 0.38));
+  animation: desktop-accent-drift 9s ease-in-out infinite;
+}
+
+.intro-kicker,
+.card-kicker,
+.portfolio-card-heading {
+  color: rgba(24, 24, 26, 0.5);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.intro-copy {
+  max-width: 640px;
+  position: relative;
+  z-index: 1;
+}
+
+.intro-copy h1,
+.intro-copy h2 {
+  margin: 0;
+  font-size: clamp(42px, 4.6vw, 70px);
+  letter-spacing: -0.055em;
+  line-height: 0.96;
+}
+
+.intro-copy h1 {
+  font-weight: 430;
+}
+
+.intro-copy h2 {
+  font-weight: 760;
+}
+
+.intro-copy p {
+  max-width: 580px;
+  margin: 24px 0 0;
+  color: rgba(24, 24, 26, 0.68);
+  font-size: clamp(18px, 1.6vw, 24px);
+  letter-spacing: -0.018em;
+  line-height: 1.32;
+}
+
+.intro-links {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 24px;
+}
+
+.intro-links a,
+.desktop-card a,
+.widget-service-link {
+  color: inherit;
+  font-weight: 650;
+  text-decoration: none;
+  transition: opacity 120ms ease, background-color 120ms ease;
+}
+
+.intro-links a {
+  padding-bottom: 3px;
+  border-bottom: 1px solid currentColor;
+  font-size: 14px;
+}
+
+.desktop-card {
+  padding: 26px 28px;
+  scroll-margin-top: 52px;
+  background: rgba(248, 248, 250, 0.97);
+}
+
+.portfolio-card-heading {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-icon-link {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(24, 24, 26, 0.12);
+  border-radius: 50%;
+  font-size: 13px;
+  transition:
+    transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 160ms ease;
+}
+
+.intro-links a:hover,
+.widget-service-link:hover {
+  opacity: 0.62;
+}
+
+.card-icon-link:hover {
+  background: rgba(24, 24, 26, 0.06);
+}
+
+.os32-card {
+  grid-area: os32;
+  isolation: isolate;
+  color: #fff;
+  background:
+    radial-gradient(circle at 88% 14%, rgba(105, 133, 255, 0.58), transparent 34%),
+    linear-gradient(145deg, #191922, #0e1015 72%);
+}
+
+.os32-card .portfolio-card-heading {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.os32-card .card-icon-link {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.os32-copy {
+  width: 52%;
+  position: absolute;
+  left: 28px;
+  bottom: 30px;
+  z-index: 2;
+}
+
+.os32-copy p,
+.os32-copy h2,
+.os32-copy span {
+  margin: 0;
+}
+
+.os32-copy p {
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.os32-copy h2 {
+  font-size: clamp(50px, 6vw, 82px);
+  letter-spacing: -0.07em;
+  line-height: 0.94;
+}
+
+.os32-copy span {
+  display: block;
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 15px;
+  line-height: 1.38;
+}
+
+.os32-preview {
+  width: 60%;
+  height: 58%;
+  position: absolute;
+  right: -46px;
+  bottom: -30px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.3);
+  transform: rotate(-3deg);
+  transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.os32-preview-bar {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.os32-preview-body {
+  display: grid;
+  gap: 12px;
+  padding: 24px;
+  color: rgba(255, 255, 255, 0.56);
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 12px;
+}
+
+.os32-preview-body strong {
+  color: #fff;
+}
+
+.academic-card {
+  grid-area: academic;
+  display: flex;
+  flex-direction: column;
+}
+
+.academic-card h2,
+.research-card h2 {
+  margin: 20px 0 0;
+  font-size: clamp(26px, 2.5vw, 38px);
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+}
+
+.academic-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: auto;
+}
+
+.academic-links a {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(24, 24, 26, 0.05);
+}
+
+.academic-links a:hover {
+  background: rgba(24, 24, 26, 0.08);
+}
+
+.academic-links a > span {
+  grid-column: 1 / -1;
+  color: rgba(24, 24, 26, 0.46);
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.academic-links strong {
+  overflow: hidden;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.academic-links svg {
+  align-self: center;
+  font-size: 10px;
+}
+
+.research-card {
+  grid-area: research;
+  color: #fff;
+  background: linear-gradient(145deg, #565c75, #2d3142);
+}
+
+.research-card .portfolio-card-heading,
+.research-card p {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.research-card p {
+  max-width: 530px;
+  margin: 14px 0 0;
+  font-size: 14px;
+  line-height: 1.42;
+}
+
+.research-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.research-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 13px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 11px;
+}
+
+.research-links a:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.experience-card {
+  grid-area: experience;
+  background: rgba(248, 248, 250, 0.97);
+}
+
+.experience-list {
+  margin-top: 18px;
+}
+
+.experience-list > div {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 16px;
+  padding: 13px 0;
+  border-top: 1px solid rgba(24, 24, 26, 0.1);
+}
+
+.experience-list strong,
+.experience-list span {
+  font-size: 13px;
+}
+
+.experience-list span {
+  color: rgba(24, 24, 26, 0.52);
+}
+
+.desktop-demo-widgets {
+  display: contents;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+}
+
+.desktop-widget {
+  padding: 18px;
+  isolation: isolate;
+  scroll-margin-top: 52px;
+  background: rgba(248, 248, 250, 0.96);
+}
+
+.music-widget,
+.weather-widget,
+.world-clock-widget,
+.photos-widget {
+  border-radius: 30px;
+}
+
+.notes-widget,
+.github-widget,
+.goodreads-widget,
+.letterboxd-widget {
+  border-radius: 24px;
+}
+
+.widget-label {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 11.5px;
+  font-weight: 650;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.widget-label svg {
+  flex: 0 0 auto;
+  font-size: 12.5px;
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.music-widget {
+  grid-area: music;
+  padding: 18px;
+  color: #fff;
+  background: #3b2732;
+}
+
+.music-widget::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(15, 13, 18, 0.48);
+}
+
+.music-backdrop {
+  position: absolute;
+  inset: -20px;
+  z-index: -2;
+  width: calc(100% + 40px);
+  height: calc(100% + 40px);
+  object-fit: cover;
+  filter: blur(24px) saturate(0.88);
+  animation: music-ambient 12s ease-in-out infinite alternate;
+}
+
+.music-player {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 18px;
+  padding: 24px 8px 0;
+  box-sizing: border-box;
+}
+
+.music-artwork {
+  width: 84px;
+  height: 84px;
+  flex: 0 0 84px;
+  display: block;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 480ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 320ms ease;
+}
+
+.music-track {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.music-track strong,
+.music-track span {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.music-track strong {
+  margin-bottom: 3px;
+  font-size: 16px;
+  letter-spacing: -0.025em;
+}
+
+.music-track span {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+}
+
+.desktop-hero-rail .music-player {
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding: 28px 0 0;
+}
+
+.desktop-hero-rail .music-artwork {
+  width: 112px;
+  height: 112px;
+  flex-basis: 112px;
+}
+
+.desktop-hero-rail .music-track {
+  align-items: center;
+  text-align: center;
+}
+
+.world-clock-widget {
+  grid-area: clock;
+  padding: 18px 22px;
+  color: #fff;
+  background: rgba(25, 25, 28, 0.97);
+}
+
+.world-clock-list {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: 18px;
+  padding-top: 14px;
+  box-sizing: border-box;
+}
+
+.world-clock-city {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.clock-face {
+  width: 88px;
+  height: 88px;
+  position: relative;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.24);
+}
+
+.clock-face-day {
+  color: #171719;
+  background: #f5f5f5;
+}
+
+.clock-face-night {
+  color: #f5f5f7;
+  background: #343437;
+}
+
+.clock-number {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: 7px;
+  font-weight: 700;
+  line-height: 1;
+  transform: translate(-50%, -50%) rotate(var(--number-angle)) translateY(-33px) rotate(var(--number-counter-angle));
+}
+
+.clock-hand {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1.5px;
+  border-radius: 99px;
+  background: currentColor;
+  transform: translate(-50%, -100%) rotate(var(--angle));
+  transform-origin: 50% 100%;
+}
+
+.clock-hour {
+  height: 21px;
+}
+
+.clock-minute {
+  height: 31px;
+}
+
+.clock-second {
+  width: 1px;
+  height: 33px;
+  color: #ff9f0a;
+}
+
+.clock-pin {
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1px solid #ff9f0a;
+  border-radius: 50%;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+}
+
+.world-clock-city strong {
+  max-width: 100%;
+  overflow: hidden;
+  margin-top: 8px;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.world-clock-city > span,
+.world-clock-city > small {
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.world-clock-city > small {
+  font-weight: 700;
+}
+
+.weather-widget {
+  grid-area: weather;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 18px 18px;
+  color: #fff;
+  background: linear-gradient(155deg, #2d78b9, #4b9adc);
+}
+
+.weather-widget .widget-label svg {
+  color: #ffd55e;
+}
+
+.weather-widget > strong {
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+.weather-temperature {
+  margin-top: 5px;
+  font-size: clamp(52px, 5vw, 72px);
+  font-weight: 280;
+  letter-spacing: -0.065em;
+  line-height: 0.92;
+}
+
+.weather-forecast {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: auto 0;
+}
+
+.weather-hour {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: rgba(255, 255, 255, 0.82);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.weather-hour span {
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.weather-hour svg {
+  color: #ffd55e;
+  font-size: 12px;
+  transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.weather-hour strong {
+  color: #fff;
+  font-size: 11px;
+}
+
+.weather-condition {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.notes-widget {
+  grid-area: notes;
+  display: flex;
+  flex-direction: column;
+  padding: 38px 16px 10px;
+  color: #242426;
+  background: rgba(248, 248, 247, 0.97);
+}
+
+.notes-widget .widget-label,
+.goodreads-widget .widget-label {
+  color: rgba(36, 36, 38, 0.58);
+}
+
+.notes-widget .widget-label svg {
+  color: #f2b90c;
+}
+
+.note-row {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  padding: 3px 0;
+  border-top: 1px solid rgba(60, 60, 67, 0.12);
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.note-row strong {
+  font-size: 11px;
+}
+
+.note-row span {
+  display: -webkit-box;
+  overflow: hidden;
+  color: rgba(36, 36, 38, 0.5);
+  font-size: 9px;
+  line-height: 1.2;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.photos-widget {
+  grid-area: photos;
+  padding: 0;
+  background: #171b25;
+}
+
+.photos-widget .widget-label {
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
+}
+
+.photos-grid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 2px;
+}
+
+.photos-grid img {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  display: block;
+  object-fit: cover;
+  transition:
+    transform 520ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 260ms ease,
+    filter 260ms ease;
+}
+
+.goodreads-widget,
+.letterboxd-widget {
+  display: flex;
+  flex-direction: column;
+  padding: 38px 16px 12px;
+}
+
+.goodreads-widget {
+  grid-area: goodreads;
+  color: #332820;
+  background: rgba(246, 243, 235, 0.98);
+}
+
+.letterboxd-widget {
+  grid-area: letterboxd;
+  color: #fff;
+  background: #15191d;
+}
+
+.media-cover-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 76px);
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.book-cover,
+.film-poster {
+  width: 76px;
+  height: 112px;
+  min-width: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 9px 7px;
+  overflow: hidden;
+  border-radius: 9px;
+  box-sizing: border-box;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 360ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 260ms ease;
+}
+
+.book-cover span,
+.film-poster span {
+  font-size: 8px;
+  font-weight: 750;
+  line-height: 1.05;
+}
+
+.cover-sand {
+  color: #2b2119;
+  background: linear-gradient(160deg, #e8d8b7, #b49a70);
+}
+
+.cover-ink,
+.cover-night {
+  color: #f5f5f7;
+  background: linear-gradient(160deg, #30343c, #111318);
+}
+
+.cover-rust {
+  color: #fff1d9;
+  background: linear-gradient(160deg, #d67442, #78361e);
+}
+
+.cover-sky {
+  color: #1b3143;
+  background: linear-gradient(160deg, #cde6ed, #6eabbc);
+}
+
+.cover-stone {
+  color: #f6f1e8;
+  background: linear-gradient(160deg, #99958d, #494843);
+}
+
+.widget-service-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 6px;
+  font-size: 10px;
+}
+
+.widget-service-link svg {
+  font-size: 9px;
+}
+
+.github-widget {
+  grid-area: github;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  color: #fff;
+  background: #0d1117;
+}
+
+.github-activity {
+  width: max-content;
+  flex: 1;
+  display: grid;
+  align-content: center;
+  align-self: center;
+  gap: 5px;
+}
+
+.github-activity > span {
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 8px;
+}
+
+.contribution-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 7px);
+  gap: 2px;
+}
+
+.contribution-grid i {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  transition:
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 180ms ease;
+}
+
+.github-widget[data-visible="true"] .contribution-grid i {
+  animation: contribution-pop 420ms ease backwards;
+  animation-delay: var(--cell-delay, 0ms);
+}
+
+.contribution-grid .contribution-level-1 {
+  background: #0e4429;
+}
+
+.contribution-grid .contribution-level-2 {
+  background: #006d32;
+}
+
+.contribution-grid .contribution-level-3 {
+  background: #26a641;
+}
+
+.contribution-grid .contribution-level-4 {
+  background: #39d353;
+}
+
+.desktop-apps-widget {
+  grid-area: apps;
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 34px 18px 10px;
+  overflow: visible;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.13);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: saturate(1.35) blur(22px);
+  -webkit-backdrop-filter: saturate(1.35) blur(22px);
+}
+
+.desktop-apps-widget .widget-label {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.desktop-apps-widget .dock-nav {
+  width: 100%;
+  min-width: 0;
+}
+
+.desktop-hero-rail .desktop-apps-widget {
+  padding-inline: 10px;
+}
+
+.desktop-hero-rail .dock-shelf {
+  gap: 2px;
+  padding-inline: 4px;
+}
+
+.desktop-hero-rail .dock-divider {
+  margin-inline: 3px;
+}
+
+.desktop-demo .desktop-apps-widget .dock-shelf {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.desktop-apps-widget .dock-divider {
+  height: 34px;
+}
+
+.desktop-demo .dock-shelf {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 10px 28px rgba(0, 0, 0, 0.26);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .desktop-intro-card:hover,
+  .desktop-demo[data-motion-ready="true"] .desktop-card[data-visible="true"]:hover,
+  .desktop-demo[data-motion-ready="true"] .desktop-widget[data-visible="true"]:hover {
+    transform: translate3d(0, -4px, 0) scale(1.006);
+    box-shadow: 0 22px 48px rgba(10, 20, 43, 0.2);
+  }
+
+  .desktop-apps-widget:hover {
+    border-color: rgba(255, 255, 255, 0.34);
+    box-shadow: 0 18px 44px rgba(10, 20, 43, 0.18);
+  }
+
+  .card-icon-link:hover {
+    transform: scale(1.08) rotate(3deg);
+  }
+
+  .os32-card:hover .os32-preview {
+    transform: translate3d(-6px, -4px, 0) rotate(-2deg);
+  }
+
+  .music-widget:hover .music-artwork {
+    transform: scale(1.06) rotate(-1deg);
+    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.38);
+  }
+
+  .weather-widget:hover .widget-label svg {
+    transform: rotate(24deg) scale(1.08);
+  }
+
+  .weather-widget:hover .weather-hour:nth-child(1) {
+    transform: translateY(-3px);
+  }
+
+  .weather-widget:hover .weather-hour:nth-child(2) {
+    transform: translateY(-5px);
+  }
+
+  .weather-widget:hover .weather-hour:nth-child(3) {
+    transform: translateY(-3px);
+  }
+
+  .weather-widget:hover .weather-hour svg {
+    transform: rotate(18deg);
+  }
+
+  .photos-grid:hover img {
+    opacity: 0.76;
+    filter: saturate(0.84);
+  }
+
+  .photos-grid img:hover {
+    z-index: 1;
+    opacity: 1;
+    filter: saturate(1.08);
+    transform: scale(1.045);
+  }
+
+  .note-row:hover {
+    transform: translateX(4px);
+  }
+
+  .github-widget:hover .contribution-grid i {
+    filter: brightness(1.24);
+    transform: scale(1.1);
+  }
+
+  .goodreads-widget:hover .book-cover:nth-child(1),
+  .letterboxd-widget:hover .film-poster:nth-child(1) {
+    transform: translateY(-3px) rotate(-1.5deg);
+  }
+
+  .goodreads-widget:hover .book-cover:nth-child(2),
+  .letterboxd-widget:hover .film-poster:nth-child(2) {
+    transform: translateY(-7px);
+  }
+
+  .goodreads-widget:hover .book-cover:nth-child(3),
+  .letterboxd-widget:hover .film-poster:nth-child(3) {
+    transform: translateY(-3px) rotate(1.5deg);
+  }
+
+  .book-cover:hover,
+  .film-poster:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28);
+  }
+}
+
+.desktop-demo a:focus-visible,
+.desktop-demo button:focus-visible {
+  outline: 3px solid rgba(0, 122, 255, 0.72);
+  outline-offset: 3px;
+}
+
+.desktop-demo .menubar-appname-button:focus-visible,
+.desktop-demo .menubar-menu-item:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.78);
+  outline-offset: 1px;
+}
+
+@media (max-width: 1024px) {
+  .desktop-demo-workspace {
+    width: calc(100vw - 48px);
+  }
+
+  .desktop-hero-grid {
+    height: auto;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 420px 150px;
+    grid-template-areas:
+      "intro"
+      "rail";
+  }
+
+  .desktop-hero-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 150px;
+    grid-template-areas: "apps music";
+  }
+
+  .desktop-hero-rail .music-player {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 18px;
+    padding: 24px 8px 0;
+  }
+
+  .desktop-hero-rail .music-artwork {
+    width: 84px;
+    height: 84px;
+    flex-basis: 84px;
+  }
+
+  .desktop-hero-rail .music-track {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .desktop-portfolio-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 340px 320px;
+    grid-template-areas:
+      "os32 academic"
+      "research experience";
+  }
+
+  .desktop-dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 280px 260px 160px 190px;
+    grid-template-areas:
+      "weather photos"
+      "clock clock"
+      "notes github"
+      "goodreads letterboxd";
+  }
+
+  .intro-copy h1,
+  .intro-copy h2 {
+    font-size: 58px;
+  }
+}
+
+@media (max-width: 680px) {
+  .desktop-demo {
+    --card-radius: 24px;
+    --grid-gap: 14px;
+  }
+
+  .desktop-demo .menubar-right {
+    display: none;
+  }
+
+  .desktop-demo .menubar-navigation {
+    display: none;
+  }
+
+  .desktop-demo > .macos-menubar {
+    display: flex;
+  }
+
+  .desktop-demo-workspace {
+    width: calc(100vw - 32px);
+    padding: 16px 0 64px;
+  }
+
+  .desktop-hero-grid {
+    grid-template-rows: 460px auto;
+  }
+
+  .desktop-hero-rail {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 118px 260px;
+    grid-template-areas:
+      "apps"
+      "music";
+  }
+
+  .desktop-hero-rail .music-player {
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    padding: 28px 0 0;
+  }
+
+  .desktop-hero-rail .music-artwork {
+    width: 112px;
+    height: 112px;
+    flex-basis: 112px;
+  }
+
+  .desktop-hero-rail .music-track {
+    align-items: center;
+    text-align: center;
+  }
+
+  .desktop-story,
+  .desktop-dashboard {
+    margin-top: 56px;
+  }
+
+  .desktop-portfolio-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 500px 330px 330px 330px;
+    grid-template-areas:
+      "os32"
+      "academic"
+      "research"
+      "experience";
+  }
+
+  .desktop-dashboard-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 300px 340px 320px 220px 180px 200px 200px;
+    grid-template-areas:
+      "weather"
+      "photos"
+      "clock"
+      "notes"
+      "github"
+      "goodreads"
+      "letterboxd";
+  }
+
+  .desktop-intro-card {
+    min-height: 460px;
+    padding: 32px;
+  }
+
+  .intro-copy h1,
+  .intro-copy h2 {
+    font-size: clamp(44px, 14vw, 58px);
+  }
+
+  .intro-copy p {
+    font-size: 18px;
+  }
+
+  .music-widget,
+  .weather-widget,
+  .world-clock-widget,
+  .photos-widget {
+    border-radius: 28px;
+  }
+
+  .notes-widget,
+  .github-widget,
+  .goodreads-widget,
+  .letterboxd-widget,
+  .desktop-apps-widget {
+    border-radius: 22px;
+  }
+
+  .os32-copy {
+    width: calc(100% - 56px);
+  }
+
+  .os32-preview {
+    width: 74%;
+    height: 48%;
+    right: -38px;
+    bottom: -30px;
+  }
+
+  .clock-face {
+    width: 72px;
+    height: 72px;
+  }
+
+  .clock-number {
+    transform: translate(-50%, -50%) rotate(var(--number-angle)) translateY(-27px) rotate(var(--number-counter-angle));
+  }
+
+  .clock-hour {
+    height: 18px;
+  }
+
+  .clock-minute {
+    height: 25px;
+  }
+
+  .clock-second {
+    height: 27px;
+  }
+
+  .world-clock-list {
+    gap: 8px;
+  }
+
+  .music-artwork {
+    width: 78px;
+    height: 78px;
+    flex-basis: 78px;
+  }
+
+  .academic-links {
+    grid-template-columns: 1fr;
+  }
+
+  .research-links {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .desktop-apps-widget {
+    padding-inline: 12px;
+    overflow: hidden;
+  }
+
+  .desktop-apps-widget .dock-nav {
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+  }
+
+  .desktop-apps-widget .dock-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .desktop-apps-widget .dock-shelf {
+    min-width: max-content;
+  }
+
+  .desktop-apps-widget .dock-tooltip {
+    display: none;
+  }
+}
+
+@media (min-width: 1025px) {
+  .desktop-demo-fork-2 .desktop-hero-grid {
+    height: 448px;
+    grid-template-areas: "intro intro intro intro intro intro intro rail rail rail rail rail";
+  }
+
+  .desktop-demo-fork-2 .desktop-hero-rail {
+    grid-template-rows: 116px 316px;
+  }
+
+  .desktop-demo-fork-3 .desktop-hero-grid {
+    height: 536px;
+    grid-template-rows: 388px 132px;
+    grid-template-areas:
+      "intro intro intro intro intro intro intro intro intro intro intro intro"
+      "rail rail rail rail rail rail rail rail rail rail rail rail";
+  }
+
+  .desktop-demo-fork-3 .desktop-hero-rail {
+    grid-template-columns: 5fr 7fr;
+    grid-template-rows: 132px;
+    grid-template-areas: "apps music";
+  }
+
+  .desktop-demo-fork-3 .desktop-hero-rail .music-player,
+  .desktop-demo-fork-5 .desktop-hero-rail .music-player,
+  .desktop-demo-fork-6 .desktop-hero-rail .music-player {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 26px 8px 0;
+  }
+
+  .desktop-demo-fork-3 .desktop-hero-rail .music-artwork,
+  .desktop-demo-fork-5 .desktop-hero-rail .music-artwork,
+  .desktop-demo-fork-6 .desktop-hero-rail .music-artwork {
+    width: 76px;
+    height: 76px;
+    flex-basis: 76px;
+  }
+
+  .desktop-demo-fork-3 .desktop-hero-rail .music-track,
+  .desktop-demo-fork-5 .desktop-hero-rail .music-track,
+  .desktop-demo-fork-6 .desktop-hero-rail .music-track {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .desktop-demo-fork-4 .desktop-hero-grid {
+    height: 480px;
+    grid-template-areas: "intro intro intro intro intro intro rail rail rail rail rail rail";
+  }
+
+  .desktop-demo-fork-4 .desktop-hero-rail {
+    grid-template-rows: 124px 340px;
+  }
+
+  .desktop-demo-fork-4 .desktop-hero-rail .music-player {
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    padding: 30px 0 0;
+  }
+
+  .desktop-demo-fork-4 .desktop-hero-rail .music-artwork {
+    width: 136px;
+    height: 136px;
+    flex-basis: 136px;
+  }
+
+  .desktop-demo-fork-4 .desktop-hero-rail .music-track {
+    align-items: center;
+    text-align: center;
+  }
+
+  .desktop-demo-fork-5 .desktop-hero-grid {
+    height: 492px;
+    grid-template-rows: 368px 108px;
+    grid-template-areas:
+      "intro intro intro intro intro intro intro intro intro intro intro intro"
+      "rail rail rail rail rail rail rail rail rail rail rail rail";
+  }
+
+  .desktop-demo-fork-5 .desktop-hero-rail {
+    grid-template-columns: 7fr 5fr;
+    grid-template-rows: 108px;
+    grid-template-areas: "apps music";
+  }
+
+  .desktop-demo-fork-5 .desktop-hero-rail .music-player {
+    padding-top: 24px;
+  }
+
+  .desktop-demo-fork-5 .desktop-hero-rail .music-artwork {
+    width: 60px;
+    height: 60px;
+    flex-basis: 60px;
+    border-radius: 12px;
+  }
+
+  .desktop-demo-fork-6 .desktop-hero-grid {
+    height: 536px;
+    grid-template-rows: 340px 180px;
+    grid-template-areas:
+      "intro intro intro intro intro intro intro intro apps apps apps apps"
+      "music music music music music music music music music music music music";
+  }
+
+  .desktop-demo-fork-6 .desktop-hero-rail,
+  .desktop-demo-fork-7 .desktop-hero-rail {
+    display: contents;
+  }
+
+  .desktop-demo-fork-6 .desktop-apps-widget {
+    grid-area: apps;
+    align-items: center;
+    padding: 34px 12px 16px;
+  }
+
+  .desktop-demo-fork-6 .music-widget {
+    grid-area: music;
+  }
+
+  .desktop-demo-fork-6 .desktop-apps-widget .dock-shelf {
+    transform: scale(0.82);
+    transform-origin: center bottom;
+  }
+
+  .desktop-demo-fork-6 .desktop-hero-rail .music-artwork {
+    width: 104px;
+    height: 104px;
+    flex-basis: 104px;
+  }
+
+  .desktop-demo-fork-7 .desktop-hero-grid {
+    height: 420px;
+    grid-template-areas: "intro intro intro intro intro intro apps apps apps apps music music";
+  }
+
+  .desktop-demo-fork-7 .desktop-apps-widget {
+    grid-area: apps;
+    align-items: center;
+    padding: 38px 22px 20px;
+  }
+
+  .desktop-demo-fork-7 .music-widget {
+    grid-area: music;
+  }
+
+  .desktop-demo-fork-7 .desktop-apps-widget .dock-shelf {
+    display: grid;
+    grid-template-columns: repeat(4, 42px);
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .desktop-demo-fork-7 .desktop-apps-widget .dock-divider {
+    width: 100%;
+    height: 1px;
+    grid-column: 1 / -1;
+    margin: 0;
+  }
+
+  .desktop-demo-fork-7 .desktop-hero-rail .music-player {
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    padding: 30px 0 0;
+  }
+
+  .desktop-demo-fork-7 .desktop-hero-rail .music-artwork {
+    width: 104px;
+    height: 104px;
+    flex-basis: 104px;
+  }
+
+  .desktop-demo-fork-7 .desktop-hero-rail .music-track {
+    align-items: center;
+    text-align: center;
+  }
+
+  .desktop-demo-fork-8 .desktop-hero-grid {
+    width: min(920px, 100%);
+    height: 380px;
+    margin-inline: auto;
+    grid-template-areas: "intro intro intro intro intro intro intro rail rail rail rail rail";
+  }
+
+  .desktop-demo-fork-8 .desktop-hero-rail {
+    grid-template-rows: 96px 268px;
+  }
+
+  .desktop-demo-fork-8 .desktop-apps-widget .dock-shelf {
+    transform: scale(0.84);
+    transform-origin: center bottom;
+  }
+
+  .desktop-demo-fork-8 .desktop-hero-rail .music-artwork {
+    width: 84px;
+    height: 84px;
+    flex-basis: 84px;
+  }
+
+  .desktop-demo-fork-9 .desktop-hero-grid {
+    height: 430px;
+    grid-template-areas: "intro intro intro intro intro intro intro intro rail rail rail rail";
+  }
+
+  .desktop-demo-fork-9 .desktop-hero-rail {
+    width: calc(100% + 42px);
+    grid-template-rows: 110px 304px;
+    transform: translateX(-42px);
+    z-index: 2;
+  }
+
+  .desktop-demo-fork-9 .desktop-apps-widget .dock-shelf {
+    transform: scale(0.9);
+    transform-origin: center bottom;
+  }
+
+  .desktop-demo-fork-10 .desktop-hero-grid {
+    width: min(980px, 100%);
+    height: 380px;
+    margin: 22px auto 0;
+    grid-template-areas: "intro intro intro intro intro intro intro rail rail rail rail rail";
+  }
+
+  .desktop-demo-fork-10 .desktop-hero-rail {
+    grid-template-rows: 96px 268px;
+  }
+
+  .desktop-demo-fork-10 .desktop-apps-widget .dock-shelf {
+    transform: scale(0.86);
+    transform-origin: center bottom;
+  }
+
+  .desktop-demo-fork-10 .desktop-hero-rail .music-artwork {
+    width: 78px;
+    height: 78px;
+    flex-basis: 78px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-demo {
+    scroll-behavior: auto;
+  }
+
+  .desktop-demo [data-reveal],
+  .desktop-intro-card,
+  .desktop-card,
+  .desktop-widget,
+  .desktop-apps-widget,
+  .card-icon-link,
+  .os32-preview,
+  .music-artwork,
+  .weather-hour,
+  .weather-hour svg,
+  .note-row,
+  .photos-grid img,
+  .book-cover,
+  .film-poster,
+  .contribution-grid i {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .desktop-intro-card::after,
+  .music-backdrop,
+  .github-widget .contribution-grid i {
+    animation: none !important;
+  }
+}
+
+.desktop-demo-workspace {
+  width: min(1100px, calc(100vw - 64px));
+}
+
+.desktop-hero-grid {
+  height: 400px;
+  grid-template-areas: "intro intro intro intro intro intro intro rail rail rail rail rail";
+}
+
+.desktop-hero-rail {
+  grid-template-rows: 104px 280px;
+}
+
+.desktop-apps-widget {
+  padding: 17px 10px 9px;
+  border-color: rgba(255, 255, 255, 0.15);
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.desktop-hero-rail .dock-shelf {
+  gap: 0;
+}
+
+.desktop-hero-rail .dock-item {
+  padding-inline: 2px;
+}
+
+.desktop-hero-rail .dock-divider {
+  margin-inline: 2px;
+}
+
+.desktop-hero-rail .music-player {
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 18px;
+  padding: 28px 8px 0;
+}
+
+.desktop-hero-rail .music-artwork {
+  width: 96px;
+  height: 96px;
+  flex-basis: 96px;
+}
+
+.desktop-hero-rail .music-track {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.desktop-story,
+.desktop-dashboard {
+  margin-top: 88px;
+}
+
+.desktop-about {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  scroll-margin-top: 52px;
+}
+
+.desktop-about-copy {
+  grid-column: 5 / -1;
+  padding: 38px 42px 34px;
+  border-radius: var(--card-radius);
+  background: rgba(248, 248, 250, 0.96);
+  box-shadow: var(--card-shadow);
+}
+
+.desktop-about-copy h3 {
+  margin: 0 0 38px;
+  color: rgba(24, 24, 26, 0.46);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.desktop-about-copy p {
+  margin: 0;
+  font-size: clamp(20px, 2.3vw, 31px);
+  letter-spacing: -0.035em;
+  line-height: 1.18;
+}
+
+.desktop-about-copy p + p {
+  margin-top: 26px;
+  color: rgba(24, 24, 26, 0.58);
+  font-size: clamp(16px, 1.6vw, 21px);
+  line-height: 1.38;
+}
+
+.desktop-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-areas: "os32 os32 os32 os32 os32 os32 os32 academic academic academic academic academic";
+  height: 360px;
+  gap: var(--grid-gap);
+}
+
+.os32-copy h3 {
+  margin: 0;
+  font-size: clamp(50px, 6vw, 82px);
+  letter-spacing: -0.07em;
+  line-height: 0.94;
+}
+
+.desktop-feature-grid .os32-copy {
+  width: 44%;
+}
+
+.desktop-feature-grid .os32-preview {
+  width: 54%;
+  height: 54%;
+  right: -28px;
+}
+
+.academic-card h3 {
+  margin: 20px 0 0;
+  font-size: clamp(26px, 2.5vw, 38px);
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+}
+
+.academic-card > p {
+  margin: 14px 0 0;
+  color: rgba(24, 24, 26, 0.54);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.portfolio-index,
+.desktop-list-card {
+  margin-top: var(--grid-gap);
+  overflow: hidden;
+  border-radius: var(--card-radius);
+  background: rgba(248, 248, 250, 0.96);
+  box-shadow: var(--card-shadow);
+}
+
+.portfolio-index-item,
+.desktop-list-row {
+  min-height: 128px;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 112px;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 28px;
+  color: #18181a;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.portfolio-index-item + .portfolio-index-item,
+.desktop-list-row + .desktop-list-row,
+.experience-directory-row + .experience-directory-row {
+  border-top: 1px solid rgba(24, 24, 26, 0.1);
+}
+
+.portfolio-index-number,
+.desktop-list-number {
+  align-self: start;
+  padding-top: 4px;
+  color: rgba(24, 24, 26, 0.36);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.portfolio-index-item h3,
+.desktop-list-row h3,
+.experience-directory-row h3 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: -0.025em;
+}
+
+.portfolio-index-item p,
+.desktop-list-row p {
+  margin: 7px 0 0;
+  color: rgba(24, 24, 26, 0.56);
+  font-size: 13px;
+  line-height: 1.42;
+}
+
+.portfolio-index-tags {
+  display: block;
+  margin-top: 12px;
+  color: rgba(24, 24, 26, 0.4);
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.portfolio-index-action,
+.desktop-list-meta {
+  justify-self: end;
+  color: rgba(24, 24, 26, 0.42);
+  font-size: 10px;
+  font-weight: 650;
+  text-align: right;
+}
+
+a.portfolio-index-item,
+a.desktop-list-row {
+  transition: background-color 160ms ease;
+}
+
+a.portfolio-index-item:hover,
+a.desktop-list-row:hover {
+  background: rgba(24, 24, 26, 0.045);
+}
+
+.desktop-list-card {
+  margin-top: 0;
+}
+
+.desktop-list-copy > span {
+  display: block;
+  margin-bottom: 7px;
+  color: rgba(24, 24, 26, 0.4);
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.desktop-list-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.experience-directory {
+  position: relative;
+  padding: 8px 28px;
+}
+
+.experience-link {
+  position: absolute;
+  top: 18px;
+  right: 28px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(24, 24, 26, 0.52);
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.experience-directory-row {
+  min-height: 78px;
+  display: grid;
+  grid-template-columns: 1.1fr 1.5fr 0.7fr 0.8fr;
+  align-items: center;
+  gap: 20px;
+}
+
+.experience-directory-row span {
+  color: rgba(24, 24, 26, 0.52);
+  font-size: 12px;
+}
+
+.experience-directory-row span:nth-last-child(-n + 2) {
+  text-align: right;
+}
+
+.desktop-dashboard-grid {
+  grid-template-areas:
+    "weather weather weather photos photos photos photos clock clock clock clock clock"
+    "weather weather weather photos photos photos photos clock clock clock clock clock"
+    "notes notes notes github github github goodreads goodreads goodreads letterboxd letterboxd letterboxd";
+}
+
+.media-cover-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.book-cover,
+.film-poster {
+  width: 100%;
+  height: 110px;
+}
+
+.widget-overlay-link {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+}
+
+.desktop-photo-library {
+  scroll-margin-top: 52px;
+}
+
+.desktop-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-flow: dense;
+  gap: 10px;
+}
+
+.desktop-photo-grid button {
+  min-height: 190px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.12);
+  cursor: zoom-in;
+}
+
+.desktop-photo-grid button:nth-child(7n + 1),
+.desktop-photo-grid button:nth-child(11n + 4) {
+  grid-row: span 2;
+}
+
+.desktop-photo-grid img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 360ms cubic-bezier(0.16, 1, 0.3, 1), filter 180ms ease;
+}
+
+.desktop-photo-grid button:hover img {
+  transform: scale(1.025);
+  filter: saturate(1.06);
+}
+
+.desktop-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 56px;
+  background: rgba(8, 8, 10, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.desktop-lightbox img {
+  max-width: min(1100px, 92vw);
+  max-height: 86vh;
+  border-radius: 18px;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.48);
+}
+
+.desktop-lightbox button {
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  top: 22px;
+  right: 24px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+}
+
+.desktop-demo[data-motion-ready="true"] [data-reveal] {
+  transform: translate3d(0, 12px, 0);
+  transition: opacity 240ms ease var(--reveal-delay, 0ms), transform 320ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
+}
+
+.desktop-demo[data-motion-ready="true"] [data-reveal][data-visible="true"] {
+  transform: translate3d(0, 0, 0);
+}
+
+.desktop-intro-card::after,
+.music-backdrop {
+  animation-play-state: paused;
+}
+
+.desktop-intro-card:hover::after,
+.music-widget:hover .music-backdrop {
+  animation-play-state: running;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .desktop-intro-card:hover,
+  .desktop-demo[data-motion-ready="true"] .desktop-card[data-visible="true"]:hover,
+  .desktop-demo[data-motion-ready="true"] .desktop-widget[data-visible="true"]:hover {
+    transform: translate3d(0, 0, 0);
+    box-shadow: var(--card-shadow);
+  }
+}
+
+.desktop-demo .menubar-menu-item[aria-current="location"] {
+  background: transparent;
+  box-shadow: inset 0 -1px rgba(255, 255, 255, 0.82);
+}
+
+@media (max-width: 1024px) {
+  .desktop-hero-grid {
+    height: auto;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 420px 150px;
+    grid-template-areas:
+      "intro"
+      "rail";
+  }
+
+  .desktop-hero-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 150px;
+    grid-template-areas: "apps music";
+  }
+
+  .desktop-feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "os32 academic";
+    height: 370px;
+  }
+
+  .desktop-feature-grid .os32-preview {
+    width: 70%;
+    height: 170px;
+    top: 72px;
+    right: -20px;
+    bottom: auto;
+  }
+
+  .desktop-feature-grid .os32-copy {
+    width: calc(100% - 56px);
+    bottom: 26px;
+  }
+
+  .desktop-about-copy {
+    grid-column: 5 / -1;
+  }
+
+  .desktop-dashboard-grid {
+    grid-template-rows: 280px 260px 190px 200px;
+    grid-template-areas:
+      "weather photos"
+      "clock clock"
+      "notes github"
+      "goodreads letterboxd";
+  }
+
+  .desktop-photo-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-demo > .macos-menubar {
+    display: flex;
+  }
+
+  .desktop-demo .menubar-right {
+    display: none;
+  }
+
+  .desktop-demo-workspace {
+    width: calc(100vw - 40px);
+  }
+
+  .desktop-about {
+    display: block;
+  }
+
+  .experience-directory-row {
+    grid-template-columns: 1fr 1.2fr;
+    gap: 8px 18px;
+    padding: 16px 0;
+  }
+
+  .experience-directory-row span:nth-last-child(-n + 2) {
+    text-align: left;
+  }
+
+  .desktop-photo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+@media (max-width: 680px) {
+  .desktop-demo-workspace {
+    width: calc(100vw - 32px);
+  }
+
+  .desktop-hero-grid {
+    grid-template-rows: 460px auto;
+  }
+
+  .desktop-hero-rail {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 104px 164px;
+    grid-template-areas:
+      "apps"
+      "music";
+  }
+
+  .desktop-hero-rail .music-player {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 26px 4px 0;
+  }
+
+  .desktop-hero-rail .music-artwork {
+    width: 82px;
+    height: 82px;
+    flex-basis: 82px;
+  }
+
+  .desktop-hero-rail .music-track {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .desktop-story,
+  .desktop-dashboard {
+    margin-top: 64px;
+  }
+
+  .desktop-about-copy {
+    padding: 28px;
+  }
+
+  .desktop-about-copy h3 {
+    margin-bottom: 24px;
+  }
+
+  .desktop-feature-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "os32"
+      "academic";
+    height: auto;
+  }
+
+  .desktop-feature-grid .os32-card {
+    height: 470px;
+  }
+
+  .desktop-feature-grid .academic-card {
+    height: 320px;
+  }
+
+  .os32-preview {
+    width: 74%;
+    height: 180px;
+    top: 72px;
+    right: -30px;
+    bottom: auto;
+  }
+
+  .os32-copy {
+    width: calc(100% - 56px);
+    bottom: 28px;
+  }
+
+  .desktop-feature-grid .os32-preview {
+    width: 74%;
+    height: 180px;
+    top: 72px;
+    right: -30px;
+  }
+
+  .desktop-feature-grid .os32-copy {
+    width: calc(100% - 56px);
+    bottom: 28px;
+  }
+
+  .portfolio-index-item,
+  .desktop-list-row {
+    min-height: 0;
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 12px;
+    padding: 22px 20px;
+  }
+
+  .portfolio-index-action,
+  .desktop-list-meta {
+    grid-column: 2;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .desktop-list-meta {
+    justify-content: flex-start;
+  }
+
+  .experience-directory {
+    padding: 34px 20px 8px;
+  }
+
+  .experience-link {
+    top: 14px;
+    right: 20px;
+  }
+
+  .desktop-dashboard-grid {
+    grid-template-rows: none;
+    grid-auto-rows: auto;
+    grid-template-areas:
+      "weather"
+      "photos"
+      "clock"
+      "notes"
+      "github"
+      "goodreads"
+      "letterboxd";
+  }
+
+  .weather-widget,
+  .photos-widget,
+  .world-clock-widget {
+    min-height: 280px;
+  }
+
+  .notes-widget,
+  .github-widget {
+    min-height: 180px;
+  }
+
+  .goodreads-widget,
+  .letterboxd-widget {
+    min-height: 210px;
+  }
+
+  .desktop-photo-grid button {
+    min-height: 150px;
+  }
+
+  .desktop-photo-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .desktop-photo-grid button {
+    min-height: 108px;
+    border-radius: 12px;
+  }
+
+  .desktop-lightbox {
+    padding: 24px;
+  }
+
+  .desktop-lightbox img {
+    max-width: 100%;
+  }
+
+  .desktop-apps-widget .dock-nav {
+    mask-image: linear-gradient(90deg, #000 88%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent);
+  }
+}
+
+.desktop-dashboard-grid {
+  grid-template-rows: 152px 152px 224px;
+}
+
+.desktop-dashboard-grid .desktop-widget {
+  box-shadow:
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.16),
+    0 18px 44px rgba(16, 26, 52, 0.14);
+}
+
+.desktop-dashboard-grid .widget-label,
+.desktop-hero-grid .widget-label {
+  top: 17px;
+  left: 19px;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 680;
+  letter-spacing: 0.01em;
+}
+
+.desktop-dashboard-grid .widget-label svg,
+.desktop-hero-grid .widget-label svg {
+  font-size: 12px;
+}
+
+.desktop-apps-widget {
+  padding: 34px 10px 9px;
+}
+
+.desktop-apps-widget .widget-label {
+  top: 12px;
+  left: 16px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.72);
+  background: rgba(18, 24, 38, 0.16);
+}
+
+.music-widget {
+  padding: 0;
+  background: #2d2024;
+}
+
+.music-widget::after {
+  background: linear-gradient(105deg, rgba(28, 21, 27, 0.72), rgba(37, 24, 25, 0.48));
+}
+
+.music-backdrop {
+  inset: -32px;
+  width: calc(100% + 64px);
+  height: calc(100% + 64px);
+  filter: blur(34px) saturate(1.08) brightness(0.72);
+}
+
+.desktop-demo .music-player {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+  padding: 42px 26px 20px;
+}
+
+.music-artwork-frame {
+  position: relative;
+  flex: 0 0 148px;
+}
+
+.desktop-demo .music-artwork {
+  width: 148px;
+  height: 148px;
+  flex-basis: 148px;
+  border-radius: 20px;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.34);
+}
+
+.music-status {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.88);
+  background: rgba(20, 18, 20, 0.56);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 8px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.music-status i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #34c759;
+  box-shadow: 0 0 8px rgba(52, 199, 89, 0.7);
+}
+
+.desktop-demo .music-track {
+  flex: 1;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.music-track .music-mix {
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.desktop-demo .music-track strong {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: -0.045em;
+}
+
+.music-track .music-artist {
+  margin-top: 3px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 11px;
+}
+
+.music-progress {
+  width: 100%;
+  height: 3px;
+  margin-top: 22px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.music-progress i {
+  width: 43%;
+  height: 100%;
+  display: block;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.music-progress-meta {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+.music-progress-meta span {
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.weather-widget {
+  padding: 44px 20px 18px;
+  background:
+    radial-gradient(circle at 84% 17%, rgba(255, 239, 154, 0.78) 0 7%, transparent 18%),
+    linear-gradient(155deg, #236caf 0%, #4294d2 58%, #6bb3df 100%);
+}
+
+.weather-widget::before {
+  content: "";
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: -40px;
+  right: 10px;
+  z-index: -1;
+  border-radius: 50%;
+  background: rgba(255, 227, 111, 0.34);
+  filter: blur(18px);
+}
+
+.weather-summary {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+}
+
+.weather-summary > strong {
+  grid-column: 1 / -1;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+
+.weather-temperature {
+  margin: 6px 0 0;
+  font-size: 68px;
+  font-weight: 250;
+  letter-spacing: -0.07em;
+  line-height: 0.88;
+}
+
+.weather-condition {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  padding-bottom: 4px;
+}
+
+.weather-condition strong {
+  font-size: 11px;
+}
+
+.weather-condition span {
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 8px;
+  font-weight: 650;
+}
+
+.weather-forecast {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  margin: auto 0 0;
+  padding-top: 13px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.weather-hour {
+  gap: 5px;
+}
+
+.weather-hour span {
+  font-size: 8px;
+}
+
+.weather-hour svg {
+  font-size: 15px;
+}
+
+.weather-hour strong {
+  font-size: 11px;
+}
+
+.photos-widget {
+  border-radius: 28px;
+  background: #111319;
+}
+
+.photos-widget .widget-label {
+  padding: 6px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(18, 18, 20, 0.38);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.photos-grid {
+  gap: 3px;
+  background: #111319;
+}
+
+.photos-grid img:nth-child(1) {
+  object-position: 50% 45%;
+}
+
+.photos-grid img:nth-child(2) {
+  object-position: 50% 58%;
+}
+
+.photos-grid img:nth-child(3) {
+  object-position: 50% 48%;
+}
+
+.photos-grid img:nth-child(4) {
+  object-position: 50% 42%;
+}
+
+.photos-meta {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 36px 17px 14px;
+  color: #fff;
+  background: linear-gradient(transparent, rgba(8, 10, 14, 0.72));
+  pointer-events: none;
+}
+
+.photos-meta strong {
+  font-size: 12px;
+}
+
+.photos-meta span {
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 9px;
+}
+
+.world-clock-widget {
+  padding: 18px 20px;
+  background: linear-gradient(150deg, #202023, #151517 72%);
+}
+
+.world-clock-list {
+  gap: 10px;
+  padding: 42px 0 8px;
+}
+
+.clock-face {
+  width: 94px;
+  height: 94px;
+  box-shadow:
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.12),
+    0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+.clock-number {
+  font-size: 7.5px;
+  transform: translate(-50%, -50%) rotate(var(--number-angle)) translateY(-35px) rotate(var(--number-counter-angle));
+}
+
+.clock-hour {
+  height: 23px;
+}
+
+.clock-minute {
+  height: 33px;
+}
+
+.clock-second {
+  height: 36px;
+}
+
+.clock-city-meta {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 9px;
+}
+
+.world-clock-city .clock-city-meta strong {
+  margin: 0;
+  font-size: 10px;
+}
+
+.clock-city-meta .clock-digital-time {
+  margin-top: 2px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  font-weight: 620;
+}
+
+.clock-city-meta > span:last-child {
+  margin-top: 2px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 8px;
+  font-weight: 620;
+  white-space: nowrap;
+}
+
+.notes-widget {
+  padding: 42px 16px 12px;
+  background:
+    linear-gradient(90deg, rgba(242, 185, 12, 0.2) 0 3px, transparent 3px),
+    linear-gradient(160deg, #fffef8, #f5efdc);
+}
+
+.notes-widget .widget-label {
+  color: rgba(74, 59, 30, 0.68);
+}
+
+.notes-summary,
+.media-widget-summary {
+  position: absolute;
+  top: 17px;
+  right: 16px;
+  color: rgba(36, 36, 38, 0.42);
+  font-size: 8px;
+  font-weight: 650;
+}
+
+.notes-list {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.note-row {
+  padding: 7px 0 6px;
+  border-color: rgba(79, 64, 36, 0.12);
+}
+
+.note-row > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.note-row strong {
+  color: #2c2922;
+  font-size: 10px;
+}
+
+.note-row time {
+  color: rgba(44, 41, 34, 0.38);
+  font-size: 8px;
+}
+
+.note-row span {
+  margin-top: 2px;
+  color: rgba(44, 41, 34, 0.52);
+  font-size: 8.5px;
+}
+
+.github-widget {
+  padding: 42px 18px 13px;
+  background: linear-gradient(150deg, #10151c, #080b10);
+}
+
+.github-summary {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.github-summary strong {
+  font-size: 12px;
+  letter-spacing: -0.01em;
+}
+
+.github-summary span {
+  color: #39d353;
+  font-size: 8px;
+  font-weight: 680;
+}
+
+.github-activity {
+  width: auto;
+  align-content: end;
+  align-self: stretch;
+  gap: 8px;
+}
+
+.contribution-grid {
+  grid-template-columns: repeat(12, 10px);
+  justify-content: center;
+  gap: 3px;
+}
+
+.contribution-grid i {
+  width: 10px;
+  height: 10px;
+  border-radius: 2.5px;
+}
+
+.github-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+  color: rgba(255, 255, 255, 0.36);
+  font-size: 7px;
+}
+
+.github-legend i {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: #0e4429;
+}
+
+.github-legend i:nth-of-type(2) {
+  background: #006d32;
+}
+
+.github-legend i:nth-of-type(3) {
+  background: #26a641;
+}
+
+.github-legend i:nth-of-type(4) {
+  background: #39d353;
+}
+
+.goodreads-widget,
+.letterboxd-widget {
+  padding: 42px 14px 12px;
+}
+
+.goodreads-widget {
+  background: linear-gradient(150deg, #f5efe3, #e8ddc8);
+}
+
+.goodreads-widget .widget-label {
+  color: rgba(65, 48, 34, 0.72);
+}
+
+.letterboxd-widget {
+  background: linear-gradient(150deg, #191f24, #0d1115);
+}
+
+.letterboxd-widget .media-widget-summary {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.media-cover-grid {
+  gap: 8px;
+}
+
+.book-cover,
+.film-poster {
+  height: 126px;
+  position: relative;
+  padding: 10px 8px;
+  border-radius: 10px;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
+}
+
+.book-cover {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.book-cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 3px 0 0 rgba(255, 255, 255, 0.18), inset -1px 0 rgba(0, 0, 0, 0.14);
+  pointer-events: none;
+}
+
+.book-cover .book-progress {
+  padding: 3px 5px;
+  border-radius: 99px;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 6px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.book-cover strong {
+  margin-top: auto;
+  font-size: 11px;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.book-cover small {
+  margin-top: 4px;
+  font-size: 6.5px;
+  opacity: 0.62;
+}
+
+.film-poster {
+  padding: 0;
+  background: #222;
+}
+
+.film-poster > img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.film-poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 36%, rgba(7, 9, 12, 0.88));
+}
+
+.media-cover-meta {
+  position: absolute;
+  right: 7px;
+  bottom: 8px;
+  left: 7px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.media-cover-meta strong {
+  font-size: 8px;
+  line-height: 1.04;
+}
+
+.media-cover-meta span {
+  margin-top: 2px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 6.5px;
+}
+
+.film-rating {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px 5px;
+  border-radius: 99px;
+  color: #fff;
+  background: rgba(8, 10, 13, 0.54);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: 6.5px;
+  font-weight: 700;
+}
+
+.film-rating svg {
+  color: #ffcc00;
+  font-size: 6px;
+}
+
+.goodreads-widget .widget-service-link,
+.letterboxd-widget .widget-service-link {
+  padding-top: 7px;
+  font-size: 8.5px;
+  font-weight: 650;
+}
+
+@media (max-width: 1024px) {
+  .desktop-dashboard-grid {
+    grid-template-rows: 300px 284px 208px 224px;
+  }
+
+  .desktop-demo .music-player {
+    gap: 16px;
+    padding: 38px 18px 14px;
+  }
+
+  .music-artwork-frame {
+    flex-basis: 92px;
+  }
+
+  .desktop-demo .music-artwork {
+    width: 92px;
+    height: 92px;
+    flex-basis: 92px;
+    border-radius: 15px;
+  }
+
+  .desktop-demo .music-track strong {
+    font-size: 22px;
+  }
+
+  .music-progress {
+    margin-top: 12px;
+  }
+
+  .clock-face {
+    width: 86px;
+    height: 86px;
+  }
+
+  .clock-number {
+    transform: translate(-50%, -50%) rotate(var(--number-angle)) translateY(-32px) rotate(var(--number-counter-angle));
+  }
+}
+
+@media (max-width: 680px) {
+  .desktop-dashboard-grid {
+    grid-auto-rows: auto;
+  }
+
+  .weather-widget,
+  .photos-widget,
+  .world-clock-widget {
+    min-height: 310px;
+  }
+
+  .notes-widget,
+  .github-widget {
+    min-height: 216px;
+  }
+
+  .goodreads-widget,
+  .letterboxd-widget {
+    min-height: 232px;
+  }
+
+  .desktop-demo .music-player {
+    padding: 36px 16px 12px;
+  }
+
+  .music-status {
+    left: 7px;
+    bottom: 7px;
+    padding: 4px 6px;
+    font-size: 7px;
+  }
+
+  .music-track .music-mix {
+    margin-bottom: 4px;
+    font-size: 7px;
+  }
+
+  .desktop-demo .music-track strong {
+    font-size: 20px;
+  }
+
+  .music-track .music-artist {
+    font-size: 9px;
+  }
+
+  .music-progress-meta {
+    display: none;
+  }
+
+  .weather-temperature {
+    font-size: 76px;
+  }
+
+  .world-clock-list {
+    gap: 6px;
+  }
+
+  .clock-face {
+    width: 82px;
+    height: 82px;
+  }
+
+  .clock-number {
+    transform: translate(-50%, -50%) rotate(var(--number-angle)) translateY(-30px) rotate(var(--number-counter-angle));
+  }
+
+  .media-cover-grid {
+    gap: 10px;
+  }
+
+  .book-cover,
+  .film-poster {
+    height: 150px;
+  }
+}
