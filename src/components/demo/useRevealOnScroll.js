@@ -29,7 +29,17 @@ const useRevealOnScroll = (containerRef) => {
     });
 
     targets.forEach((target) => observer.observe(target));
-    return () => observer.disconnect();
+
+    // Elements added or moved after mount (layout changes, hot reloads) still need revealing.
+    const mutations = new MutationObserver(() => {
+      container.querySelectorAll('[data-reveal]:not([data-visible="true"])').forEach((target) => observer.observe(target));
+    });
+    mutations.observe(container, { childList: true, subtree: true });
+
+    return () => {
+      observer.disconnect();
+      mutations.disconnect();
+    };
   }, [containerRef]);
 };
 

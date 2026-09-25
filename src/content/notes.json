@@ -1,0 +1,34 @@
+[
+  {
+    "id": "about-me",
+    "title": "About Me",
+    "date": "2026-09-25",
+    "pinned": true,
+    "preview": "I am pursuing a Bachelor of Science in Electrical Engineering and Computer Sciences at UC Berkeley, where I focus on building useful technology and learning how complex systems work.",
+    "html": "<p>I am pursuing a Bachelor of Science in Electrical Engineering and Computer Sciences at UC Berkeley, where I focus on building useful technology and learning how complex systems work.</p>\n<p>My work spans software development, machine learning, artificial intelligence, computer vision, graphics, and research. I care about clear ideas, careful engineering, and real-world applications.</p>"
+  },
+  {
+    "id": "ideas",
+    "title": "Ideas",
+    "date": "2026-09-25",
+    "pinned": false,
+    "preview": "Interfaces that feel calm and useful.",
+    "html": "<p>Interfaces that feel calm and useful.</p>"
+  },
+  {
+    "id": "this-week",
+    "title": "This week",
+    "date": "2026-09-22",
+    "pinned": false,
+    "preview": "Finish the portfolio widget pass.",
+    "html": "<p>Finish the portfolio widget pass.</p>"
+  },
+  {
+    "id": "reading-list",
+    "title": "Reading list",
+    "date": "2026-09-20",
+    "pinned": false,
+    "preview": "Books, films, and projects to revisit.",
+    "html": "<p>Books, films, and projects to revisit.</p>"
+  }
+]

@@ -119,3 +119,20 @@
         transition: none !important;
     }
 }
+
+/* Native macOS app icons ship with their own squircle, shadow and ~10% transparent margin. */
+.dock-icon-tile-image {
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
+}
+
+.dock-icon-tile-image img {
+    width: 125%;
+    height: 125%;
+    flex-shrink: 0;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+}

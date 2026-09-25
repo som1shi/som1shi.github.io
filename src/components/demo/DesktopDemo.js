@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { FaThLarge } from 'react-icons/fa';
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import MenuBar from '../chrome/MenuBar';
 import DockNav from '../chrome/DockNav';
 import DesktopPortfolio from './DesktopPortfolio';
-import DesktopWidgets, { MusicWidget } from './DesktopWidgets';
+import { GoldenGateWidget } from './DesktopWidgets';
 import DesktopExtras from './DesktopExtras';
 import DesktopMediaLibraries from './DesktopMediaLibraries';
 import useRevealOnScroll from './useRevealOnScroll';
-import { profile } from '../../content/portfolioContent';
+import { profile, socialLinks } from '../../content/portfolioContent';
 import './DesktopDemo.css';
 import './DesktopShell.css';
 import './DesktopPortfolio.css';
@@ -25,17 +25,25 @@ const dockTargets = {
   Photos: 'photos',
   Misc: 'play',
   Contact: 'contact',
-  Life: 'dashboard',
 };
 
 const targetSections = Object.entries(dockTargets).reduce((items, [section, target]) => ({ ...items, [target]: section }), {});
 const desktopSections = ['Home', 'About', 'Projects', 'Research', 'Experiences', 'Photos', 'Misc', 'Contact'];
 const desktopExternalLinks = ['linkedin', 'github'];
+// Menu labels match the dock tooltips and window titles so the chrome reads as one system.
 const menuItems = [
-  { id: 'Projects', label: 'Work' },
+  { id: 'About', label: 'Ideas' },
+  { id: 'Projects', label: 'Projects' },
   { id: 'Research', label: 'Research' },
   { id: 'Experiences', label: 'Experience' },
-  { id: 'Life', label: 'Life' },
+  { id: 'Photos', label: 'Photos' },
+  { id: 'Misc', label: 'Games' },
+  { id: 'Contact', label: 'Contact' },
+];
+
+const menuStatusLinks = [
+  { label: 'LinkedIn', url: socialLinks.linkedin, Icon: FaLinkedinIn },
+  { label: 'GitHub', url: socialLinks.github, Icon: FaGithub },
 ];
 
 const scrollDesktopTo = (container, target, frameRef, reduceMotion) => {
@@ -113,6 +121,7 @@ const DesktopDemo = ({ variant = 1 }) => {
         onHomeSelect={() => handleSectionSelect('Home')}
         onSectionSelect={handleSectionSelect}
         showPower={false}
+        statusLinks={menuStatusLinks}
       />
       <div className="desktop-demo-workspace">
         <div className="desktop-hero-grid">
@@ -122,14 +131,22 @@ const DesktopDemo = ({ variant = 1 }) => {
               <div className="intro-copy">
                 <h1>Hello</h1>
                 <h2>I’m {profile.name}</h2>
-                <p className="intro-discipline">Electrical Engineering and Computer Science Student</p>
-                <p className="intro-school">University of California, <strong className="intro-school-accent">Berkeley</strong></p>
+                <p className="intro-discipline">
+                  Software at <strong className="intro-accent intro-accent-vals" data-text="Vals AI">Vals AI</strong>
+                </p>
+                <p className="intro-school">
+                  Electrical Engineering and Computer Sciences at University of California,{' '}
+                  <strong className="intro-accent intro-accent-berkeley" data-text="Berkeley">Berkeley</strong>
+                </p>
+              </div>
+              <div className="intro-marks" aria-hidden="true">
+                <img className="intro-mark intro-mark-vals" src="/marks/vals-logo.png" alt="" />
+                <img className="intro-mark intro-mark-berkeley" src="/marks/oski.png" alt="" />
               </div>
             </section>
           </div>
           <aside className="desktop-hero-rail" aria-label="Quick access">
             <section className="desktop-apps-widget" aria-label="Apps widget" data-reveal>
-              <div className="widget-label widget-label-top-left"><FaThLarge aria-hidden="true" /><span>Dock</span></div>
               <DockNav
                 activeSection={activeSection}
                 compact
@@ -138,17 +155,12 @@ const DesktopDemo = ({ variant = 1 }) => {
                 externalIds={desktopExternalLinks}
               />
             </section>
-            <MusicWidget />
+            <GoldenGateWidget />
           </aside>
         </div>
 
         <DesktopPortfolio />
 
-        <section id="dashboard" className="desktop-dashboard" aria-label="Widget collage">
-          <div className="desktop-dashboard-grid">
-            <DesktopWidgets />
-          </div>
-        </section>
 
         <DesktopMediaLibraries />
         <DesktopExtras />

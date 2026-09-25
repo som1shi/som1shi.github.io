@@ -22,7 +22,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
+    "notes": "node scripts/build-notes.mjs",
+    "prestart": "npm run notes",
+    "prebuild": "npm run notes",
+    "sync-media": "node scripts/sync-media.mjs",
+    "predeploy": "npm run sync-media && npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",

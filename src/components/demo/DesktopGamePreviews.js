@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
+import Os32LivePreview from './Os32LivePreview';
 
 const mineValues = {
   9: '1',
@@ -107,17 +108,28 @@ const previews = {
   wikiconnect: <WikiPreview />,
 };
 
+// Games: os32 runs live as the main screen; the smaller games stack on the right.
 const DesktopGamePreviews = ({ games }) => (
-  <div className="desktop-games-grid">
-    {games.map((game) => (
-      <a className={`desktop-game-preview desktop-game-preview-${game.id}`} href={game.route} key={game.id}>
-        <div className="desktop-game-preview-canvas" aria-hidden="true">{previews[game.id]}</div>
-        <footer>
-          <div><strong>{game.title}</strong><span>{game.description}</span></div>
-          <FaArrowRight aria-hidden="true" />
-        </footer>
-      </a>
-    ))}
+  <div className="games-app">
+    <section className="games-feature" aria-label="os32">
+      <Os32LivePreview />
+      <div className="games-feature-copy">
+        <span>Web operating system</span>
+        <h3>os32</h3>
+        <p>A retro desktop in the browser with a file system, terminal, browser, and built-in apps — including every game on the right.</p>
+      </div>
+    </section>
+    <ul className="games-list">
+      {games.map((game) => (
+        <li key={game.id}>
+          <a className={`games-list-item desktop-game-preview-${game.id}`} href={game.route}>
+            <span className="games-list-thumb" aria-hidden="true">{previews[game.id]}</span>
+            <span className="games-list-copy"><strong>{game.title}</strong><span>{game.description}</span></span>
+            <FaArrowRight aria-hidden="true" />
+          </a>
+        </li>
+      ))}
+    </ul>
   </div>
 );
 

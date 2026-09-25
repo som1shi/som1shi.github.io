@@ -15,14 +15,14 @@ import {
 import './DockNav.css';
 
 const sections = [
-    { id: 'Home', label: 'Finder', Icon: FaHome, gradient: 'linear-gradient(135deg, #2196f3 0%, #1a73e8 100%)' },
-    { id: 'About', label: 'About Me', Icon: FaStickyNote, gradient: 'linear-gradient(135deg, #fdf5c9 0%, #f4e375 100%)' },
-    { id: 'Experiences', label: 'Experiences', Icon: FaBriefcase, gradient: 'linear-gradient(135deg, #8e8e93 0%, #636366 100%)' },
-    { id: 'Projects', label: 'Projects', Icon: FaCodeBranch, gradient: 'linear-gradient(135deg, #34c759 0%, #248a3d 100%)' },
-    { id: 'Research', label: 'Research', Icon: FaFlask, gradient: 'linear-gradient(135deg, #af52de 0%, #8944ab 100%)' },
-    { id: 'Photos', label: 'Photos', Icon: FaImages, gradient: 'linear-gradient(135deg, #e0b0ff 0%, #b05bff 50%, #56ccf2 100%)' },
-    { id: 'Misc', label: 'Misc', Icon: FaGamepad, gradient: 'linear-gradient(135deg, #ff3b30 0%, #d70015 100%)' },
-    { id: 'Contact', label: 'Contact', Icon: FaCommentDots, gradient: 'linear-gradient(135deg, #30d158 0%, #248a3d 100%)' },
+    { id: 'Home', image: '/icons/dock/finder.png', label: 'Finder', Icon: FaHome, gradient: 'linear-gradient(135deg, #2196f3 0%, #1a73e8 100%)' },
+    { id: 'About', image: '/icons/dock/notes.png', label: 'Ideas', Icon: FaStickyNote, gradient: 'linear-gradient(135deg, #fdf5c9 0%, #f4e375 100%)' },
+    { id: 'Experiences', image: '/icons/dock/pages.png', label: 'Experience', Icon: FaBriefcase, gradient: 'linear-gradient(135deg, #8e8e93 0%, #636366 100%)' },
+    { id: 'Projects', image: '/icons/dock/terminal.png', label: 'Projects', Icon: FaCodeBranch, gradient: 'linear-gradient(135deg, #34c759 0%, #248a3d 100%)' },
+    { id: 'Research', image: '/icons/dock/preview.png', label: 'Research', Icon: FaFlask, gradient: 'linear-gradient(135deg, #af52de 0%, #8944ab 100%)' },
+    { id: 'Photos', image: '/icons/dock/photos.png', label: 'Photos', Icon: FaImages, gradient: 'linear-gradient(135deg, #e0b0ff 0%, #b05bff 50%, #56ccf2 100%)' },
+    { id: 'Misc', image: '/icons/dock/games.png', label: 'Games', Icon: FaGamepad, gradient: 'linear-gradient(135deg, #ff3b30 0%, #d70015 100%)' },
+    { id: 'Contact', image: '/icons/dock/messages.png', label: 'Contact', Icon: FaCommentDots, gradient: 'linear-gradient(135deg, #30d158 0%, #248a3d 100%)' },
 ];
 
 const externalLinks = [
@@ -32,7 +32,7 @@ const externalLinks = [
 ];
 
 const DEFAULT_BASE_SIZE = 50;
-const COMPACT_BASE_SIZE = 38;
+const COMPACT_BASE_SIZE = 34;
 
 function gaussian(dist, sigma) {
     return Math.exp(-(dist * dist) / (2 * sigma * sigma));
@@ -111,7 +111,7 @@ const DockNav = ({ activeSection, setActiveSection, sectionIds, externalIds, com
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
             >
-                {visibleSections.map(({ id, label, Icon, gradient }) => {
+                {visibleSections.map(({ id, label, Icon, gradient, image }) => {
                     const idx = refIdx++;
                     const isActive = activeSection === id;
                     const s = scales[idx] || 1;
@@ -131,16 +131,16 @@ const DockNav = ({ activeSection, setActiveSection, sectionIds, externalIds, com
                             }}
                         >
                             <span
-                                className="dock-icon-tile"
+                                className={`dock-icon-tile ${image ? 'dock-icon-tile-image' : ''}`.trim()}
                                 style={{
-                                    background: gradient,
+                                    background: image ? undefined : gradient,
                                     width: reduceMotion ? baseSize : tileSize,
                                     height: reduceMotion ? baseSize : tileSize,
                                     fontSize: baseSize * 0.48 * (reduceMotion ? 1 : s),
                                 }}
                                 aria-hidden="true"
                             >
-                                <Icon />
+                                {image ? <img src={image} alt="" draggable="false" /> : <Icon />}
                             </span>
                             <span className="dock-tooltip">{label}</span>
                             {isActive && <span className="dock-dot" />}

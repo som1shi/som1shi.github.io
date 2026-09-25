@@ -1,178 +1,287 @@
 import React, { useEffect, useRef, useState } from 'react';
 import DesktopAppWindow from './DesktopAppWindow';
+import mediaLibrary from '../../content/mediaLibrary.json';
 
-const DesktopMediaScene = React.lazy(() => import('./DesktopMediaScene'));
+// Synced from Goodreads and Letterboxd by `npm run sync-media`.
+const { books, films } = mediaLibrary;
 
-const books = [
-  {
-    title: 'The Design of Everyday Things',
-    creator: 'Don Norman',
-    cover: '#ded4ad',
-    spine: '#c7bc92',
-    pages: '#eee9d8',
-    ink: '#26231d',
-    size: [7.9, 0.62, 3.1],
-    position: [-0.18, 1.46, 0],
-    rotation: [0, -0.02, -0.012],
-  },
-  {
-    title: 'The Creative Act',
-    creator: 'Rick Rubin',
-    cover: '#292724',
-    spine: '#191816',
-    pages: '#d8d0c1',
-    ink: '#f0e9dc',
-    size: [8.45, 0.7, 3.25],
-    position: [0.2, 0, 0.08],
-    rotation: [0, 0.025, 0.009],
-  },
-  {
-    title: 'Dune',
-    creator: 'Frank Herbert',
-    cover: '#d98653',
-    spine: '#b65e3b',
-    pages: '#ead4b7',
-    ink: '#281711',
-    size: [8.1, 0.76, 3.15],
-    position: [-0.08, -1.48, -0.06],
-    rotation: [0, -0.016, -0.006],
-  },
+// Letterboxd rows: pinned favourites, then recent likes, then everything else watched lately.
+const FILM_GROUPS = [
+  { key: 'holyGrail', label: 'Holy Grail', size: 4 },
+  { key: 'loved', label: 'Loved Recently', size: 4 },
+  { key: 'recent', label: 'Recently Watched', size: 4 },
 ];
 
-const films = [
-  {
-    title: 'Perfect Days',
-    creator: 'Wim Wenders',
-    src: '/photos/11.jpg',
-    edge: '#d3d7d5',
-    size: [2.42, 3.54, 0.19],
-    position: [-3.28, -0.08, 0],
-    rotation: [0.01, 0.13, -0.045],
-  },
-  {
-    title: 'Arrival',
-    creator: 'Denis Villeneuve',
-    src: '/photos/24.JPG',
-    edge: '#9ca3aa',
-    size: [2.42, 3.54, 0.19],
-    position: [0, 0.22, 0.3],
-    rotation: [-0.015, -0.025, 0.018],
-  },
-  {
-    title: 'The Social Network',
-    creator: 'David Fincher',
-    src: '/photos/17.jpg',
-    edge: '#33465f',
-    size: [2.42, 3.54, 0.19],
-    position: [3.28, -0.1, -0.08],
-    rotation: [0.008, -0.13, 0.04],
-  },
-];
+const shortTitle = (title) => title.split(':')[0];
 
-const useSectionProgress = () => {
-  const sectionRef = useRef(null);
-  const [progress, setProgress] = useState(0.5);
-  const [active, setActive] = useState(false);
-  const [ready, setReady] = useState(false);
+const formatDate = (iso) => (iso
+  ? new Date(`${iso}T12:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  : null);
+
+// Spine and ink colours sampled from the real cover, so each spine matches its book.
+const useCoverColors = (src) => {
+  const [colors, setColors] = useState(null);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    const scroller = section?.closest('.desktop-demo');
-    if (!section || !scroller) return undefined;
-
-    if (!('IntersectionObserver' in window)) {
-      setActive(true);
-      setReady(true);
-      return undefined;
-    }
-
-    const activeObserver = new IntersectionObserver(
-      ([entry]) => setActive(entry.isIntersecting),
-      { root: scroller, threshold: 0.01 },
-    );
-    const readyObserver = new IntersectionObserver(
-      ([entry], observer) => {
-        if (!entry.isIntersecting) return;
-        setReady(true);
-        observer.disconnect();
-      },
-      { root: scroller, rootMargin: '320px 0px', threshold: 0 },
-    );
-    activeObserver.observe(section);
-    readyObserver.observe(section);
-    return () => {
-      activeObserver.disconnect();
-      readyObserver.disconnect();
+    if (!src) return undefined;
+    let cancelled = false;
+    const image = new Image();
+    image.onload = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = 12;
+        canvas.height = 18;
+        const context = canvas.getContext('2d');
+        context.drawImage(image, 0, 0, 12, 18);
+        const { data } = context.getImageData(0, 0, 12, 18);
+        let r = 0; let g = 0; let b = 0;
+        for (let i = 0; i < data.length; i += 4) {
+          r += data[i]; g += data[i + 1]; b += data[i + 2];
+        }
+        const count = data.length / 4;
+        [r, g, b] = [r, g, b].map((channel) => Math.round((channel / count) * 0.82));
+        const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+        if (!cancelled) {
+          setColors({
+            '--spine': `rgb(${r}, ${g}, ${b})`,
+            '--cover': `rgb(${Math.min(255, r + 18)}, ${Math.min(255, g + 18)}, ${Math.min(255, b + 18)})`,
+            '--ink': luminance > 0.55 ? '#1d1b18' : '#f4efe4',
+          });
+        }
+      } catch {
+        // canvas unavailable; keep the neutral spine
+      }
     };
-  }, []);
+    image.src = src;
+    return () => { cancelled = true; };
+  }, [src]);
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    const scroller = section?.closest('.desktop-demo');
-    if (!section || !scroller || !active) return undefined;
-    let frame;
-
-    const update = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        const sectionBox = section.getBoundingClientRect();
-        const scrollerBox = scroller.getBoundingClientRect();
-        const distance = scrollerBox.bottom - sectionBox.top;
-        const range = scrollerBox.height + sectionBox.height;
-        setProgress(Math.max(0, Math.min(1, distance / range)));
-      });
-    };
-
-    update();
-    scroller.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
-
-    return () => {
-      cancelAnimationFrame(frame);
-      scroller.removeEventListener('scroll', update);
-      window.removeEventListener('resize', update);
-    };
-  }, [active]);
-
-  return [sectionRef, progress, active, ready];
+  return colors ?? { '--spine': '#3a3530', '--cover': '#4a443d', '--ink': '#f4efe4' };
 };
 
-const MediaFallback = ({ items }) => (
-  <div className="desktop-media-fallback">
-    {items.map((item) => (
-      <article key={item.title}>
-        <strong>{item.title}</strong>
-        <span>{item.creator}</span>
-      </article>
-    ))}
+const useSectionActive = () => {
+  const sectionRef = useRef(null);
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return undefined;
+    if (!('IntersectionObserver' in window)) {
+      setActive(true);
+      return undefined;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => setActive(entry.isIntersecting),
+      { root: section.closest('.desktop-demo'), threshold: 0.15 },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  return [sectionRef, active];
+};
+
+const Stars = ({ rating }) => (
+  <span className="film-stars" aria-label={`${rating} out of 5 stars`}>
+    {'★'.repeat(Math.floor(rating))}
+    {rating % 1 ? '½' : ''}
+  </span>
+);
+
+const StackedBook = ({ item, selected, onOpen }) => {
+  const colors = useCoverColors(item.cover);
+
+  return (
+    <div className="stack-book" style={colors}>
+      <button
+        type="button"
+        className="stack-book-object"
+        aria-label={`Open ${item.title} by ${item.creator}`}
+        aria-expanded={selected}
+        onClick={(event) => onOpen(item, event.currentTarget)}
+      >
+        <span className="stack-face stack-face-spine" aria-hidden="true">
+          <span className="stack-spine-author">{item.creator}</span>
+          <span className="stack-spine-title">{shortTitle(item.title)}</span>
+        </span>
+        <span className="stack-face stack-face-top" aria-hidden="true">
+          {item.cover && <img src={item.cover} alt="" loading="lazy" decoding="async" />}
+        </span>
+        <span className="stack-face stack-face-end" aria-hidden="true" />
+      </button>
+    </div>
+  );
+};
+
+// The stack is three askew pairs; an index card tucked under each pair names it.
+const BOOK_GROUPS = [
+  { key: 'reading', label: 'Currently Reading' },
+  { key: 'read', label: 'Recently Read' },
+  { key: 'favorites', label: 'Favourites' },
+];
+
+const BookDetail = ({ item, onClose }) => {
+  const closeRef = useRef(null);
+  const colors = useCoverColors(item.cover);
+
+  useEffect(() => {
+    closeRef.current?.focus({ preventScroll: true });
+    const onKey = (event) => {
+      if (event.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [onClose]);
+
+  return (
+    <div className="gr-detail" style={colors} role="region" aria-label={`${item.title} details`}>
+      <button type="button" ref={closeRef} className="gr-back" onClick={onClose}>‹ My books</button>
+      <div className="book-detail-object-wrap gr-detail-book">
+        <div className="shelf-book-object" aria-hidden="true">
+          <div className="shelf-book-front shelf-book-front-image">
+            {item.cover && <img src={item.cover} alt="" />}
+          </div>
+          <div className="shelf-book-spine"><span>{shortTitle(item.title)}</span></div>
+        </div>
+      </div>
+      <div className="gr-detail-body">
+        <span className={`gr-shelf gr-shelf-${item.status === 'Reading' ? 'reading' : 'read'}`}>
+          {item.status === 'Reading' ? 'Currently Reading' : 'Read'}
+        </span>
+        <h3>{shortTitle(item.title)}</h3>
+        <p className="gr-author">by <span>{item.creator}</span></p>
+        {item.rating ? (
+          <p className="gr-rating">
+            <span className="gr-stars" aria-label={`Rated ${item.rating} out of 5`}>
+              {'★'.repeat(item.rating)}<span className="gr-stars-empty">{'★'.repeat(5 - item.rating)}</span>
+            </span>
+            <span className="gr-rating-label">My rating</span>
+          </p>
+        ) : null}
+        <p className="gr-meta">
+          {[item.pages && `${item.pages} pages`, item.published && `First published ${item.published}`].filter(Boolean).join(', ')}
+          {item.readAt ? <><br />Read {formatDate(item.readAt)}</> : null}
+        </p>
+        {item.review && (
+          <blockquote className="gr-review">
+            <span className="gr-review-by">Sarvagya’s review</span>
+            {item.review}
+          </blockquote>
+        )}
+        <a className="gr-link" href={item.url} target="_blank" rel="noopener noreferrer">View on Goodreads</a>
+      </div>
+    </div>
+  );
+};
+
+const PosterSheet = ({ item }) => (
+  <div className="cinema-lightbox">
+    <div className="real-poster-sheet" aria-hidden="true">
+      {item.poster
+        ? <img src={item.poster} alt="" loading="lazy" decoding="async" />
+        : <span className="real-poster-fallback">{item.title}</span>}
+    </div>
   </div>
 );
 
-const SemanticMediaList = ({ items, label }) => (
-  <ul className="desktop-media-semantic-list" aria-label={label}>
-    {items.map((item) => <li key={item.title}>{item.title} by {item.creator}</li>)}
-  </ul>
+const Poster = ({ item, onOpen }) => (
+  <li className="retro-poster">
+    <button
+      type="button"
+      className="retro-poster-button"
+      aria-label={`Enlarge ${item.title} poster`}
+      onClick={(event) => onOpen(item, event.currentTarget)}
+    >
+      <PosterSheet item={item} />
+    </button>
+  </li>
 );
 
-const GoodreadsStack = ({ items }) => {
-  const [sectionRef, progress, active, ready] = useSectionProgress();
+const PosterZoom = ({ item, onClose }) => {
+  const closeRef = useRef(null);
+
+  useEffect(() => {
+    closeRef.current?.focus({ preventScroll: true });
+    const onKey = (event) => {
+      if (event.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [onClose]);
+
+  return (
+    <div className="lb-detail" role="region" aria-label={`${item.title} details`}>
+      {item.poster && <div className="lb-backdrop" style={{ backgroundImage: `url(${item.poster})` }} aria-hidden="true" />}
+      <button type="button" ref={closeRef} className="lb-back" onClick={onClose}>‹ Diary</button>
+      <div className="lb-detail-poster">
+        {item.poster && <img src={item.poster} alt={`${item.title} poster`} />}
+      </div>
+      <div className="lb-detail-body">
+        <h3>{item.title} <span className="lb-year">{item.year}</span></h3>
+        <div className="lb-diary">
+          <span className="lb-diary-label">
+            {item.watchedAt ? `${item.rewatch ? 'Rewatched' : 'Watched'} ${formatDate(item.watchedAt)}` : 'Pinned favourite'}
+          </span>
+          <span className="lb-diary-marks">
+            {item.rating ? <Stars rating={item.rating} /> : null}
+            {item.liked && <span className="lb-heart" aria-label="Liked">♥</span>}
+            {item.rewatch && <span className="lb-rewatch" aria-label="Rewatch">↻</span>}
+          </span>
+        </div>
+        <a className="lb-link" href={item.url} target="_blank" rel="noopener noreferrer">View on Letterboxd</a>
+      </div>
+    </div>
+  );
+};
+
+// Shared open/close state for an enlargeable item that returns focus to what opened it.
+const useSelection = () => {
+  const [selected, setSelected] = useState(null);
+  const openerRef = useRef(null);
+  const open = (item, opener) => {
+    openerRef.current = opener;
+    setSelected(item);
+  };
+  const close = React.useCallback(() => {
+    setSelected(null);
+    requestAnimationFrame(() => openerRef.current?.focus({ preventScroll: true }));
+  }, []);
+  return [selected, open, close];
+};
+
+const GoodreadsShelf = ({ items }) => {
+  const [sectionRef, active] = useSectionActive();
+  const [selected, open, close] = useSelection();
 
   return (
     <section ref={sectionRef} className="desktop-story desktop-media-library" aria-label="Goodreads library" data-media-active={active}>
       <DesktopAppWindow app="goodreads">
-        <div className="desktop-media-stage desktop-book-stage">
-          {ready ? (
-            <React.Suspense fallback={<MediaFallback items={items} />}>
-              <DesktopMediaScene
-                fallback={<MediaFallback items={items} />}
-                items={items}
-                kind="books"
-                progress={progress}
-                active={active}
-              />
-            </React.Suspense>
-          ) : <MediaFallback items={items} />}
-          <SemanticMediaList items={items} label="Recent books" />
+        <div className="desktop-media-stage desktop-book-stage" data-book-open={Boolean(selected)}>
+          <div className="book-stack-layer" aria-hidden={Boolean(selected)}>
+            <ul className="book-stack" aria-label="Books">
+              {BOOK_GROUPS.map((group) => {
+                const pair = items.filter((item) => item.group === group.key);
+                if (!pair.length) return null;
+                return (
+                  <li className={`stack-pair stack-pair-${group.key}`} key={group.key} aria-label={group.label}>
+                    {pair.map((item) => (
+                      <StackedBook
+                        item={item}
+                        key={item.title}
+                        selected={selected?.title === item.title}
+                        onOpen={open}
+                      />
+                    ))}
+                    <span className="stack-shelf" aria-hidden="true">
+                      <span className="stack-shelf-top" />
+                      <span className="stack-shelf-front"><span>{group.label}</span></span>
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          {selected && <BookDetail item={selected} key={selected.title} onClose={close} />}
         </div>
       </DesktopAppWindow>
     </section>
@@ -180,32 +289,29 @@ const GoodreadsStack = ({ items }) => {
 };
 
 const LetterboxdLibrary = ({ items }) => {
-  const [sectionRef, progress, active, ready] = useSectionProgress();
+  const [sectionRef, active] = useSectionActive();
+  const [selected, open, close] = useSelection();
 
   return (
     <section ref={sectionRef} className="desktop-story desktop-media-library" aria-label="Letterboxd library" data-media-active={active}>
       <DesktopAppWindow app="letterboxd">
-        <div className="desktop-media-stage desktop-poster-stage">
-          {ready ? (
-            <React.Suspense fallback={<MediaFallback items={items} />}>
-              <DesktopMediaScene
-                fallback={<MediaFallback items={items} />}
-                items={items}
-                kind="posters"
-                progress={progress}
-                active={active}
-              />
-            </React.Suspense>
-          ) : <MediaFallback items={items} />}
-          <div className="desktop-poster-index" aria-hidden="true">
-            {items.map((item) => (
-              <article key={item.title}>
-                <strong>{item.title}</strong>
-                <span>{item.creator}</span>
-              </article>
+        <div className="desktop-media-stage desktop-poster-stage" data-poster-open={Boolean(selected)}>
+          <div className="poster-wall" aria-hidden={Boolean(selected)}>
+            {FILM_GROUPS.map(({ key, label, size }) => (
+              <section className={`poster-group poster-group-${key}`} key={key} aria-label={label}>
+                <div className="poster-marquee" aria-hidden="true"><span>{label}</span></div>
+                <ul className="poster-row">
+                  {items[key].map((item) => <Poster item={item} key={`${item.title}-${item.year}`} onOpen={open} />)}
+                  {Array.from({ length: Math.max(0, size - items[key].length) }, (_, index) => (
+                    <li className="retro-poster poster-empty" key={`empty-${index}`} aria-hidden="true">
+                      <div className="cinema-lightbox"><div className="real-poster-sheet" /></div>
+                    </li>
+                  ))}
+                </ul>
+              </section>
             ))}
           </div>
-          <SemanticMediaList items={items} label="Recently watched films" />
+          {selected && <PosterZoom item={selected} key={selected.title} onClose={close} />}
         </div>
       </DesktopAppWindow>
     </section>
@@ -213,10 +319,10 @@ const LetterboxdLibrary = ({ items }) => {
 };
 
 const DesktopMediaLibraries = () => (
-  <>
-    <GoodreadsStack items={books} />
+  <div className="desktop-story desktop-media-row">
+    <GoodreadsShelf items={books} />
     <LetterboxdLibrary items={films} />
-  </>
+  </div>
 );
 
 export default DesktopMediaLibraries;

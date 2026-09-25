@@ -47,7 +47,7 @@ const Contact = ({ desktop = false }) => {
     return (
         <div className={`contact-card ${desktop ? 'desktop-contact-card' : ''} ${isExpanded ? 'expanded' : ''} ${animState || ''}`} onAnimationEnd={onAnimationEnd}>
             <div className="section-header">
-                <TrafficLights />
+                {!desktop && <TrafficLights />}
                 <h2 className="window-title">Contact</h2>
             </div>
             <div className="contact-body">

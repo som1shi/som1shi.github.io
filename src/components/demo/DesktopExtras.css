@@ -230,3 +230,115 @@
     min-width: 0;
   }
 }
+
+.desktop-demo-fork-1 .desktop-photo-grid img {
+  opacity: 0;
+  transition:
+    opacity 320ms ease,
+    transform 360ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 180ms ease;
+}
+
+.desktop-demo-fork-1 .desktop-photo-grid img.is-loaded {
+  opacity: 1;
+}
+
+/* Photos: white library background */
+.desktop-demo-fork-1 .desktop-app-window-photos .desktop-app-window-content,
+.desktop-demo-fork-1 .desktop-app-window-photos .desktop-photo-grid {
+  background: #fff;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-photos .desktop-app-window-content {
+  scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-photos .desktop-app-window-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+  background-clip: padding-box;
+}
+
+.desktop-demo-fork-1 .desktop-photo-grid button {
+  background: #f1f1f3;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== global polish: no visible scrollbars, no white outlines, one titlebar colour ===== */
+.desktop-demo-fork-1,
+.desktop-demo-fork-1 * {
+  scrollbar-width: none !important;
+}
+
+.desktop-demo-fork-1::-webkit-scrollbar,
+.desktop-demo-fork-1 *::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+}
+
+.desktop-demo-fork-1 .desktop-app-window,
+.desktop-demo-fork-1 .desktop-widget,
+.desktop-demo-fork-1 .desktop-apps-widget {
+  border: 0;
+}
+
+.desktop-demo-fork-1 .desktop-app-titlebar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: linear-gradient(180deg, #f7f7f9 0%, #ececf0 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.desktop-demo-fork-1 .desktop-app-title {
+  color: #5f5f66;
+}
+
+/* titlebars take the colour of their window's body */
+.desktop-demo-fork-1 .desktop-app-window-projects .desktop-app-titlebar,
+.desktop-demo-fork-1 .desktop-app-window-goodreads .desktop-app-titlebar,
+.desktop-demo-fork-1 .desktop-app-window-letterboxd .desktop-app-titlebar {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.desktop-demo-fork-1 .desktop-app-window-projects .desktop-app-titlebar {
+  background: #1c1c1e;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-goodreads .desktop-app-titlebar {
+  background: #16302c;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-letterboxd .desktop-app-titlebar {
+  background: #1c2228;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-projects .desktop-app-title,
+.desktop-demo-fork-1 .desktop-app-window-goodreads .desktop-app-title,
+.desktop-demo-fork-1 .desktop-app-window-letterboxd .desktop-app-title {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.desktop-demo-fork-1 .desktop-app-window-goodreads .desktop-app-title svg,
+.desktop-demo-fork-1 .desktop-app-window-letterboxd .desktop-app-title svg {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* Ideas: fixed height; the note list and the open note scroll on their own */
+.desktop-demo-fork-1 .desktop-app-window-about .desktop-app-window-content {
+  height: 440px;
+  overflow: hidden;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-about .notes-app {
+  height: 100%;
+  min-height: 0;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-about .notes-app-sidebar,
+.desktop-demo-fork-1 .desktop-app-window-about .notes-app-note {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}

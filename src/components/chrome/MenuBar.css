@@ -135,3 +135,15 @@
         display: none;
     }
 }
+
+.menubar-link {
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.86;
+    transition: opacity 140ms ease;
+}
+
+.menubar-link:hover,
+.menubar-link:focus-visible {
+    opacity: 1;
+}

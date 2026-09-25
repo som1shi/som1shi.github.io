@@ -11,6 +11,7 @@ const MenuBar = ({
     menuItems = [],
     onSectionSelect,
     onHomeSelect,
+    statusLinks,
 }) => {
     const [time, setTime] = useState('');
 
@@ -67,8 +68,24 @@ const MenuBar = ({
                 )}
             </div>
             <div className="menubar-right">
-                <span className="menubar-icon"><FaWifi /></span>
-                <span className="menubar-icon menubar-battery"><IoBatteryFullSharp /></span>
+                {statusLinks ? statusLinks.map(({ label, url, Icon }) => (
+                    <a
+                        key={label}
+                        className="menubar-icon menubar-link"
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={label}
+                        title={label}
+                    >
+                        <Icon aria-hidden="true" />
+                    </a>
+                )) : (
+                    <>
+                        <span className="menubar-icon"><FaWifi /></span>
+                        <span className="menubar-icon menubar-battery"><IoBatteryFullSharp /></span>
+                    </>
+                )}
                 {showPower && (
                     <button className="menubar-power" type="button" onClick={toggleShell} aria-label="Shut Down">
                         <FaPowerOff />

@@ -1,0 +1,201 @@
+{
+  "syncedAt": "2026-09-25T09:30:47.737Z",
+  "books": [
+    {
+      "title": "The Pickwick Papers",
+      "creator": "Charles Dickens",
+      "status": "Reading",
+      "rating": null,
+      "review": null,
+      "readAt": null,
+      "addedAt": "2026-08-13",
+      "published": "1837",
+      "pages": 593,
+      "url": "https://www.goodreads.com/book/show/17718879",
+      "group": "reading",
+      "cover": "/media/books/the-pickwick-papers.jpg"
+    },
+    {
+      "title": "The Brothers Karamazov",
+      "creator": "Fyodor Dostoevsky",
+      "status": "Reading",
+      "rating": null,
+      "review": null,
+      "readAt": null,
+      "addedAt": "2026-03-16",
+      "published": "1879",
+      "pages": 796,
+      "url": "https://www.goodreads.com/book/show/4934",
+      "group": "reading",
+      "cover": "/media/books/the-brothers-karamazov.jpg"
+    },
+    {
+      "title": "Endurance: Shackleton's Incredible Voyage",
+      "creator": "Alfred Lansing",
+      "status": "Read",
+      "rating": 4,
+      "review": "they sure did kill a lot of dogs",
+      "readAt": "2026-09-25",
+      "addedAt": "2026-09-25",
+      "published": "1959",
+      "pages": 282,
+      "url": "https://www.goodreads.com/book/show/139069",
+      "group": "read",
+      "cover": "/media/books/endurance-shackleton-s-incredible-voyage.jpg"
+    },
+    {
+      "title": "Watership Down",
+      "creator": "Richard Adams",
+      "status": "Read",
+      "rating": 3,
+      "review": "animal farm without the farm",
+      "readAt": null,
+      "addedAt": "2026-07-05",
+      "published": "1972",
+      "pages": 478,
+      "url": "https://www.goodreads.com/book/show/76620",
+      "group": "read",
+      "cover": "/media/books/watership-down.jpg"
+    },
+    {
+      "title": "Charlie and the Chocolate Factory",
+      "creator": "Roald Dahl",
+      "status": "Read",
+      "rating": 5,
+      "review": null,
+      "readAt": null,
+      "addedAt": "2026-06-07",
+      "published": "1964",
+      "pages": 176,
+      "url": "https://www.goodreads.com/book/show/6310",
+      "group": "favorites",
+      "cover": "/media/books/charlie-and-the-chocolate-factory.jpg"
+    },
+    {
+      "title": "Animal Farm",
+      "creator": "George Orwell",
+      "status": "Read",
+      "rating": 5,
+      "review": null,
+      "readAt": null,
+      "addedAt": "2026-06-07",
+      "published": "1945",
+      "pages": 141,
+      "url": "https://www.goodreads.com/book/show/170448",
+      "group": "favorites",
+      "cover": "/media/books/animal-farm.jpg"
+    }
+  ],
+  "films": {
+    "holyGrail": [
+      {
+        "title": "Sholay",
+        "year": 1975,
+        "url": "https://letterboxd.com/film/sholay/",
+        "poster": "/media/films/sholay-1975.jpg"
+      },
+      {
+        "title": "Star Wars: Episode III – Revenge of the Sith",
+        "year": 2005,
+        "url": "https://letterboxd.com/film/star-wars-episode-iii-revenge-of-the-sith/",
+        "poster": "/media/films/star-wars-episode-iii-revenge-of-the-sith-2005.jpg"
+      },
+      {
+        "title": "Interstellar",
+        "year": 2014,
+        "url": "https://letterboxd.com/film/interstellar/",
+        "poster": "/media/films/interstellar-2014.jpg"
+      },
+      {
+        "title": "The Lion King",
+        "year": 1994,
+        "url": "https://letterboxd.com/film/the-lion-king/",
+        "poster": "/media/films/the-lion-king-1994.jpg"
+      }
+    ],
+    "loved": [
+      {
+        "title": "Dostana",
+        "year": 2008,
+        "rating": 4,
+        "liked": true,
+        "rewatch": true,
+        "watchedAt": "2026-09-13",
+        "url": "https://letterboxd.com/sarvagyas/film/dostana/",
+        "poster": "/media/films/dostana-2008.jpg"
+      },
+      {
+        "title": "Veer-Zaara",
+        "year": 2004,
+        "rating": 4,
+        "liked": true,
+        "rewatch": false,
+        "watchedAt": "2026-08-22",
+        "url": "https://letterboxd.com/sarvagyas/film/veer-zaara/",
+        "poster": "/media/films/veer-zaara-2004.jpg"
+      },
+      {
+        "title": "Main Hoon Na",
+        "year": 2004,
+        "rating": 3.5,
+        "liked": true,
+        "rewatch": true,
+        "watchedAt": "2026-08-20",
+        "url": "https://letterboxd.com/sarvagyas/film/main-hoon-na/",
+        "poster": "/media/films/main-hoon-na-2004.jpg"
+      },
+      {
+        "title": "Lost Ladies",
+        "year": 2023,
+        "rating": 4,
+        "liked": true,
+        "rewatch": false,
+        "watchedAt": "2026-08-19",
+        "url": "https://letterboxd.com/sarvagyas/film/lost-ladies/",
+        "poster": "/media/films/lost-ladies-2023.jpg"
+      }
+    ],
+    "recent": [
+      {
+        "title": "Chef",
+        "year": 2014,
+        "rating": 3.5,
+        "liked": false,
+        "rewatch": false,
+        "watchedAt": "2026-09-24",
+        "url": "https://letterboxd.com/sarvagyas/film/chef/",
+        "poster": "/media/films/chef-2014.jpg"
+      },
+      {
+        "title": "The Proposal",
+        "year": 2009,
+        "rating": 3,
+        "liked": false,
+        "rewatch": false,
+        "watchedAt": "2026-09-19",
+        "url": "https://letterboxd.com/sarvagyas/film/the-proposal-2009/",
+        "poster": "/media/films/the-proposal-2009.jpg"
+      },
+      {
+        "title": "I Hate Luv Storys",
+        "year": 2010,
+        "rating": 3,
+        "liked": false,
+        "rewatch": false,
+        "watchedAt": "2026-09-19",
+        "url": "https://letterboxd.com/sarvagyas/film/i-hate-luv-storys/",
+        "poster": "/media/films/i-hate-luv-storys-2010.jpg"
+      },
+      {
+        "title": "Coyote vs. Acme",
+        "year": 2026,
+        "rating": 4,
+        "liked": false,
+        "rewatch": false,
+        "watchedAt": "2026-09-12",
+        "url": "https://letterboxd.com/sarvagyas/film/coyote-vs-acme/",
+        "poster": "/media/films/coyote-vs-acme-2026.jpg"
+      }
+    ]
+  }
+}

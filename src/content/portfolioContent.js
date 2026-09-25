@@ -1,6 +1,6 @@
 export const profile = {
   name: 'Sarvagya',
-  location: 'Berkeley, California',
+  location: 'San Francisco, California',
   email: 'sarvagya@berkeley.edu',
   intro: 'I study electrical engineering and computer science at UC Berkeley, and build thoughtful software across systems, research, and the web.',
   about: [
@@ -103,7 +103,7 @@ export const research = [
     id: 'algorithmic-media',
     title: 'Transformers for Social Media Trends and Algorithms',
     organization: 'Designing Algorithmic Media',
-    date: 'January 2026 – Current',
+    date: 'January 2026 – May 2026',
     description: 'Research on transformer systems for modeling social media trends and algorithms.',
     url: 'https://arxiv.org/abs/2605.02358',
   },
@@ -150,6 +150,7 @@ export const research = [
 ];
 
 export const experiences = [
+  { id: 'vals-ai', company: 'Vals AI', role: 'Member of Technical Staff', date: 'July 2026 – Present', location: 'San Francisco, CA' },
   { id: 'microsoft', company: 'Microsoft', role: 'Software Engineer Intern', date: 'Summer 2025', location: 'Redmond, WA' },
   { id: 'bentley', company: 'Bentley Systems', role: 'Contract Software Developer', date: 'Fall 2024', location: 'Berkeley, CA' },
   { id: 'sap', company: 'SAP SE', role: 'Development Intern', date: 'Summer 2024', location: 'Palo Alto, CA' },
@@ -177,5 +178,12 @@ const uppercasePhotos = new Set([2, 3, 4, 5, 6, 13, 15, 16, 18, 20, 22, 23, 24, 
 export const photos = photoNumbers.map((number, index) => ({
   id: number,
   src: `/photos/${number}${uppercasePhotos.has(number) ? '.JPG' : '.jpg'}`,
+  thumb: `/photos/thumbs/${number}.webp`,
   alt: `Sarvagya’s photograph ${index + 1}`,
 }));
+
+export const notes = [
+  { id: 'ideas', title: 'Ideas', preview: 'Interfaces that feel calm and useful.', time: 'Today' },
+  { id: 'this-week', title: 'This week', preview: 'Finish the portfolio widget pass.', time: 'Tue' },
+  { id: 'reading-list', title: 'Reading list', preview: 'Books, films, and projects to revisit.', time: 'Sun' },
+];

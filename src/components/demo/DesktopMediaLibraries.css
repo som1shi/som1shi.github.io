@@ -3,203 +3,2462 @@
 }
 
 .desktop-media-stage {
-  min-height: 560px;
+  --media-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  contain: layout paint;
 }
 
-.desktop-book-stage {
-  background:
-    radial-gradient(circle at 50% 42%, rgba(128, 92, 82, 0.17), transparent 38%),
-    linear-gradient(160deg, #1d1818 0%, #120f10 64%, #0b090a 100%);
-}
-
-.desktop-book-stage::before,
-.desktop-poster-stage::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.desktop-book-stage::before {
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025), transparent 14% 86%, rgba(0, 0, 0, 0.22)),
-    linear-gradient(180deg, rgba(255, 245, 230, 0.02), transparent 28%, rgba(0, 0, 0, 0.25));
-}
-
-.desktop-poster-stage {
-  min-height: 590px;
-  background:
-    radial-gradient(circle at 50% 36%, rgba(87, 111, 143, 0.3), transparent 42%),
-    linear-gradient(150deg, #242932 0%, #151922 58%, #0e1117 100%);
-}
-
-.desktop-poster-stage::before {
-  opacity: 0.22;
-  background:
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 120px),
-    linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.36));
-}
-
-.desktop-media-canvas {
-  width: 100% !important;
-  height: 100% !important;
-  min-height: inherit;
-  position: absolute !important;
-  inset: 0;
-  z-index: 1;
-  display: block;
-  touch-action: pan-y;
-  opacity: 0.96;
-  transform: scale(0.998);
-  transition: opacity var(--motion-standard) ease, transform var(--motion-entry) var(--motion-ease);
-}
-
-.desktop-media-library[data-media-active="true"] .desktop-media-canvas {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.desktop-poster-index {
-  position: absolute;
-  z-index: 2;
-  right: 5%;
-  bottom: 22px;
-  left: 5%;
+.media-caption {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
-  color: rgba(255, 255, 255, 0.94);
-  pointer-events: none;
-}
-
-.desktop-poster-index article {
-  min-width: 0;
-  display: grid;
-  gap: 3px;
+  gap: 4px;
+  justify-items: center;
   text-align: center;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.58);
-  opacity: 0;
-  transform: translate3d(0, 6px, 0);
-  transition: opacity var(--motion-standard) ease, transform var(--motion-entry) var(--motion-ease);
+  color: rgba(255, 255, 255, 0.94);
 }
 
-.desktop-media-library[data-media-active="true"] .desktop-poster-index article {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-.desktop-media-library[data-media-active="true"] .desktop-poster-index article:nth-child(2) {
-  transition-delay: 45ms;
-}
-
-.desktop-media-library[data-media-active="true"] .desktop-poster-index article:nth-child(3) {
-  transition-delay: 90ms;
-}
-
-.desktop-poster-index strong {
+.media-caption strong {
+  max-width: 100%;
   overflow: hidden;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(16px, 2vw, 23px);
-  font-weight: 400;
-  letter-spacing: -0.025em;
-  line-height: 1.05;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.desktop-poster-index span {
-  color: rgba(255, 255, 255, 0.58);
+.media-caption span {
+  color: rgba(255, 255, 255, 0.55);
   font-size: 11px;
   font-weight: 560;
 }
 
-.desktop-media-semantic-list {
-  width: 1px;
-  height: 1px;
+/* Goodreads: a Stripe Press-style stack; selecting a book turns it to its cover */
+
+.desktop-book-stage {
+  min-height: 560px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 214, 160, 0.16), transparent 55%),
+    linear-gradient(180deg, #1f1915 0%, #15110e 70%, #0f0c0a 100%);
+}
+
+.book-stack-layer {
   position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 54px;
+  perspective: 2400px;
+  perspective-origin: 50% 20%;
+  transition: opacity 420ms ease, transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.book-stack-layer::after {
+  content: "";
+  position: absolute;
+  top: calc(50% + 70px);
+  left: 50%;
+  width: min(560px, 60%);
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  filter: blur(26px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.desktop-media-library:not([data-media-active="true"]) .book-stack-layer,
+.desktop-book-stage[data-book-open="true"] .book-stack-layer {
+  opacity: 0;
+}
+
+.desktop-book-stage[data-book-open="true"] .book-stack-layer {
+  transform: translate3d(-6%, 0, 0) scale(0.96);
+  pointer-events: none;
+}
+
+.book-stack {
+  --stack-l: 500px;
+  --stack-t: 58px;
+  --stack-d: 330px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform-style: preserve-3d;
+  transform: translate3d(0, var(--stack-rise, 0), 0) rotateX(-13deg) rotateY(-11deg);
+  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.desktop-media-library:not([data-media-active="true"]) .book-stack {
+  --stack-rise: 28px;
+}
+
+.stack-book {
+  transform-style: preserve-3d;
+}
+
+.stack-book:nth-child(1) { transform: translate3d(-14px, 0, -6px) rotateY(2deg); }
+.stack-book:nth-child(2) { transform: translate3d(18px, 0, 4px) rotateY(-1.5deg); }
+.stack-book:nth-child(3) { transform: translate3d(-4px, 0, 0) rotateY(0.8deg); }
+
+.stack-book-everyday { --cover: #e9dfc4; --spine: #dccfaa; --ink: #221f1a; }
+.stack-book-creative { --cover: #1a1917; --spine: #121110; --ink: #e9e1d2; }
+.stack-book-dune { --cover: #e39a55; --spine: #cc6c3c; --ink: #3a1d10; }
+
+.stack-book-object {
+  width: var(--stack-l);
+  height: var(--stack-t);
+  position: relative;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stack-book-object:hover,
+.stack-book-object:focus-visible {
+  transform: translate3d(-8px, 0, 46px);
+}
+
+.stack-book-object[aria-expanded="true"] {
+  transform: translate3d(0, 0, 180px);
+}
+
+.stack-book-object:focus-visible {
+  outline: none;
+}
+
+.stack-book-object:focus-visible .stack-face-spine {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.85);
+}
+
+.stack-face {
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
   overflow: hidden;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
+}
+
+.stack-face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--media-grain);
+  mix-blend-mode: multiply;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.stack-face-spine {
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 24px;
+  border-radius: 3px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent 22% 78%, rgba(0, 0, 0, 0.22)),
+    var(--spine);
+  transform: translateZ(calc(var(--stack-d) / 2));
+}
+
+.stack-spine-author {
+  flex: 0 1 auto;
+  max-width: 34%;
+  overflow: hidden;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-align: left;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
-.desktop-media-fallback {
-  min-height: inherit;
-  position: relative;
+.stack-spine-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stack-book-creative .stack-spine-title {
+  font-style: italic;
+}
+
+.stack-book-dune .stack-spine-title {
+  font-family: "Abril Fatface", Georgia, serif;
+  font-size: 20px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.stack-spine-mark {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.55;
+}
+
+.stack-face-top {
+  top: calc((var(--stack-t) - var(--stack-d)) / 2);
+  left: 0;
+  width: var(--stack-l);
+  height: var(--stack-d);
+  border-radius: 4px;
+  background:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.12), transparent 30%, rgba(255, 255, 255, 0.08)),
+    var(--cover);
+  transform: rotateX(90deg) translateZ(calc(var(--stack-t) / 2));
+}
+
+.stack-face-end {
+  top: 3px;
+  left: calc(var(--stack-l) - var(--stack-d) / 2);
+  width: var(--stack-d);
+  height: calc(var(--stack-t) - 6px);
+  background: repeating-linear-gradient(180deg, #f1ebdc 0 2px, #d8cfbb 2px 3px);
+  transform: rotateY(90deg) translateZ(-3px);
+}
+
+.book-detail {
+  --book-w: 172px;
+  --book-h: 254px;
+  --book-d: 34px;
+  position: absolute;
+  inset: 0;
   z-index: 2;
   display: grid;
-  align-content: center;
-  gap: 1px;
-  padding: 10%;
-  color: rgba(255, 255, 255, 0.9);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: 40px;
+  padding: 40px 8% 40px 6%;
 }
 
-.desktop-media-fallback article {
+.book-detail-object-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  perspective: 1400px;
+  transform: scale(1.35);
+}
+
+.book-detail-object-wrap::after {
+  content: "";
+  position: absolute;
+  top: calc(50% + var(--book-h) / 2 - 12px);
+  left: 50%;
+  width: calc(var(--book-w) * 1.2);
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  filter: blur(10px);
+  transform: translateX(-54%);
+}
+
+.shelf-book-object {
+  width: var(--book-w);
+  height: var(--book-h);
+  position: relative;
+  z-index: 1;
+  transform-style: preserve-3d;
+  transform: rotateY(22deg);
+  transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: book-turn 1000ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.book-detail-object-wrap:hover .shelf-book-object {
+  transform: rotateY(8deg) translate3d(0, -6px, 12px);
+}
+
+@keyframes book-turn {
+  from {
+    transform: translate3d(-60px, 30px, -120px) rotateY(88deg) rotateZ(-4deg);
+  }
+}
+
+.book-detail-copy {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  color: #fff;
+  animation: book-copy-in 700ms cubic-bezier(0.16, 1, 0.3, 1) 180ms backwards;
+}
+
+@keyframes book-copy-in {
+  from {
+    opacity: 0;
+    transform: translate3d(18px, 0, 0);
+  }
+}
+
+.book-detail-status {
+  padding: 4px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.book-detail-copy h3 {
+  margin: 4px 0 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(28px, 3.4vw, 42px);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+}
+
+.book-detail-author {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.book-detail-copy p {
+  max-width: 44ch;
+  margin: 6px 0 10px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.book-detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.book-detail-back:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.book-detail-back:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+.shelf-book-front,
+.shelf-book-spine {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.shelf-book-front {
+  inset: 0;
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 18px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  flex-direction: column;
+  align-items: center;
+  padding: 22px 16px;
+  border-radius: 2px 4px 4px 2px;
+  box-shadow:
+    inset 5px 0 6px -3px rgba(0, 0, 0, 0.35),
+    inset -1px 0 0 rgba(255, 255, 255, 0.12),
+    0 18px 30px rgba(0, 0, 0, 0.35);
+  text-align: center;
 }
 
-.desktop-media-fallback strong {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 18px;
-  font-weight: 400;
+.shelf-book-front::after,
+.shelf-book-spine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--media-grain);
+  mix-blend-mode: multiply;
+  opacity: 0.22;
+  pointer-events: none;
 }
 
-.desktop-media-fallback span {
-  color: rgba(255, 255, 255, 0.52);
+.shelf-book-spine {
+  right: 100%;
+  width: var(--book-d);
+  display: grid;
+  place-items: center;
+  transform-origin: right center;
+  transform: rotateY(-90deg);
+  box-shadow: inset -4px 0 6px -2px rgba(0, 0, 0, 0.3), inset 3px 0 4px -2px rgba(255, 255, 255, 0.18);
+}
+
+.shelf-book-spine span {
+  max-height: 88%;
+  overflow: hidden;
+  font-family: "Playfair Display", Georgia, serif;
   font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+}
+
+.shelf-book-front strong {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.08;
+}
+
+.book-author {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* The Design of Everyday Things */
+.shelf-book-everyday .shelf-book-front {
+  background: linear-gradient(135deg, #f2ead4, #e2d6b5);
+  color: #221f1a;
+}
+
+.shelf-book-everyday .shelf-book-spine {
+  background: #d9cca7;
+  color: #221f1a;
+}
+
+.shelf-book-everyday .book-kicker {
+  color: #b23a2b;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.shelf-book-everyday .book-teapot {
+  width: 64px;
+  height: 64px;
+  position: relative;
+  margin: 22px 0 18px;
+  border: 3px solid #221f1a;
+  border-radius: 50%;
+}
+
+.shelf-book-everyday .book-teapot::before,
+.shelf-book-everyday .book-teapot::after {
+  content: "";
+  position: absolute;
+  background: #221f1a;
+}
+
+.shelf-book-everyday .book-teapot::before {
+  top: 50%;
+  left: 50%;
+  width: 3px;
+  height: 36px;
+  transform: translate(-50%, -80%) rotate(45deg);
+  transform-origin: 50% 100%;
+}
+
+.shelf-book-everyday .book-teapot::after {
+  right: -16px;
+  bottom: 6px;
+  width: 14px;
+  height: 3px;
+}
+
+.shelf-book-everyday .shelf-book-front strong {
+  font-size: 17px;
+}
+
+.shelf-book-everyday .book-author {
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+/* The Creative Act */
+.shelf-book-creative .shelf-book-front {
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #1b1a18, #0c0b0a);
+  color: #f1ebdf;
+}
+
+.shelf-book-creative .shelf-book-spine {
+  background: #121110;
+  color: #d9d1c2;
+}
+
+.shelf-book-creative .shelf-book-front strong {
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.shelf-book-creative .book-rule {
+  width: 26px;
+  height: 1px;
+  background: rgba(241, 235, 223, 0.5);
+}
+
+.shelf-book-creative .book-subtitle {
+  color: rgba(241, 235, 223, 0.6);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 11px;
+  font-style: italic;
+}
+
+.shelf-book-creative .book-author {
+  position: absolute;
+  bottom: 22px;
+  color: rgba(241, 235, 223, 0.8);
+}
+
+/* Dune */
+.shelf-book-dune .shelf-book-front {
+  gap: 8px;
+  background:
+    radial-gradient(circle at 68% 62%, #f7d9a0 0 15px, transparent 16px),
+    linear-gradient(180deg, #eeb56d 0%, #e08a4a 55%, #c2602f 100%);
+  color: #3a1d10;
+}
+
+.shelf-book-dune .shelf-book-spine {
+  background: #c9683a;
+  color: #3a1d10;
+}
+
+.shelf-book-dune .shelf-book-front strong {
+  font-family: "Abril Fatface", Georgia, serif;
+  font-size: 44px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.shelf-book-dune .shelf-book-spine span {
+  font-family: "Abril Fatface", Georgia, serif;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.shelf-book-dune .book-dunes {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 42%;
+  background:
+    radial-gradient(ellipse 90% 60% at 20% 100%, #8f3f1d 0 60%, transparent 61%),
+    radial-gradient(ellipse 80% 55% at 85% 100%, #a84d24 0 62%, transparent 63%),
+    radial-gradient(ellipse 120% 70% at 50% 110%, #b85a2a 0 70%, transparent 71%);
+}
+
+/* Letterboxd: retro one-sheets in backlit cinema lightboxes */
+
+.desktop-poster-stage {
+  min-height: 600px;
+  display: grid;
+  align-content: center;
+  padding: 48px 5% 56px;
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(255, 255, 255, 0.06), transparent 70%),
+    linear-gradient(180deg, #111113 0%, #18181b 68%, #0b0b0c 68.3%, #060607 100%);
+}
+
+.poster-wall {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 56px;
+  margin: 0 4%;
+  padding: 0;
+  list-style: none;
+
+}
+
+.retro-poster {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: 34px;
+}
+
+.cinema-lightbox {
+  width: 100%;
+  max-width: 230px;
+  position: relative;
+  padding: 12px 24px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #1b1b1d, #0c0c0d);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 0 3px #050505,
+    0 24px 40px rgba(0, 0, 0, 0.6);
+  transition: transform 460ms cubic-bezier(0.16, 1, 0.3, 1), filter 300ms ease;
+}
+
+/* light spilling from the lightbox onto the wall and the floor */
+.cinema-lightbox::before {
+  content: "";
+  position: absolute;
+  inset: -28px -34px;
+  z-index: -1;
+  border-radius: 24px;
+  background: var(--glow, rgba(255, 236, 200, 0.22));
+  filter: blur(34px);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* film-strip sprocket holes down both edges */
+.cinema-lightbox::after {
+  content: "";
+  position: absolute;
+  inset: 12px 7px;
+  background:
+    repeating-linear-gradient(180deg, #d9d6cf 0 7px, transparent 7px 13px) left top / 9px 100% no-repeat,
+    repeating-linear-gradient(180deg, #d9d6cf 0 7px, transparent 7px 13px) right top / 9px 100% no-repeat;
+  opacity: 0.82;
+  pointer-events: none;
+}
+
+.retro-poster-seventies { --glow: rgba(255, 190, 130, 0.3); }
+.retro-poster-scifi { --glow: rgba(120, 170, 255, 0.3); }
+.retro-poster-noir { --glow: rgba(255, 255, 255, 0.22); }
+
+.retro-poster:hover .cinema-lightbox {
+  transform: translate3d(0, -6px, 0);
+  filter: brightness(1.08);
+}
+
+.retro-poster-sheet {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 12px 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 0 18px rgba(255, 245, 225, 0.35), inset 0 0 18px rgba(90, 60, 20, 0.2);
+  filter: brightness(1.06) saturate(1.05);
+  text-align: center;
+}
+
+/* paper grain, fold creases and worn edges */
+.retro-poster-sheet::before,
+.retro-poster-sheet::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.retro-poster-sheet::before {
+  background:
+    linear-gradient(90deg, transparent calc(50% - 1px), rgba(255, 255, 255, 0.22) 50%, rgba(0, 0, 0, 0.12) calc(50% + 1px), transparent calc(50% + 2px)),
+    linear-gradient(180deg, transparent calc(33% - 1px), rgba(255, 255, 255, 0.18) 33%, rgba(0, 0, 0, 0.1) calc(33% + 1px), transparent calc(33% + 2px)),
+    linear-gradient(180deg, transparent calc(66% - 1px), rgba(255, 255, 255, 0.18) 66%, rgba(0, 0, 0, 0.1) calc(66% + 1px), transparent calc(66% + 2px));
+}
+
+.retro-poster-sheet::after {
+  background-image: var(--media-grain);
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+.retro-poster-kicker {
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.retro-poster-art {
+  width: 100%;
+  flex: 1;
+  min-height: 48%;
+  position: relative;
+  margin: 8px 0 10px;
+  overflow: hidden;
+}
+
+.retro-poster-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.18) 0.6px, transparent 1px) 0 0 / 3px 3px;
+  mix-blend-mode: multiply;
+}
+
+.retro-poster-art img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.retro-poster-title {
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.retro-poster-tagline {
+  max-width: 92%;
+  margin-top: 5px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 8px;
+  font-style: italic;
+  line-height: 1.25;
+}
+
+.retro-poster-billing {
+  margin-top: 7px;
+  font-family: "Bebas Neue", Impact, sans-serif;
+  font-size: 7px;
+  letter-spacing: 0.12em;
+  opacity: 0.72;
+}
+
+/* Perfect Days: faded 70s arthouse */
+.retro-poster-seventies .retro-poster-sheet {
+  background: #efe3c6;
+  color: #3b2a1e;
+}
+
+.retro-poster-seventies .retro-poster-art {
+  border-radius: 999px 999px 4px 4px;
+}
+
+.retro-poster-seventies .retro-poster-art img {
+  filter: sepia(0.45) saturate(1.25) contrast(0.95) brightness(1.04) hue-rotate(-8deg);
+}
+
+.retro-poster-seventies .retro-poster-title {
+  color: #c2452d;
+  font-family: "Abril Fatface", Georgia, serif;
+  font-size: 28px;
+}
+
+/* Arrival: 60s space-age */
+.retro-poster-scifi .retro-poster-sheet {
+  background: radial-gradient(circle at 50% 38%, #26314a, #121726 70%);
+  color: #f2e4c4;
+}
+
+.retro-poster-scifi .retro-poster-art {
+  width: 82%;
+  flex: none;
+  aspect-ratio: 1;
+  border: 2px solid #e8b257;
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px #121726, 0 0 0 6px rgba(232, 178, 87, 0.5);
+}
+
+.retro-poster-scifi .retro-poster-art img {
+  filter: sepia(0.35) saturate(1.5) hue-rotate(-20deg) contrast(1.08);
+}
+
+.retro-poster-scifi .retro-poster-title {
+  margin-top: auto;
+  color: #e8b257;
+  font-family: "Bebas Neue", Impact, sans-serif;
+  font-size: 40px;
+  letter-spacing: 0.22em;
+  text-indent: 0.22em;
+}
+
+.retro-poster-scifi .retro-poster-sheet::after {
+  mix-blend-mode: screen;
+  opacity: 0.18;
+}
+
+/* The Social Network: 50s noir */
+.retro-poster-noir .retro-poster-sheet {
+  background: #e9e3d3;
+  color: #141312;
+}
+
+.retro-poster-noir .retro-poster-art {
+  outline: 5px solid #141312;
+  outline-offset: -5px;
+}
+
+.retro-poster-noir .retro-poster-art img {
+  filter: grayscale(1) contrast(1.35) brightness(0.95);
+}
+
+.retro-poster-noir .retro-poster-title {
+  font-family: "Bebas Neue", Impact, sans-serif;
+  font-size: 30px;
+  letter-spacing: 0.02em;
+}
+
+.retro-poster-noir .retro-poster-tagline {
+  padding: 3px 6px;
+  background: #b3261e;
+  color: #f5efe2;
+  font-family: "Bebas Neue", Impact, sans-serif;
+  font-size: 8px;
+  font-style: normal;
+  letter-spacing: 0.08em;
+}
+
+.film-stars {
+  color: #00c030;
+  letter-spacing: 0.05em;
+}
+
+/* entrance */
+.desktop-media-library .retro-poster {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition: opacity 500ms ease, transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.desktop-media-library[data-media-active="true"] .retro-poster {
+  opacity: 1;
+  transform: none;
+}
+
+.desktop-media-library[data-media-active="true"] .retro-poster:nth-child(2) {
+  transition-delay: 70ms;
+}
+
+.desktop-media-library[data-media-active="true"] .retro-poster:nth-child(3) {
+  transition-delay: 140ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-media-library .retro-poster,
+  .retro-poster-sheet {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .shelf-book-object,
+  .book-detail-copy {
+    animation: none;
+  }
+
+  .stack-book-object,
+  .book-stack,
+  .book-stack-layer {
+    transition: none;
+  }
 }
 
 @media (max-width: 900px) {
-  .desktop-media-stage,
-  .desktop-poster-stage {
-    min-height: 500px;
+  .book-stack {
+    --stack-l: 380px;
+    --stack-t: 48px;
+    --stack-d: 250px;
   }
 
-  .desktop-poster-index {
-    right: 4%;
-    left: 4%;
-    gap: 12px;
+  .stack-spine-title {
+    font-size: 15px;
+  }
+
+  .book-detail-object-wrap {
+    transform: scale(1.1);
+  }
+
+  .poster-wall {
+    gap: 18px;
   }
 }
 
 @media (max-width: 680px) {
-  .desktop-media-stage,
-  .desktop-poster-stage {
-    min-height: 360px;
+  .poster-wall {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 
-  .desktop-poster-index {
-    right: 14px;
-    bottom: 14px;
-    left: 14px;
-    gap: 5px;
+  .book-stack {
+    --stack-l: 280px;
+    --stack-t: 40px;
+    --stack-d: 190px;
   }
 
-  .desktop-poster-index strong {
-    font-size: 11px;
+  .stack-spine-author {
+    display: none;
   }
 
-  .desktop-poster-index span {
-    font-size: 8px;
+  .book-detail {
+    grid-template-columns: 1fr;
+    align-content: center;
+    justify-items: center;
+    gap: 56px;
+    padding: 48px 24px;
   }
 
-  .desktop-media-fallback {
-    padding: 28px;
+  .book-detail-object-wrap {
+    transform: none;
   }
+}
 
-  .desktop-media-fallback article {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 3px;
-    padding: 13px 0;
+/* Goodreads and Letterboxd share one row */
+.desktop-demo-fork-1 .desktop-media-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--desktop-gap);
+  align-items: stretch;
+}
+
+.desktop-demo-fork-1 .desktop-media-row > .desktop-story {
+  margin-top: 0;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .desktop-media-stage {
+  height: 620px;
+  min-height: 0;
+}
+
+/* a narrower, taller stack for the half-width window */
+.desktop-demo-fork-1 .desktop-media-row .book-stack {
+  --stack-l: 400px;
+  --stack-t: 44px;
+  --stack-d: 230px;
+  gap: 22px;
+  margin-left: 28px;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .stack-face-spine {
+  gap: 14px;
+  padding: 0 18px;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .stack-spine-author {
+  max-width: 38%;
+  font-size: 9px;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .stack-spine-title {
+  font-size: 15px;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .stack-book-dune .stack-spine-title {
+  font-size: 17px;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-detail {
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 36px;
+  padding: 32px 28px 32px 64px;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-detail-object-wrap {
+  transform: none;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-detail-copy h3 {
+  font-size: 28px;
+}
+
+/* posters: a two-column wall; click to enlarge */
+.desktop-demo-fork-1 .desktop-media-row .desktop-poster-stage {
+  display: block;
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-wall {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 34px 20px;
+  padding: 40px 32px;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .retro-poster {
+  gap: 0;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .cinema-lightbox {
+  width: 230px;
+  max-width: none;
+  zoom: 0.78;
+}
+
+.desktop-demo-fork-1 .retro-poster-button {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+.desktop-demo-fork-1 .retro-poster-button:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 6px;
+  border-radius: 6px;
+}
+
+.desktop-demo-fork-1 .poster-zoom {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  background: rgba(8, 7, 7, 0.74);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: poster-zoom-fade 260ms ease both;
+  cursor: zoom-out;
+}
+
+.desktop-demo-fork-1 .poster-zoom-inner {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  cursor: default;
+  animation: poster-zoom-in 480ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-zoom .cinema-lightbox {
+  zoom: 1.4;
+}
+
+@keyframes poster-zoom-fade {
+  from { opacity: 0; }
+}
+
+@keyframes poster-zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.82) translate3d(0, 20px, 0);
   }
+}
+
+@media (max-width: 900px) {
+  .desktop-demo-fork-1 .desktop-media-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-demo-fork-1 .poster-zoom,
+  .desktop-demo-fork-1 .poster-zoom-inner {
+    animation: none;
+  }
+}
+
+/* an even stack: every book the same length, squared up */
+.desktop-demo-fork-1 .desktop-media-row .stack-book {
+  transform: none;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-stack {
+  gap: 12px;
+}
+
+.desktop-demo-fork-1 .stack-book-generic .stack-spine-title {
+  font-weight: 600;
+}
+
+/* generic covers take their palette from data */
+.desktop-demo-fork-1 .shelf-book-generic .shelf-book-front {
+  justify-content: center;
+  gap: 14px;
+  background: var(--cover);
+  color: var(--ink);
+}
+
+.desktop-demo-fork-1 .shelf-book-generic .shelf-book-spine {
+  background: var(--spine);
+  color: var(--ink);
+}
+
+.desktop-demo-fork-1 .shelf-book-generic .shelf-book-front strong {
+  font-size: 22px;
+}
+
+.desktop-demo-fork-1 .shelf-book-generic .book-rule {
+  width: 28px;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+.desktop-demo-fork-1 .shelf-book-generic .book-author {
+  position: absolute;
+  bottom: 24px;
+}
+
+/* film detail fills the window: poster left, details right */
+.desktop-demo-fork-1 .desktop-media-row .poster-zoom {
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 30px;
+  padding: 32px 28px;
+  place-items: center start;
+  background: rgba(10, 8, 8, 0.9);
+  cursor: default;
+}
+
+.desktop-demo-fork-1 .poster-zoom-art {
+  animation: poster-zoom-in 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-zoom .cinema-lightbox {
+  zoom: 1.05;
+}
+
+.desktop-demo-fork-1 .poster-zoom-copy p {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+}
+
+.desktop-demo-fork-1 .poster-zoom-copy .film-stars {
+  letter-spacing: 0.08em;
+}
+
+/* long titles step down so they stay on the sheet */
+.desktop-demo-fork-1 .retro-poster-scifi .retro-poster-title.is-long {
+  font-size: 27px;
+  letter-spacing: 0.1em;
+  text-indent: 0.1em;
+}
+
+.desktop-demo-fork-1 .retro-poster-scifi .retro-poster-title.is-xlong {
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  text-indent: 0.06em;
+}
+
+.desktop-demo-fork-1 .retro-poster-seventies .retro-poster-title.is-long {
+  font-size: 24px;
+}
+
+.desktop-demo-fork-1 .retro-poster-seventies .retro-poster-title.is-xlong {
+  font-size: 19px;
+}
+
+.desktop-demo-fork-1 .retro-poster-noir .retro-poster-title.is-xlong {
+  font-size: 24px;
+}
+
+/* synced media: real covers, real posters, spines tinted from each cover */
+.desktop-demo-fork-1 .stack-spine-title {
+  font-weight: 600;
+}
+
+.desktop-demo-fork-1 .stack-spine-bookmark {
+  width: 10px;
+  height: calc(100% + 10px);
+  flex: none;
+  align-self: flex-start;
+  margin-top: -2px;
+  background: #c8352b;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.desktop-demo-fork-1 .book-detail .shelf-book-spine {
+  background: var(--spine);
+  color: var(--ink);
+}
+
+.desktop-demo-fork-1 .shelf-book-front-image {
+  padding: 0;
+  background: var(--cover);
+}
+
+.desktop-demo-fork-1 .shelf-book-front-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.desktop-demo-fork-1 .book-detail-meta {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+}
+
+.desktop-demo-fork-1 .book-detail-review {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+}
+
+.desktop-demo-fork-1 .book-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.desktop-demo-fork-1 .book-detail-actions a {
+  text-decoration: none;
+}
+
+.desktop-demo-fork-1 .real-poster-sheet {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #1a1a1c;
+  box-shadow: 0 0 18px rgba(255, 245, 225, 0.3);
+}
+
+.desktop-demo-fork-1 .real-poster-sheet img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.desktop-demo-fork-1 .real-poster-fallback {
+  padding: 12px;
+  color: #eee;
+  font-family: "Bebas Neue", Impact, sans-serif;
+  font-size: 22px;
+  text-align: center;
+}
+
+.desktop-demo-fork-1 .film-liked {
+  color: #ff8000;
+}
+
+/* fixed wall: all nine posters visible at once, no scrolling (3 × 3) */
+.desktop-demo-fork-1 .desktop-media-row .desktop-poster-stage {
+  overflow: hidden;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-wall {
+  height: 100%;
+  box-sizing: border-box;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 16px 14px;
+  padding: 22px 24px;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .retro-poster,
+.desktop-demo-fork-1 .desktop-media-row .retro-poster-button {
+  height: 100%;
+  align-content: center;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-wall .cinema-lightbox {
+  width: 138px;
+  padding: 7px 15px;
+  zoom: 1;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-wall .cinema-lightbox::after {
+  inset: 6px 3px;
+  background:
+    repeating-linear-gradient(180deg, #d9d6cf 0 4px, transparent 4px 8px) left top / 6px 100% no-repeat,
+    repeating-linear-gradient(180deg, #d9d6cf 0 4px, transparent 4px 8px) right top / 6px 100% no-repeat;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-wall .cinema-lightbox::before {
+  inset: -14px -18px;
+  filter: blur(20px);
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-zoom .cinema-lightbox {
+  width: 230px;
+  padding: 12px 24px;
+  zoom: 1.05;
+}
+
+/* ---- Goodreads book page ---- */
+.desktop-demo-fork-1 .gr-detail {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  align-content: start;
+  gap: 26px;
+  padding: 64px 34px 30px;
+  overflow-y: auto;
+  background: #f9f7f4;
+  color: #1e1915;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  animation: gr-in 320ms ease both;
+}
+
+@keyframes gr-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+}
+
+.desktop-demo-fork-1 .gr-back,
+.desktop-demo-fork-1 .lb-back {
+  position: absolute;
+  top: 18px;
+  left: 22px;
+  padding: 4px 2px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.desktop-demo-fork-1 .gr-back {
+  color: #00635d;
+}
+
+.desktop-demo-fork-1 .gr-back:hover,
+.desktop-demo-fork-1 .gr-link:hover {
+  text-decoration: underline;
+}
+
+.desktop-demo-fork-1 .gr-detail-cover {
+  display: grid;
+  gap: 12px;
+}
+
+.desktop-demo-fork-1 .gr-detail-cover img {
+  width: 100%;
+  display: block;
+  border-radius: 2px 6px 6px 2px;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+.desktop-demo-fork-1 .gr-shelf {
+  padding: 7px 0;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.desktop-demo-fork-1 .gr-shelf-reading {
+  background: #409d69;
+}
+
+.desktop-demo-fork-1 .gr-shelf-read {
+  border: 1px solid #409d69;
+  color: #409d69;
+  background: #fff;
+}
+
+.desktop-demo-fork-1 .gr-detail-body h3 {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.12;
+}
+
+.desktop-demo-fork-1 .gr-author {
+  margin: 8px 0 0;
+  color: #333;
+  font-size: 15px;
+}
+
+.desktop-demo-fork-1 .gr-author span {
+  font-weight: 600;
+}
+
+.desktop-demo-fork-1 .gr-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0 0;
+}
+
+.desktop-demo-fork-1 .gr-stars {
+  color: #e87400;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.desktop-demo-fork-1 .gr-stars-empty {
+  color: #d8d4cb;
+}
+
+.desktop-demo-fork-1 .gr-rating-label {
+  color: #767676;
+  font-size: 12px;
+}
+
+.desktop-demo-fork-1 .gr-meta {
+  margin: 14px 0 0;
+  color: #767676;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.desktop-demo-fork-1 .gr-review {
+  margin: 18px 0 0;
+  padding: 14px 16px;
+  border-top: 1px solid #e3ded4;
+  border-bottom: 1px solid #e3ded4;
+  color: #1e1915;
+  font-family: Georgia, serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.desktop-demo-fork-1 .gr-review-by {
+  display: block;
+  margin-bottom: 4px;
+  color: #767676;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.desktop-demo-fork-1 .gr-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: #00635d;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ---- Letterboxd film page ---- */
+.desktop-demo-fork-1 .lb-detail {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  align-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 56px 30px 40px;
+  overflow: hidden;
+  background: #14181c;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  animation: gr-in 320ms ease both;
+}
+
+.desktop-demo-fork-1 .lb-backdrop {
+  position: absolute;
+  inset: -40px -40px 30%;
+  z-index: 0;
+  background-position: center 30%;
+  background-size: cover;
+  filter: blur(28px) saturate(1.1);
+  opacity: 0.45;
+  -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent);
+  mask-image: linear-gradient(180deg, #000 30%, transparent);
+}
+
+.desktop-demo-fork-1 .lb-back {
+  z-index: 1;
+  color: #9ab;
+}
+
+.desktop-demo-fork-1 .lb-back:hover {
+  color: #fff;
+}
+
+.desktop-demo-fork-1 .lb-detail-poster,
+.desktop-demo-fork-1 .lb-detail-body {
+  position: relative;
+  z-index: 1;
+}
+
+.desktop-demo-fork-1 .lb-detail-poster img {
+  width: 100%;
+  display: block;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px rgba(221, 238, 255, 0.25), 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+.desktop-demo-fork-1 .lb-detail-body h3 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.desktop-demo-fork-1 .lb-year {
+  color: #9ab;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: underline;
+  text-decoration-color: rgba(153, 170, 187, 0.4);
+  text-underline-offset: 3px;
+}
+
+.desktop-demo-fork-1 .lb-diary {
+  display: grid;
+  gap: 6px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #2c3440;
+}
+
+.desktop-demo-fork-1 .lb-diary-label {
+  color: #9ab;
+  font-size: 12px;
+}
+
+.desktop-demo-fork-1 .lb-diary-marks {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+}
+
+.desktop-demo-fork-1 .lb-diary-marks .film-stars {
+  color: #00c030;
+  letter-spacing: 1px;
+}
+
+.desktop-demo-fork-1 .lb-heart {
+  color: #ff8000;
+}
+
+.desktop-demo-fork-1 .lb-rewatch {
+  color: #40bcf4;
+  font-size: 16px;
+}
+
+.desktop-demo-fork-1 .lb-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: #40bcf4;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.desktop-demo-fork-1 .lb-link:hover {
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-demo-fork-1 .gr-detail,
+  .desktop-demo-fork-1 .lb-detail {
+    animation: none;
+  }
+}
+
+/* 4 × 4 wall in three marquee-headed groups: Holy Grail / Loved / Recently Watched */
+.desktop-demo-fork-1 .desktop-media-row .desktop-media-stage {
+  height: 700px;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-wall {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 22px;
+  box-sizing: border-box;
+}
+
+.desktop-demo-fork-1 .poster-group {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+
+.desktop-demo-fork-1 .poster-group .poster-marquee {
+  padding: 5px 18px;
+  background:
+    radial-gradient(circle, #ffe6a8 0 1.4px, transparent 2px) 0 2px / 9px 4px repeat-x,
+    radial-gradient(circle, #ffe6a8 0 1.4px, transparent 2px) 4.5px calc(100% - 2px) / 9px 4px repeat-x,
+    #2a1b14;
+}
+
+.desktop-demo-fork-1 .poster-group .poster-marquee span {
+  padding: 4px 0 2px;
+  font-size: 13px;
+  letter-spacing: 0.32em;
+  text-indent: 0.32em;
+}
+
+.desktop-demo-fork-1 .poster-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-row .retro-poster,
+.desktop-demo-fork-1 .desktop-media-row .poster-row .retro-poster-button {
+  height: auto;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-row .cinema-lightbox {
+  width: 96px;
+  padding: 5px 11px;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-row .cinema-lightbox::after {
+  inset: 5px 2px;
+  background:
+    repeating-linear-gradient(180deg, #d9d6cf 0 3px, transparent 3px 7px) left top / 5px 100% no-repeat,
+    repeating-linear-gradient(180deg, #d9d6cf 0 3px, transparent 3px 7px) right top / 5px 100% no-repeat;
+}
+
+.desktop-demo-fork-1 .poster-empty .real-poster-sheet {
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0 6px, transparent 6px 12px),
+    #1a1a1c;
+  box-shadow: none;
+}
+
+.desktop-demo-fork-1 .poster-empty .cinema-lightbox::before {
+  display: none;
+}
+
+.desktop-demo-fork-1 .poster-group .poster-marquee {
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(255, 200, 120, 0.2), inset 0 0 0 1px rgba(255, 220, 160, 0.22);
+}
+
+.desktop-demo-fork-1 .poster-group .poster-marquee span {
+  display: block;
+  color: #ffe6a8;
+  font-family: "Bebas Neue", Impact, sans-serif;
+  text-shadow: 0 0 10px rgba(255, 200, 120, 0.6);
+}
+
+/* posters stay put: no hover lift and no scroll-in entrance */
+.desktop-demo-fork-1 .desktop-media-row .retro-poster,
+.desktop-demo-fork-1 .desktop-media-library[data-media-active="true"] .retro-poster {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.desktop-demo-fork-1 .retro-poster:hover .cinema-lightbox {
+  transform: none;
+}
+
+/* Goodreads detail on the bookshelf stage: the book turns in 3D, details beside it */
+.desktop-demo-fork-1 .gr-detail {
+  --book-w: 172px;
+  --book-h: 254px;
+  --book-d: 34px;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 60px 34px 40px 72px;
+  overflow: hidden;
+  background: transparent;
+  color: #f4efe4;
+}
+
+.desktop-demo-fork-1 .gr-detail-book {
+  transform: scale(1.12);
+}
+
+.desktop-demo-fork-1 .gr-back {
+  color: rgba(244, 239, 228, 0.7);
+}
+
+.desktop-demo-fork-1 .gr-back:hover {
+  color: #fff;
+}
+
+.desktop-demo-fork-1 .gr-detail-body {
+  display: grid;
+  justify-items: start;
+  animation: book-copy-in 700ms cubic-bezier(0.16, 1, 0.3, 1) 200ms backwards;
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-shelf {
+  margin-bottom: 14px;
+  padding: 5px 12px;
+  font-size: 11px;
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-shelf-read {
+  border-color: rgba(64, 157, 105, 0.8);
+  color: #7fd3a1;
+  background: transparent;
+}
+
+.desktop-demo-fork-1 .gr-detail-body h3 {
+  color: #fff;
+  font-size: 32px;
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-author {
+  color: rgba(244, 239, 228, 0.72);
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-stars {
+  color: #f59e2b;
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-stars-empty {
+  color: rgba(255, 255, 255, 0.18);
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-rating-label,
+.desktop-demo-fork-1 .gr-detail .gr-meta {
+  color: rgba(244, 239, 228, 0.5);
+}
+
+/* the review as an index card tucked beside the book */
+.desktop-demo-fork-1 .gr-detail .gr-review {
+  max-width: 300px;
+  margin-top: 20px;
+  padding: 14px 18px 16px;
+  border: 0;
+  border-radius: 2px;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 21px, rgba(90, 130, 200, 0.22) 21px 22px),
+    linear-gradient(180deg, #fbf7ea, #f3ecd6);
+  background-position: 0 30px, 0 0;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+  color: #2b2620;
+  line-height: 22px;
+  transform: rotate(-1.5deg);
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-review-by {
+  color: #b23a2b;
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-link {
+  color: #7fd3a1;
+}
+
+/* ---- polish pass: Goodreads stack + Letterboxd wall ---- */
+.desktop-demo-fork-1 .desktop-media-row .desktop-media-stage {
+  height: 740px;
+}
+
+/* real front covers on each book's top face; rotated so the cover's spine edge meets the spine */
+.desktop-demo-fork-1 .stack-face-top img {
+  width: var(--stack-d);
+  height: var(--stack-l);
+  position: absolute;
+  top: calc((var(--stack-d) - var(--stack-l)) / 2);
+  left: calc((var(--stack-l) - var(--stack-d)) / 2);
+  object-fit: cover;
+  transform: rotate(-90deg);
+  filter: saturate(0.92) brightness(0.96);
+}
+
+.desktop-demo-fork-1 .stack-face-top::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.18), transparent 35%, rgba(255, 255, 255, 0.06));
+  pointer-events: none;
+}
+
+.desktop-demo-fork-1 .stack-face-top::after {
+  z-index: 2;
+}
+
+/* ground the stack with a soft contact shadow right under the bottom book */
+.desktop-demo-fork-1 .desktop-media-row .book-stack-layer::after {
+  top: auto;
+  bottom: calc(50% - 205px);
+  width: 460px;
+  height: 46px;
+  background: rgba(0, 0, 0, 0.6);
+  filter: blur(22px);
+}
+
+.desktop-demo-fork-1 .desktop-media-row .desktop-book-stage {
+  background:
+    radial-gradient(ellipse 70% 45% at 50% 0%, rgba(255, 214, 160, 0.14), transparent 70%),
+    radial-gradient(ellipse 60% 30% at 50% 100%, rgba(0, 0, 0, 0.5), transparent 70%),
+    linear-gradient(180deg, #1f1915 0%, #15110e 70%, #0f0c0a 100%);
+}
+
+/* cinema wall: one continuous wall, no floor line cutting through the rows */
+.desktop-demo-fork-1 .desktop-media-row .desktop-poster-stage {
+  background:
+    radial-gradient(ellipse 60% 22% at 50% 4%, rgba(255, 200, 130, 0.12), transparent 70%),
+    radial-gradient(ellipse 70% 30% at 50% 100%, rgba(0, 0, 0, 0.45), transparent 70%),
+    linear-gradient(180deg, #1b1716 0%, #141112 100%);
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-wall {
+  gap: 14px;
+  padding: 18px 20px 22px;
+}
+
+.desktop-demo-fork-1 .poster-group {
+  gap: 10px;
+}
+
+.desktop-demo-fork-1 .poster-row {
+  gap: 12px 10px;
+}
+
+/* slimmer lightbox frame so the posters themselves get the space */
+.desktop-demo-fork-1 .desktop-media-row .poster-row .cinema-lightbox {
+  width: 108px;
+  padding: 4px 9px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #1d1d20, #0f0f11);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.07),
+    0 0 0 2px #060606,
+    0 14px 24px rgba(0, 0, 0, 0.55);
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-row .cinema-lightbox::after {
+  inset: 4px 2px;
+  opacity: 0.55;
+  background:
+    repeating-linear-gradient(180deg, #d9d6cf 0 3px, transparent 3px 7px) left top / 4px 100% no-repeat,
+    repeating-linear-gradient(180deg, #d9d6cf 0 3px, transparent 3px 7px) right top / 4px 100% no-repeat;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-row .real-poster-sheet {
+  border-radius: 2px;
+  box-shadow: 0 0 14px rgba(255, 240, 215, 0.22);
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-row .retro-poster-button:hover .real-poster-sheet {
+  filter: brightness(1.08);
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-row .real-poster-sheet img {
+  transition: filter 160ms ease;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-wall {
+  gap: 10px;
+  padding: 14px 20px 16px;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-row .cinema-lightbox {
+  width: 104px;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-stack {
+  margin-top: 70px;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-stack-layer::after {
+  bottom: calc(50% - 250px);
+}
+
+/* three poster rows (Holy Grail / Loved Recently / Recently Watched) → shorter windows */
+.desktop-demo-fork-1 .desktop-media-row .desktop-media-stage {
+  height: 590px;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-stack {
+  margin-top: 30px;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-stack-layer::after {
+  bottom: calc(50% - 215px);
+}
+
+/* =================== theme pass: fit the macOS system look =================== */
+
+/* ---- Goodreads: light warm-neutral stage, like Notes/Pages ---- */
+.desktop-demo-fork-1 .desktop-media-row .desktop-book-stage {
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 0%, #ffffff, transparent 70%),
+    linear-gradient(180deg, #f6f3ee 0%, #eee9e1 100%);
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-stack-layer::after {
+  background: rgba(60, 45, 30, 0.34);
+  filter: blur(24px);
+}
+
+.desktop-demo-fork-1 .stack-face-spine {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+}
+
+.desktop-demo-fork-1 .stack-spine-author {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  opacity: 0.85;
+}
+
+.desktop-demo-fork-1 .stack-spine-bookmark {
+  background: #d63b2f;
+}
+
+/* book detail on the light stage */
+.desktop-demo-fork-1 .gr-detail {
+  color: #1d1d1f;
+}
+
+.desktop-demo-fork-1 .gr-back {
+  color: #00635d;
+}
+
+.desktop-demo-fork-1 .gr-back:hover {
+  color: #00443f;
+}
+
+.desktop-demo-fork-1 .gr-detail-body h3 {
+  color: #1d1d1f;
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-author {
+  color: rgba(29, 29, 31, 0.7);
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-stars {
+  color: #e87400;
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-stars-empty {
+  color: rgba(0, 0, 0, 0.14);
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-rating-label,
+.desktop-demo-fork-1 .gr-detail .gr-meta {
+  color: rgba(29, 29, 31, 0.5);
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-shelf-read {
+  border-color: #409d69;
+  color: #2f7d52;
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-review {
+  box-shadow: 0 8px 20px rgba(60, 45, 30, 0.18), 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-link {
+  color: #00635d;
+}
+
+.desktop-demo-fork-1 .gr-detail .shelf-book-object::after,
+.desktop-demo-fork-1 .gr-detail-book::after {
+  background: rgba(60, 45, 30, 0.35);
+}
+
+/* ---- Letterboxd: its own cool slate, clean frames, crisp signage ---- */
+.desktop-demo-fork-1 .desktop-media-row .desktop-poster-stage {
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(64, 188, 244, 0.08), transparent 70%),
+    linear-gradient(180deg, #1c2228 0%, #14181c 100%);
+}
+
+.desktop-demo-fork-1 .poster-group .poster-marquee {
+  padding: 5px 16px;
+  border-radius: 6px;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.9) 0 1.1px, transparent 1.6px) 0 1px / 8px 4px repeat-x,
+    radial-gradient(circle, rgba(255, 255, 255, 0.9) 0 1.1px, transparent 1.6px) 4px calc(100% - 1px) / 8px 4px repeat-x,
+    #2c3440;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.desktop-demo-fork-1 .poster-group .poster-marquee span {
+  padding: 5px 0 3px;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-indent: 0.24em;
+  text-shadow: none;
+}
+
+.desktop-demo-fork-1 .poster-group-holyGrail .poster-marquee span { color: #ff8000; }
+.desktop-demo-fork-1 .poster-group-loved .poster-marquee span { color: #00e054; }
+.desktop-demo-fork-1 .poster-group-recent .poster-marquee span { color: #40bcf4; }
+
+.desktop-demo-fork-1 .desktop-media-row .poster-row .cinema-lightbox {
+  background: #0e1114;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 10px 22px rgba(0, 0, 0, 0.45);
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-row .cinema-lightbox::before {
+  display: none;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-row .cinema-lightbox::after {
+  opacity: 0.28;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .poster-row .real-poster-sheet {
+  box-shadow: none;
+}
+
+/* Letterboxd's thin inner poster border, drawn over the image */
+.desktop-demo-fork-1 .desktop-media-row .poster-row .real-poster-sheet::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(221, 238, 255, 0.2);
+  pointer-events: none;
+}
+
+/* =================== Goodreads: its own dark "library green" stage =================== */
+.desktop-demo-fork-1 .desktop-media-row .desktop-book-stage {
+  background:
+    radial-gradient(ellipse 75% 45% at 50% 0%, rgba(255, 236, 200, 0.1), transparent 70%),
+    radial-gradient(ellipse 70% 30% at 50% 100%, rgba(0, 0, 0, 0.35), transparent 70%),
+    linear-gradient(180deg, #16302c 0%, #0c1d1b 100%);
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-stack-layer::after {
+  background: rgba(0, 0, 0, 0.65);
+  filter: blur(26px);
+}
+
+/* book detail: light type on the dark stage */
+.desktop-demo-fork-1 .gr-detail,
+.desktop-demo-fork-1 .gr-detail-body h3 {
+  color: #f5f2ea;
+}
+
+.desktop-demo-fork-1 .gr-back {
+  color: rgba(245, 242, 234, 0.65);
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.desktop-demo-fork-1 .gr-back:hover {
+  color: #fff;
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-author {
+  color: rgba(245, 242, 234, 0.72);
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-stars {
+  color: #f5a33b;
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-stars-empty {
+  color: rgba(255, 255, 255, 0.16);
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-rating-label,
+.desktop-demo-fork-1 .gr-detail .gr-meta {
+  color: rgba(245, 242, 234, 0.5);
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-shelf-read {
+  border-color: rgba(127, 211, 161, 0.7);
+  color: #9fe0b9;
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-link {
+  color: #9fe0b9;
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-review {
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.45);
+}
+
+/* classic theatre letter-board marquee: warm backlit panel, black letters, incandescent bulbs */
+.desktop-demo-fork-1 .poster-group .poster-marquee {
+  padding: 7px 10px;
+  border-radius: 5px;
+  background:
+    radial-gradient(circle, #ffe7a8 0 1.6px, rgba(255, 190, 90, 0.35) 2.2px, transparent 3px) 0 0 / 10px 7px repeat-x,
+    radial-gradient(circle, #ffe7a8 0 1.6px, rgba(255, 190, 90, 0.35) 2.2px, transparent 3px) 5px 100% / 10px 7px repeat-x,
+    linear-gradient(180deg, #2a2320, #1a1513);
+  box-shadow:
+    0 0 0 1px rgba(255, 220, 160, 0.14),
+    0 0 22px rgba(255, 190, 90, 0.18),
+    0 8px 18px rgba(0, 0, 0, 0.45);
+}
+
+.desktop-demo-fork-1 .poster-group .poster-marquee span {
+  padding: 3px 14px 1px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #fffaf0, #f3e9d2);
+  box-shadow: inset 0 0 8px rgba(255, 214, 140, 0.55), 0 0 12px rgba(255, 230, 180, 0.35);
+  color: #161412;
+  font-family: "Bebas Neue", "Oswald", Impact, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-indent: 0.14em;
+  text-shadow: none;
+}
+
+.desktop-demo-fork-1 .poster-group-holyGrail .poster-marquee span,
+.desktop-demo-fork-1 .poster-group-loved .poster-marquee span,
+.desktop-demo-fork-1 .poster-group-recent .poster-marquee span {
+  color: #161412;
+}
+
+/* ---- three askew pairs with index-card dividers ---- */
+.desktop-demo-fork-1 .desktop-media-row .book-stack {
+  gap: 16px;
+  margin-left: 66px;
+}
+
+.desktop-demo-fork-1 .stack-pair {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transform-style: preserve-3d;
+}
+
+.desktop-demo-fork-1 .stack-pair:nth-child(1) { transform: translate3d(-6px, 0, 0) rotateY(1.8deg); }
+.desktop-demo-fork-1 .stack-pair:nth-child(2) { transform: translate3d(9px, 0, 4px) rotateY(-1.5deg); }
+.desktop-demo-fork-1 .stack-pair:nth-child(3) { transform: translate3d(-2px, 0, 0) rotateY(0.9deg); }
+
+.desktop-demo-fork-1 .stack-pair .stack-book {
+  transform: none;
+}
+
+/* the card sits in the gap under its pair, tucked behind the spines, poking out on the left */
+.desktop-demo-fork-1 .stack-card {
+  width: 128px;
+  height: 22px;
+  position: absolute;
+  bottom: -15px;
+  left: -62px;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  background:
+    linear-gradient(90deg, transparent 8px, rgba(214, 72, 60, 0.45) 8px 9px, transparent 9px),
+    linear-gradient(180deg, #fbf7ea, #f1e9d2);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+  color: #2b2620;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 11px;
+  font-style: italic;
+  font-weight: 500;
+  white-space: nowrap;
+  transform: translateZ(calc(var(--stack-d) / 2 - 24px)) rotate(-2deg);
+  pointer-events: none;
+}
+
+.desktop-demo-fork-1 .stack-pair:nth-child(2) .stack-card {
+  transform: translateZ(calc(var(--stack-d) / 2 - 24px)) rotate(1.5deg);
+}
+
+.desktop-demo-fork-1 .stack-pair:nth-child(3) .stack-card {
+  transform: translateZ(calc(var(--stack-d) / 2 - 24px)) rotate(-1deg);
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-stack {
+  --stack-t: 40px;
+  margin-top: 0;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-stack-layer::after {
+  bottom: calc(50% - 232px);
+}
+
+/* ---- bookmarks: a ribbon slips out from between each pair, fishtail end on the left ---- */
+.desktop-demo-fork-1 .desktop-media-row .book-stack {
+  --stack-l: 370px;
+  margin-left: 128px;
+}
+
+.desktop-demo-fork-1 .stack-card {
+  display: none;
+}
+
+.desktop-demo-fork-1 .stack-bookmark {
+  width: 136px;
+  height: 24px;
+  position: absolute;
+  top: calc(var(--stack-t) + 5px - 12px);
+  left: -130px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 16px;
+  box-sizing: border-box;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 45%, rgba(0, 0, 0, 0.18)),
+    var(--ribbon, #c8352b);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 11px 50%);
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.4));
+  transform: translateZ(calc(var(--stack-d) / 2 - 6px));
+  pointer-events: none;
+}
+
+.desktop-demo-fork-1 .stack-bookmark span {
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.desktop-demo-fork-1 .stack-pair-reading { --ribbon: #c0392b; }
+.desktop-demo-fork-1 .stack-pair-read { --ribbon: #2e7d5b; }
+.desktop-demo-fork-1 .stack-pair-favorites { --ribbon: #c08a1e; }
+
+.desktop-demo-fork-1 .stack-pair:nth-child(2) .stack-bookmark {
+  transform: translateZ(calc(var(--stack-d) / 2 - 6px)) rotate(-1.5deg);
+}
+
+.desktop-demo-fork-1 .stack-pair:nth-child(3) .stack-bookmark {
+  transform: translateZ(calc(var(--stack-d) / 2 - 6px)) rotate(1deg);
+}
+
+/* bookmarks act as dividers: each sits in the gap beneath its pair */
+.desktop-demo-fork-1 .stack-bookmark {
+  top: auto;
+  bottom: -20px;
+}
+
+/* straight pairs (no askew), room on the left for the divider ribbons */
+.desktop-demo-fork-1 .stack-pair:nth-child(n) {
+  transform: none;
+}
+
+.desktop-demo-fork-1 .stack-pair:nth-child(n) .stack-bookmark {
+  transform: translateZ(calc(var(--stack-d) / 2 - 6px));
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-stack {
+  --stack-l: 340px;
+  margin-left: 172px;
+}
+
+.desktop-demo-fork-1 .stack-bookmark {
+  width: 160px;
+  left: -154px;
+  padding-right: 14px;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-stack {
+  margin-left: 192px;
+  --stack-l: 330px;
+}
+
+/* ---- proper paper bookmarks: slipped between pairs, sticking out of the page side ---- */
+.desktop-demo-fork-1 .desktop-media-row .book-stack {
+  --stack-l: 340px;
+  margin-left: 12px;
+}
+
+.desktop-demo-fork-1 .stack-bookmark {
+  width: 150px;
+  height: 26px;
+  left: calc(var(--stack-l) - 34px);
+  right: auto;
+  bottom: -21px;
+  justify-content: flex-start;
+  padding: 0 0 0 44px;
+  border-radius: 2px 13px 13px 2px;
+  clip-path: none;
+  background:
+    radial-gradient(circle at calc(100% - 13px) 50%, #0c1d1b 0 3px, transparent 3.5px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent 40%, rgba(0, 0, 0, 0.14)),
+    var(--ribbon);
+  filter: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  transform: translateZ(calc(var(--stack-d) / 2 - 10px));
+}
+
+.desktop-demo-fork-1 .stack-bookmark span {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #fdf6e3;
+}
+
+/* cord through the punched hole, with a small tassel */
+.desktop-demo-fork-1 .stack-bookmark-tassel {
+  width: 2px;
+  height: 20px;
+  position: absolute;
+  top: 13px;
+  right: 12px;
+  border-radius: 1px;
+  background: var(--tassel, #e8c77a);
+  transform: rotate(-10deg);
+  transform-origin: top center;
+}
+
+.desktop-demo-fork-1 .stack-bookmark-tassel::after {
+  content: "";
+  width: 6px;
+  height: 11px;
+  position: absolute;
+  bottom: -9px;
+  left: -2px;
+  border-radius: 2px 2px 3px 3px;
+  background: repeating-linear-gradient(90deg, var(--tassel, #e8c77a) 0 1px, rgba(0, 0, 0, 0.15) 1px 2px);
+}
+
+.desktop-demo-fork-1 .stack-pair-reading { --ribbon: #a8322a; --tassel: #f0c987; }
+.desktop-demo-fork-1 .stack-pair-read { --ribbon: #2b6b50; --tassel: #e8d7a6; }
+.desktop-demo-fork-1 .stack-pair-favorites { --ribbon: #b07d1b; --tassel: #fbe6b0; }
+
+.desktop-demo-fork-1 .desktop-media-row .book-stack {
+  margin-left: -58px;
+}
+
+.desktop-demo-fork-1 .stack-bookmark {
+  width: 172px;
+  padding-left: 36px;
+}
+
+.desktop-demo-fork-1 .stack-bookmark span {
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-stack {
+  margin-left: -80px;
+}
+
+.desktop-demo-fork-1 .stack-bookmark {
+  width: 186px;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-stack {
+  margin-left: -94px;
+}
+
+/* ---- thin walnut shelves under each pair, lettered on the front edge ---- */
+.desktop-demo-fork-1 .stack-bookmark {
+  display: none;
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-stack {
+  --stack-l: 380px;
+  --shelf-h: 11px;
+  gap: 24px;
+  margin-left: 0;
+}
+
+.desktop-demo-fork-1 .stack-shelf {
+  width: calc(var(--stack-l) + 36px);
+  height: var(--shelf-h);
+  position: absolute;
+  left: -18px;
+  bottom: calc(-1 * var(--shelf-h) - 1px);
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.desktop-demo-fork-1 .stack-shelf-front,
+.desktop-demo-fork-1 .stack-shelf-top {
+  position: absolute;
+  left: 0;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* the plank's top surface, deeper than the books */
+.desktop-demo-fork-1 .stack-shelf-top {
+  top: calc((var(--shelf-h) - var(--stack-d) - 28px) / 2);
+  height: calc(var(--stack-d) + 28px);
+  background:
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.06) 0 2px, transparent 2px 9px),
+    linear-gradient(0deg, #6b4a34, #4e3526);
+  transform: rotateX(90deg) translateZ(calc(var(--shelf-h) / 2));
+}
+
+/* the front edge, with the label lettered on it */
+.desktop-demo-fork-1 .stack-shelf-front {
+  top: 0;
+  height: var(--shelf-h);
+  display: flex;
+  align-items: center;
+  padding-left: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 230, 200, 0.22), transparent 30%, rgba(0, 0, 0, 0.25)),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.07) 0 1px, transparent 1px 7px),
+    #5c3f2d;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.45);
+  transform: translateZ(calc(var(--stack-d) / 2 + 14px));
+}
+
+.desktop-demo-fork-1 .stack-shelf-front span {
+  color: rgba(255, 238, 214, 0.82);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.35);
+}
+
+.desktop-demo-fork-1 .desktop-media-row .book-stack {
+  --shelf-h: 14px;
+  gap: 28px;
+  margin-left: 44px;
+}
+
+.desktop-demo-fork-1 .stack-shelf-front span {
+  font-size: 8.5px;
+}
+
+/* Goodreads: dark walnut bookcase interior */
+.desktop-demo-fork-1 .desktop-media-row .desktop-book-stage {
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(255, 214, 160, 0.16), transparent 70%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.45) 0%, transparent 9% 91%, rgba(0, 0, 0, 0.45) 100%),
+    repeating-linear-gradient(90deg, rgba(255, 220, 180, 0.025) 0 2px, transparent 2px 11px, rgba(0, 0, 0, 0.05) 11px 12px, transparent 12px 23px),
+    linear-gradient(180deg, #3a2618 0%, #2a1a10 60%, #1f140c 100%);
+}
+
+.desktop-demo-fork-1 .desktop-app-window-goodreads .desktop-app-titlebar {
+  background: #3a2618;
 }
