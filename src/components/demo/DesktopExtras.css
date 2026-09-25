@@ -364,3 +364,24 @@
     repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.07) 0 1px, transparent 1px 7px),
     var(--walnut, #4f3524);
 }
+
+/* Goodreads detail: cream accents instead of green, to sit with the walnut */
+.desktop-demo-fork-1 .gr-detail .gr-shelf-reading {
+  border: 1px solid #efe1c1;
+  background: #efe1c1;
+  color: #3a2618;
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-shelf-read {
+  border: 1px solid rgba(239, 225, 193, 0.75);
+  background: transparent;
+  color: #efe1c1;
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-link {
+  color: #efe1c1;
+}
+
+.desktop-demo-fork-1 .gr-detail .gr-link:hover {
+  color: #fff8e8;
+}
