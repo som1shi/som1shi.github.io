@@ -2462,3 +2462,34 @@
 .desktop-demo-fork-1 .desktop-app-window-goodreads .desktop-app-titlebar {
   background: #3a2618;
 }
+
+/* even darker walnut interior */
+.desktop-demo-fork-1 .desktop-media-row .desktop-book-stage {
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(255, 210, 150, 0.12), transparent 70%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, transparent 9% 91%, rgba(0, 0, 0, 0.5) 100%),
+    repeating-linear-gradient(90deg, rgba(255, 220, 180, 0.02) 0 2px, transparent 2px 11px, rgba(0, 0, 0, 0.06) 11px 12px, transparent 12px 23px),
+    linear-gradient(180deg, #24170e 0%, #1a100a 60%, #120b06 100%);
+}
+
+/* solid plank ends so the shelves have thickness from every angle */
+.desktop-demo-fork-1 .stack-shelf-end {
+  width: calc(var(--stack-d) + 28px);
+  height: var(--shelf-h);
+  position: absolute;
+  top: 0;
+  display: block;
+  background:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.08) 0 1px, transparent 1px 4px),
+    linear-gradient(90deg, #3e2a1d, #4e3526);
+}
+
+.desktop-demo-fork-1 .stack-shelf-end-right {
+  left: calc(100% - (var(--stack-d) + 28px) / 2);
+  transform: translateZ(0) rotateY(90deg);
+}
+
+.desktop-demo-fork-1 .stack-shelf-end-left {
+  left: calc(-1 * (var(--stack-d) + 28px) / 2);
+  transform: rotateY(-90deg);
+}

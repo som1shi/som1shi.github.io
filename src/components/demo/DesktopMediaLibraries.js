@@ -274,6 +274,8 @@ const GoodreadsShelf = ({ items }) => {
                     ))}
                     <span className="stack-shelf" aria-hidden="true">
                       <span className="stack-shelf-top" />
+                      <span className="stack-shelf-end stack-shelf-end-right" />
+                      <span className="stack-shelf-end stack-shelf-end-left" />
                       <span className="stack-shelf-front"><span>{group.label}</span></span>
                     </span>
                   </li>
