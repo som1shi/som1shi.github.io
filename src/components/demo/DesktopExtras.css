@@ -357,3 +357,10 @@
 .desktop-demo-fork-1 .desktop-app-window-goodreads .desktop-app-title svg {
   color: rgba(255, 238, 214, 0.85);
 }
+
+.desktop-demo-fork-1 .desktop-app-window-goodreads .desktop-app-titlebar {
+  background:
+    linear-gradient(180deg, rgba(255, 230, 200, 0.14), transparent 40%, rgba(0, 0, 0, 0.2)),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.07) 0 1px, transparent 1px 7px),
+    var(--walnut, #4f3524);
+}

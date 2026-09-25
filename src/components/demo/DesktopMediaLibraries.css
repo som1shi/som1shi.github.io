@@ -2493,3 +2493,28 @@
   left: calc(-1 * (var(--stack-d) + 28px) / 2);
   transform: rotateY(-90deg);
 }
+
+/* one walnut for every shelf surface (shared with the Goodreads titlebar) */
+.desktop-demo-fork-1 .desktop-app-window-goodreads {
+  --walnut: #4f3524;
+}
+
+.desktop-demo-fork-1 .stack-shelf-front {
+  background:
+    linear-gradient(180deg, rgba(255, 230, 200, 0.14), transparent 40%, rgba(0, 0, 0, 0.2)),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.07) 0 1px, transparent 1px 7px),
+    var(--walnut);
+}
+
+.desktop-demo-fork-1 .stack-shelf-top {
+  background:
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.07) 0 1px, transparent 1px 7px),
+    linear-gradient(0deg, rgba(255, 230, 200, 0.06), rgba(0, 0, 0, 0.12)),
+    var(--walnut);
+}
+
+.desktop-demo-fork-1 .stack-shelf-end {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.1)),
+    var(--walnut);
+}
