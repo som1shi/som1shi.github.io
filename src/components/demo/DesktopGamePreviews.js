@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaArrowRight } from 'react-icons/fa';
+import { socialLinks } from '../../content/portfolioContent';
 import Os32LivePreview from './Os32LivePreview';
 
 const mineValues = {
@@ -108,28 +108,51 @@ const previews = {
   wikiconnect: <WikiPreview />,
 };
 
-// Games: os32 runs live as the main screen; the smaller games stack on the right.
+const categories = {
+  wordsweeper: 'Puzzle',
+  'quantum-chess': 'Strategy',
+  'rotate-connect-four': 'Board',
+  refiner: 'Arcade',
+  wikiconnect: 'Trivia',
+};
+
+// Games as the App Store: os32 is the featured story, the other games sit on a shelf of app icons.
 const DesktopGamePreviews = ({ games }) => (
-  <div className="games-app">
-    <section className="games-feature" aria-label="os32">
-      <Os32LivePreview />
-      <div className="games-feature-copy">
-        <span>Web operating system</span>
+  <div className="appstore">
+    <section className="appstore-hero" aria-label="Featured: os32">
+      <div className="appstore-hero-media">
+        <Os32LivePreview />
+      </div>
+      <div className="appstore-hero-copy">
+        <span className="appstore-eyebrow">Editors’ Choice</span>
         <h3>os32</h3>
-        <p>A retro desktop in the browser with a file system, terminal, browser, and built-in apps — including every game on the right.</p>
+        <span className="appstore-subtitle">Web operating system</span>
+        <p>A retro desktop in the browser with a file system, terminal, browser, and built-in apps, including every game below.</p>
+        <div className="appstore-hero-actions">
+          <a className="appstore-get appstore-get-primary" href={socialLinks.os32} target="_blank" rel="noopener noreferrer">Get</a>
+          <span>Free · Runs in your browser</span>
+        </div>
       </div>
     </section>
-    <ul className="games-list">
-      {games.map((game) => (
-        <li key={game.id}>
-          <a className={`games-list-item desktop-game-preview-${game.id}`} href={game.route}>
-            <span className="games-list-thumb" aria-hidden="true">{previews[game.id]}</span>
-            <span className="games-list-copy"><strong>{game.title}</strong><span>{game.description}</span></span>
-            <FaArrowRight aria-hidden="true" />
-          </a>
-        </li>
-      ))}
-    </ul>
+
+    <section className="appstore-shelf" aria-label="More games">
+      <header>
+        <h4>More Games</h4>
+        <span>{games.length} apps</span>
+      </header>
+      <ul>
+        {games.map((game) => (
+          <li key={game.id}>
+            <a className="appstore-app" href={game.route}>
+              <span className="appstore-icon" aria-hidden="true">{previews[game.id]}</span>
+              <strong>{game.title}</strong>
+              <span className="appstore-category">{categories[game.id] ?? 'Games'}</span>
+              <span className="appstore-get">Get</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
   </div>
 );
 

@@ -385,3 +385,1166 @@
 .desktop-demo-fork-1 .gr-detail .gr-link:hover {
   color: #fff8e8;
 }
+
+/* ===== no hover movement anywhere: cards, widgets, photos, posters and list rows stay put ===== */
+.desktop-demo-fork-1 .desktop-intro-card:hover,
+.desktop-demo-fork-1 .desktop-widget:hover,
+.desktop-demo-fork-1 .desktop-widget[data-visible="true"]:hover,
+.desktop-demo-fork-1[data-motion-ready="true"] .desktop-widget[data-visible="true"]:hover,
+.desktop-demo-fork-1 .desktop-apps-widget:hover,
+.desktop-demo-fork-1 .desktop-apps-widget[data-visible="true"]:hover,
+.desktop-demo-fork-1 .desktop-widget:hover .widget-label svg,
+.desktop-demo-fork-1 .golden-gate-widget:hover img,
+.desktop-demo-fork-1 .os32-live:hover,
+.desktop-demo-fork-1 .retro-poster:hover .cinema-lightbox,
+.desktop-demo-fork-1 .games-list-item:hover,
+.desktop-demo-fork-1 .desktop-photo-grid button:hover,
+.desktop-demo-fork-1 .desktop-photo-grid button:hover img {
+  transform: none !important;
+}
+
+/* ===== Experience: the whole résumé fits on the sheet, GitHub gets the same height ===== */
+.desktop-demo-fork-1 .desktop-app-window-experience .desktop-app-window-content {
+  height: 580px;
+}
+
+.desktop-demo-fork-1 .pages-app {
+  padding: 16px 28px;
+  overflow: hidden;
+}
+
+.desktop-demo-fork-1 .pages-sheet {
+  min-height: 100%;
+  padding: 28px 52px 22px;
+}
+
+.desktop-demo-fork-1 .pages-sheet-header {
+  padding-bottom: 10px;
+}
+
+.desktop-demo-fork-1 .pages-sheet-header h3 {
+  font-size: 25px;
+}
+
+.desktop-demo-fork-1 .pages-sheet-list {
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.desktop-demo-fork-1 .pages-sheet-list li + li {
+  padding-top: 6px;
+  border-top: 1px solid #efefef;
+}
+
+.desktop-demo-fork-1 .pages-entry-line {
+  line-height: 1.22;
+}
+
+.desktop-demo-fork-1 .pages-entry-line strong {
+  font-size: 15px;
+}
+
+.desktop-demo-fork-1 .pages-entry-line span {
+  font-size: 13px;
+}
+
+.desktop-demo-fork-1 .pages-entry-sub {
+  margin-top: 1px;
+}
+
+.desktop-demo-fork-1 .pages-entry-sub em {
+  font-size: 13.5px;
+}
+
+.desktop-demo-fork-1 .pages-entry-sub span {
+  font-size: 12px;
+}
+
+/* ===== Projects: the whole `ls -l` fits as two columns, nothing hidden behind a scroll ===== */
+.desktop-demo-fork-1 .desktop-app-window-projects .projects-term .project-terminal {
+  max-height: none;
+  overflow: visible;
+}
+
+.desktop-demo-fork-1 .project-terminal .term-listing {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 40px;
+  margin-top: 4px;
+}
+
+.desktop-demo-fork-1 .project-terminal .term-entry {
+  padding: 7px 0;
+}
+
+.desktop-demo-fork-1 .project-terminal .term-line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== Weather: a labelled forecast list with hairlines, like the large Weather widget ===== */
+.desktop-demo-fork-1 .wx-days {
+  align-content: start;
+  gap: 0;
+}
+
+.desktop-demo-fork-1 .wx-days-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 8px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.desktop-demo-fork-1 .wx-days-label svg {
+  font-size: 10px;
+}
+
+.desktop-demo-fork-1 .wx-day {
+  min-height: 44px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+/* ===== Contact as Messages ===== */
+.desktop-demo-fork-1 .desktop-contact-section {
+  min-height: 0;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-contact .desktop-app-window-content {
+  height: 440px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.desktop-demo-fork-1 .messages-app {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  background: #fff;
+}
+
+.desktop-demo-fork-1 .messages-sidebar {
+  padding: 14px 10px;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  background: #f5f5f7;
+}
+
+.desktop-demo-fork-1 .messages-search {
+  margin: 0 4px 12px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.06);
+  color: rgba(60, 60, 67, 0.5);
+  font-size: 13px;
+}
+
+.desktop-demo-fork-1 .messages-sidebar ul {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.desktop-demo-fork-1 .messages-thread {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  color: #1d1d1f;
+  text-decoration: none;
+  transition: background 140ms ease;
+}
+
+.desktop-demo-fork-1 a.messages-thread:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.desktop-demo-fork-1 .messages-thread.is-active {
+  background: #0a84ff;
+  color: #fff;
+}
+
+.desktop-demo-fork-1 .messages-avatar {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #a5abb8 0%, #858a96 100%);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.desktop-demo-fork-1 .messages-avatar-linkedin {
+  background: #0a66c2;
+  font-size: 16px;
+}
+
+.desktop-demo-fork-1 .messages-avatar-github {
+  background: #1f2328;
+  font-size: 19px;
+}
+
+.desktop-demo-fork-1 .messages-thread-text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.desktop-demo-fork-1 .messages-thread-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.desktop-demo-fork-1 .messages-thread-top strong {
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.desktop-demo-fork-1 .messages-thread-top time {
+  color: rgba(60, 60, 67, 0.55);
+  font-size: 12px;
+}
+
+.desktop-demo-fork-1 .messages-thread-preview {
+  overflow: hidden;
+  color: rgba(60, 60, 67, 0.7);
+  font-size: 12.5px;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.desktop-demo-fork-1 .messages-thread.is-active time,
+.desktop-demo-fork-1 .messages-thread.is-active .messages-thread-preview {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.desktop-demo-fork-1 .messages-conversation {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.desktop-demo-fork-1 .messages-header {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 14px 0 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.desktop-demo-fork-1 .messages-avatar-small {
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+}
+
+.desktop-demo-fork-1 .messages-header strong {
+  color: #1d1d1f;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.desktop-demo-fork-1 .messages-transcript {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 0;
+  padding: 14px 22px;
+  overflow-y: auto;
+}
+
+.desktop-demo-fork-1 .messages-stamp {
+  align-self: center;
+  margin-bottom: 8px;
+  color: rgba(60, 60, 67, 0.5);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.desktop-demo-fork-1 .bubble {
+  max-width: 62%;
+  margin: 0;
+  padding: 8px 13px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.35;
+  animation: bubble-in 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.desktop-demo-fork-1 .bubble-in {
+  align-self: flex-start;
+  background: #e9e9eb;
+  color: #1d1d1f;
+}
+
+.desktop-demo-fork-1 .bubble-out {
+  align-self: flex-end;
+  margin-block: 8px 4px;
+  background: #0a84ff;
+  color: #fff;
+}
+
+.desktop-demo-fork-1 .bubble a {
+  color: #0a66c2;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.desktop-demo-fork-1 .bubble-email {
+  font-family: "SF Mono", Menlo, monospace;
+  font-size: 13px;
+  user-select: all;
+}
+
+.desktop-demo-fork-1 .bubble-typing {
+  display: flex;
+  gap: 4px;
+  padding: 12px 14px;
+}
+
+.desktop-demo-fork-1 .bubble-typing i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #8e8e93;
+  animation: typing-dot 1.2s ease-in-out infinite;
+}
+
+.desktop-demo-fork-1 .bubble-typing i:nth-child(2) { animation-delay: 0.15s; }
+.desktop-demo-fork-1 .bubble-typing i:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes typing-dot {
+  0%, 60%, 100% { opacity: 0.35; }
+  30% { opacity: 1; }
+}
+
+@keyframes bubble-in {
+  from { opacity: 0; transform: translate3d(0, 6px, 0) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+.desktop-demo-fork-1 .messages-reset {
+  align-self: center;
+  margin-top: 10px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(60, 60, 67, 0.55);
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.desktop-demo-fork-1 .messages-reset:hover {
+  color: #0a84ff;
+}
+
+.desktop-demo-fork-1 .messages-suggestions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 22px 8px;
+}
+
+.desktop-demo-fork-1 .messages-suggestions button {
+  padding: 5px 12px;
+  border: 1px solid rgba(10, 132, 255, 0.45);
+  border-radius: 999px;
+  background: #fff;
+  color: #0a84ff;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 140ms ease;
+}
+
+.desktop-demo-fork-1 .messages-suggestions button:hover {
+  background: rgba(10, 132, 255, 0.08);
+}
+
+.desktop-demo-fork-1 .messages-compose {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 16px 14px;
+  padding: 4px 4px 4px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 999px;
+}
+
+.desktop-demo-fork-1 .messages-compose input {
+  flex: 1;
+  min-width: 0;
+  padding: 5px 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #1d1d1f;
+  font: inherit;
+  font-size: 14px;
+}
+
+.desktop-demo-fork-1 .messages-compose input::placeholder {
+  color: rgba(60, 60, 67, 0.45);
+}
+
+.desktop-demo-fork-1 .messages-compose button {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #d1d1d6;
+  color: #fff;
+  font-size: 11px;
+  cursor: default;
+  transition: background 140ms ease;
+}
+
+.desktop-demo-fork-1 .messages-compose button.is-ready {
+  background: #0a84ff;
+  cursor: pointer;
+}
+
+.desktop-demo-fork-1 .messages-receipt {
+  align-self: flex-end;
+  margin: -2px 4px 6px 0;
+  color: rgba(60, 60, 67, 0.5);
+  font-size: 10.5px;
+  font-weight: 500;
+}
+
+.desktop-demo-fork-1 .bubble-out {
+  margin-bottom: 2px;
+}
+
+/* consecutive bubbles from the same side tuck their corners together, as in Messages */
+.desktop-demo-fork-1 .bubble-in + .bubble-in {
+  border-top-left-radius: 6px;
+}
+
+.desktop-demo-fork-1 .bubble-in:has(+ .bubble-in) {
+  border-bottom-left-radius: 6px;
+}
+
+/* ===== Contact row: Messages + Calendar ===== */
+.desktop-demo-fork-1 .contact-split {
+  display: grid;
+  grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+  gap: var(--desktop-gap);
+  align-items: stretch;
+}
+
+.desktop-demo-fork-1 .contact-split .calendar-widget {
+  height: 0;
+  min-height: 100%;
+}
+
+/* ===== Calendar widget ===== */
+.desktop-demo-fork-1 .calendar-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px 20px 18px;
+  border-radius: var(--widget-radius);
+  background: #fff;
+  color: #1d1d1f;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+}
+
+.desktop-demo-fork-1 .cal-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.desktop-demo-fork-1 .cal-weekday {
+  color: #ff3b30;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.desktop-demo-fork-1 .cal-month {
+  color: #1d1d1f;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.desktop-demo-fork-1 .cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  row-gap: 2px;
+  text-align: center;
+}
+
+.desktop-demo-fork-1 .cal-dow {
+  padding-bottom: 4px;
+  color: rgba(60, 60, 67, 0.5);
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.desktop-demo-fork-1 .cal-day {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 50%;
+  font-size: 12.5px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.desktop-demo-fork-1 .cal-day.has-entry::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #ff9f0a;
+  transform: translateX(-50%);
+}
+
+.desktop-demo-fork-1 .cal-day.is-today {
+  background: #ff3b30;
+  color: #fff;
+  font-weight: 700;
+}
+
+.desktop-demo-fork-1 .cal-day.is-today::after {
+  background: #fff;
+}
+
+.desktop-demo-fork-1 .cal-events {
+  flex: 1;
+  min-height: 0;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.desktop-demo-fork-1 .cal-events-label {
+  display: block;
+  margin-bottom: 8px;
+  color: rgba(60, 60, 67, 0.55);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.desktop-demo-fork-1 .cal-events ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.desktop-demo-fork-1 .cal-event {
+  display: grid;
+  grid-template-columns: 3px minmax(0, 1fr);
+  gap: 9px;
+  padding: 5px 8px 5px 6px;
+  border-radius: 8px;
+  color: inherit;
+  text-decoration: none;
+  transition: background 140ms ease;
+}
+
+.desktop-demo-fork-1 .cal-event-film { --event: #ff9f0a; background: rgba(255, 159, 10, 0.1); }
+.desktop-demo-fork-1 .cal-event-book { --event: #a2845e; background: rgba(162, 132, 94, 0.12); }
+
+.desktop-demo-fork-1 .cal-event:hover {
+  filter: brightness(0.97);
+}
+
+.desktop-demo-fork-1 .cal-event-bar {
+  border-radius: 2px;
+  background: var(--event);
+}
+
+.desktop-demo-fork-1 .cal-event-text {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.desktop-demo-fork-1 .cal-event-text strong {
+  overflow: hidden;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.desktop-demo-fork-1 .cal-event-text span {
+  color: rgba(60, 60, 67, 0.6);
+  font-size: 11px;
+}
+
+/* ===== last row: Shortcuts + About This Site ===== */
+.desktop-demo-fork-1 .desktop-desk-row {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: var(--desktop-gap);
+  align-items: stretch;
+}
+
+.desktop-demo-fork-1 .shortcuts-widget {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 10px;
+  height: auto;
+  padding: 14px;
+  border-radius: var(--widget-radius);
+  background: #1c1c1e;
+}
+
+.desktop-demo-fork-1 .shortcut {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 78px;
+  padding: 12px 13px;
+  border: 0;
+  border-radius: 16px;
+  color: #fff;
+  font: 600 13px/1.2 -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transition: filter 140ms ease;
+}
+
+.desktop-demo-fork-1 .shortcut:hover {
+  filter: brightness(1.08);
+}
+
+.desktop-demo-fork-1 .shortcut svg {
+  font-size: 17px;
+  opacity: 0.95;
+}
+
+.desktop-demo-fork-1 .shortcut-email { background: linear-gradient(160deg, #4aa3ff, #0a6cf0); }
+.desktop-demo-fork-1 .shortcut-os32 { background: linear-gradient(160deg, #ffb340, #f27a0a); }
+.desktop-demo-fork-1 .shortcut-paper { background: linear-gradient(160deg, #e05a5a, #b31b1b); }
+.desktop-demo-fork-1 .shortcut-photo { background: linear-gradient(160deg, #ff6fa5, #e0337a); }
+.desktop-demo-fork-1 .shortcut-game { background: linear-gradient(160deg, #a67cff, #6c3ee8); }
+.desktop-demo-fork-1 .shortcut-source { background: linear-gradient(160deg, #4cd97b, #1fa64a); }
+
+/* ===== About This Site ===== */
+.desktop-demo-fork-1 .desktop-app-window-aboutSite .desktop-app-window-content {
+  padding: 0;
+}
+
+.desktop-demo-fork-1 .about-site {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  align-items: center;
+  gap: 36px;
+  height: 100%;
+  padding: 34px 44px 34px 40px;
+  box-sizing: border-box;
+  background: #fbfbfd;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+}
+
+.desktop-demo-fork-1 .about-site-machine {
+  display: grid;
+  justify-items: center;
+}
+
+.desktop-demo-fork-1 .about-site-screen {
+  width: 220px;
+  height: 142px;
+  position: relative;
+  overflow: hidden;
+  border: 7px solid #1d1d1f;
+  border-radius: 10px 10px 0 0;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #e7b99a 0%, #9d93c6 38%, #5e8fc4 64%, #1d2c52 100%);
+}
+
+.desktop-demo-fork-1 .about-site-menubar {
+  position: absolute;
+  inset: 4px 6px auto;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(60, 40, 40, 0.35);
+}
+
+.desktop-demo-fork-1 .about-site-card {
+  position: absolute;
+  top: 16px;
+  left: 12px;
+  width: 116px;
+  height: 64px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.desktop-demo-fork-1 .about-site-card::before,
+.desktop-demo-fork-1 .about-site-card::after {
+  content: "";
+  position: absolute;
+  left: 9px;
+  height: 6px;
+  border-radius: 3px;
+  background: #1d1d1f;
+}
+
+.desktop-demo-fork-1 .about-site-card::before { top: 12px; width: 40px; }
+.desktop-demo-fork-1 .about-site-card::after { top: 23px; width: 70px; box-shadow: 0 12px 0 rgba(29, 29, 31, 0.35); }
+
+.desktop-demo-fork-1 .about-site-widget {
+  position: absolute;
+  top: 16px;
+  right: 12px;
+  width: 66px;
+  height: 20px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.desktop-demo-fork-1 .about-site-widget-photo {
+  top: 40px;
+  height: 40px;
+  background: linear-gradient(160deg, #c0503a, #6e7d93);
+}
+
+.desktop-demo-fork-1 .about-site-screen::after {
+  content: "";
+  position: absolute;
+  inset: 88px 12px 0;
+  border-radius: 6px 6px 0 0;
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.desktop-demo-fork-1 .about-site-base {
+  width: 250px;
+  height: 9px;
+  border-radius: 0 0 10px 10px;
+  background: linear-gradient(180deg, #d9d9de, #a9a9b0);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.desktop-demo-fork-1 .about-site-copy h3 {
+  margin: 0;
+  color: #1d1d1f;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.desktop-demo-fork-1 .about-site-version {
+  display: block;
+  margin-top: 2px;
+  color: rgba(60, 60, 67, 0.6);
+  font-size: 12.5px;
+}
+
+.desktop-demo-fork-1 .about-site-copy dl {
+  display: grid;
+  gap: 5px;
+  margin: 18px 0 0;
+}
+
+.desktop-demo-fork-1 .about-site-copy dl div {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 12px;
+  font-size: 12.5px;
+}
+
+.desktop-demo-fork-1 .about-site-copy dt {
+  color: #1d1d1f;
+  font-weight: 600;
+  text-align: right;
+}
+
+.desktop-demo-fork-1 .about-site-copy dd {
+  margin: 0;
+  color: rgba(60, 60, 67, 0.8);
+}
+
+.desktop-demo-fork-1 .about-site-actions {
+  display: flex;
+  gap: 8px;
+  margin: 18px 0 0 108px;
+}
+
+.desktop-demo-fork-1 .about-site-actions a {
+  padding: 4px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 7px;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  color: #1d1d1f;
+  font-size: 12.5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 140ms ease;
+}
+
+.desktop-demo-fork-1 .about-site-actions a:hover {
+  background: #f2f2f5;
+}
+
+@media (max-width: 900px) {
+  .desktop-demo-fork-1 .contact-split,
+  .desktop-demo-fork-1 .desktop-desk-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .desktop-demo-fork-1 .contact-split .calendar-widget {
+    height: auto;
+  }
+
+  .desktop-demo-fork-1 .about-site {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.desktop-demo-fork-1 .desktop-app-window-aboutSite {
+  display: flex;
+  flex-direction: column;
+  background: #fbfbfd;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-aboutSite .desktop-app-window-content {
+  flex: 1;
+}
+
+/* Ideas: Notes-style date stamp centred above the open note */
+.desktop-demo-fork-1 .notes-note-stamp {
+  display: block;
+  margin: -6px 0 14px;
+  color: rgba(60, 60, 67, 0.45);
+  font-size: 11.5px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Games: descriptions get two lines instead of an ellipsis */
+.desktop-demo-fork-1 .games-list-copy span {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 1.35;
+  white-space: normal;
+}
+
+/* ===== one grid for every widget + window row: widget = 1 column, window = 2, edges line up ===== */
+@media (min-width: 901px) {
+  .desktop-demo-fork-1 .research-split,
+  .desktop-demo-fork-1 .photos-split,
+  .desktop-demo-fork-1 .desktop-desk-row,
+  .desktop-demo-fork-1 .experience-split,
+  .desktop-demo-fork-1 .contact-split {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .desktop-demo-fork-1 .research-split > :nth-child(2),
+  .desktop-demo-fork-1 .photos-split > :nth-child(2),
+  .desktop-demo-fork-1 .desktop-desk-row > :nth-child(2),
+  .desktop-demo-fork-1 .experience-split > :first-child,
+  .desktop-demo-fork-1 .contact-split > :first-child {
+    grid-column: span 2;
+  }
+}
+
+/* GitHub: four repos fit without clipping the last card */
+.desktop-demo-fork-1 .gh-repos {
+  gap: 7px;
+}
+
+.desktop-demo-fork-1 .gh-repo {
+  padding-block: 9px;
+}
+
+/* ===== one row height: every mid-page window and its widget stands 640px tall ===== */
+@media (min-width: 901px) {
+  .desktop-demo-fork-1 .desktop-app-window-research .desktop-app-window-content,
+  .desktop-demo-fork-1 .desktop-app-window-experience .desktop-app-window-content,
+  .desktop-demo-fork-1 .desktop-app-window-playground .desktop-app-window-content {
+    height: calc(640px - var(--titlebar-height));
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-research .preview-app,
+  .desktop-demo-fork-1 .desktop-app-window-playground .games-app {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .desktop-demo-fork-1 .desktop-media-row .desktop-media-stage {
+    height: calc(640px - var(--titlebar-height));
+  }
+}
+
+@media (min-width: 901px) {
+  .desktop-demo-fork-1 .desktop-app-window-playground .games-app {
+    box-sizing: border-box;
+  }
+
+  /* 596 content − 34px toolbar − 44px canvas padding */
+  .desktop-demo-fork-1 .preview-paper {
+    height: 518px;
+  }
+}
+
+/* ===== Games as the App Store: os32 story on top, a shelf of app icons below ===== */
+.desktop-demo-fork-1 .desktop-app-window-playground .desktop-app-window-content {
+  background: #fff;
+}
+
+.desktop-demo-fork-1 .appstore {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  padding: 20px 22px 22px;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  color: #1d1d1f;
+}
+
+.desktop-demo-fork-1 .appstore-hero {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 34px;
+  padding: 26px 34px 26px 26px;
+  border-radius: 20px;
+  background:
+    radial-gradient(120% 90% at 0% 0%, rgba(90, 150, 255, 0.35), transparent 55%),
+    radial-gradient(80% 80% at 100% 100%, rgba(120, 80, 255, 0.22), transparent 60%),
+    #14161d;
+  color: #fff;
+}
+
+.desktop-demo-fork-1 .appstore-hero-media {
+  min-width: 0;
+}
+
+.desktop-demo-fork-1 .appstore-hero-media .os32-live {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.desktop-demo-fork-1 .appstore-eyebrow {
+  color: #6cb6ff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.desktop-demo-fork-1 .appstore-hero-copy h3 {
+  margin: 6px 0 0;
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.desktop-demo-fork-1 .appstore-subtitle {
+  display: block;
+  margin-top: 6px;
+  color: rgba(235, 235, 245, 0.6);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.desktop-demo-fork-1 .appstore-hero-copy p {
+  margin: 14px 0 0;
+  color: rgba(235, 235, 245, 0.82);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.desktop-demo-fork-1 .appstore-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.desktop-demo-fork-1 .appstore-hero-actions span {
+  color: rgba(235, 235, 245, 0.55);
+  font-size: 11.5px;
+}
+
+.desktop-demo-fork-1 .appstore-get {
+  display: inline-grid;
+  place-items: center;
+  min-width: 64px;
+  height: 26px;
+  padding: 0 14px;
+  box-sizing: border-box;
+  border-radius: 999px;
+  background: #eef0f4;
+  color: #0a84ff;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 140ms ease, color 140ms ease;
+}
+
+.desktop-demo-fork-1 .appstore-get-primary {
+  min-width: 76px;
+  height: 30px;
+  background: #0a84ff;
+  color: #fff;
+}
+
+.desktop-demo-fork-1 .appstore-get-primary:hover {
+  background: #2a95ff;
+}
+
+.desktop-demo-fork-1 .appstore-shelf header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.desktop-demo-fork-1 .appstore-shelf h4 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.desktop-demo-fork-1 .appstore-shelf header span {
+  color: rgba(60, 60, 67, 0.55);
+  font-size: 12.5px;
+}
+
+.desktop-demo-fork-1 .appstore-shelf ul {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.desktop-demo-fork-1 .appstore-app {
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  padding: 6px 4px;
+  border-radius: 14px;
+  color: inherit;
+  text-align: center;
+  text-decoration: none;
+}
+
+.desktop-demo-fork-1 .appstore-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 84px;
+  height: 84px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #e9e5d6;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.desktop-demo-fork-1 .appstore-icon .game-ui {
+  flex: none;
+  width: 320px;
+  height: 215px;
+  zoom: 0.4;
+  pointer-events: none;
+}
+
+.desktop-demo-fork-1 .appstore-app strong {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.desktop-demo-fork-1 .appstore-category {
+  color: rgba(60, 60, 67, 0.55);
+  font-size: 11.5px;
+}
+
+.desktop-demo-fork-1 .appstore-app .appstore-get {
+  margin-top: 8px;
+}
+
+.desktop-demo-fork-1 .appstore-app:hover .appstore-get {
+  background: #0a84ff;
+  color: #fff;
+}
+
+.desktop-demo-fork-1 .appstore-hero-media .os32-live {
+  position: relative;
+  inset: auto;
+  display: block;
+  transform: none;
+}
+
+.desktop-demo-fork-1 .appstore-hero-media {
+  display: grid;
+  justify-items: center;
+}
+
+.desktop-demo-fork-1 .appstore-hero-media .os32-live {
+  width: min(100%, 440px);
+}
+
+.desktop-demo-fork-1 .appstore-hero-media .os32-live {
+  width: min(100%, 392px);
+}
+
+.desktop-demo-fork-1 .appstore-app {
+  padding: 2px 4px;
+}
+
+.desktop-demo-fork-1 .appstore-icon {
+  margin-bottom: 6px;
+}
+
+.desktop-demo-fork-1 .appstore-app .appstore-get {
+  margin-top: 6px;
+}

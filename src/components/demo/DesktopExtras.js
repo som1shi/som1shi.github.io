@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { games, photos } from '../../content/portfolioContent';
-import Contact from '../sections/Contact';
 import DesktopAppWindow from './DesktopAppWindow';
 import DesktopGamePreviews from './DesktopGamePreviews';
+import DesktopMessages from './DesktopMessages';
+import { AboutSiteWindow, CalendarWidget, ShortcutsWidget } from './DesktopDesk';
 import { WeatherWidget } from './DesktopWidgets';
 
 const DesktopExtras = () => {
@@ -48,7 +49,15 @@ const DesktopExtras = () => {
       </section>
 
       <section id="contact" className="desktop-story desktop-contact-section" aria-label="Contact" data-reveal>
-        <Contact desktop />
+        <div className="contact-split">
+          <DesktopMessages />
+          <CalendarWidget />
+        </div>
+      </section>
+
+      <section className="desktop-story desktop-desk-row" aria-label="Shortcuts and about this site">
+        <ShortcutsWidget onOpenPhoto={setSelectedPhoto} />
+        <AboutSiteWindow />
       </section>
 
       {selectedPhoto && (

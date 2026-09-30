@@ -13,6 +13,7 @@ import {
   FaGithub,
   FaMapMarkerAlt,
   FaSun,
+  FaRegCalendar,
 } from 'react-icons/fa';
 
 const clockCities = [
@@ -283,7 +284,7 @@ const describeWeather = (code, isDay = true) => {
 const WEATHER_URL = 'https://api.open-meteo.com/v1/forecast?latitude=37.7749&longitude=-122.4194'
   + '&current=temperature_2m,weather_code,is_day&hourly=temperature_2m,weather_code,is_day'
   + '&daily=weather_code,temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit'
-  + '&timezone=America%2FLos_Angeles&forecast_days=6';
+  + '&timezone=America%2FLos_Angeles&forecast_days=8';
 
 const useSanFranciscoWeather = () => {
   const [weather, setWeather] = useState(null);
@@ -301,7 +302,7 @@ const useSanFranciscoWeather = () => {
           code: data.hourly.weather_code[nowIndex + i],
           isDay: data.hourly.is_day[nowIndex + i] === 1,
         }));
-        const days = data.daily.time.slice(0, 5).map((date, i) => ({
+        const days = data.daily.time.slice(0, 7).map((date, i) => ({
           name: i === 0 ? 'Today' : new Date(`${date}T12:00:00`).toLocaleDateString('en-US', { weekday: 'short' }),
           code: data.daily.weather_code[i],
           high: Math.round(data.daily.temperature_2m_max[i]),
@@ -367,6 +368,7 @@ export const WeatherWidget = () => {
       </div>
 
       <div className="wx-days">
+        <span className="wx-days-label"><FaRegCalendar aria-hidden="true" /> 7-Day Forecast</span>
         {(weather?.days ?? []).map((day) => {
           const { Icon, label } = describeWeather(day.code, true);
           return (

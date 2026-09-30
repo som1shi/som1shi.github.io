@@ -25,7 +25,7 @@ const PreviewApp = () => {
   const [selectedId, setSelectedId] = useState(research[0].id);
   const canvasRef = useRef(null);
   useEffect(() => {
-    canvasRef.current?.scrollTo({ top: 0 });
+    if (canvasRef.current) canvasRef.current.scrollTop = 0;
   }, [selectedId]);
   const selectedIndex = Math.max(0, research.findIndex((item) => item.id === selectedId));
   const selected = research[selectedIndex];
@@ -185,6 +185,11 @@ const NotesApp = () => {
       {selected && (
         <article className="notes-app-note" aria-label={selected.title}>
           <div className="desktop-about-copy note-body">
+            {selected.date && (
+              <time className="notes-note-stamp" dateTime={selected.date}>
+                {new Date(`${selected.date}T12:00:00`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+              </time>
+            )}
             <h3 className="notes-note-title">{selected.title}</h3>
             {/* authored locally in notes/*.md and escaped by the build script */}
             <div dangerouslySetInnerHTML={{ __html: selected.html }} />
@@ -240,9 +245,10 @@ const DesktopPortfolio = () => {
               </section>
             </div>
 
-          <div className="project-terminal desktop-scroll-widget" aria-label="More projects" tabIndex="0">
+          <div className="project-terminal" aria-label="More projects">
             <p className="term-line"><span className="term-prompt">sarvagya@macbook ~ %</span> ls -l ~/projects</p>
             <p className="term-muted">total {remainingProjects.length}</p>
+            <div className="term-listing">
             {remainingProjects.map((project) => {
               const slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
               const name = <span className="term-dir">{slug}/</span>;
@@ -258,6 +264,7 @@ const DesktopPortfolio = () => {
                 </div>
               );
             })}
+            </div>
           </div>
           </div>
         </DesktopAppWindow>
