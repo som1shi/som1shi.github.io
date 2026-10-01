@@ -510,341 +510,6 @@
   border-top: 1px solid rgba(255, 255, 255, 0.16);
 }
 
-/* ===== Contact as Messages ===== */
-.desktop-demo-fork-1 .desktop-contact-section {
-  min-height: 0;
-}
-
-.desktop-demo-fork-1 .desktop-app-window-contact .desktop-app-window-content {
-  height: 440px;
-  padding: 0;
-  overflow: hidden;
-}
-
-.desktop-demo-fork-1 .messages-app {
-  display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
-  height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-  background: #fff;
-}
-
-.desktop-demo-fork-1 .messages-sidebar {
-  padding: 14px 10px;
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
-  background: #f5f5f7;
-}
-
-.desktop-demo-fork-1 .messages-search {
-  margin: 0 4px 12px;
-  padding: 6px 10px;
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.06);
-  color: rgba(60, 60, 67, 0.5);
-  font-size: 13px;
-}
-
-.desktop-demo-fork-1 .messages-sidebar ul {
-  display: grid;
-  gap: 2px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.desktop-demo-fork-1 .messages-thread {
-  display: grid;
-  grid-template-columns: 40px minmax(0, 1fr);
-  align-items: center;
-  gap: 10px;
-  padding: 9px 10px;
-  border-radius: 10px;
-  color: #1d1d1f;
-  text-decoration: none;
-  transition: background 140ms ease;
-}
-
-.desktop-demo-fork-1 a.messages-thread:hover {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.desktop-demo-fork-1 .messages-thread.is-active {
-  background: #0a84ff;
-  color: #fff;
-}
-
-.desktop-demo-fork-1 .messages-avatar {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, #a5abb8 0%, #858a96 100%);
-  color: #fff;
-  font-size: 17px;
-  font-weight: 600;
-}
-
-.desktop-demo-fork-1 .messages-avatar-linkedin {
-  background: #0a66c2;
-  font-size: 16px;
-}
-
-.desktop-demo-fork-1 .messages-avatar-github {
-  background: #1f2328;
-  font-size: 19px;
-}
-
-.desktop-demo-fork-1 .messages-thread-text {
-  display: grid;
-  gap: 2px;
-  min-width: 0;
-}
-
-.desktop-demo-fork-1 .messages-thread-top {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.desktop-demo-fork-1 .messages-thread-top strong {
-  font-size: 13.5px;
-  font-weight: 600;
-}
-
-.desktop-demo-fork-1 .messages-thread-top time {
-  color: rgba(60, 60, 67, 0.55);
-  font-size: 12px;
-}
-
-.desktop-demo-fork-1 .messages-thread-preview {
-  overflow: hidden;
-  color: rgba(60, 60, 67, 0.7);
-  font-size: 12.5px;
-  line-height: 1.3;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.desktop-demo-fork-1 .messages-thread.is-active time,
-.desktop-demo-fork-1 .messages-thread.is-active .messages-thread-preview {
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.desktop-demo-fork-1 .messages-conversation {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  min-height: 0;
-}
-
-.desktop-demo-fork-1 .messages-header {
-  display: grid;
-  justify-items: center;
-  gap: 4px;
-  padding: 14px 0 10px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.desktop-demo-fork-1 .messages-avatar-small {
-  width: 32px;
-  height: 32px;
-  font-size: 14px;
-}
-
-.desktop-demo-fork-1 .messages-header strong {
-  color: #1d1d1f;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.desktop-demo-fork-1 .messages-transcript {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  min-height: 0;
-  padding: 14px 22px;
-  overflow-y: auto;
-}
-
-.desktop-demo-fork-1 .messages-stamp {
-  align-self: center;
-  margin-bottom: 8px;
-  color: rgba(60, 60, 67, 0.5);
-  font-size: 11px;
-  font-weight: 500;
-}
-
-.desktop-demo-fork-1 .bubble {
-  max-width: 62%;
-  margin: 0;
-  padding: 8px 13px;
-  border-radius: 18px;
-  font-size: 14px;
-  line-height: 1.35;
-  animation: bubble-in 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.desktop-demo-fork-1 .bubble-in {
-  align-self: flex-start;
-  background: #e9e9eb;
-  color: #1d1d1f;
-}
-
-.desktop-demo-fork-1 .bubble-out {
-  align-self: flex-end;
-  margin-block: 8px 4px;
-  background: #0a84ff;
-  color: #fff;
-}
-
-.desktop-demo-fork-1 .bubble a {
-  color: #0a66c2;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.desktop-demo-fork-1 .bubble-email {
-  font-family: "SF Mono", Menlo, monospace;
-  font-size: 13px;
-  user-select: all;
-}
-
-.desktop-demo-fork-1 .bubble-typing {
-  display: flex;
-  gap: 4px;
-  padding: 12px 14px;
-}
-
-.desktop-demo-fork-1 .bubble-typing i {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #8e8e93;
-  animation: typing-dot 1.2s ease-in-out infinite;
-}
-
-.desktop-demo-fork-1 .bubble-typing i:nth-child(2) { animation-delay: 0.15s; }
-.desktop-demo-fork-1 .bubble-typing i:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes typing-dot {
-  0%, 60%, 100% { opacity: 0.35; }
-  30% { opacity: 1; }
-}
-
-@keyframes bubble-in {
-  from { opacity: 0; transform: translate3d(0, 6px, 0) scale(0.98); }
-  to { opacity: 1; transform: none; }
-}
-
-.desktop-demo-fork-1 .messages-reset {
-  align-self: center;
-  margin-top: 10px;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: rgba(60, 60, 67, 0.55);
-  font: inherit;
-  font-size: 11px;
-  cursor: pointer;
-}
-
-.desktop-demo-fork-1 .messages-reset:hover {
-  color: #0a84ff;
-}
-
-.desktop-demo-fork-1 .messages-suggestions {
-  display: flex;
-  justify-content: flex-end;
-  padding: 0 22px 8px;
-}
-
-.desktop-demo-fork-1 .messages-suggestions button {
-  padding: 5px 12px;
-  border: 1px solid rgba(10, 132, 255, 0.45);
-  border-radius: 999px;
-  background: #fff;
-  color: #0a84ff;
-  font: inherit;
-  font-size: 12.5px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 140ms ease;
-}
-
-.desktop-demo-fork-1 .messages-suggestions button:hover {
-  background: rgba(10, 132, 255, 0.08);
-}
-
-.desktop-demo-fork-1 .messages-compose {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0 16px 14px;
-  padding: 4px 4px 4px 14px;
-  border: 1px solid rgba(0, 0, 0, 0.14);
-  border-radius: 999px;
-}
-
-.desktop-demo-fork-1 .messages-compose input {
-  flex: 1;
-  min-width: 0;
-  padding: 5px 0;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  color: #1d1d1f;
-  font: inherit;
-  font-size: 14px;
-}
-
-.desktop-demo-fork-1 .messages-compose input::placeholder {
-  color: rgba(60, 60, 67, 0.45);
-}
-
-.desktop-demo-fork-1 .messages-compose button {
-  display: grid;
-  place-items: center;
-  width: 26px;
-  height: 26px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: #d1d1d6;
-  color: #fff;
-  font-size: 11px;
-  cursor: default;
-  transition: background 140ms ease;
-}
-
-.desktop-demo-fork-1 .messages-compose button.is-ready {
-  background: #0a84ff;
-  cursor: pointer;
-}
-
-.desktop-demo-fork-1 .messages-receipt {
-  align-self: flex-end;
-  margin: -2px 4px 6px 0;
-  color: rgba(60, 60, 67, 0.5);
-  font-size: 10.5px;
-  font-weight: 500;
-}
-
-.desktop-demo-fork-1 .bubble-out {
-  margin-bottom: 2px;
-}
-
-/* consecutive bubbles from the same side tuck their corners together, as in Messages */
-.desktop-demo-fork-1 .bubble-in + .bubble-in {
-  border-top-left-radius: 6px;
-}
-
-.desktop-demo-fork-1 .bubble-in:has(+ .bubble-in) {
-  border-bottom-left-radius: 6px;
-}
-
 /* ===== Contact row: Messages + Calendar ===== */
 .desktop-demo-fork-1 .contact-split {
   display: grid;
@@ -867,7 +532,7 @@
   border-radius: var(--widget-radius);
   background: #fff;
   color: #1d1d1f;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-family: var(--font-text);
 }
 
 .desktop-demo-fork-1 .cal-header {
@@ -1007,220 +672,8 @@
   font-size: 11px;
 }
 
-/* ===== last row: Shortcuts + About This Site ===== */
-.desktop-demo-fork-1 .desktop-desk-row {
-  display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
-  gap: var(--desktop-gap);
-  align-items: stretch;
-}
-
-.desktop-demo-fork-1 .shortcuts-widget {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-rows: 1fr;
-  gap: 10px;
-  height: auto;
-  padding: 14px;
-  border-radius: var(--widget-radius);
-  background: #1c1c1e;
-}
-
-.desktop-demo-fork-1 .shortcut {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  min-height: 78px;
-  padding: 12px 13px;
-  border: 0;
-  border-radius: 16px;
-  color: #fff;
-  font: 600 13px/1.2 -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-  text-align: left;
-  text-decoration: none;
-  cursor: pointer;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
-  transition: filter 140ms ease;
-}
-
-.desktop-demo-fork-1 .shortcut:hover {
-  filter: brightness(1.08);
-}
-
-.desktop-demo-fork-1 .shortcut svg {
-  font-size: 17px;
-  opacity: 0.95;
-}
-
-.desktop-demo-fork-1 .shortcut-email { background: linear-gradient(160deg, #4aa3ff, #0a6cf0); }
-.desktop-demo-fork-1 .shortcut-os32 { background: linear-gradient(160deg, #ffb340, #f27a0a); }
-.desktop-demo-fork-1 .shortcut-paper { background: linear-gradient(160deg, #e05a5a, #b31b1b); }
-.desktop-demo-fork-1 .shortcut-photo { background: linear-gradient(160deg, #ff6fa5, #e0337a); }
-.desktop-demo-fork-1 .shortcut-game { background: linear-gradient(160deg, #a67cff, #6c3ee8); }
-.desktop-demo-fork-1 .shortcut-source { background: linear-gradient(160deg, #4cd97b, #1fa64a); }
-
-/* ===== About This Site ===== */
-.desktop-demo-fork-1 .desktop-app-window-aboutSite .desktop-app-window-content {
-  padding: 0;
-}
-
-.desktop-demo-fork-1 .about-site {
-  display: grid;
-  grid-template-columns: 250px minmax(0, 1fr);
-  align-items: center;
-  gap: 36px;
-  height: 100%;
-  padding: 34px 44px 34px 40px;
-  box-sizing: border-box;
-  background: #fbfbfd;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-}
-
-.desktop-demo-fork-1 .about-site-machine {
-  display: grid;
-  justify-items: center;
-}
-
-.desktop-demo-fork-1 .about-site-screen {
-  width: 220px;
-  height: 142px;
-  position: relative;
-  overflow: hidden;
-  border: 7px solid #1d1d1f;
-  border-radius: 10px 10px 0 0;
-  box-sizing: border-box;
-  background: linear-gradient(180deg, #e7b99a 0%, #9d93c6 38%, #5e8fc4 64%, #1d2c52 100%);
-}
-
-.desktop-demo-fork-1 .about-site-menubar {
-  position: absolute;
-  inset: 4px 6px auto;
-  height: 5px;
-  border-radius: 3px;
-  background: rgba(60, 40, 40, 0.35);
-}
-
-.desktop-demo-fork-1 .about-site-card {
-  position: absolute;
-  top: 16px;
-  left: 12px;
-  width: 116px;
-  height: 64px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.92);
-}
-
-.desktop-demo-fork-1 .about-site-card::before,
-.desktop-demo-fork-1 .about-site-card::after {
-  content: "";
-  position: absolute;
-  left: 9px;
-  height: 6px;
-  border-radius: 3px;
-  background: #1d1d1f;
-}
-
-.desktop-demo-fork-1 .about-site-card::before { top: 12px; width: 40px; }
-.desktop-demo-fork-1 .about-site-card::after { top: 23px; width: 70px; box-shadow: 0 12px 0 rgba(29, 29, 31, 0.35); }
-
-.desktop-demo-fork-1 .about-site-widget {
-  position: absolute;
-  top: 16px;
-  right: 12px;
-  width: 66px;
-  height: 20px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.45);
-}
-
-.desktop-demo-fork-1 .about-site-widget-photo {
-  top: 40px;
-  height: 40px;
-  background: linear-gradient(160deg, #c0503a, #6e7d93);
-}
-
-.desktop-demo-fork-1 .about-site-screen::after {
-  content: "";
-  position: absolute;
-  inset: 88px 12px 0;
-  border-radius: 6px 6px 0 0;
-  background: rgba(255, 255, 255, 0.88);
-}
-
-.desktop-demo-fork-1 .about-site-base {
-  width: 250px;
-  height: 9px;
-  border-radius: 0 0 10px 10px;
-  background: linear-gradient(180deg, #d9d9de, #a9a9b0);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
-}
-
-.desktop-demo-fork-1 .about-site-copy h3 {
-  margin: 0;
-  color: #1d1d1f;
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.desktop-demo-fork-1 .about-site-version {
-  display: block;
-  margin-top: 2px;
-  color: rgba(60, 60, 67, 0.6);
-  font-size: 12.5px;
-}
-
-.desktop-demo-fork-1 .about-site-copy dl {
-  display: grid;
-  gap: 5px;
-  margin: 18px 0 0;
-}
-
-.desktop-demo-fork-1 .about-site-copy dl div {
-  display: grid;
-  grid-template-columns: 96px minmax(0, 1fr);
-  gap: 12px;
-  font-size: 12.5px;
-}
-
-.desktop-demo-fork-1 .about-site-copy dt {
-  color: #1d1d1f;
-  font-weight: 600;
-  text-align: right;
-}
-
-.desktop-demo-fork-1 .about-site-copy dd {
-  margin: 0;
-  color: rgba(60, 60, 67, 0.8);
-}
-
-.desktop-demo-fork-1 .about-site-actions {
-  display: flex;
-  gap: 8px;
-  margin: 18px 0 0 108px;
-}
-
-.desktop-demo-fork-1 .about-site-actions a {
-  padding: 4px 12px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 7px;
-  background: #fff;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  color: #1d1d1f;
-  font-size: 12.5px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: background 140ms ease;
-}
-
-.desktop-demo-fork-1 .about-site-actions a:hover {
-  background: #f2f2f5;
-}
-
 @media (max-width: 900px) {
-  .desktop-demo-fork-1 .contact-split,
-  .desktop-demo-fork-1 .desktop-desk-row {
+  .desktop-demo-fork-1 .contact-split {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -1228,20 +681,8 @@
     height: auto;
   }
 
-  .desktop-demo-fork-1 .about-site {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }
 
-.desktop-demo-fork-1 .desktop-app-window-aboutSite {
-  display: flex;
-  flex-direction: column;
-  background: #fbfbfd;
-}
-
-.desktop-demo-fork-1 .desktop-app-window-aboutSite .desktop-app-window-content {
-  flex: 1;
-}
 
 /* Ideas: Notes-style date stamp centred above the open note */
 .desktop-demo-fork-1 .notes-note-stamp {
@@ -1266,7 +707,6 @@
 @media (min-width: 901px) {
   .desktop-demo-fork-1 .research-split,
   .desktop-demo-fork-1 .photos-split,
-  .desktop-demo-fork-1 .desktop-desk-row,
   .desktop-demo-fork-1 .experience-split,
   .desktop-demo-fork-1 .contact-split {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1274,7 +714,6 @@
 
   .desktop-demo-fork-1 .research-split > :nth-child(2),
   .desktop-demo-fork-1 .photos-split > :nth-child(2),
-  .desktop-demo-fork-1 .desktop-desk-row > :nth-child(2),
   .desktop-demo-fork-1 .experience-split > :first-child,
   .desktop-demo-fork-1 .contact-split > :first-child {
     grid-column: span 2;
@@ -1332,7 +771,7 @@
   height: 100%;
   padding: 20px 22px 22px;
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-family: var(--font-text);
   color: #1d1d1f;
 }
 
@@ -1547,4 +986,1069 @@
 
 .desktop-demo-fork-1 .appstore-app .appstore-get {
   margin-top: 6px;
+}
+
+/* ===== Wallpaper: frosted colour + magnetic dots ===== */
+.desktop-demo-fork-1 .desktop-wallpaper {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: #efeeea;
+}
+
+.desktop-demo-fork-1 .desktop-wallpaper canvas,
+.desktop-demo-fork-1 .wallpaper-veil {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* the colour layer is low-res; the blur turns it into soft frosted light */
+.desktop-demo-fork-1 .wallpaper-frost {
+  filter: blur(70px);
+  transform: scale(1.15);
+}
+
+.desktop-demo-fork-1 .wallpaper-veil {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.32));
+}
+
+/* ===== Contact: macOS Messages, dark ===== */
+.desktop-demo-fork-1 .desktop-app-window-contact .desktop-app-titlebar {
+  border-bottom-color: rgba(0, 0, 0, 0.5);
+  background: #2c2c2e;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.desktop-demo-fork-1 .desktop-app-window-contact .desktop-app-title {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.desktop-demo-fork-1 .desktop-app-window-contact .desktop-app-window-content {
+  height: 440px;
+  padding: 0;
+  overflow: hidden;
+  background: #1e1e1e;
+}
+
+.desktop-demo-fork-1 .msg-app {
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr);
+  height: 100%;
+  color: #f5f5f7;
+  font-family: var(--font-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.desktop-demo-fork-1 .msg-sidebar {
+  min-height: 0;
+  padding: 12px 10px;
+  overflow-y: auto;
+  border-right: 1px solid rgba(0, 0, 0, 0.6);
+  background: #262628;
+}
+
+.desktop-demo-fork-1 .msg-search {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 28px;
+  margin: 0 4px 10px;
+  padding: 0 9px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(235, 235, 245, 0.45);
+  font-size: 11px;
+}
+
+.desktop-demo-fork-1 .msg-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #f5f5f7;
+  font: inherit;
+  font-size: 13px;
+}
+
+.desktop-demo-fork-1 .msg-search input::placeholder {
+  color: rgba(235, 235, 245, 0.45);
+}
+
+.desktop-demo-fork-1 .msg-sidebar ul {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.desktop-demo-fork-1 .msg-thread {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: default;
+}
+
+.desktop-demo-fork-1 .msg-thread[aria-current="true"] {
+  background: #0a84ff;
+}
+
+.desktop-demo-fork-1 .msg-thread:not([aria-current="true"]):hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.desktop-demo-fork-1 .msg-avatar {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #a4a8b3, #7d828d);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.desktop-demo-fork-1 .msg-avatar-linkedin { background: #0a66c2; font-size: 17px; }
+.desktop-demo-fork-1 .msg-avatar-github { background: #f5f5f7; color: #1f2328; font-size: 22px; }
+
+.desktop-demo-fork-1 .msg-avatar-small {
+  width: 22px;
+  height: 22px;
+  font-size: 10px;
+}
+
+.desktop-demo-fork-1 .msg-avatar-small.msg-avatar-github { font-size: 12px; }
+.desktop-demo-fork-1 .msg-avatar-small.msg-avatar-linkedin { font-size: 10px; }
+
+.desktop-demo-fork-1 .msg-thread-text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.desktop-demo-fork-1 .msg-thread-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.desktop-demo-fork-1 .msg-thread-top strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.desktop-demo-fork-1 .msg-thread-top time,
+.desktop-demo-fork-1 .msg-thread-preview {
+  color: rgba(235, 235, 245, 0.55);
+  font-size: 12px;
+}
+
+.desktop-demo-fork-1 .msg-thread-preview {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.desktop-demo-fork-1 .msg-thread[aria-current="true"] time,
+.desktop-demo-fork-1 .msg-thread[aria-current="true"] .msg-thread-preview {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.desktop-demo-fork-1 .msg-conversation {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: #1e1e1e;
+}
+
+.desktop-demo-fork-1 .msg-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  flex: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.55);
+  background: #252527;
+}
+
+.desktop-demo-fork-1 .msg-header strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.desktop-demo-fork-1 .msg-transcript {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-height: 0;
+  padding: 14px 18px 10px;
+  overflow-y: auto;
+}
+
+.desktop-demo-fork-1 .msg-stamp {
+  align-self: center;
+  margin-bottom: 10px;
+  color: rgba(235, 235, 245, 0.45);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.desktop-demo-fork-1 .msg-bubble {
+  max-width: 66%;
+  margin: 0;
+  padding: 7px 12px;
+  border-radius: 18px;
+  font-size: 13.5px;
+  line-height: 1.35;
+}
+
+.desktop-demo-fork-1 .msg-in {
+  align-self: flex-start;
+  background: #3a3a3c;
+  color: #f5f5f7;
+}
+
+.desktop-demo-fork-1 .msg-out {
+  align-self: flex-end;
+  background: #0a84ff;
+  color: #fff;
+}
+
+.desktop-demo-fork-1 .msg-in + .msg-out,
+.desktop-demo-fork-1 .msg-out + .msg-in {
+  margin-top: 8px;
+}
+
+.desktop-demo-fork-1 .msg-receipt {
+  align-self: flex-end;
+  margin: 1px 4px 0 0;
+  color: rgba(235, 235, 245, 0.45);
+  font-size: 10.5px;
+  font-weight: 500;
+}
+
+.desktop-demo-fork-1 .msg-link {
+  display: grid;
+  width: min(300px, 70%);
+  padding: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  text-decoration: none;
+}
+
+.desktop-demo-fork-1 .msg-link-art {
+  display: grid;
+  place-items: center;
+  height: 120px;
+  background: linear-gradient(160deg, #3d3d40, #2a2a2c);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 40px;
+}
+
+.desktop-demo-fork-1 .msg-link-meta {
+  display: grid;
+  gap: 2px;
+  padding: 9px 12px 10px;
+  background: #3a3a3c;
+}
+
+.desktop-demo-fork-1 .msg-link-meta strong {
+  color: #f5f5f7;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.desktop-demo-fork-1 .msg-link-meta span {
+  color: rgba(235, 235, 245, 0.55);
+  font-size: 11.5px;
+}
+
+.desktop-demo-fork-1 .msg-compose {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  padding: 8px 14px 12px;
+}
+
+.desktop-demo-fork-1 .msg-compose-apps {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(235, 235, 245, 0.7);
+  font-size: 11px;
+  cursor: default;
+}
+
+.desktop-demo-fork-1 .msg-field {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  min-height: 30px;
+  padding: 2px 3px 2px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+}
+
+.desktop-demo-fork-1 .msg-field input {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #f5f5f7;
+  font: inherit;
+  font-size: 13.5px;
+}
+
+.desktop-demo-fork-1 .msg-field input::placeholder {
+  color: rgba(235, 235, 245, 0.35);
+}
+
+.desktop-demo-fork-1 .msg-send {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #0a84ff;
+  color: #fff;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* ---- Messages motion ---- */
+.desktop-demo-fork-1 .msg-enter {
+  animation: msg-enter 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes msg-enter {
+  from { opacity: 0; transform: translate3d(0, 10px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+/* sent bubbles swoosh up out of the compose bar */
+.desktop-demo-fork-1 .msg-sent {
+  transform-origin: 100% 100%;
+  animation: msg-sent 420ms cubic-bezier(0.18, 0.9, 0.3, 1.15) both;
+}
+
+@keyframes msg-sent {
+  0% { opacity: 0; transform: translate3d(12px, 46px, 0) scale(0.6); }
+  60% { opacity: 1; }
+  100% { opacity: 1; transform: none; }
+}
+
+/* replies and the typing indicator pop out from the left */
+.desktop-demo-fork-1 .msg-pop {
+  transform-origin: 0% 100%;
+  animation: msg-pop 340ms cubic-bezier(0.2, 0.9, 0.3, 1.25) both;
+}
+
+@keyframes msg-pop {
+  from { opacity: 0; transform: scale(0.7); }
+  to { opacity: 1; transform: none; }
+}
+
+.desktop-demo-fork-1 .msg-receipt {
+  animation: msg-fade 300ms ease 380ms both;
+}
+
+@keyframes msg-fade {
+  from { opacity: 0; transform: translate3d(0, -2px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+.desktop-demo-fork-1 .msg-typing {
+  display: flex;
+  gap: 4px;
+  padding: 11px 13px;
+}
+
+.desktop-demo-fork-1 .msg-typing i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(235, 235, 245, 0.55);
+  animation: msg-dot 1.1s ease-in-out infinite;
+}
+
+.desktop-demo-fork-1 .msg-typing i:nth-child(2) { animation-delay: 0.15s; }
+.desktop-demo-fork-1 .msg-typing i:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes msg-dot {
+  0%, 60%, 100% { opacity: 0.4; transform: none; }
+  30% { opacity: 1; transform: translate3d(0, -3px, 0); }
+}
+
+/* the send button pops in once there's something to send */
+.desktop-demo-fork-1 .msg-send {
+  animation: msg-pop 220ms cubic-bezier(0.2, 0.9, 0.3, 1.4) both;
+  transition: filter 140ms ease, transform 120ms ease;
+}
+
+.desktop-demo-fork-1 .msg-send:active {
+  transform: scale(0.88);
+}
+
+.desktop-demo-fork-1 .msg-thread {
+  transition: background 160ms ease;
+}
+
+.desktop-demo-fork-1 .msg-field {
+  transition: border-color 160ms ease;
+}
+
+.desktop-demo-fork-1 .msg-field:focus-within {
+  border-color: rgba(10, 132, 255, 0.7);
+}
+
+/* copyable email inside Sarvagya's reply */
+.desktop-demo-fork-1 .msg-email-bubble {
+  display: grid;
+  gap: 8px;
+}
+
+.desktop-demo-fork-1 .msg-email {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 7px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #64b5ff;
+  font: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.desktop-demo-fork-1 .msg-email span {
+  color: #f5f5f7;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.desktop-demo-fork-1 .msg-email:hover {
+  background: rgba(255, 255, 255, 0.13);
+}
+
+.desktop-demo-fork-1 .msg-email.is-copied {
+  color: #30d158;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-demo-fork-1 .msg-enter,
+  .desktop-demo-fork-1 .msg-sent,
+  .desktop-demo-fork-1 .msg-pop,
+  .desktop-demo-fork-1 .msg-receipt,
+  .desktop-demo-fork-1 .msg-send,
+  .desktop-demo-fork-1 .msg-typing i {
+    animation: none;
+  }
+}
+
+
+/* ===== Scroll experience: sections are scroll-linked scenes (useScrollScenes); their content cascades in once they land ===== */
+.desktop-demo-fork-1 .desktop-demo-workspace > * {
+  transform-origin: 50% 0%;
+  will-change: transform, opacity;
+}
+
+/* uses the independent `translate` property so it never fights a component's own transform */
+.desktop-demo-fork-1 .desktop-story .notes-app-sidebar li,
+.desktop-demo-fork-1 .desktop-story .notes-app-note,
+.desktop-demo-fork-1 .desktop-story .term-block,
+.desktop-demo-fork-1 .desktop-story .term-entry,
+.desktop-demo-fork-1 .desktop-story .pages-sheet-header,
+.desktop-demo-fork-1 .desktop-story .pages-sheet-list li,
+.desktop-demo-fork-1 .desktop-story .github-widget > *,
+.desktop-demo-fork-1 .desktop-story .preview-app-list li,
+.desktop-demo-fork-1 .desktop-story .preview-paper,
+.desktop-demo-fork-1 .desktop-story .photos-split .weather-widget > *,
+.desktop-demo-fork-1 .desktop-story .desktop-photo-grid button,
+.desktop-demo-fork-1 .desktop-story .world-clock-widget > *,
+.desktop-demo-fork-1 .desktop-story .appstore-feature,
+.desktop-demo-fork-1 .desktop-story .appstore-shelf header,
+.desktop-demo-fork-1 .desktop-story .appstore-app,
+.desktop-demo-fork-1 .desktop-story .msg-sidebar li,
+.desktop-demo-fork-1 .desktop-story .cal-header,
+.desktop-demo-fork-1 .desktop-story .cal-grid,
+.desktop-demo-fork-1 .desktop-story .cal-events li {
+  opacity: 0;
+  translate: 0 14px;
+  animation: scene-cascade 560ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(140ms + var(--i, 0) * 55ms);
+  animation-play-state: paused;
+}
+
+.desktop-demo-fork-1 .desktop-story[data-entered] .notes-app-sidebar li,
+.desktop-demo-fork-1 .desktop-story[data-entered] .notes-app-note,
+.desktop-demo-fork-1 .desktop-story[data-entered] .term-block,
+.desktop-demo-fork-1 .desktop-story[data-entered] .term-entry,
+.desktop-demo-fork-1 .desktop-story[data-entered] .pages-sheet-header,
+.desktop-demo-fork-1 .desktop-story[data-entered] .pages-sheet-list li,
+.desktop-demo-fork-1 .desktop-story[data-entered] .github-widget > *,
+.desktop-demo-fork-1 .desktop-story[data-entered] .preview-app-list li,
+.desktop-demo-fork-1 .desktop-story[data-entered] .preview-paper,
+.desktop-demo-fork-1 .desktop-story[data-entered] .photos-split .weather-widget > *,
+.desktop-demo-fork-1 .desktop-story[data-entered] .desktop-photo-grid button,
+.desktop-demo-fork-1 .desktop-story[data-entered] .world-clock-widget > *,
+.desktop-demo-fork-1 .desktop-story[data-entered] .appstore-feature,
+.desktop-demo-fork-1 .desktop-story[data-entered] .appstore-shelf header,
+.desktop-demo-fork-1 .desktop-story[data-entered] .appstore-app,
+.desktop-demo-fork-1 .desktop-story[data-entered] .msg-sidebar li,
+.desktop-demo-fork-1 .desktop-story[data-entered] .cal-header,
+.desktop-demo-fork-1 .desktop-story[data-entered] .cal-grid,
+.desktop-demo-fork-1 .desktop-story[data-entered] .cal-events li {
+  animation-play-state: running;
+}
+
+@keyframes scene-cascade {
+  from { opacity: 0; translate: 0 14px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+.desktop-demo-fork-1 .desktop-story :nth-child(1) { --i: 0; }
+.desktop-demo-fork-1 .desktop-story :nth-child(2) { --i: 1; }
+.desktop-demo-fork-1 .desktop-story :nth-child(3) { --i: 2; }
+.desktop-demo-fork-1 .desktop-story :nth-child(4) { --i: 3; }
+.desktop-demo-fork-1 .desktop-story :nth-child(5) { --i: 4; }
+.desktop-demo-fork-1 .desktop-story :nth-child(6) { --i: 5; }
+.desktop-demo-fork-1 .desktop-story :nth-child(7) { --i: 6; }
+.desktop-demo-fork-1 .desktop-story :nth-child(8) { --i: 7; }
+.desktop-demo-fork-1 .desktop-story :nth-child(9) { --i: 8; }
+.desktop-demo-fork-1 .desktop-story :nth-child(10) { --i: 9; }
+.desktop-demo-fork-1 .desktop-story :nth-child(11) { --i: 10; }
+.desktop-demo-fork-1 .desktop-story :nth-child(12) { --i: 11; }
+.desktop-demo-fork-1 .desktop-story :nth-child(13) { --i: 12; }
+.desktop-demo-fork-1 .desktop-story :nth-child(14) { --i: 13; }
+
+/* message bubbles wait for the Contact scene too */
+.desktop-demo-fork-1 .desktop-story:not([data-entered]) .msg-enter {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-demo-fork-1 .desktop-demo-workspace > * {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .desktop-demo-fork-1 .desktop-story .notes-app-sidebar li,
+  .desktop-demo-fork-1 .desktop-story .notes-app-note,
+  .desktop-demo-fork-1 .desktop-story .term-block,
+  .desktop-demo-fork-1 .desktop-story .term-entry,
+  .desktop-demo-fork-1 .desktop-story .pages-sheet-header,
+  .desktop-demo-fork-1 .desktop-story .pages-sheet-list li,
+  .desktop-demo-fork-1 .desktop-story .github-widget > *,
+  .desktop-demo-fork-1 .desktop-story .preview-app-list li,
+  .desktop-demo-fork-1 .desktop-story .preview-paper,
+        .desktop-demo-fork-1 .desktop-story .photos-split .weather-widget > *,
+  .desktop-demo-fork-1 .desktop-story .desktop-photo-grid button,
+  .desktop-demo-fork-1 .desktop-story .world-clock-widget > *,
+  .desktop-demo-fork-1 .desktop-story .appstore-feature,
+  .desktop-demo-fork-1 .desktop-story .appstore-shelf header,
+  .desktop-demo-fork-1 .desktop-story .appstore-app,
+  .desktop-demo-fork-1 .desktop-story .msg-sidebar li,
+  .desktop-demo-fork-1 .desktop-story .cal-header,
+  .desktop-demo-fork-1 .desktop-story .cal-grid,
+  .desktop-demo-fork-1 .desktop-story .cal-events li {
+    opacity: 1;
+    translate: none;
+    animation: none;
+  }
+}
+
+/* switching notes or papers re-plays a quick, short version of the cascade */
+.desktop-demo-fork-1 .desktop-story[data-entered] .notes-app-note,
+.desktop-demo-fork-1 .desktop-story[data-entered] .preview-paper {
+  animation-duration: 380ms;
+  animation-delay: 0ms;
+}
+
+/* ===== Type system: SF Pro everywhere, one scale, Apple tracking ===== */
+.desktop-demo-fork-1 {
+  --font-text: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Helvetica Neue", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
+  font-family: var(--font-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1;
+}
+
+.desktop-demo-fork-1 h1,
+.desktop-demo-fork-1 h2,
+.desktop-demo-fork-1 h3,
+.desktop-demo-fork-1 h4 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+.desktop-demo-fork-1 p {
+  text-wrap: pretty;
+}
+
+/* hero: SF Pro Display, tight tracking like apple.com */
+.desktop-demo-fork-1 .intro-copy h1,
+.desktop-demo-fork-1 .intro-copy h2 {
+  font-family: var(--font-display);
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.desktop-demo-fork-1 .intro-copy h1 { font-weight: 600; }
+.desktop-demo-fork-1 .intro-copy h2 { font-weight: 700; }
+
+.desktop-demo-fork-1 .intro-copy .intro-discipline,
+.desktop-demo-fork-1 .intro-copy .intro-school {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  color: rgba(29, 29, 31, 0.56);
+}
+
+.desktop-demo-fork-1 .intro-kicker {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(29, 29, 31, 0.45);
+}
+
+/* window titles: 13px semibold, as in macOS */
+.desktop-demo-fork-1 .desktop-app-title {
+  font-family: var(--font-text);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* large in-window headings */
+.desktop-demo-fork-1 .pages-sheet-header h3,
+.desktop-demo-fork-1 .notes-note-title,
+.desktop-demo-fork-1 .appstore-hero-copy h3,
+.desktop-demo-fork-1 .gr-detail-body h3,
+.desktop-demo-fork-1 .lb-detail-body h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* Experience: a clean Pages document in SF instead of a serif */
+.desktop-demo-fork-1 .pages-sheet { font-family: var(--font-text); }
+.desktop-demo-fork-1 .pages-sheet-header h3 { font-size: 28px; }
+.desktop-demo-fork-1 .pages-entry-line strong { font-weight: 600; letter-spacing: -0.015em; }
+.desktop-demo-fork-1 .pages-entry-sub em { font-style: normal; color: rgba(29, 29, 31, 0.72); }
+
+/* Ideas note body: readable 15/24 */
+.desktop-demo-fork-1 .note-body p,
+.desktop-demo-fork-1 .note-body li {
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: -0.005em;
+}
+
+/* small uppercase captions share one style */
+.desktop-demo-fork-1 .cal-events-label,
+.desktop-demo-fork-1 .wx-days-label,
+.desktop-demo-fork-1 .gh-section-label,
+.desktop-demo-fork-1 .appstore-eyebrow,
+.desktop-demo-fork-1 .notes-app-group h4 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* numbers that change or line up use tabular figures */
+.desktop-demo-fork-1 .world-clock-widget,
+.desktop-demo-fork-1 .weather-widget,
+.desktop-demo-fork-1 .cal-grid,
+.desktop-demo-fork-1 .gh-stats,
+.desktop-demo-fork-1 .gh-calendar,
+.desktop-demo-fork-1 .pages-entry-line span,
+.desktop-demo-fork-1 .msg-thread-top time,
+.desktop-demo-fork-1 .macos-menubar {
+  font-variant-numeric: tabular-nums;
+}
+
+.desktop-demo-fork-1 .wx-temp {
+  font-family: var(--font-display);
+  font-weight: 200;
+  letter-spacing: -0.04em;
+}
+
+/* Projects: the two course folders share rows (subgrid), so art, names, notes and tags line up evenly */
+.desktop-demo-fork-1 .term-block-courses .course-folder-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(4, auto);
+  column-gap: 16px;
+}
+
+.desktop-demo-fork-1 .term-block-courses .course-folder {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  align-content: start;
+  row-gap: 6px;
+  padding: 14px;
+}
+
+.desktop-demo-fork-1 .term-block-courses .course-folder .term-tags {
+  flex-wrap: nowrap;
+  overflow: hidden;
+  padding-left: 0;
+  margin-top: 4px !important;
+}
+
+/* ===== Games: App Store editorial feature cards (os32 + Terra) ===== */
+.desktop-demo-fork-1 .appstore-features {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.desktop-demo-fork-1 .appstore-feature {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  color: #fff;
+  text-decoration: none;
+  isolation: isolate;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 10px 28px rgba(0, 0, 0, 0.16);
+}
+
+.desktop-demo-fork-1 .appstore-feature-art {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  background: #111;
+}
+
+.desktop-demo-fork-1 .appstore-feature-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.desktop-demo-fork-1 .appstore-os32-cover {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.desktop-demo-fork-1 .appstore-os32-cover iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1280px;
+  height: 800px;
+  border: 0;
+  transform-origin: 50% 50%;
+}
+
+/* scrims keep the type legible over any artwork, as on App Store cards */
+.desktop-demo-fork-1 .appstore-feature::before,
+.desktop-demo-fork-1 .appstore-feature::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.desktop-demo-fork-1 .appstore-feature::before {
+  top: 0;
+  height: 48%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+}
+
+.desktop-demo-fork-1 .appstore-feature::after {
+  bottom: 0;
+  height: 42%;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  -webkit-mask-image: linear-gradient(0deg, #000 35%, transparent);
+  mask-image: linear-gradient(0deg, #000 35%, transparent);
+}
+
+.desktop-demo-fork-1 .appstore-feature-head {
+  display: grid;
+  gap: 6px;
+  padding: 18px 20px 0;
+}
+
+.desktop-demo-fork-1 .appstore-feature-eyebrow {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.desktop-demo-fork-1 .appstore-feature-head strong {
+  max-width: 15em;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  text-wrap: balance;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
+}
+
+.desktop-demo-fork-1 .appstore-lockup {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 11px;
+  padding: 14px 16px 16px;
+}
+
+.desktop-demo-fork-1 .appstore-lockup-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 9px;
+  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.25), 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.desktop-demo-fork-1 .appstore-lockup-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.desktop-demo-fork-1 .appstore-icon-os32 {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(160deg, #3d7bf0, #1d3fae);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.desktop-demo-fork-1 .appstore-lockup-text {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.desktop-demo-fork-1 .appstore-lockup-text b {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.desktop-demo-fork-1 .appstore-lockup-text small {
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.desktop-demo-fork-1 .appstore-lockup-get {
+  min-width: 64px;
+  padding: 5px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.24);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  transition: background 160ms ease;
+}
+
+.desktop-demo-fork-1 .appstore-feature:hover .appstore-lockup-get {
+  background: rgba(255, 255, 255, 0.36);
+}
+
+/* ---- Messages: unified macOS toolbar, no stacked bars, soft hairlines ---- */
+.desktop-demo-fork-1 .desktop-app-window-contact .desktop-app-titlebar {
+  display: none;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-contact .desktop-app-window-content {
+  height: 484px;
+}
+
+.desktop-demo-fork-1 .msg-sidebar {
+  padding: 0 10px 12px;
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
+  background: #29292b;
+}
+
+.desktop-demo-fork-1 .msg-sidebar-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 6px;
+}
+
+.desktop-demo-fork-1 .msg-app-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.desktop-demo-fork-1 .msg-sidebar-toolbar strong {
+  flex: 1;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.desktop-demo-fork-1 .msg-compose-icon {
+  color: rgba(235, 235, 245, 0.6);
+  font-size: 14px;
+}
+
+.desktop-demo-fork-1 .msg-header {
+  justify-content: flex-start;
+  gap: 6px;
+  height: 52px;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: #232325;
+}
+
+.desktop-demo-fork-1 .msg-header-to {
+  color: rgba(235, 235, 245, 0.45);
+  font-size: 13px;
+}
+
+.desktop-demo-fork-1 .msg-header-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 9px 2px 3px;
+  border-radius: 999px;
+  background: rgba(10, 132, 255, 0.22);
+  color: #d6e8ff;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.desktop-demo-fork-1 .msg-header-chip .msg-avatar-small {
+  width: 18px;
+  height: 18px;
+  font-size: 9px;
+}
+
+.desktop-demo-fork-1 .msg-transcript {
+  padding-top: 18px;
+}
+
+.desktop-demo-fork-1 .msg-thread-preview {
+  -webkit-line-clamp: 1;
+  overflow-wrap: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+
+.desktop-demo-fork-1 .msg-field {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* email reads as a detected link inside the bubble, like Messages' data detectors */
+.desktop-demo-fork-1 .msg-detected {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.45);
+  text-underline-offset: 2px;
+}
+
+.desktop-demo-fork-1 .msg-detected:hover {
+  text-decoration-color: #fff;
+}
+
+.desktop-demo-fork-1 .msg-copy {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 5px;
+  margin: 2px 0 0 10px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(235, 235, 245, 0.5);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  animation: msg-fade 300ms ease 300ms both;
+  transition: color 140ms ease;
+}
+
+.desktop-demo-fork-1 .msg-copy svg {
+  font-size: 10px;
+}
+
+.desktop-demo-fork-1 .msg-copy:hover {
+  color: #64b5ff;
+}
+
+.desktop-demo-fork-1 .msg-copy.is-copied {
+  color: #30d158;
 }

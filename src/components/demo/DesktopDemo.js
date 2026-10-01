@@ -6,7 +6,9 @@ import DesktopPortfolio from './DesktopPortfolio';
 import { GoldenGateWidget } from './DesktopWidgets';
 import DesktopExtras from './DesktopExtras';
 import DesktopMediaLibraries from './DesktopMediaLibraries';
+import DesktopWallpaper from './DesktopWallpaper';
 import useRevealOnScroll from './useRevealOnScroll';
+import useScrollScenes from './useScrollScenes';
 import { profile, socialLinks } from '../../content/portfolioContent';
 import './DesktopDemo.css';
 import './DesktopShell.css';
@@ -49,7 +51,10 @@ const menuStatusLinks = [
 const scrollDesktopTo = (container, target, frameRef, reduceMotion) => {
   cancelAnimationFrame(frameRef.current);
   const start = container.scrollTop;
-  const offset = target.getBoundingClientRect().top - container.getBoundingClientRect().top;
+  // layout position (offsetTop), so the scroll-linked scene transforms don't skew the destination
+  let offset = 0;
+  for (let el = target; el && el !== container; el = el.offsetParent) offset += el.offsetTop;
+  offset -= start;
   const end = Math.max(0, Math.min(container.scrollHeight - container.clientHeight, start + offset - 52));
 
   if (reduceMotion) {
@@ -75,6 +80,7 @@ const DesktopDemo = ({ variant = 1 }) => {
   const desktopRef = useRef(null);
   const scrollFrameRef = useRef(null);
   useRevealOnScroll(desktopRef);
+  useScrollScenes(desktopRef);
 
   const handleSectionSelect = useCallback((section) => {
     setActiveSection(section);
@@ -90,19 +96,28 @@ const DesktopDemo = ({ variant = 1 }) => {
     const scrollFrame = scrollFrameRef;
     if (!desktop) return undefined;
     let frame;
+    // scroll events already arrive once per frame, so update in place
     const updateActiveSection = () => {
       cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
+      frame = 0;
+      (() => {
         setIsMenuCompact(desktop.scrollTop > 40);
-        const targets = Object.keys(targetSections)
-          .map((id) => document.getElementById(id))
-          .filter(Boolean);
-        const current = targets.reduce((best, target) => {
-          const distance = Math.abs(target.getBoundingClientRect().top - 72);
-          return !best || distance < best.distance ? { target, distance } : best;
-        }, null);
-        if (current) setActiveSection(targetSections[current.target.id]);
-      });
+        // the section under the reading line (35% down the viewport) is active; measured by layout position
+        // so the scroll-linked scene transforms don't skew it. The books/films row has no menu item.
+        const line = desktop.scrollTop + desktop.clientHeight * 0.35;
+        const atBottom = desktop.scrollTop + desktop.clientHeight >= desktop.scrollHeight - 4;
+        const scenes = Array.from(desktop.querySelectorAll('.desktop-demo-workspace > *'));
+        const layoutTop = (el) => {
+          let top = 0;
+          for (let node = el; node && node !== desktop; node = node.offsetParent) top += node.offsetTop;
+          return top;
+        };
+        let current = scenes[0];
+        scenes.forEach((scene) => { if (layoutTop(scene) <= line) current = scene; });
+        if (atBottom) current = scenes[scenes.length - 1];
+        const id = current?.id || current?.querySelector('[id]')?.id;
+        setActiveSection(targetSections[id] ?? '');
+      })();
     };
     desktop.addEventListener('scroll', updateActiveSection, { passive: true });
     return () => {
@@ -114,6 +129,7 @@ const DesktopDemo = ({ variant = 1 }) => {
 
   return (
     <main ref={desktopRef} className={`desktop-demo desktop-demo-fork-${variant}`} aria-label="macOS desktop layout demo">
+      <DesktopWallpaper />
       <MenuBar
         activeSection={activeSection}
         compact={isMenuCompact}

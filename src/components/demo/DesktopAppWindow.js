@@ -9,7 +9,6 @@ const apps = {
   photos: { title: 'Photos', icon: '/icons/dock/photos.png' },
   playground: { title: 'Games', icon: '/icons/dock/games.png' },
   contact: { title: 'Contact', icon: '/icons/dock/messages.png' },
-  aboutSite: { title: 'About This Site', icon: '/icons/dock/finder.png' },
   goodreads: { title: 'Goodreads', Icon: FaBookOpen },
   letterboxd: { title: 'Letterboxd', Icon: FaFilm },
 };

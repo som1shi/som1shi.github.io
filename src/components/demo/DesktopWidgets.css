@@ -839,7 +839,7 @@
 }
 
 .desktop-demo-fork-1 .research-split .clock-number {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Rounded", "SF Pro Display", sans-serif;
+  font-family: var(--font-display);
   font-size: 14px;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -924,7 +924,7 @@
   gap: 18px;
   padding: 20px 20px 18px;
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  font-family: var(--font-display);
   background: linear-gradient(180deg, #2a7bd4 0%, #5aa3ea 100%);
 }
 

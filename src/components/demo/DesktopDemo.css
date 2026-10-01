@@ -425,7 +425,7 @@
   gap: 12px;
   padding: 24px;
   color: rgba(255, 255, 255, 0.56);
-  font-family: "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 12px;
 }
 
@@ -553,7 +553,7 @@
 
 .desktop-demo-widgets {
   display: contents;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+  font-family: var(--font-display);
 }
 
 .desktop-widget {

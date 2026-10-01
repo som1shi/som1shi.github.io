@@ -1,19 +1,7 @@
-import React, { useMemo, useState } from 'react';
-import {
-  FaCheck,
-  FaCode,
-  FaDesktop,
-  FaDiceFive,
-  FaEnvelope,
-  FaFileAlt,
-  FaImage,
-} from 'react-icons/fa';
-import { games, photos, profile, research, socialLinks } from '../../content/portfolioContent';
+import React, { useMemo } from 'react';
 import mediaLibrary from '../../content/mediaLibrary.json';
-import DesktopAppWindow from './DesktopAppWindow';
 
 const WEEKDAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-const REPO_URL = 'https://github.com/som1shi/som1shi.github.io';
 
 const localIso = (date) => [
   date.getFullYear(),
@@ -98,84 +86,3 @@ export const CalendarWidget = () => {
     </section>
   );
 };
-
-const pick = (list) => list[Math.floor(Math.random() * list.length)];
-
-// Shortcuts: one-tap actions, tiled like the Shortcuts widget.
-export const ShortcutsWidget = ({ onOpenPhoto }) => {
-  const [copied, setCopied] = useState(false);
-
-  const copyEmail = () => {
-    navigator.clipboard?.writeText(profile.email).then(() => {
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
-    }).catch(() => {});
-  };
-
-  const shortcuts = [
-    { id: 'email', label: copied ? 'Copied' : 'Copy Email', Icon: copied ? FaCheck : FaEnvelope, onClick: copyEmail },
-    { id: 'os32', label: 'Open os32', Icon: FaDesktop, href: socialLinks.os32 },
-    { id: 'paper', label: 'Read the Paper', Icon: FaFileAlt, href: research[0].url },
-    { id: 'photo', label: 'Random Photo', Icon: FaImage, onClick: () => onOpenPhoto?.(pick(photos)) },
-    { id: 'game', label: 'Surprise Game', Icon: FaDiceFive, onClick: () => { window.location.href = pick(games).route; } },
-    { id: 'source', label: 'View Source', Icon: FaCode, href: REPO_URL },
-  ];
-
-  return (
-    <section className="desktop-widget shortcuts-widget" aria-label="Shortcuts widget" data-reveal>
-      {shortcuts.map(({ id, label, Icon, href, onClick }) => {
-        const content = (
-          <>
-            <Icon aria-hidden="true" />
-            <span>{label}</span>
-          </>
-        );
-        return href ? (
-          <a className={`shortcut shortcut-${id}`} href={href} target="_blank" rel="noopener noreferrer" key={id}>{content}</a>
-        ) : (
-          <button type="button" className={`shortcut shortcut-${id}`} onClick={onClick} key={id} aria-live={id === 'email' ? 'polite' : undefined}>
-            {content}
-          </button>
-        );
-      })}
-    </section>
-  );
-};
-
-const syncedOn = new Date(mediaLibrary.syncedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-const filmCount = Object.values(mediaLibrary.films).flat().length;
-
-// About This Site, in the shape of About This Mac.
-export const AboutSiteWindow = () => (
-  <DesktopAppWindow app="aboutSite">
-    <div className="about-site">
-      <div className="about-site-machine" aria-hidden="true">
-        <div className="about-site-screen">
-          <span className="about-site-menubar" />
-          <span className="about-site-card" />
-          <span className="about-site-widget" />
-          <span className="about-site-widget about-site-widget-photo" />
-        </div>
-        <div className="about-site-base" />
-      </div>
-
-      <div className="about-site-copy">
-        <h3>som1shi.github.io</h3>
-        <span className="about-site-version">Version 2026.{new Date(mediaLibrary.syncedAt).getMonth() + 1}</span>
-        <dl>
-          <div><dt>Built with</dt><dd>React · CSS, no UI kit</dd></div>
-          <div><dt>Library</dt><dd>{mediaLibrary.books.length} books · {filmCount} films</dd></div>
-          <div><dt>Sources</dt><dd>Goodreads · Letterboxd</dd></div>
-          <div><dt>Last synced</dt><dd>{syncedOn}</dd></div>
-          <div><dt>Live data</dt><dd>GitHub activity · San Francisco weather</dd></div>
-          <div><dt>Photos</dt><dd>{photos.length} photographs</dd></div>
-          <div><dt>Location</dt><dd>{profile.location}</dd></div>
-        </dl>
-        <div className="about-site-actions">
-          <a href={REPO_URL} target="_blank" rel="noopener noreferrer">View Source</a>
-          <a href={socialLinks.github} target="_blank" rel="noopener noreferrer">More Projects</a>
-        </div>
-      </div>
-    </div>
-  </DesktopAppWindow>
-);

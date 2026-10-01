@@ -34,7 +34,6 @@ const PreviewApp = () => {
     <div className="preview-app">
       <div className="preview-app-toolbar" aria-hidden="true">
         <span>{selected.title}</span>
-        <span>Page {selectedIndex + 1} of {research.length}</span>
       </div>
       <nav className="notes-app-sidebar preview-app-list" aria-label="Research papers">
         <div className="notes-app-folder"><span>Research</span><strong>{research.length} papers</strong></div>
@@ -155,7 +154,6 @@ const NotesApp = () => {
   return (
     <div className="notes-app">
       <nav className="notes-app-sidebar" aria-label="Notes">
-        <div className="notes-app-folder"><span>Ideas</span><strong>{notes.length} notes</strong></div>
         {groups.map((group) => (
           <section className="notes-app-group" key={group.label} aria-label={group.label}>
             <h4>{group.label}</h4>
@@ -183,7 +181,7 @@ const NotesApp = () => {
         ))}
       </nav>
       {selected && (
-        <article className="notes-app-note" aria-label={selected.title}>
+        <article className="notes-app-note" aria-label={selected.title} key={selected.id}>
           <div className="desktop-about-copy note-body">
             {selected.date && (
               <time className="notes-note-stamp" dateTime={selected.date}>
@@ -205,7 +203,7 @@ const DesktopPortfolio = () => {
 
   return (
     <>
-      <section id="about" className="desktop-story desktop-about" aria-label="Ideas" data-reveal>
+      <section id="about" className="desktop-story desktop-about" aria-label="Ideas">
         <DesktopAppWindow app="about">
           <NotesApp />
         </DesktopAppWindow>

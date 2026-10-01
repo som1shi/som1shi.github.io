@@ -20,7 +20,7 @@
 .media-caption strong {
   max-width: 100%;
   overflow: hidden;
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: var(--font-display);
   font-size: 18px;
   font-weight: 500;
   letter-spacing: -0.01em;
@@ -324,7 +324,7 @@
 
 .book-detail-copy h3 {
   margin: 4px 0 0;
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(28px, 3.4vw, 42px);
   font-weight: 500;
   letter-spacing: -0.015em;
@@ -1139,7 +1139,7 @@
 }
 
 .desktop-demo-fork-1 .poster-zoom-copy p {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: var(--font-display);
   font-style: italic;
 }
 
@@ -1211,7 +1211,7 @@
 }
 
 .desktop-demo-fork-1 .book-detail-review {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: var(--font-display);
   font-style: italic;
 }
 
@@ -1312,7 +1312,7 @@
   overflow-y: auto;
   background: #f9f7f4;
   color: #1e1915;
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  font-family: var(--font-text);
   animation: gr-in 320ms ease both;
 }
 
@@ -1381,7 +1381,7 @@
 
 .desktop-demo-fork-1 .gr-detail-body h3 {
   margin: 0;
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: var(--font-display);
   font-size: 28px;
   font-weight: 700;
   line-height: 1.12;
@@ -1432,7 +1432,7 @@
   border-top: 1px solid #e3ded4;
   border-bottom: 1px solid #e3ded4;
   color: #1e1915;
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
   font-size: 15px;
   line-height: 1.5;
 }
@@ -1441,7 +1441,7 @@
   display: block;
   margin-bottom: 4px;
   color: #767676;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-text);
   font-size: 11px;
   font-weight: 600;
 }
@@ -1469,7 +1469,7 @@
   overflow: hidden;
   background: #14181c;
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  font-family: var(--font-text);
   animation: gr-in 320ms ease both;
 }
 
@@ -1509,7 +1509,7 @@
 
 .desktop-demo-fork-1 .lb-detail-body h3 {
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-display);
   font-size: 30px;
   font-weight: 700;
   line-height: 1.1;
@@ -1517,7 +1517,7 @@
 
 .desktop-demo-fork-1 .lb-year {
   color: #9ab;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-text);
   font-size: 16px;
   font-weight: 400;
   text-decoration: underline;
@@ -1919,7 +1919,7 @@
 }
 
 .desktop-demo-fork-1 .stack-spine-author {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-family: var(--font-text);
   font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -1949,7 +1949,7 @@
 
 .desktop-demo-fork-1 .gr-detail .gr-author {
   color: rgba(29, 29, 31, 0.7);
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-text);
 }
 
 .desktop-demo-fork-1 .gr-detail .gr-stars {
@@ -2003,7 +2003,7 @@
 .desktop-demo-fork-1 .poster-group .poster-marquee span {
   padding: 5px 0 3px;
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-family: var(--font-text);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.24em;
@@ -2065,7 +2065,7 @@
 
 .desktop-demo-fork-1 .gr-back {
   color: rgba(245, 242, 234, 0.65);
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-text);
 }
 
 .desktop-demo-fork-1 .gr-back:hover {
@@ -2234,7 +2234,7 @@
 
 .desktop-demo-fork-1 .stack-bookmark span {
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-family: var(--font-text);
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -2431,7 +2431,7 @@
 
 .desktop-demo-fork-1 .stack-shelf-front span {
   color: rgba(255, 238, 214, 0.82);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-family: var(--font-text);
   font-size: 7.5px;
   font-weight: 700;
   letter-spacing: 0.22em;

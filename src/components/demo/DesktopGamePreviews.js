@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { socialLinks } from '../../content/portfolioContent';
-import Os32LivePreview from './Os32LivePreview';
 
 const mineValues = {
   9: '1',
@@ -116,29 +115,78 @@ const categories = {
   wikiconnect: 'Trivia',
 };
 
+const TERRA_URL = 'https://terrawebgpu.vercel.app/';
+
+// os32 running live, scaled to cover the card like App Store artwork (non-interactive; the card is the link)
+const Os32Cover = () => {
+  const ref = useRef(null);
+  const [scale, setScale] = useState(0.4);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !('ResizeObserver' in window)) return undefined;
+    const observer = new ResizeObserver(([entry]) => {
+      const { width, height } = entry.contentRect;
+      setScale(Math.max(width / 1280, height / 800));
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return (
+    <span className="appstore-os32-cover" ref={ref}>
+      <iframe src={socialLinks.os32} title="os32" loading="lazy" tabIndex="-1" aria-hidden="true" style={{ transform: `translate(-50%, -50%) scale(${scale})` }} />
+    </span>
+  );
+};
+
+const FEATURES = [
+  {
+    id: 'os32',
+    url: socialLinks.os32,
+    eyebrow: 'Editors’ Choice',
+    headline: 'A whole retro desktop, right in your browser',
+    name: 'os32',
+    subtitle: 'Web operating system',
+    art: <Os32Cover />,
+    icon: <span className="appstore-icon-os32">32</span>,
+  },
+  {
+    id: 'terra',
+    url: TERRA_URL,
+    eyebrow: 'Now on WebGPU',
+    headline: 'Endless worlds, generated as you fly',
+    name: 'Terra',
+    subtitle: 'Procedural world renderer',
+    art: <img src="/projects/terra.webp" alt="" loading="lazy" decoding="async" />,
+    icon: <img src="/projects/terra-icon.webp" alt="" />,
+  },
+];
+
 // Games as the App Store: os32 is the featured story, the other games sit on a shelf of app icons.
 const DesktopGamePreviews = ({ games }) => (
   <div className="appstore">
-    <section className="appstore-hero" aria-label="Featured: os32">
-      <div className="appstore-hero-media">
-        <Os32LivePreview />
-      </div>
-      <div className="appstore-hero-copy">
-        <span className="appstore-eyebrow">Editors’ Choice</span>
-        <h3>os32</h3>
-        <span className="appstore-subtitle">Web operating system</span>
-        <p>A retro desktop in the browser with a file system, terminal, browser, and built-in apps, including every game below.</p>
-        <div className="appstore-hero-actions">
-          <a className="appstore-get appstore-get-primary" href={socialLinks.os32} target="_blank" rel="noopener noreferrer">Get</a>
-          <span>Free · Runs in your browser</span>
-        </div>
-      </div>
+    <section className="appstore-features" aria-label="Featured">
+      {FEATURES.map((feature) => (
+        <a className={`appstore-feature appstore-feature-${feature.id}`} href={feature.url} target="_blank" rel="noopener noreferrer" key={feature.id}>
+          <span className="appstore-feature-art" aria-hidden="true">{feature.art}</span>
+          <span className="appstore-feature-head">
+            <span className="appstore-feature-eyebrow">{feature.eyebrow}</span>
+            <strong>{feature.headline}</strong>
+          </span>
+          <span className="appstore-lockup">
+            <span className="appstore-lockup-icon" aria-hidden="true">{feature.icon}</span>
+            <span className="appstore-lockup-text">
+              <b>{feature.name}</b>
+              <small>{feature.subtitle}</small>
+            </span>
+            <span className="appstore-lockup-get">Get</span>
+          </span>
+        </a>
+      ))}
     </section>
 
     <section className="appstore-shelf" aria-label="More games">
       <header>
         <h4>More Games</h4>
-        <span>{games.length} apps</span>
       </header>
       <ul>
         {games.map((game) => (
