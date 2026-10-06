@@ -89,28 +89,44 @@ const PreviewApp = () => {
 };
 
 // Experience as a Pages document: a typeset résumé on a sheet of paper.
+// "July 2026 – Present" -> 2026, "Summer 2025" -> 2025
+const yearOf = (date) => (date.match(/\d{4}/) || [''])[0];
+const seasonOf = (date) => date.replace(/\s*\d{4}.*$/, '').trim();
+
 const PagesResume = () => (
   <div className="pages-app">
     <article className="pages-sheet">
       <header className="pages-sheet-header">
-        <h3>Experience</h3>
+        <div>
+          <h3>Experience</h3>
+          <span className="pages-sheet-sub">{experiences.length} roles · {yearOf(experiences[experiences.length - 1].date)}–now</span>
+        </div>
         <ExternalLink href={socialLinks.linkedin} className="pages-sheet-link">
           LinkedIn <FaExternalLinkAlt />
         </ExternalLink>
       </header>
-      <ol className="pages-sheet-list">
-        {experiences.map((item) => (
-          <li key={item.id}>
-            <div className="pages-entry-line">
-              <strong>{item.company}</strong>
-              <span>{item.date}</span>
-            </div>
-            <div className="pages-entry-line pages-entry-sub">
-              <em>{item.role}</em>
-              <span>{item.location}</span>
-            </div>
-          </li>
-        ))}
+      <ol className="xp-timeline">
+        {experiences.map((item, index) => {
+          const year = yearOf(item.date);
+          const showYear = index === 0 || yearOf(experiences[index - 1].date) !== year;
+          const current = /present/i.test(item.date);
+          return (
+            <li className={`xp-row${current ? ' is-current' : ''}`} key={item.id}>
+              <span className="xp-year">{showYear ? year : ''}</span>
+              <span className="xp-dot" aria-hidden="true" />
+              <div className="xp-body">
+                <div className="xp-line">
+                  <strong>{item.company}</strong>
+                  {current ? <span className="xp-now">Now</span> : seasonOf(item.date) && <span className="xp-season">{seasonOf(item.date)}</span>}
+                </div>
+                <div className="xp-line xp-sub">
+                  <span>{item.role}</span>
+                  <span className="xp-place">{item.location}</span>
+                </div>
+              </div>
+            </li>
+          );
+        })}
       </ol>
     </article>
   </div>
@@ -244,8 +260,7 @@ const DesktopPortfolio = () => {
             </div>
 
           <div className="project-terminal" aria-label="More projects">
-            <p className="term-line"><span className="term-prompt">sarvagya@macbook ~ %</span> ls -l ~/projects</p>
-            <p className="term-muted">total {remainingProjects.length}</p>
+            <p className="term-line"><span className="term-prompt">sarvagya@macbook ~ %</span> ls ~/projects</p>
             <div className="term-listing">
             {remainingProjects.map((project) => {
               const slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -253,9 +268,8 @@ const DesktopPortfolio = () => {
               return (
                 <div className="term-entry" key={project.id}>
                   <p className="term-line">
-                    <span className="term-muted">{project.url ? 'drwxr-xr-x' : 'drwx------'}</span>{' '}
-                    {project.url ? <ExternalLink href={project.url}>{name}</ExternalLink> : name}
-                    {!project.url && <span className="term-private"> (private)</span>}
+                    {project.url ? <ExternalLink href={project.url}>{name} <span className="term-link-mark">↗</span></ExternalLink> : name}
+                    {!project.url && <span className="term-private"> private</span>}
                   </p>
                   <p className="term-comment"># {project.description}</p>
                   <p className="term-tags">{project.technologies.map((tech) => <span key={tech}>{tech}</span>)}</p>

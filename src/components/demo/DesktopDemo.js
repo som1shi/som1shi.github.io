@@ -146,7 +146,13 @@ const DesktopDemo = ({ variant = 1 }) => {
               <span className="intro-kicker">{profile.location}</span>
               <div className="intro-copy">
                 <h1>Hello</h1>
-                <h2>I’m {profile.name}</h2>
+                <h2>
+                  I’m{' '}
+                  <span className="intro-name" lang="hi" aria-label={`${profile.name} (सर्वज्ञ)`}>
+                    <span className="intro-name-latin" aria-hidden="true">{profile.name}</span>
+                    <span className="intro-name-devanagari" aria-hidden="true">सर्वज्ञ</span>
+                  </span>
+                </h2>
                 <p className="intro-discipline">
                   Software at <strong className="intro-accent intro-accent-vals" data-text="Vals AI">Vals AI</strong>
                 </p>
