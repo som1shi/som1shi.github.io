@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { FaChevronLeft } from 'react-icons/fa';
 import DesktopAppWindow from './DesktopAppWindow';
 import mediaLibrary from '../../content/mediaLibrary.json';
 
@@ -134,8 +135,9 @@ const BookDetail = ({ item, onClose }) => {
   }, [onClose]);
 
   return (
-    <div className="gr-detail" style={colors} role="region" aria-label={`${item.title} details`}>
-      <button type="button" ref={closeRef} className="gr-back" onClick={onClose}>‹ My books</button>
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
+    <div className="gr-detail media-dismissable" style={colors} role="region" aria-label={`${item.title} details`} onClick={(event) => { if (!event.target.closest('a')) onClose(); }}>
+      <button type="button" ref={closeRef} className="media-toolbar-back" onClick={onClose} aria-label="Back to bookshelf"><FaChevronLeft aria-hidden="true" /><span>Bookshelf</span></button>
       <div className="book-detail-object-wrap gr-detail-book">
         <div className="shelf-book-object" aria-hidden="true">
           <div className="shelf-book-front shelf-book-front-image">
@@ -210,9 +212,10 @@ const PosterZoom = ({ item, onClose }) => {
   }, [onClose]);
 
   return (
-    <div className="lb-detail" role="region" aria-label={`${item.title} details`}>
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
+    <div className="lb-detail media-dismissable" role="region" aria-label={`${item.title} details`} onClick={(event) => { if (!event.target.closest('a')) onClose(); }}>
       {item.poster && <div className="lb-backdrop" style={{ backgroundImage: `url(${item.poster})` }} aria-hidden="true" />}
-      <button type="button" ref={closeRef} className="lb-back" onClick={onClose}>‹ Diary</button>
+      <button type="button" ref={closeRef} className="media-toolbar-back" onClick={onClose} aria-label="Back to films"><FaChevronLeft aria-hidden="true" /><span>Films</span></button>
       <div className="lb-detail-poster">
         {item.poster && <img src={item.poster} alt={`${item.title} poster`} />}
       </div>

@@ -775,32 +775,6 @@
   color: #1d1d1f;
 }
 
-.desktop-demo-fork-1 .appstore-hero {
-  flex: 1;
-  min-height: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  align-items: center;
-  gap: 34px;
-  padding: 26px 34px 26px 26px;
-  border-radius: 20px;
-  background:
-    radial-gradient(120% 90% at 0% 0%, rgba(90, 150, 255, 0.35), transparent 55%),
-    radial-gradient(80% 80% at 100% 100%, rgba(120, 80, 255, 0.22), transparent 60%),
-    #14161d;
-  color: #fff;
-}
-
-.desktop-demo-fork-1 .appstore-hero-media {
-  min-width: 0;
-}
-
-.desktop-demo-fork-1 .appstore-hero-media .os32-live {
-  width: 100%;
-  max-width: none;
-  margin: 0;
-}
-
 .desktop-demo-fork-1 .appstore-eyebrow {
   color: #6cb6ff;
   font-size: 11px;
@@ -809,39 +783,12 @@
   text-transform: uppercase;
 }
 
-.desktop-demo-fork-1 .appstore-hero-copy h3 {
-  margin: 6px 0 0;
-  font-size: 44px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1;
-}
-
 .desktop-demo-fork-1 .appstore-subtitle {
   display: block;
   margin-top: 6px;
   color: rgba(235, 235, 245, 0.6);
   font-size: 14px;
   font-weight: 500;
-}
-
-.desktop-demo-fork-1 .appstore-hero-copy p {
-  margin: 14px 0 0;
-  color: rgba(235, 235, 245, 0.82);
-  font-size: 14px;
-  line-height: 1.45;
-}
-
-.desktop-demo-fork-1 .appstore-hero-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-.desktop-demo-fork-1 .appstore-hero-actions span {
-  color: rgba(235, 235, 245, 0.55);
-  font-size: 11.5px;
 }
 
 .desktop-demo-fork-1 .appstore-get {
@@ -954,26 +901,6 @@
 .desktop-demo-fork-1 .appstore-app:hover .appstore-get {
   background: #0a84ff;
   color: #fff;
-}
-
-.desktop-demo-fork-1 .appstore-hero-media .os32-live {
-  position: relative;
-  inset: auto;
-  display: block;
-  transform: none;
-}
-
-.desktop-demo-fork-1 .appstore-hero-media {
-  display: grid;
-  justify-items: center;
-}
-
-.desktop-demo-fork-1 .appstore-hero-media .os32-live {
-  width: min(100%, 440px);
-}
-
-.desktop-demo-fork-1 .appstore-hero-media .os32-live {
-  width: min(100%, 392px);
 }
 
 .desktop-demo-fork-1 .appstore-app {
@@ -1208,16 +1135,6 @@
   overflow-y: auto;
 }
 
-.desktop-demo-fork-1 .msg-stamp {
-  align-self: center;
-  margin-bottom: 10px;
-  color: rgba(235, 235, 245, 0.45);
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 1.35;
-  text-align: center;
-}
-
 .desktop-demo-fork-1 .msg-bubble {
   max-width: 66%;
   margin: 0;
@@ -1437,42 +1354,6 @@
 
 .desktop-demo-fork-1 .msg-field:focus-within {
   border-color: rgba(10, 132, 255, 0.7);
-}
-
-/* copyable email inside Sarvagya's reply */
-.desktop-demo-fork-1 .msg-email-bubble {
-  display: grid;
-  gap: 8px;
-}
-
-.desktop-demo-fork-1 .msg-email {
-  display: inline-flex;
-  align-items: center;
-  justify-self: start;
-  gap: 7px;
-  padding: 6px 10px;
-  border: 0;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #64b5ff;
-  font: inherit;
-  font-size: 12.5px;
-  cursor: pointer;
-  transition: background 160ms ease, color 160ms ease;
-}
-
-.desktop-demo-fork-1 .msg-email span {
-  color: #f5f5f7;
-  font-family: var(--font-mono);
-  font-size: 12px;
-}
-
-.desktop-demo-fork-1 .msg-email:hover {
-  background: rgba(255, 255, 255, 0.13);
-}
-
-.desktop-demo-fork-1 .msg-email.is-copied {
-  color: #30d158;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2051,4 +1932,310 @@
 
 .desktop-demo-fork-1 .msg-copy.is-copied {
   color: #30d158;
+}
+
+/* ===== Weather forecast: rows share the height evenly, bars coloured by temperature, a dot for now ===== */
+.desktop-demo-fork-1 .photos-split .weather-widget {
+  gap: 14px;
+  padding: 20px 18px 14px;
+}
+
+.desktop-demo-fork-1 .wx-days {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.desktop-demo-fork-1 .wx-days-label {
+  flex: none;
+  padding: 0 2px 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.desktop-demo-fork-1 .wx-day {
+  flex: 1;
+  min-height: 0;
+  grid-template-columns: 44px 22px 34px minmax(0, 1fr) 34px;
+  gap: 10px;
+  padding: 0 2px;
+  border-top: 0;
+  font-size: 14px;
+}
+
+.desktop-demo-fork-1 .wx-day + .wx-day {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.desktop-demo-fork-1 .wx-day svg {
+  justify-self: center;
+  font-size: 16px;
+}
+
+.desktop-demo-fork-1 .wx-day-low {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.desktop-demo-fork-1 .wx-range {
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.desktop-demo-fork-1 .wx-range i {
+  border-radius: 3px;
+}
+
+.desktop-demo-fork-1 .wx-now-dot {
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.18);
+  transform: translate(-50%, -50%);
+}
+
+/* ===== Goodreads + Letterboxd: the titlebar floats over the stage, so it is always the stage's own colour
+   (including the open book/film views, whose backdrops now run up under it) ===== */
+.desktop-demo-fork-1 .desktop-app-window-goodreads,
+.desktop-demo-fork-1 .desktop-app-window-letterboxd {
+  position: relative;
+}
+
+.desktop-demo-fork-1 .desktop-app-window-goodreads .desktop-app-titlebar,
+.desktop-demo-fork-1 .desktop-app-window-letterboxd .desktop-app-titlebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 6;
+  border-bottom: 0;
+  background: transparent;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+@media (min-width: 901px) {
+  .desktop-demo-fork-1 .desktop-media-row .desktop-media-stage {
+    height: 640px;
+    padding-top: var(--titlebar-height);
+    box-sizing: border-box;
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-goodreads .desktop-app-window-content,
+  .desktop-demo-fork-1 .desktop-app-window-letterboxd .desktop-app-window-content {
+    height: 640px;
+  }
+}
+
+.desktop-demo-fork-1 .gr-detail {
+  padding-top: calc(64px + var(--titlebar-height));
+}
+
+.desktop-demo-fork-1 .lb-detail {
+  padding-top: calc(56px + var(--titlebar-height));
+}
+
+.desktop-demo-fork-1 .gr-back,
+.desktop-demo-fork-1 .lb-back {
+  top: calc(18px + var(--titlebar-height));
+}
+
+/* 10-day list: tighter rows, as in the Weather app */
+.desktop-demo-fork-1 .wx-day {
+  font-size: 13px;
+}
+
+.desktop-demo-fork-1 .wx-day svg {
+  font-size: 14px;
+}
+
+/* open book/film: a round glass close button top-right, like an App Store story, instead of text back links */
+.desktop-demo-fork-1 .media-close {
+  top: calc(14px + var(--titlebar-height));
+  right: 16px;
+  left: auto;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  backdrop-filter: blur(12px) saturate(1.4);
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 12px;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+/* weather: compact columns so the row reads left to right without a hole after the icon */
+.desktop-demo-fork-1 .wx-day {
+  grid-template-columns: 42px 18px 30px minmax(0, 1fr) 30px;
+  gap: 8px;
+}
+
+.desktop-demo-fork-1 .wx-day svg {
+  justify-self: start;
+}
+
+/* range track: a faint light groove (not a dark slab), so the stretch before a day's low doesn't read as a gap */
+.desktop-demo-fork-1 .wx-range {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.desktop-demo-fork-1 .wx-range i {
+  border-radius: 2px;
+}
+
+/* Sarvagya's memoji avatar, cropped to a circle on its own lilac */
+.desktop-demo-fork-1 .msg-avatar.has-photo {
+  overflow: hidden;
+  background: #d9cdf5;
+}
+
+.desktop-demo-fork-1 .msg-avatar.has-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* open book/film: no visible close button; clicking the view (or Esc) closes it.
+   The button stays for keyboard users and appears only on keyboard focus. */
+.desktop-demo-fork-1 .media-dismissable {
+  cursor: zoom-out;
+}
+
+.desktop-demo-fork-1 .media-dismissable a {
+  cursor: pointer;
+}
+
+/* back: a macOS toolbar chevron in the window's titlebar (top-left), like Finder or the App Store */
+.desktop-demo-fork-1 .media-toolbar-back {
+  position: absolute;
+  top: calc((var(--titlebar-height) - 28px) / 2);
+  left: 12px;
+  z-index: 7;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 140ms ease, color 140ms ease;
+  animation: msg-fade 260ms ease both;
+}
+
+.desktop-demo-fork-1 .media-toolbar-back:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.desktop-demo-fork-1 .media-toolbar-back:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* back chevron: same box as the titlebar, so it sits exactly on the title's centre line */
+.desktop-demo-fork-1 .media-toolbar-back {
+  top: 0;
+  height: var(--titlebar-height);
+  background: transparent !important;
+}
+
+.desktop-demo-fork-1 .media-toolbar-back svg {
+  padding: 6px 8px;
+  border-radius: 7px;
+  box-sizing: content-box;
+  transition: background 140ms ease;
+}
+
+.desktop-demo-fork-1 .media-toolbar-back:hover svg {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.desktop-demo-fork-1 .media-toolbar-back:focus-visible {
+  outline: none;
+}
+
+.desktop-demo-fork-1 .media-toolbar-back:focus-visible svg {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.55);
+}
+
+/* back chevron sits just below the titlebar, top-left of the open book/film */
+.desktop-demo-fork-1 .media-toolbar-back {
+  top: calc(var(--titlebar-height) + 6px);
+  left: 14px;
+  height: 32px;
+}
+
+/* iOS-style navigation back: accent chevron + section name */
+.desktop-demo-fork-1 .media-toolbar-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  width: auto;
+  height: 32px;
+  padding: 0 8px 0 4px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.desktop-demo-fork-1 .media-toolbar-back svg {
+  padding: 0;
+  font-size: 17px;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.desktop-demo-fork-1 .gr-detail .media-toolbar-back { color: #efe1c1; }
+.desktop-demo-fork-1 .lb-detail .media-toolbar-back { color: #40bcf4; }
+
+.desktop-demo-fork-1 .media-toolbar-back:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  filter: brightness(1.12);
+}
+
+.desktop-demo-fork-1 .media-toolbar-back:focus-visible {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.45);
+}
+
+/* photo viewer: iOS-style "‹ Photos" back, top-left, matching the book and film views */
+.desktop-demo-fork-1 .desktop-lightbox .lightbox-back {
+  top: 20px;
+  right: auto;
+  left: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  width: auto;
+  height: 34px;
+  padding: 0 10px 0 6px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #0a84ff;
+  font: 500 16px/1 var(--font-text);
+  letter-spacing: -0.01em;
+  transition: background 140ms ease;
+}
+
+.desktop-demo-fork-1 .desktop-lightbox .lightbox-back svg {
+  font-size: 18px;
+}
+
+.desktop-demo-fork-1 .desktop-lightbox .lightbox-back:hover {
+  background: rgba(255, 255, 255, 0.08);
 }

@@ -284,7 +284,7 @@ const describeWeather = (code, isDay = true) => {
 const WEATHER_URL = 'https://api.open-meteo.com/v1/forecast?latitude=37.7749&longitude=-122.4194'
   + '&current=temperature_2m,weather_code,is_day&hourly=temperature_2m,weather_code,is_day'
   + '&daily=weather_code,temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit'
-  + '&timezone=America%2FLos_Angeles&forecast_days=8';
+  + '&timezone=America%2FLos_Angeles&forecast_days=11';
 
 const useSanFranciscoWeather = () => {
   const [weather, setWeather] = useState(null);
@@ -302,7 +302,7 @@ const useSanFranciscoWeather = () => {
           code: data.hourly.weather_code[nowIndex + i],
           isDay: data.hourly.is_day[nowIndex + i] === 1,
         }));
-        const days = data.daily.time.slice(0, 7).map((date, i) => ({
+        const days = data.daily.time.slice(0, 10).map((date, i) => ({
           name: i === 0 ? 'Today' : new Date(`${date}T12:00:00`).toLocaleDateString('en-US', { weekday: 'short' }),
           code: data.daily.weather_code[i],
           high: Math.round(data.daily.temperature_2m_max[i]),
@@ -328,6 +328,21 @@ const useSanFranciscoWeather = () => {
   }, []);
 
   return weather;
+};
+
+// Apple Weather colours a range bar by the temperatures it covers (°F): cold blue through green and yellow to hot red
+const TEMP_STOPS = [[32, [94, 168, 255]], [50, [90, 200, 250]], [60, [125, 220, 190]], [68, [212, 225, 87]], [75, [255, 214, 10]], [84, [255, 159, 10]], [95, [255, 69, 58]]];
+const tempColor = (t) => {
+  if (t <= TEMP_STOPS[0][0]) return `rgb(${TEMP_STOPS[0][1].join(',')})`;
+  for (let i = 1; i < TEMP_STOPS.length; i += 1) {
+    const [t1, c1] = TEMP_STOPS[i];
+    const [t0, c0] = TEMP_STOPS[i - 1];
+    if (t <= t1) {
+      const k = (t - t0) / (t1 - t0);
+      return `rgb(${c0.map((v, j) => Math.round(v + (c1[j] - v) * k)).join(',')})`;
+    }
+  }
+  return `rgb(${TEMP_STOPS[TEMP_STOPS.length - 1][1].join(',')})`;
 };
 
 export const WeatherWidget = () => {
@@ -368,7 +383,7 @@ export const WeatherWidget = () => {
       </div>
 
       <div className="wx-days">
-        <span className="wx-days-label"><FaRegCalendar aria-hidden="true" /> 7-Day Forecast</span>
+        <span className="wx-days-label"><FaRegCalendar aria-hidden="true" /> 10-Day Forecast</span>
         {(weather?.days ?? []).map((day) => {
           const { Icon, label } = describeWeather(day.code, true);
           return (
@@ -377,7 +392,16 @@ export const WeatherWidget = () => {
               <Icon aria-label={label} />
               <span className="wx-day-low">{day.low}°</span>
               <span className="wx-range" aria-hidden="true">
-                <i style={{ left: `${((day.low - weekLow) / span) * 100}%`, right: `${100 - ((day.high - weekLow) / span) * 100}%` }} />
+                <i
+                  style={{
+                    left: `${((day.low - weekLow) / span) * 100}%`,
+                    right: `${100 - ((day.high - weekLow) / span) * 100}%`,
+                    background: `linear-gradient(90deg, ${tempColor(day.low)}, ${tempColor((day.low + day.high) / 2)}, ${tempColor(day.high)})`,
+                  }}
+                />
+                {day.name === 'Today' && weather && (
+                  <b className="wx-now-dot" style={{ left: `${((Math.min(Math.max(weather.temperature, day.low), day.high) - weekLow) / span) * 100}%` }} />
+                )}
               </span>
               <span className="wx-day-high">{day.high}°</span>
             </div>

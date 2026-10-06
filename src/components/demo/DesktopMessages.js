@@ -10,6 +10,7 @@ const threads = [
     id: 'sarvagya',
     name: 'Sarvagya',
     initials: 'S',
+    photo: '/marks/memoji.webp',
     time: 'Now',
     preview: 'Hi, I’m Sarvagya.',
     messages: [
@@ -42,11 +43,16 @@ const threads = [
   },
 ];
 
-const Avatar = ({ thread, small }) => (
-  <span className={`msg-avatar msg-avatar-${thread.id}${small ? ' msg-avatar-small' : ''}`} aria-hidden="true">
-    {thread.Icon ? <thread.Icon /> : thread.initials}
-  </span>
-);
+const Avatar = ({ thread, small }) => {
+  const [photoFailed, setPhotoFailed] = useState(false);
+  const showPhoto = thread.photo && !photoFailed;
+  return (
+    <span className={`msg-avatar msg-avatar-${thread.id}${small ? ' msg-avatar-small' : ''}${showPhoto ? ' has-photo' : ''}`} aria-hidden="true">
+      {thread.Icon && <thread.Icon />}
+      {!thread.Icon && (showPhoto ? <img src={thread.photo} alt="" onError={() => setPhotoFailed(true)} /> : thread.initials)}
+    </span>
+  );
+};
 
 // open the visitor's mail app without navigating the page away
 const openMail = (text) => {

@@ -147,7 +147,7 @@ const FEATURES = [
     name: 'os32',
     subtitle: 'Web operating system',
     art: <Os32Cover />,
-    icon: <span className="appstore-icon-os32">32</span>,
+    icon: <img src="/projects/os32-icon.webp" alt="" />,
   },
   {
     id: 'terra',

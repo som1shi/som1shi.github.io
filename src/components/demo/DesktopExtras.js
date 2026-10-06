@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaTimes } from 'react-icons/fa';
+import { FaChevronLeft } from 'react-icons/fa';
 import { games, photos } from '../../content/portfolioContent';
 import DesktopAppWindow from './DesktopAppWindow';
 import DesktopGamePreviews from './DesktopGamePreviews';
@@ -57,7 +57,7 @@ const DesktopExtras = () => {
 
       {selectedPhoto && (
         <div className="desktop-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" onClick={() => setSelectedPhoto(null)}>
-          <button type="button" aria-label="Close photo viewer" onClick={() => setSelectedPhoto(null)}><FaTimes /></button>
+          <button type="button" className="lightbox-back" aria-label="Back to Photos" onClick={() => setSelectedPhoto(null)}><FaChevronLeft aria-hidden="true" /><span>Photos</span></button>
           <img
             src={selectedPhoto.src}
             alt={selectedPhoto.alt}
