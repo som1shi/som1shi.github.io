@@ -1,0 +1,18 @@
+[
+  {
+    "id": "about-me",
+    "title": "About Me",
+    "date": "2026-09-25",
+    "pinned": true,
+    "preview": "I'm Sarvagya, and I currently am working on the forefront of Model Evals at Vals AI. Previous, I was an undergrad at UC Berkeley where I got a Bachelor of Science in Electrical Engineering and Computer Sciences at UC Berkeley.",
+    "html": "<p>I'm Sarvagya, and I currently am working on the forefront of Model Evals at Vals AI. Previous, I was an undergrad at UC Berkeley where I got a Bachelor of Science in Electrical Engineering and Computer Sciences at UC Berkeley.</p>\n<p>My work has spanned from systems engineering, AI Infrastructure, XR/VR Development, AI Agents Factories and Auto Generated evals.</p>"
+  },
+  {
+    "id": "bakeries",
+    "title": "SF Bakeries",
+    "date": "2026-05-01",
+    "pinned": false,
+    "preview": "Here is my list of SF Bakeries in no particular order(🫃): - Baklvastory - Tartine - Butter and Crumbl(Overrated for Line) - Juniper - Arsicault(Almond Chocolate Croissant)",
+    "html": "<p>Here is my list of SF Bakeries in no particular order(🫃):</p>\n<ul><li>Baklvastory</li><li>Tartine</li><li>Butter and Crumbl(Overrated for Line)</li><li>Juniper</li><li>Arsicault(Almond Chocolate Croissant)</li></ul>"
+  }
+]

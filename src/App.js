@@ -6,16 +6,14 @@ import './App.css';
 import Sidebar from './components/Sidebar';
 import MainSection from './components/MainSection';
 import SocialLinks from './components/SocialLinks';
-import LaptopFrame from './components/chrome/LaptopFrame';
 import IPhoneFrame from './components/chrome/IPhoneFrame';
-import MenuBar from './components/chrome/MenuBar';
-import DockNav from './components/chrome/DockNav';
 import IOSDock from './components/chrome/IOSDock';
 import Minesweeper from './components/games/Minesweeper/Minesweeper';
 import QuantumChess from './components/games/QuantumChess/QuantumChess';
 import RotateConnectFour from './components/games/RotateConnectFour/RotateConnectFour';
 import Refiner from './components/games/Refiner/Refiner';
 import WikiConnect from './components/games/WikiConnect/WikiConnect';
+import DesktopDemo from './components/demo/DesktopDemo';
 
 function App() {
   const [activeSection, setActiveSection] = useState("Home");
@@ -151,29 +149,7 @@ function App() {
       );
     }
 
-    return (
-      <LaptopFrame toggleShell={toggleShell}>
-        {renderShutdownModal()}
-        <div className="laptop-menubar-slot">
-          <MenuBar activeSection={activeSection} toggleShell={toggleShell} />
-        </div>
-        <div className="laptop-main-slot">
-          <MainSection activeSection={activeSection} />
-        </div>
-        <div className="laptop-dock-slot">
-          <DockNav
-            activeSection={activeSection}
-            setActiveSection={setActiveSection}
-          />
-        </div>
-        <div className="laptop-mobile-sidebar-slot">
-          <Sidebar
-            activeSection={activeSection}
-            setActiveSection={setActiveSection}
-          />
-        </div>
-      </LaptopFrame>
-    );
+    return null;
   };
 
   return (
@@ -181,7 +157,9 @@ function App() {
       <Routes>
         <Route path="/" element={
           <>
-            {isShellEnabled ? (
+            {!isMobile ? (
+              <DesktopDemo />
+            ) : isShellEnabled ? (
               <div className="app">{renderContent()}</div>
             ) : (
               renderContent()
@@ -194,7 +172,7 @@ function App() {
         <Route path="/refiner" element={<Refiner />} />
         <Route path="/wikiconnect" element={<WikiConnect />} />
       </Routes>
-    </Router >
+    </Router>
   );
 }
 

@@ -25,7 +25,19 @@
     <!-- Add default favicon -->
     <link 
       rel="icon" 
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>"
+      type="image/png"
+      href="%PUBLIC_URL%/memoji-icon.png"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/memoji-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bebas+Neue&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/font/Serif/cmun-serif.css"
     />
     <title>Sarvagya</title>
     <script type="text/javascript">
@@ -52,7 +64,7 @@
         } else {
           document.title = 'Sarvagya';
           var link = document.querySelector("link[rel='icon']");
-          link.href = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🎯</text></svg>';
+          link.href = '/memoji-icon.png';
         }
       }
 
