@@ -17,6 +17,7 @@ import './DesktopWidgets.css';
 import './DesktopMediaLibraries.css';
 import './DesktopGamePreviews.css';
 import './DesktopExtras.css';
+import './DesktopMobile.css';
 
 const dockTargets = {
   Home: 'home',

@@ -1,0 +1,394 @@
+/* ===== Phone layout (iPhone-sized screens) =====
+   Loaded last. The desktop grid already collapses to one column below 900px;
+   this file tunes spacing, heights and the apps that need a different shape on a phone. */
+
+@media (max-width: 700px) {
+  /* ---- shell: 16px side gutters, tighter rhythm, no fixed heights ---- */
+  .desktop-demo-fork-1 .desktop-demo-workspace {
+    width: calc(100vw - 32px);
+    padding: 20px 0 64px;
+  }
+
+  .desktop-demo-fork-1 .desktop-demo-workspace > * + * {
+    margin-top: 0;
+  }
+
+  .desktop-demo-fork-1 .desktop-story,
+  .desktop-demo-fork-1 .desktop-hero-grid {
+    margin-bottom: 28px;
+  }
+
+  .desktop-demo-fork-1 .desktop-hero-grid {
+    height: auto;
+    grid-template-rows: auto auto;
+    gap: 14px;
+  }
+
+  .desktop-demo-fork-1 .desktop-demo-intro {
+    height: auto;
+  }
+
+  .desktop-demo-fork-1 .desktop-hero-rail {
+    grid-template-rows: auto auto;
+    gap: 14px;
+  }
+
+  .desktop-demo-fork-1 .desktop-apps-widget {
+    min-height: 0;
+  }
+
+  .desktop-demo-fork-1 .research-split,
+  .desktop-demo-fork-1 .experience-split,
+  .desktop-demo-fork-1 .photos-split,
+  .desktop-demo-fork-1 .contact-split,
+  .desktop-demo-fork-1 .desktop-media-row {
+    gap: 14px;
+  }
+
+  /* scenes still fade in, but don't drift or shrink sideways on a narrow screen */
+  .desktop-demo-fork-1 .desktop-demo-workspace > * {
+    transform: none !important;
+  }
+
+  /* ---- menu bar: app name + links + clock; the Dock widget handles sections ---- */
+  .desktop-demo-fork-1 .menubar-navigation,
+  .desktop-demo-fork-1 .menubar-section {
+    display: none;
+  }
+
+  .desktop-demo-fork-1 > .macos-menubar {
+    width: calc(100vw - 16px);
+  }
+
+  /* right side: LinkedIn, GitHub and the clock, like a phone status bar */
+  .desktop-demo-fork-1 .menubar-right {
+    display: flex !important;
+    gap: 10px;
+  }
+
+  .desktop-demo-fork-1 .menubar-time {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- hero ---- */
+  .desktop-demo-fork-1 .desktop-intro-card {
+    height: auto;
+    min-height: 0;
+    padding: 24px 22px 28px;
+  }
+
+  .desktop-demo-fork-1 .intro-copy {
+    margin: 22px 0 0;
+  }
+
+  .desktop-demo-fork-1 .intro-marks {
+    display: none;
+  }
+
+  .desktop-demo-fork-1 .intro-copy h1,
+  .desktop-demo-fork-1 .intro-copy h2 {
+    font-size: 44px;
+  }
+
+  .desktop-demo-fork-1 .intro-copy .intro-discipline,
+  .desktop-demo-fork-1 .intro-copy .intro-school {
+    font-size: 22px;
+  }
+
+  /* ---- dock: icons shrink to fit one row ---- */
+  .desktop-demo-fork-1 .desktop-apps-widget {
+    height: auto;
+    padding: 12px 8px;
+  }
+
+  .desktop-demo-fork-1 .desktop-apps-widget .dock-shelf {
+    flex-wrap: nowrap;
+    gap: 2px;
+  }
+
+  .desktop-demo-fork-1 .desktop-apps-widget .dock-item {
+    padding: 1px;
+  }
+
+  /* 10 icons + divider across (screen - 32px gutters - 16px padding); sizes are inline, so !important */
+  .desktop-demo-fork-1 .desktop-apps-widget .dock-icon-tile {
+    width: calc((100vw - 48px - 40px - 2px * 10) / 10) !important;
+    height: calc((100vw - 48px - 40px - 2px * 10) / 10) !important;
+    font-size: 13px !important;
+  }
+
+  .desktop-demo-fork-1 .desktop-apps-widget .dock-shelf {
+    justify-content: space-between;
+  }
+
+  .desktop-demo-fork-1 .desktop-apps-widget .dock-divider {
+    height: 24px;
+    margin: 0 3px;
+  }
+
+  .desktop-demo-fork-1 .golden-gate-widget {
+    height: 220px;
+  }
+
+  /* ---- windows: content sets the height ---- */
+  .desktop-demo-fork-1 .desktop-app-window,
+  .desktop-demo-fork-1 .desktop-app-window .desktop-app-window-content {
+    height: auto !important;
+    min-height: 0;
+  }
+
+  /* ---- Ideas: list on top, note below ---- */
+  .desktop-demo-fork-1 .notes-app {
+    display: flex;
+    flex-direction: column;
+    height: auto !important;
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-about .notes-app-sidebar {
+    max-height: none;
+    overflow: visible;
+    border-right: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-about .notes-app-note {
+    overflow: visible;
+  }
+
+  .desktop-demo-fork-1 .note-body {
+    padding: 22px 20px 26px;
+  }
+
+  /* ---- Projects: one column ---- */
+  .desktop-demo-fork-1 .projects-term {
+    padding: 18px 16px;
+  }
+
+  .desktop-demo-fork-1 .projects-term-top,
+  .desktop-demo-fork-1 .term-os32,
+  .desktop-demo-fork-1 .project-terminal .term-listing {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .desktop-demo-fork-1 .term-block-courses .course-folder-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 8px;
+  }
+
+  .desktop-demo-fork-1 .term-block-courses .course-folder {
+    padding: 10px 6px;
+  }
+
+  .desktop-demo-fork-1 .term-block-courses .course-folder .term-tags {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 4px;
+  }
+
+  .desktop-demo-fork-1 .term-block-courses .course-folder .term-tags span {
+    line-height: 1.5;
+  }
+
+  .desktop-demo-fork-1 .project-terminal .term-line {
+    white-space: normal;
+  }
+
+  .desktop-demo-fork-1 .term-ascii {
+    font-size: 9px;
+  }
+
+  /* ---- World Clock: three across stays, just smaller ---- */
+  .desktop-demo-fork-1 .research-split .world-clock-widget {
+    min-height: 0;
+  }
+
+  /* ---- Research: list on top, paper scales to the width ---- */
+  .desktop-demo-fork-1 .preview-app {
+    display: flex;
+    flex-direction: column;
+    height: auto !important;
+  }
+
+  .desktop-demo-fork-1 .preview-app-toolbar {
+    display: none;
+  }
+
+  .desktop-demo-fork-1 .preview-app-list {
+    border-right: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .desktop-demo-fork-1 .preview-app-list .notes-app-folder {
+    display: none;
+  }
+
+  .desktop-demo-fork-1 .preview-app-canvas {
+    padding: 16px;
+    overflow: visible;
+  }
+
+  .desktop-demo-fork-1 .preview-paper {
+    width: 100%;
+    height: auto !important;
+    aspect-ratio: 8.5 / 11;
+    padding: 28px 24px 22px;
+  }
+
+  /* ---- Experience: role and place stack, narrower year column ---- */
+  .desktop-demo-fork-1 .pages-app {
+    padding: 12px;
+  }
+
+  .desktop-demo-fork-1 .pages-sheet {
+    padding: 22px 18px 20px;
+  }
+
+  .desktop-demo-fork-1 .pages-sheet-header h3 {
+    font-size: 24px;
+  }
+
+  .desktop-demo-fork-1 .xp-row {
+    grid-template-columns: 38px 22px minmax(0, 1fr);
+  }
+
+  .desktop-demo-fork-1 .xp-timeline::before {
+    left: 48px;
+  }
+
+  .desktop-demo-fork-1 .xp-sub {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .desktop-demo-fork-1 .github-widget-live {
+    height: auto !important;
+  }
+
+  /* ---- Goodreads / Letterboxd: stack fits the screen ---- */
+  .desktop-demo-fork-1 .desktop-media-row .desktop-media-stage {
+    height: auto !important;
+    min-height: 520px;
+  }
+
+  .desktop-demo-fork-1 .desktop-media-row .book-stack {
+    margin-left: 0;
+    transform: scale(0.78);
+    transform-origin: 50% 50%;
+  }
+
+  .desktop-demo-fork-1 .gr-detail,
+  .desktop-demo-fork-1 .lb-detail {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    align-content: start;
+    gap: 16px;
+    overflow-y: auto;
+    text-align: center;
+  }
+
+  /* ---- Weather + Photos ---- */
+  .desktop-demo-fork-1 .photos-split .weather-widget {
+    height: auto !important;
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-photos .desktop-app-window-content {
+    height: 560px !important;
+  }
+
+  /* ---- Games: feature cards stack, games scroll sideways like an App Store shelf ---- */
+  .desktop-demo-fork-1 .appstore {
+    padding: 14px;
+    gap: 16px;
+  }
+
+  .desktop-demo-fork-1 .appstore-features {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .desktop-demo-fork-1 .appstore-feature {
+    min-height: 300px;
+  }
+
+  .desktop-demo-fork-1 .appstore-feature-head strong {
+    font-size: 23px;
+  }
+
+  .desktop-demo-fork-1 .appstore-shelf ul {
+    display: flex;
+    gap: 6px;
+    margin: 0 -14px;
+    padding: 0 14px 4px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .desktop-demo-fork-1 .appstore-shelf li {
+    flex: 0 0 104px;
+    scroll-snap-align: start;
+  }
+
+  .desktop-demo-fork-1 .appstore-icon {
+    width: 76px;
+    height: 76px;
+  }
+
+  /* ---- Contact: conversations as a strip, chat full width ---- */
+  .desktop-demo-fork-1 .msg-app {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .desktop-demo-fork-1 .desktop-app-window-contact .desktop-app-window-content {
+    height: auto !important;
+  }
+
+  .desktop-demo-fork-1 .msg-sidebar {
+    padding: 0 10px 10px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .desktop-demo-fork-1 .msg-search {
+    display: none;
+  }
+
+  .desktop-demo-fork-1 .msg-sidebar ul {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .desktop-demo-fork-1 .msg-thread {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    gap: 6px;
+    padding: 10px 4px;
+    text-align: center;
+  }
+
+  .desktop-demo-fork-1 .msg-thread-top {
+    justify-content: center;
+  }
+
+  .desktop-demo-fork-1 .msg-thread-top time,
+  .desktop-demo-fork-1 .msg-thread-preview {
+    display: none;
+  }
+
+  .desktop-demo-fork-1 .msg-conversation {
+    min-height: 420px;
+  }
+
+  .desktop-demo-fork-1 .msg-bubble {
+    max-width: 82%;
+  }
+
+  .desktop-demo-fork-1 .contact-split .calendar-widget {
+    height: auto;
+    min-height: 0;
+  }
+}
