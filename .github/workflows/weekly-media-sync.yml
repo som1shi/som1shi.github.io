@@ -1,0 +1,63 @@
+name: Weekly media sync
+
+# Pulls the latest Goodreads books and Letterboxd films (scripts/sync-media.mjs),
+# commits any changes to main, then rebuilds and redeploys the site to GitHub Pages.
+on:
+  schedule:
+    - cron: "0 15 * * 1" # Mondays 15:00 UTC (8am Pacific)
+  workflow_dispatch: # run it any time from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-media-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Sync Goodreads and Letterboxd
+        run: npm run sync-media
+
+      - name: Commit changes
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add -A src/content/mediaLibrary.json public/media
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No new books or films this week."
+          else
+            git commit -m "Weekly media sync"
+            git push origin HEAD:main
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          CI: false # existing lint warnings in the games shouldn't fail the build
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx gh-pages -d build \
+            -u "github-actions[bot] <41898299+github-actions[bot]@users.noreply.github.com>" \
+            -r "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
