@@ -171,13 +171,16 @@ const writeCache = (key, value) => {
 
 // Public GitHub data: recent repositories (REST API) and the contribution calendar (github-contributions-api).
 const useGitHubActivity = () => {
-  const [data, setData] = useState(() => readCache('gh-activity'));
+  const [data, setData] = useState(() => {
+    const cached = readCache('gh-activity');
+    return cached?.repos?.length ? cached : null;
+  });
 
   useEffect(() => {
     if (data) return undefined;
     let cancelled = false;
     Promise.all([
-      fetch(`https://api.github.com/users/${GITHUB_USER}/repos?sort=pushed&per_page=4`).then((res) => (res.ok ? res.json() : [])),
+      fetch(`https://api.github.com/users/${GITHUB_USER}/repos?sort=pushed&per_page=4`).then((res) => (res.ok ? res.json() : [])).then((list) => (Array.isArray(list) ? list : [])),
       fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USER}?y=last`).then((res) => (res.ok ? res.json() : null)),
     ]).then(([repos, calendar]) => {
       if (cancelled) return;
@@ -193,7 +196,8 @@ const useGitHubActivity = () => {
         days: calendar?.contributions ?? [],
       };
       setData(next);
-      writeCache('gh-activity', next);
+      // only remember complete results; a rate-limited or failed call is retried on the next visit
+      if (next.repos.length && next.days.length) writeCache('gh-activity', next);
     }).catch(() => {});
     return () => { cancelled = true; };
   }, [data]);
@@ -258,6 +262,12 @@ export const GitHubWidget = () => {
           </a>
         ))}
         {!activity && <span className="gh-repo-placeholder">Loading repositories…</span>}
+        {activity && !activity.repos.length && (
+          <a className="gh-repo" href={`https://github.com/${GITHUB_USER}?tab=repositories`} target="_blank" rel="noopener noreferrer">
+            <strong>See repositories on GitHub</strong>
+            <span className="gh-repo-meta">github.com/{GITHUB_USER}</span>
+          </a>
+        )}
       </div>
     </section>
   );

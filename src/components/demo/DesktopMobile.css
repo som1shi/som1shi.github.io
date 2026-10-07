@@ -81,8 +81,20 @@
     margin: 22px 0 0;
   }
 
-  .desktop-demo-fork-1 .intro-marks {
-    display: none;
+  /* logos stay (tap a line to see them), smaller and tucked into the card's corner */
+  .desktop-demo-fork-1 .intro-mark-vals {
+    width: 84px;
+    right: -14px;
+  }
+
+  .desktop-demo-fork-1 .intro-mark-berkeley {
+    width: 104px;
+    right: -14px;
+  }
+
+  .desktop-demo-fork-1 .intro-copy .intro-discipline,
+  .desktop-demo-fork-1 .intro-copy .intro-school {
+    -webkit-tap-highlight-color: transparent;
   }
 
   .desktop-demo-fork-1 .intro-copy h1,
@@ -390,5 +402,161 @@
   .desktop-demo-fork-1 .contact-split .calendar-widget {
     height: auto;
     min-height: 0;
+  }
+
+  /* ---- Letterboxd: frames shrink with their column so the wall stays centred ---- */
+  .desktop-demo-fork-1 .poster-wall {
+    margin-left: auto;
+    margin-right: auto;
+    padding-inline: 12px;
+  }
+
+  .desktop-demo-fork-1 .poster-row {
+    gap: 8px;
+  }
+
+  .desktop-demo-fork-1 .retro-poster,
+  .desktop-demo-fork-1 .retro-poster-button {
+    min-width: 0;
+  }
+
+  .desktop-demo-fork-1 .poster-row .cinema-lightbox {
+    width: 100% !important;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .desktop-demo-fork-1 .poster-row .real-poster-sheet,
+  .desktop-demo-fork-1 .poster-row .real-poster-sheet > * {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  /* ---- open book / film: cover on top, details below, centred in the window ---- */
+  .desktop-demo-fork-1 .gr-detail,
+  .desktop-demo-fork-1 .lb-detail {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    gap: 18px;
+    padding: calc(var(--titlebar-height) + 40px) 22px 28px;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .desktop-demo-fork-1 .gr-detail-body,
+  .desktop-demo-fork-1 .lb-detail-body {
+    display: grid;
+    justify-items: center;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .desktop-demo-fork-1 .gr-detail-body > *,
+  .desktop-demo-fork-1 .lb-detail-body > * {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .desktop-demo-fork-1 .gr-detail-body h3,
+  .desktop-demo-fork-1 .lb-detail-body h3 {
+    font-size: 23px;
+    line-height: 1.15;
+  }
+
+  .desktop-demo-fork-1 .lb-detail-body hr,
+  .desktop-demo-fork-1 .lb-detail-body [class*="rule"] {
+    width: 48px;
+  }
+
+  /* the 3D book keeps its shape, just smaller: 112 x 168 */
+  .desktop-demo-fork-1 .gr-detail-book,
+  .desktop-demo-fork-1 .gr-detail .book-detail-object-wrap {
+    width: 112px;
+    height: 168px;
+    margin: 0;
+    perspective: 900px;
+    transform: none;
+  }
+
+  .desktop-demo-fork-1 .gr-detail .shelf-book-object {
+    width: 112px !important;
+    height: 168px !important;
+    transform: rotateY(-18deg);
+  }
+
+  .desktop-demo-fork-1 .gr-detail .shelf-book-front {
+    width: 112px !important;
+    height: 168px !important;
+  }
+
+  .desktop-demo-fork-1 .gr-detail .shelf-book-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .desktop-demo-fork-1 .gr-detail .shelf-book-spine {
+    width: 18px !important;
+    height: 168px !important;
+  }
+
+  .desktop-demo-fork-1 .gr-detail .shelf-book-spine span {
+    display: none;
+  }
+
+  .desktop-demo-fork-1 .lb-detail-poster,
+  .desktop-demo-fork-1 .lb-detail-poster img {
+    width: 120px;
+    height: auto;
+  }
+
+  .desktop-demo-fork-1 .media-toolbar-back {
+    top: calc(var(--titlebar-height) + 4px);
+    left: 10px;
+  }
+}
+
+
+/* ===== Single-column widths (phones and narrow windows, up to 900px) ===== */
+@media (max-width: 900px) {
+  /* GitHub: full height so the repos show, calendar squares capped at GitHub's size */
+  .desktop-demo-fork-1 .experience-split .github-widget-live,
+  .desktop-demo-fork-1 .github-widget-live {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible;
+  }
+
+  .desktop-demo-fork-1 .gh-calendar {
+    grid-auto-columns: minmax(0, 1fr);
+    max-width: 420px;
+  }
+
+  .desktop-demo-fork-1 .gh-repos {
+    overflow: visible;
+  }
+
+  /* Weather: content sets the height, forecast rows keep a comfortable 36px */
+  .desktop-demo-fork-1 .photos-split .weather-widget {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .desktop-demo-fork-1 .wx-days {
+    flex: none;
+  }
+
+  .desktop-demo-fork-1 .wx-day {
+    flex: none;
+    min-height: 36px;
+  }
+
+  /* World Clock / Calendar: no stretched empty columns */
+  .desktop-demo-fork-1 .research-split .world-clock-widget,
+  .desktop-demo-fork-1 .contact-split .calendar-widget {
+    height: auto !important;
+    min-height: 0 !important;
   }
 }
