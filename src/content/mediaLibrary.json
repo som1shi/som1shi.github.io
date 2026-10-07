@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-09-25T09:30:47.737Z",
+  "syncedAt": "2026-10-07T04:21:47.429Z",
   "books": [
     {
       "title": "The Pickwick Papers",
@@ -157,6 +157,26 @@
     ],
     "recent": [
       {
+        "title": "The Wonderful Story of Henry Sugar",
+        "year": 2023,
+        "rating": 3.5,
+        "liked": false,
+        "rewatch": false,
+        "watchedAt": "2026-10-01",
+        "url": "https://letterboxd.com/sarvagyas/film/the-wonderful-story-of-henry-sugar/",
+        "poster": "/media/films/the-wonderful-story-of-henry-sugar-2023.jpg"
+      },
+      {
+        "title": "The Housemaid",
+        "year": 2025,
+        "rating": 2.5,
+        "liked": false,
+        "rewatch": false,
+        "watchedAt": "2026-09-26",
+        "url": "https://letterboxd.com/sarvagyas/film/the-housemaid-2025/",
+        "poster": "/media/films/the-housemaid-2025.jpg"
+      },
+      {
         "title": "Chef",
         "year": 2014,
         "rating": 3.5,
@@ -175,26 +195,6 @@
         "watchedAt": "2026-09-19",
         "url": "https://letterboxd.com/sarvagyas/film/the-proposal-2009/",
         "poster": "/media/films/the-proposal-2009.jpg"
-      },
-      {
-        "title": "I Hate Luv Storys",
-        "year": 2010,
-        "rating": 3,
-        "liked": false,
-        "rewatch": false,
-        "watchedAt": "2026-09-19",
-        "url": "https://letterboxd.com/sarvagyas/film/i-hate-luv-storys/",
-        "poster": "/media/films/i-hate-luv-storys-2010.jpg"
-      },
-      {
-        "title": "Coyote vs. Acme",
-        "year": 2026,
-        "rating": 4,
-        "liked": false,
-        "rewatch": false,
-        "watchedAt": "2026-09-12",
-        "url": "https://letterboxd.com/sarvagyas/film/coyote-vs-acme/",
-        "poster": "/media/films/coyote-vs-acme-2026.jpg"
       }
     ]
   }
