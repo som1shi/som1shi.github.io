@@ -4,6 +4,7 @@ date: 2026-09-25
 pinned: true
 ---
 
-I am pursuing a Bachelor of Science in Electrical Engineering and Computer Sciences at UC Berkeley, where I focus on building useful technology and learning how complex systems work.
+I'm Sarvagya, and I currently am working on the forefront of Model Evals at Vals AI.
+Previous, I was an undergrad at UC Berkeley where I got a Bachelor of Science in Electrical Engineering and Computer Sciences at UC Berkeley.
 
-My work spans software development, machine learning, artificial intelligence, computer vision, graphics, and research. I care about clear ideas, careful engineering, and real-world applications.
+My work has spanned from systems engineering, AI Infrastructure, XR/VR Development, AI Agents Factories and Auto Generated evals.

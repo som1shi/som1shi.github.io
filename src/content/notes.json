@@ -4,31 +4,15 @@
     "title": "About Me",
     "date": "2026-09-25",
     "pinned": true,
-    "preview": "I am pursuing a Bachelor of Science in Electrical Engineering and Computer Sciences at UC Berkeley, where I focus on building useful technology and learning how complex systems work.",
-    "html": "<p>I am pursuing a Bachelor of Science in Electrical Engineering and Computer Sciences at UC Berkeley, where I focus on building useful technology and learning how complex systems work.</p>\n<p>My work spans software development, machine learning, artificial intelligence, computer vision, graphics, and research. I care about clear ideas, careful engineering, and real-world applications.</p>"
+    "preview": "I'm Sarvagya, and I currently am working on the forefront of Model Evals at Vals AI. Previous, I was an undergrad at UC Berkeley where I got a Bachelor of Science in Electrical Engineering and Computer Sciences at UC Berkeley.",
+    "html": "<p>I'm Sarvagya, and I currently am working on the forefront of Model Evals at Vals AI. Previous, I was an undergrad at UC Berkeley where I got a Bachelor of Science in Electrical Engineering and Computer Sciences at UC Berkeley.</p>\n<p>My work has spanned from systems engineering, AI Infrastructure, XR/VR Development, AI Agents Factories and Auto Generated evals.</p>"
   },
   {
-    "id": "ideas",
-    "title": "Ideas",
-    "date": "2026-09-25",
+    "id": "bakeries",
+    "title": "SF Bakeries",
+    "date": "2026-05-01",
     "pinned": false,
-    "preview": "Interfaces that feel calm and useful.",
-    "html": "<p>Interfaces that feel calm and useful.</p>"
-  },
-  {
-    "id": "this-week",
-    "title": "This week",
-    "date": "2026-09-22",
-    "pinned": false,
-    "preview": "Finish the portfolio widget pass.",
-    "html": "<p>Finish the portfolio widget pass.</p>"
-  },
-  {
-    "id": "reading-list",
-    "title": "Reading list",
-    "date": "2026-09-20",
-    "pinned": false,
-    "preview": "Books, films, and projects to revisit.",
-    "html": "<p>Books, films, and projects to revisit.</p>"
+    "preview": "Here is my list of SF Bakeries in no particular order(🫃): - Baklvastory - Tartine - Butter and Crumbl(Overrated for Line) - Juniper - Arsicault(Almond Chocolate Croissant)",
+    "html": "<p>Here is my list of SF Bakeries in no particular order(🫃):</p>\n<ul><li>Baklvastory</li><li>Tartine</li><li>Butter and Crumbl(Overrated for Line)</li><li>Juniper</li><li>Arsicault(Almond Chocolate Croissant)</li></ul>"
   }
 ]
