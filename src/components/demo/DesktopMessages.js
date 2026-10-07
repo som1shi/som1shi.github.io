@@ -90,7 +90,9 @@ const DesktopMessages = () => {
 
   useEffect(() => {
     const el = transcriptRef.current;
-    if (el) el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+    if (!el) return;
+    if (el.scrollTo) el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+    else el.scrollTop = el.scrollHeight;
   }, [activeId, extra, typing]);
 
   useEffect(() => {

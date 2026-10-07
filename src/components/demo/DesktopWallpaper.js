@@ -64,8 +64,10 @@ const DesktopWallpaper = () => {
   useEffect(() => {
     const frost = frostRef.current;
     const dots = dotsRef.current;
-    const fctx = frost.getContext('2d');
-    const dctx = dots.getContext('2d');
+    const fctx = frost?.getContext('2d');
+    const dctx = dots?.getContext('2d');
+    // no 2D canvas (very old browsers, test environments): keep the plain background colour
+    if (!fctx || !dctx) return undefined;
     const noise = makeNoise();
     const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2, sx: window.innerWidth / 2, sy: window.innerHeight / 2, active: false };

@@ -303,6 +303,7 @@ const useSanFranciscoWeather = () => {
           isDay: data.hourly.is_day[nowIndex + i] === 1,
         }));
         const days = data.daily.time.slice(0, 10).map((date, i) => ({
+          date,
           name: i === 0 ? 'Today' : new Date(`${date}T12:00:00`).toLocaleDateString('en-US', { weekday: 'short' }),
           code: data.daily.weather_code[i],
           high: Math.round(data.daily.temperature_2m_max[i]),
@@ -387,7 +388,7 @@ export const WeatherWidget = () => {
         {(weather?.days ?? []).map((day) => {
           const { Icon, label } = describeWeather(day.code, true);
           return (
-            <div className="wx-day" key={day.name}>
+            <div className="wx-day" key={day.date}>
               <span className="wx-day-name">{day.name}</span>
               <Icon aria-label={label} />
               <span className="wx-day-low">{day.low}°</span>
