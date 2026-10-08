@@ -206,13 +206,82 @@
     white-space: normal;
   }
 
+  /* listing stays scannable on a phone: name + two-line description, no tag rows */
+  .desktop-demo-fork-1 .project-terminal .term-entry {
+    padding: 6px 0;
+  }
+
+  .desktop-demo-fork-1 .project-terminal .term-entry .term-tags {
+    display: none;
+  }
+
+  .desktop-demo-fork-1 .project-terminal .term-comment {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: 12px;
+  }
+
+  .desktop-demo-fork-1 .term-os32-copy > p {
+    font-size: 12px;
+  }
+
+  /* coursework: names and one-line notes, without the large ASCII folders or tags */
+  .desktop-demo-fork-1 .term-block-courses .term-folder,
+  .desktop-demo-fork-1 .term-block-courses .course-folder .term-tags,
+  .desktop-demo-fork-1 .term-os32 .term-kicker {
+    display: none;
+  }
+
+  .desktop-demo-fork-1 .term-block-courses .course-folder-grid {
+    grid-template-rows: auto;
+    margin-top: 6px;
+  }
+
+  .desktop-demo-fork-1 .term-block-courses .course-folder {
+    grid-row: auto;
+    grid-template-rows: none;
+    padding: 6px 0;
+  }
+
+  .desktop-demo-fork-1 .projects-term-top {
+    gap: 14px;
+  }
+
   .desktop-demo-fork-1 .term-ascii {
     font-size: 9px;
   }
 
-  /* ---- World Clock: three across stays, just smaller ---- */
+  /* ---- World Clock: three across, each clock scaled to its third of the width ---- */
   .desktop-demo-fork-1 .research-split .world-clock-widget {
     min-height: 0;
+    padding-inline: 10px;
+  }
+
+  .desktop-demo-fork-1 .research-split .world-clock-list {
+    gap: 6px;
+    padding: 46px 0 12px;
+  }
+
+  .desktop-demo-fork-1 .research-split .world-clock-city {
+    display: grid;
+    justify-items: center;
+    min-width: 0;
+  }
+
+  .desktop-demo-fork-1 .research-split .clock-face {
+    zoom: 0.72;
+  }
+
+  .desktop-demo-fork-1 .research-split .clock-city-meta {
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  .desktop-demo-fork-1 .research-split .clock-city-meta > span {
+    font-size: 10px;
+    white-space: nowrap;
   }
 
   /* ---- Research: list on top, paper scales to the width ---- */
