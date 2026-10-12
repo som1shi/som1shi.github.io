@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-07T04:21:47.429Z",
+  "syncedAt": "2026-10-12T22:22:27.876Z",
   "books": [
     {
       "title": "The Pickwick Papers",
@@ -115,6 +115,16 @@
     ],
     "loved": [
       {
+        "title": "Digger",
+        "year": 2026,
+        "rating": 4,
+        "liked": true,
+        "rewatch": false,
+        "watchedAt": "2026-10-10",
+        "url": "https://letterboxd.com/sarvagyas/film/digger-2026/",
+        "poster": "/media/films/digger-2026.jpg"
+      },
+      {
         "title": "Dostana",
         "year": 2008,
         "rating": 4,
@@ -143,19 +153,19 @@
         "watchedAt": "2026-08-20",
         "url": "https://letterboxd.com/sarvagyas/film/main-hoon-na/",
         "poster": "/media/films/main-hoon-na-2004.jpg"
-      },
-      {
-        "title": "Lost Ladies",
-        "year": 2023,
-        "rating": 4,
-        "liked": true,
-        "rewatch": false,
-        "watchedAt": "2026-08-19",
-        "url": "https://letterboxd.com/sarvagyas/film/lost-ladies/",
-        "poster": "/media/films/lost-ladies-2023.jpg"
       }
     ],
     "recent": [
+      {
+        "title": "Primetime",
+        "year": 2026,
+        "rating": 3,
+        "liked": false,
+        "rewatch": false,
+        "watchedAt": "2026-10-10",
+        "url": "https://letterboxd.com/sarvagyas/film/primetime-2026/",
+        "poster": "/media/films/primetime-2026.jpg"
+      },
       {
         "title": "The Wonderful Story of Henry Sugar",
         "year": 2023,
@@ -185,16 +195,6 @@
         "watchedAt": "2026-09-24",
         "url": "https://letterboxd.com/sarvagyas/film/chef/",
         "poster": "/media/films/chef-2014.jpg"
-      },
-      {
-        "title": "The Proposal",
-        "year": 2009,
-        "rating": 3,
-        "liked": false,
-        "rewatch": false,
-        "watchedAt": "2026-09-19",
-        "url": "https://letterboxd.com/sarvagyas/film/the-proposal-2009/",
-        "poster": "/media/films/the-proposal-2009.jpg"
       }
     ]
   }
