@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-19T20:20:35.015Z",
+  "syncedAt": "2026-10-26T20:16:39.718Z",
   "books": [
     {
       "title": "The Pickwick Papers",
@@ -157,6 +157,26 @@
     ],
     "recent": [
       {
+        "title": "You Can See Everything",
+        "year": 2026,
+        "rating": 4,
+        "liked": false,
+        "rewatch": false,
+        "watchedAt": "2026-10-24",
+        "url": "https://letterboxd.com/sarvagyas/film/you-can-see-everything/",
+        "poster": "/media/films/you-can-see-everything-2026.jpg"
+      },
+      {
+        "title": "Office Space",
+        "year": 1999,
+        "rating": 4,
+        "liked": false,
+        "rewatch": false,
+        "watchedAt": "2026-10-24",
+        "url": "https://letterboxd.com/sarvagyas/film/office-space/",
+        "poster": "/media/films/office-space-1999.jpg"
+      },
+      {
         "title": "Primetime",
         "year": 2026,
         "rating": 3,
@@ -175,26 +195,6 @@
         "watchedAt": "2026-10-01",
         "url": "https://letterboxd.com/sarvagyas/film/the-wonderful-story-of-henry-sugar/",
         "poster": "/media/films/the-wonderful-story-of-henry-sugar-2023.jpg"
-      },
-      {
-        "title": "The Housemaid",
-        "year": 2025,
-        "rating": 2.5,
-        "liked": false,
-        "rewatch": false,
-        "watchedAt": "2026-09-26",
-        "url": "https://letterboxd.com/sarvagyas/film/the-housemaid-2025/",
-        "poster": "/media/films/the-housemaid-2025.jpg"
-      },
-      {
-        "title": "Chef",
-        "year": 2014,
-        "rating": 3.5,
-        "liked": false,
-        "rewatch": false,
-        "watchedAt": "2026-09-24",
-        "url": "https://letterboxd.com/sarvagyas/film/chef/",
-        "poster": "/media/films/chef-2014.jpg"
       }
     ]
   }
